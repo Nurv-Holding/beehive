@@ -5,8 +5,7 @@
   "main": "index.js",
   "workspaces": [
     "src/webapi",
-    "src/webapp",
-    "project-behider-webapi"
+    "src/webapp"
   ],
   "directories": {
     "doc": "docs"
