@@ -1,0 +1,21 @@
+{
+  "name": "behider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "src/webapi",
+    "src/webapp",
+    "project-behider-webapi"
+  ],
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm start -w project-zeus-webapi"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

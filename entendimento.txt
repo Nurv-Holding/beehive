@@ -1,0 +1,20 @@
+Usuários
+    - Adm
+        - cadastra os usuários
+
+    - clientes
+
+Objetivos
+    - Empresa
+    - Time (historias)
+    - Entregas
+        - Mensal
+        - Trimestral
+        - Smestral
+
+Cadastros
+    - Equipes
+    - Objetivos
+    - Usuários
+
+Prtocesso
