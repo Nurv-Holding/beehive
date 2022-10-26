@@ -51,7 +51,7 @@ function menuTeamManagement() {
           </div>
         </Tab.List>
 
-        <div className='container-team-management'>
+        <div className='w-full'>
         <Tab.Panels>
           <Tab.Panel>
             <Team/>
@@ -61,7 +61,7 @@ function menuTeamManagement() {
             <Pdi/>
           </Tab.Panel>
 
-          <Tab.Panel>
+          <Tab.Panel className='w-full'>
             <Meetings />
           </Tab.Panel>
         </Tab.Panels>

@@ -1,4 +1,4 @@
-function okrsPercentage() {
+function teamObjectivesPercentage() {
     return(
         <div className='container-two-percentage'>
             <div className='container-percentage-okr'>
@@ -32,4 +32,4 @@ function okrsPercentage() {
     )
 }
 
-export default okrsPercentage
+export default teamObjectivesPercentage

@@ -112,7 +112,7 @@ header nav span:hover{
 
 /*team management*/
 .container-team-management{
-    @apply w-11/12 h-[400px] bg-[#FFFFFF] rounded-lg shadow-[3px_4px_4px_2px_#00000040] flex flex-col py-4 pl-4 overflow-y-scroll my-4
+    @apply w-11/12 h-[400px] bg-[#FFFFFF] rounded-lg shadow-[3px_4px_4px_2px_#00000040] flex flex-col items-center py-4 pl-4 overflow-y-scroll my-4
 }
 
 .container-team-management-pdi{
@@ -153,15 +153,15 @@ header nav span:hover{
 }
 
 .percentage-first{
-    @apply bg-[#5500C3] w-[75%] h-full
+    @apply bg-[#5500C3] w-[75%] h-full rounded
 }
 
 .percentage-second{
-    @apply bg-[#5500C3] w-[100%] h-full
+    @apply bg-[#5500C3] w-[100%] h-full rounded
 }
 
 .percentage-third{
-    @apply bg-[#5500C3] w-[50%] h-full
+    @apply bg-[#5500C3] w-[50%] h-full rounded
 }
 
 /*END PERCENTAGE CONTAINER*/
@@ -194,15 +194,15 @@ header nav span:hover{
 }
 
 .percentage-my-progress{
-    @apply bg-[#5500C3] w-[80%] h-full
+    @apply bg-[#5500C3] w-[80%] h-full rounded
 }
 
 .percentage-team-progress{
-    @apply bg-[#5500C3] w-[40%] h-full
+    @apply bg-[#5500C3] w-[40%] h-full rounded
 }
 
 .percentage-monthly-income{
-    @apply bg-[#5500C3] w-[69%] h-full
+    @apply bg-[#5500C3] w-[69%] h-full rounded
 }
 
 /*ScrollBar*/
@@ -233,7 +233,7 @@ header nav span:hover{
 /*END TABLE STYLES*/
 
 
-
+/*NAV TOGGLE*/
 .nav-btn button{
     @apply text-base rounded px-2 py-2
 }
@@ -242,3 +242,17 @@ header nav span:hover{
     @apply bg-[#5500C3] text-white
 }
 /*END NAV TOGGLE*/
+
+/*Disclosure*/
+.disclosure-btn{
+    @apply w-full bg-[#D9D9D9]
+}
+
+.percentage-container-disclosure{
+    @apply w-[20%] bg-[#D9D9D9] h-4 rounded
+}
+
+.percentage-bar-disclosure{
+    @apply w-[70%] bg-[#5500C3] h-4 rounded
+}
+/*End Disclosure*/

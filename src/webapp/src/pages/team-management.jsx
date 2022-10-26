@@ -16,10 +16,6 @@ function teamManagement() {
             <span className='current-page'>Gerenciamento de time</span>
           </Link>
           
-          <Link to="/okrs">
-            <span>OKR's</span>
-          </Link>
-          
           <Link to="/carreira">
             <span>Carreira</span>
           </Link>

@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom'
 
 function pdi() {
   return (
-    <div id='pdi' className='container-team-management-pdi'>
+    <div className='flex flex-col items-center'>
+    <div className='container-team-management'>
+    <div className='container-team-management-pdi'>
       <div className='profile-container-pdi'>
         <div className='profile-photo-pdi'>
           <img src="https://thispersondoesnotexist.com/image"/>
@@ -87,6 +89,8 @@ function pdi() {
             </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 }

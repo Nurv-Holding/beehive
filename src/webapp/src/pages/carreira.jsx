@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
-import OkrsPercentage from '../components/okrsPercentage';
-import OkrsTable from '../components/okrs-table';
 
-function okrs() {
+function carreira() {
   return (
     <>
       <header>
@@ -17,23 +15,17 @@ function okrs() {
             <span>Gerenciamento de time</span>
           </Link>
           
-          <Link to="/okrs">
-            <span className='current-page'>OKR's</span>
-          </Link>
-          
           <Link to="/carreira">
-            <span>Carreira</span>
+            <span className='current-page'>Carreira</span>
           </Link>
         </nav>
       </header>
 
-      <main className='flex flex-col items-center'>
-        <OkrsPercentage />
-
-        <OkrsTable />
+      <main>
+          
       </main>
     </>
   );
 }
 
-export default okrs;
+export default carreira;

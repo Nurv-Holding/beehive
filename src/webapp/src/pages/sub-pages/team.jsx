@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom'
 
 function team() {
   return (
-    <div id='team' className='container-table-grid-team'>
+    <div className='flex flex-col items-center'>
+    <div className='container-team-management'>
+    <div className='container-table-grid-team'>
       <div>
         <h1 className='container-title-grid'>Nome</h1>
 
@@ -54,6 +56,8 @@ function team() {
           <p className='text-desc-grid'>19/10/22</p>
           <p className='text-desc-grid'>19/10/22</p>
         </div>
+    </div>
+    </div>
     </div>
   );
 }

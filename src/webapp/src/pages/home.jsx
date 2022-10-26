@@ -21,16 +21,8 @@ function Home() {
             <span>Gerenciamento de time</span>
           </Link>
           
-          <Link to="/okrs">
-            <span>OKR's</span>
-          </Link>
-          
           <Link to="/carreira">
             <span>Carreira</span>
-          </Link>
-
-          <Link to="/">
-            <span>Empresas</span>
           </Link>
         </nav>
       </header>
