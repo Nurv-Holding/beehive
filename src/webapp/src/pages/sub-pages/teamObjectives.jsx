@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import TeamObjectivesPercentage from '../../components/teamObjectivesPercentage';
 import TeamObjectivesTable from '../../components/teamObjectivesTable';
 
-function meetings() {
+function teamObjectives() {
   return (
     <div className='flex flex-col items-center'>
       <TeamObjectivesPercentage />
@@ -11,4 +11,4 @@ function meetings() {
   );
 }
 
-export default meetings;
+export default teamObjectives;

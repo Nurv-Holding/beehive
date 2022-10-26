@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import MenuTeamManagement from '../components/menuTeamManagement';
+import Example from './sub-pages/empresasMenu';
 
-function teamManagement() {
+function empresas() {
   return (
     <>
       <header>
@@ -13,7 +13,7 @@ function teamManagement() {
           </Link>
           
           <Link to="/gerenciamentodetime">
-            <span className='current-page'>Gerenciamento de time</span>
+            <span>Gerenciamento de time</span>
           </Link>
           
           <Link to="/carreira">
@@ -21,16 +21,16 @@ function teamManagement() {
           </Link>
 
           <Link to="/empresas">
-            <span>empresas</span>
+            <span className='current-page'>empresas</span>
           </Link>
         </nav>
       </header>
 
-      <main className='flex flex-col items-center py-8'>
-        <MenuTeamManagement/>
+      <main className='w-full flex flex-row'>
+          <Example/>
       </main>
     </>
   );
 }
 
-export default teamManagement;
+export default empresas;

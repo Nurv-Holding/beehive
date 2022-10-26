@@ -256,3 +256,17 @@ header nav span:hover{
     @apply w-[70%] bg-[#5500C3] h-4 rounded
 }
 /*End Disclosure*/
+
+/*EmpresasMenu*/
+.container-nav-empresas{
+    @apply w-[20%] h-full bg-[#FFFFFF] flex flex-col items-center
+}
+
+.container-nav-empresas{
+    height: calc(100vh - 56px);
+}
+
+.container-nav-empresas button{
+    @apply p-2 rounded-lg focus:outline-none
+}
+/*End EmpresasMenu*/
