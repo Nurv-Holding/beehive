@@ -18,6 +18,10 @@ function carreira() {
           <Link to="/carreira">
             <span className='current-page'>Carreira</span>
           </Link>
+
+          <Link to="/empresas">
+            <span>empresas</span>
+          </Link>
         </nav>
       </header>
 

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Team from '../pages/sub-pages/team';
-import Meetings from '../pages/sub-pages/meetings';
 import Pdi from '../pages/sub-pages/pdi';
+import TeamObjectives from '../pages/sub-pages/teamObjectives';
 import { Tab } from '@headlessui/react'
 
 function menuTeamManagement() {
@@ -62,7 +62,7 @@ function menuTeamManagement() {
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            <Meetings />
+            <TeamObjectives />
           </Tab.Panel>
         </Tab.Panels>
         </div>

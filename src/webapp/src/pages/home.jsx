@@ -24,6 +24,10 @@ function Home() {
           <Link to="/carreira">
             <span>Carreira</span>
           </Link>
+
+          <Link to="/empresas">
+            <span>empresas</span>
+          </Link>
         </nav>
       </header>
 
