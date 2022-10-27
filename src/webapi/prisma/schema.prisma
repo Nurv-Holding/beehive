@@ -12,7 +12,8 @@ datasource db {
 
 model Company {
   id               Int                @id @default(autoincrement())
-  name             Int
+  name             String
+  cnpj             String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   User             User[]
@@ -30,6 +31,7 @@ model User {
   name             String
   email            String             @unique
   occupation       String
+  roles            String?
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   company          Company            @relation(fields: [idCompany], references: [id])

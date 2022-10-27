@@ -10,7 +10,7 @@ app.use(express.urlencoded({extends:false}))
 require('./routes')(app)
 
 const server = app.listen(port,() => {
-    console.log(`server is port ${port}`)
+    console.log(`server is port http://localhost:${port}`)
 })
 
 process.on('SIGINT',() => {
