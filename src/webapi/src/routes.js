@@ -6,6 +6,7 @@ const subtasksController = require("./controllers/subtasksController")
 const tasksController = require("./controllers/tasksController")
 const teamsController = require("./controllers/teamsController")
 const teamUsersController = require("./controllers/teamUsersController")
+const teamUsersProjectionController = require("./controllers/teamUsersProjectionController")
 const userController = require("./controllers/usersController")
 
 const routes = (app) => {
@@ -71,6 +72,13 @@ const routes = (app) => {
     app.get("/process/task",processTaskUsers.getAll)
     app.put("/process/:id/task",processTaskUsers.update)
     app.delete("/process/:id/task",processTaskUsers.remove)
+
+    //teamUsersProjection
+    app.get("/users/team",teamUsersProjectionController().getAll)
+    app.get("/users/team/:id",teamUsersProjectionController().getById)
+    // app.get("/members/p/teams",teamUsersController.getAll)
+    // app.put("/members/p/:id/teams",teamUsersController.update)
+    // app.delete("/members/p/:id/teams",teamUsersController.remove)
 }
 
 module.exports = routes
