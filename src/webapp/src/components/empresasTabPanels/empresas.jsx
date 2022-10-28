@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
-import FormTimes from './times/formTimes'
-import ListaTimes from './times/listaTimes'
+import FormEmpresas from './empresas/formEmpresas'
+import ListaEmpresas from './empresas/listaEmpresas'
 
-function times() {
+function empresas() {
     return (
         <Tab.Group>
         <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
@@ -42,11 +42,11 @@ function times() {
 
             <Tab.Panels>
             <Tab.Panel className='container-empresas'>
-                <FormTimes/>
+                <FormEmpresas/>
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>
-                <ListaTimes/>
+                <ListaEmpresas/>
             </Tab.Panel>
             </Tab.Panels>
         </div>
@@ -55,4 +55,4 @@ function times() {
     )
 }
 
-export default times
+export default empresas

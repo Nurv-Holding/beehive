@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Usuarios from '../../components/empresasTabPanels/usuarios'
 import Times from '../../components/empresasTabPanels/times'
+import Empresas from '../../components/empresasTabPanels/empresas'
+import Objetivos from '../../components/empresasTabPanels/objetivos'
+import Tarefas from '../../components/empresasTabPanels/tarefas'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -89,15 +92,15 @@ export default function Example() {
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            teste 3
+            <Empresas/>
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            teste 4
+            <Objetivos/>
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            teste 5
+            <Tarefas/>
           </Tab.Panel>
         </Tab.Panels>
         </div>
