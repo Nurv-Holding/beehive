@@ -11,6 +11,10 @@ function carreira() {
             <span>Home</span>
           </Link>
           
+          <Link to="/listadeobjetivos">
+            <span>Objetivos</span>
+          </Link>
+          
           <Link to="/gerenciamentodetime">
             <span>Gerenciamento de time</span>
           </Link>

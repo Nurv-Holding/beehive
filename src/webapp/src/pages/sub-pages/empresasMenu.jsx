@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
+import Usuarios from '../../components/empresasTabPanels/usuarios'
+import Times from '../../components/empresasTabPanels/times'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -14,7 +16,7 @@ export default function Example() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'text-[#5500C3]' : ''
                   }
                 >
                   Usuários
@@ -28,7 +30,7 @@ export default function Example() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'text-[#5500C3]' : ''
                   }
                 >
                   Times
@@ -41,7 +43,7 @@ export default function Example() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'text-[#5500C3]' : ''
                   }
                 >
                   Empresas
@@ -54,7 +56,7 @@ export default function Example() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'text-[#5500C3]' : ''
                   }
                 >
                   Objetivos
@@ -67,7 +69,7 @@ export default function Example() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'text-[#5500C3]' : ''
                   }
                 >
                   Tarefas
@@ -79,11 +81,11 @@ export default function Example() {
         <div className='w-full'>
         <Tab.Panels className='text-white'>
           <Tab.Panel>
-            teste 1
+            <Usuarios/>
           </Tab.Panel>
 
           <Tab.Panel>
-            teste 2
+            <Times/>
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>

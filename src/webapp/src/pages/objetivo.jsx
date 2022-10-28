@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import EmpresasMenu from './sub-pages/empresasMenu';
+import TeamObjectivesPercentage from '../components/teamObjectivesPercentage';
+import TeamObjectivesTable from '../components/teamObjectivesTable';
 
-function empresas() {
+function objetivo() {
   return (
     <>
       <header>
@@ -11,9 +12,9 @@ function empresas() {
           <Link to="/">
             <span>Home</span>
           </Link>
-
+          
           <Link to="/listadeobjetivos">
-            <span>Objetivos</span>
+            <span className='current-page'>Objetivos</span>
           </Link>
           
           <Link to="/gerenciamentodetime">
@@ -25,16 +26,20 @@ function empresas() {
           </Link>
 
           <Link to="/empresas">
-            <span className='current-page'>empresas</span>
+            <span>empresas</span>
           </Link>
         </nav>
       </header>
 
-      <main className='w-full flex flex-row'>
-          <EmpresasMenu/>
+      <main>
+        <div className='flex flex-col items-center'>
+            <TeamObjectivesPercentage />
+            <TeamObjectivesTable />
+        </div>
       </main>
     </>
   );
 }
 
-export default empresas;
+export default objetivo;
+    
