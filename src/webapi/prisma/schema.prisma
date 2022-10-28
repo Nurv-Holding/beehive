@@ -136,7 +136,7 @@ model ProcessGoalsTask {
   idTask          Int
   idGoal          Int
   idTeam          Int
-  done            Int
+  done            Boolean           @default(false)
   initialDate     DateTime
   finalDate       DateTime
   createdAt       DateTime          @default(now())

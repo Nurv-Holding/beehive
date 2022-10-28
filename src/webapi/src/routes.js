@@ -1,5 +1,7 @@
 const companiesController = require("./controllers/companiesController")
 const goalsController = require("./controllers/goalsController")
+const processGoalsTask = require("./controllers/processGoalsTaskController")
+const processTaskUsers = require("./controllers/processTaskUsersController")
 const subtasksController = require("./controllers/subtasksController")
 const tasksController = require("./controllers/tasksController")
 const teamsController = require("./controllers/teamsController")
@@ -57,11 +59,18 @@ const routes = (app) => {
     app.delete("/subtasks/:id",subtasksController.remove)
 
     //processGoalsTask
-    app.post("/process/goals",subtasksController.create)
-    app.get("/process/:id/goals",subtasksController.getById)
-    app.get("/process/goals",subtasksController.getAll)
-    app.put("/process/:id/goals",subtasksController.update)
-    app.delete("/process/:id/goals",subtasksController.remove)
+    app.post("/process/goals",processGoalsTask.create)
+    app.get("/process/:id/goals",processGoalsTask.getById)
+    app.get("/process/goals",processGoalsTask.getAll)
+    app.put("/process/:id/goals",processGoalsTask.update)
+    app.delete("/process/:id/goals",processGoalsTask.remove)
+
+    //processTaskUsers
+    app.post("/process/task",processTaskUsers.create)
+    app.get("/process/:id/task",processTaskUsers.getById)
+    app.get("/process/task",processTaskUsers.getAll)
+    app.put("/process/:id/task",processTaskUsers.update)
+    app.delete("/process/:id/task",processTaskUsers.remove)
 }
 
 module.exports = routes
