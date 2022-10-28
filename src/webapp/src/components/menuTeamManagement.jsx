@@ -35,19 +35,6 @@ function menuTeamManagement() {
                 </button>
               )}
             </Tab>
-
-            <Tab className='nav-btn'>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
-                  }
-                >
-                  Objetivos de time
-                </button>
-              )}
-            </Tab>
           </div>
         </Tab.List>
 
@@ -59,10 +46,6 @@ function menuTeamManagement() {
 
           <Tab.Panel>
             <Pdi/>
-          </Tab.Panel>
-
-          <Tab.Panel className='w-full'>
-            <TeamObjectives />
           </Tab.Panel>
         </Tab.Panels>
         </div>

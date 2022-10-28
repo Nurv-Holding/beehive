@@ -11,6 +11,10 @@ function teamManagement() {
           <Link to="/">
             <span>Home</span>
           </Link>
+
+          <Link to="/listadeobjetivos">
+            <span>Objetivos</span>
+          </Link>
           
           <Link to="/gerenciamentodetime">
             <span className='current-page'>Gerenciamento de time</span>
