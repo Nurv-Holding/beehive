@@ -31,7 +31,6 @@ model TeamUser {
   idCompany        Int
   idUser           Int
   idTeam           Int
-  descriptions     String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   company          Company            @relation(fields: [idCompany], references: [id])
@@ -49,7 +48,6 @@ model Team {
   idCompany    Int
   name         String
   descriptions String
-  members      String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   company      Company    @relation(fields: [idCompany], references: [id])
