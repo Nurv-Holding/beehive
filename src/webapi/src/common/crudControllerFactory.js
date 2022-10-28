@@ -18,7 +18,19 @@ const crudControllerFactory = (model) => {
     }
 
     const create = async (req,res) => {
-        const data = await model.create({data:req.body})
+        let newDate;
+
+        if(req.body.initialDate){
+            newDate = {
+                ...req.body,
+                initialDate: new Date(req?.body?.initialDate),
+                finalDate: new Date(req?.body?.finalDate)   
+            }
+        }else{
+            newDate = req.body
+        }
+
+        const data = await model.create({data:newDate})
 
         return res.status(200).send(data)
 
@@ -26,8 +38,19 @@ const crudControllerFactory = (model) => {
 
     const update = async (req,res) => {
         const id = parseInt(req.params.id) 
-        const data = req.body
-        const result = await model.update({where:{id}, data})
+        let newDate;
+
+        if(req.body.initialDate){
+            newDate = {
+                ...req.body,
+                initialDate: new Date(req?.body?.initialDate),
+                finalDate: new Date(req?.body?.finalDate)  
+            }
+        }else{
+            newDate = req.body
+        }
+
+        const result = await model.update({where:{id}, data:newDate})
 
         return res.status(200).send(result)
 

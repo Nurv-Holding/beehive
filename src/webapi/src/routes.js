@@ -1,5 +1,7 @@
 const companiesController = require("./controllers/companiesController")
 const goalsController = require("./controllers/goalsController")
+const subtasksController = require("./controllers/subtasksController")
+const tasksController = require("./controllers/tasksController")
 const teamsController = require("./controllers/teamsController")
 const teamUsersController = require("./controllers/teamUsersController")
 const userController = require("./controllers/usersController")
@@ -39,6 +41,27 @@ const routes = (app) => {
     app.get("/members/teams",teamUsersController.getAll)
     app.put("/members/:id/teams",teamUsersController.update)
     app.delete("/members/:id/teams",teamUsersController.remove)
+
+    //tasks
+    app.post("/tasks",tasksController.create)
+    app.get("/tasks/:id",tasksController.getById)
+    app.get("/tasks",tasksController.getAll)
+    app.put("/tasks/:id",tasksController.update)
+    app.delete("/tasks/:id",tasksController.remove)
+
+    //subtasks
+    app.post("/subtasks",subtasksController.create)
+    app.get("/subtasks/:id",subtasksController.getById)
+    app.get("/subtasks",subtasksController.getAll)
+    app.put("/subtasks/:id",subtasksController.update)
+    app.delete("/subtasks/:id",subtasksController.remove)
+
+    //processGoalsTask
+    app.post("/process/goals",subtasksController.create)
+    app.get("/process/:id/goals",subtasksController.getById)
+    app.get("/process/goals",subtasksController.getAll)
+    app.put("/process/:id/goals",subtasksController.update)
+    app.delete("/process/:id/goals",subtasksController.remove)
 }
 
 module.exports = routes

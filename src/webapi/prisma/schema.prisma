@@ -27,31 +27,31 @@ model Company {
 }
 
 model TeamUser {
-  id               Int                @id @default(autoincrement())
-  idCompany        Int
-  idUser           Int
-  idTeam           Int
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  company          Company            @relation(fields: [idCompany], references: [id])
-  user             User               @relation(fields: [idUser], references: [id])
-  team             Team               @relation(fields: [idTeam], references: [id])
-  Goal             Goal[]
-  ProcessGoalsTask ProcessGoalsTask[]
-  ProcessTaskUser  ProcessTaskUser[]
+  id        Int      @id @default(autoincrement())
+  idCompany Int
+  idUser    Int
+  idTeam    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  company   Company  @relation(fields: [idCompany], references: [id])
+  user      User     @relation(fields: [idUser], references: [id])
+  team      Team     @relation(fields: [idTeam], references: [id])
 
   @@map("teamUsers")
 }
 
 model Team {
-  id           Int        @id @default(autoincrement())
-  idCompany    Int
-  name         String
-  descriptions String
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  company      Company    @relation(fields: [idCompany], references: [id])
-  TeamUser     TeamUser[]
+  id               Int                @id @default(autoincrement())
+  idCompany        Int
+  name             String
+  descriptions     String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  company          Company            @relation(fields: [idCompany], references: [id])
+  TeamUser         TeamUser[]
+  Goal             Goal[]
+  ProcessGoalsTask ProcessGoalsTask[]
+  ProcessTaskUser  ProcessTaskUser[]
 
   @@map("teams")
 }
@@ -90,13 +90,13 @@ model Task {
   company          Company            @relation(fields: [idCompany], references: [id])
   goal             Goal               @relation(fields: [idGoal], references: [id])
   ProcessGoalsTask ProcessGoalsTask[]
-  SubTask          SubTask[]
   ProcessTaskUser  ProcessTaskUser[]
+  Subtask          Subtask[]
 
   @@map("tasks")
 }
 
-model SubTask {
+model Subtask {
   id           Int      @id @default(autoincrement())
   idTask       Int
   name         String
@@ -108,13 +108,13 @@ model SubTask {
   updatedAt    DateTime @updatedAt
   task         Task     @relation(fields: [idTask], references: [id])
 
-  @@map("subTasks")
+  @@map("subtasks")
 }
 
 model Goal {
   id               Int                @id @default(autoincrement())
   idCompany        Int
-  idTeamUser       Int
+  idTeam           Int
   name             String
   descriptions     String
   done             Boolean            @default(false)
@@ -123,7 +123,7 @@ model Goal {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   company          Company            @relation(fields: [idCompany], references: [id])
-  teamUser         TeamUser           @relation(fields: [idTeamUser], references: [id])
+  team             Team               @relation(fields: [idTeam], references: [id])
   ProcessGoalsTask ProcessGoalsTask[]
   Task             Task[]
 
@@ -135,7 +135,7 @@ model ProcessGoalsTask {
   idCompany       Int
   idTask          Int
   idGoal          Int
-  idTeamUser      Int
+  idTeam          Int
   done            Int
   initialDate     DateTime
   finalDate       DateTime
@@ -144,7 +144,7 @@ model ProcessGoalsTask {
   task            Task              @relation(fields: [idTask], references: [id])
   company         Company           @relation(fields: [idCompany], references: [id])
   goal            Goal              @relation(fields: [idGoal], references: [id])
-  teamUser        TeamUser          @relation(fields: [idTeamUser], references: [id])
+  team            Team              @relation(fields: [idTeam], references: [id])
   User            User?             @relation(fields: [userId], references: [id])
   userId          Int?
   ProcessTaskUser ProcessTaskUser[]
@@ -155,7 +155,7 @@ model ProcessGoalsTask {
 model ProcessTaskUser {
   id                 Int              @id @default(autoincrement())
   idTask             Int
-  idTeamUser         Int
+  idTeam             Int
   idUser             Int
   idProcessGoalsTask Int
   descriptions       String
@@ -163,7 +163,7 @@ model ProcessTaskUser {
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
   task               Task             @relation(fields: [idTask], references: [id])
-  teamUser           TeamUser         @relation(fields: [idTeamUser], references: [id])
+  team               Team             @relation(fields: [idTeam], references: [id])
   user               User             @relation(fields: [idUser], references: [id])
   ProcessGoalsTask   ProcessGoalsTask @relation(fields: [idProcessGoalsTask], references: [id])
 
