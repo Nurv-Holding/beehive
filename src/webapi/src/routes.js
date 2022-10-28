@@ -1,4 +1,6 @@
 const companiesController = require("./controllers/companiesController")
+const goalsController = require("./controllers/goalsController")
+const teamsController = require("./controllers/teamsController")
 const userController = require("./controllers/usersController")
 
 const routes = (app) => {
@@ -15,6 +17,20 @@ const routes = (app) => {
     app.get("/companies",companiesController.getAll)
     app.put("/companies/:id",companiesController.update)
     app.delete("/companies/:id",companiesController.remove)
+
+    //goals
+    app.post("/goals",goalsController.create)
+    app.get("/goals/:id",goalsController.getById)
+    app.get("/goals",goalsController.getAll)
+    app.put("/goals/:id",goalsController.update)
+    app.delete("/goals/:id",goalsController.remove)
+
+    //teams
+    app.post("/teams",teamsController.create)
+    app.get("/teams/:id",teamsController.getById)
+    app.get("/teams",teamsController.getAll)
+    app.put("/teams/:id",teamsController.update)
+    app.delete("/teams/:id",teamsController.remove)
 }
 
 module.exports = routes
