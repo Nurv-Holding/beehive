@@ -1,5 +1,6 @@
 const companiesController = require("./controllers/companiesController")
 const goalsController = require("./controllers/goalsController")
+const goalsTasksController = require("./controllers/goalsTasksController")
 const processGoalsTask = require("./controllers/processGoalsTaskController")
 const processTaskUsers = require("./controllers/processTaskUsersController")
 const projectionProcessGoalsTaskController = require("./controllers/projectionProcessGoalsTaskController")
@@ -12,9 +13,9 @@ const userController = require("./controllers/usersController")
 
 const routes = (app) => {
     //users
-    app.get("/users",userController.getAll)
-    app.get("/users/:id",userController.getById)
-    app.post("/users",userController.create)
+    app.get("/users/c/:idCompany",userController.getAll)
+    app.get("/users/:idUser/c/:idCompany",userController.getById)
+    app.post("/users/c/:idCompany",userController.create)
     app.put("/users/:id",userController.update)
     app.delete("/users/:id",userController.remove)
 
@@ -31,6 +32,9 @@ const routes = (app) => {
     app.get("/goals",goalsController.getAll)
     app.put("/goals/:id",goalsController.update)
     app.delete("/goals/:id",goalsController.remove)
+
+        //goalsTasks
+        app.get("/goals/c/:idCompany/tasks",goalsTasksController().getAll)
 
     //teams
     app.post("/teams",teamsController.create)

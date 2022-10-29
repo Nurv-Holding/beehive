@@ -17,7 +17,7 @@ join users as u on tk.idUser=u.id where tk.idCompany=1;
 /*Projeção do processo de todos os objetivos*/
 select pgt.id as idProcess, tk.name as nameTask, tk.id as idTask, g.name as nameGoal, 
 g.id as idGoal, t.name as nameTeam, t.id as idTeam,
- pgt.done, pgt.createdAt as initialDate, pgt.updatedAt as finalDate
+ pgt.done, pgt.createdAt as initialDateProcess, pgt.updatedAt as finalDateProcess
 from processgoalstask as pgt join tasks as tk on pgt.idTask=tk.id
 join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
 where pgt.idCompany=1;
@@ -44,4 +44,4 @@ join processgoalstask as pgt on ptu.idProcessGoalsTask=pgt.id
 join goals as g on pgt.idGoal=g.id 
 where pgt.idCompany=1 and ptu.done=false;
 
-select * from processgoalstask;
+select * from tasks;

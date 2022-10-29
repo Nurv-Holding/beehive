@@ -3,41 +3,45 @@
 const crudControllerFactory = (model) => {
 
     const getAll = async (req,res) => {
-        const data = await model.findMany()
+        const idCompany = parseInt(req?.params?.idCompany) 
+
+        const data = await model.findMany({where:{idCompany}})
 
         return res.status(200).send(data)
 
     }
 
     const getById = async (req,res) => {
-        const id = parseInt(req.params.id) 
-        const result = await model.findUnique({where:{id}})
+        const idUser = parseInt(req.params.idUser)
+        const idCompany = parseInt(req?.params?.idCompany) 
+        const result = await model.findMany({where: {AND:[{id:idUser},{idCompany}]}})
 
         return res.status(200).send(result)
 
     }
 
     const create = async (req,res) => {
-        let newDate;
+        let newData;
+        const idCompany = parseInt(req?.params?.idCompany) 
 
         if(req.body.initialDate){
-            newDate = {
+            newData = {
                 ...req.body,
+                idCompany,
                 initialDate: new Date(req?.body?.initialDate),
                 finalDate: new Date(req?.body?.finalDate)   
             }
         }else{
-            newDate = req.body
+            newData = {...req.body, idCompany}
         }
 
-        const data = await model.create({data:newDate})
+        const data = await model.create({data:newData})
 
         return res.status(200).send(data)
 
     }
 
     const update = async (req,res) => {
-        const id = parseInt(req.params.id) 
         let newDate;
 
         if(req.body.initialDate){
@@ -57,7 +61,8 @@ const crudControllerFactory = (model) => {
     }
 
     const remove = async (req,res) => {
-        const id = parseInt(req.params.id) 
+        const id = parseInt(req.params.id)
+
         const result = await model.delete({where:{id}})
 
         return res.status(200).send(result)
