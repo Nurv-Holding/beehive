@@ -60,6 +60,7 @@ model User {
   id               Int                @id @default(autoincrement())
   idCompany        Int
   name             String
+  photo            String
   email            String             @unique
   occupation       String
   roles            String?
