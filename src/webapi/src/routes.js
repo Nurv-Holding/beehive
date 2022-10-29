@@ -6,6 +6,7 @@ const processTaskUsers = require("./controllers/processTaskUsersController")
 const projectionProcessGoalsTaskController = require("./controllers/projectionProcessGoalsTaskController")
 const subtasksController = require("./controllers/subtasksController")
 const tasksController = require("./controllers/tasksController")
+const taskSubtasksController = require("./controllers/taskSubtasksController")
 const teamsController = require("./controllers/teamsController")
 const teamUsersController = require("./controllers/teamUsersController")
 const teamUsersProjectionController = require("./controllers/teamUsersProjectionController")
@@ -14,7 +15,7 @@ const userController = require("./controllers/usersController")
 const routes = (app) => {
     //users
     app.get("/users/c/:idCompany",userController.getAll)
-    app.get("/users/:idUser/c/:idCompany",userController.getById)
+    app.get("/users/:id/c/:idCompany",userController.getById)
     app.post("/users/c/:idCompany",userController.create)
     app.put("/users/:id",userController.update)
     app.delete("/users/:id",userController.remove)
@@ -35,6 +36,7 @@ const routes = (app) => {
 
         //goalsTasks
         app.get("/goals/c/:idCompany/tasks",goalsTasksController().getAll)
+        app.get("/goals/:idGoal/c/:idCompany/tasks",goalsTasksController().getById)
 
     //teams
     app.post("/teams",teamsController.create)
@@ -51,11 +53,14 @@ const routes = (app) => {
     app.delete("/members/:id/teams",teamUsersController.remove)
 
     //tasks
-    app.post("/tasks",tasksController.create)
+    app.post("/tasks/c/:idCompany",tasksController.create)
     app.get("/tasks/:id",tasksController.getById)
-    app.get("/tasks",tasksController.getAll)
+    app.get("/tasks/c/:idCompany",tasksController.getAll)
     app.put("/tasks/:id",tasksController.update)
     app.delete("/tasks/:id",tasksController.remove)
+
+        //taskSubtasks
+        app.get("/tasks/:idTask/subtasks/c/:idCompany",taskSubtasksController().getById)
 
     //subtasks
     app.post("/subtasks",subtasksController.create)

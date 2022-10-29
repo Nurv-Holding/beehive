@@ -3,20 +3,35 @@
 const crudControllerFactory = (model) => {
 
     const getAll = async (req,res) => {
-        const idCompany = parseInt(req?.params?.idCompany) 
+        let data;
 
-        const data = await model.findMany({where:{idCompany}})
+        if(req.params.idCompany){
+            const idCompany = parseInt(req?.params?.idCompany) 
+
+            data = await model.findMany({where:{idCompany}})
+        }else{
+            data = await model.findMany()
+        }
+  
 
         return res.status(200).send(data)
 
     }
 
     const getById = async (req,res) => {
-        const idUser = parseInt(req.params.idUser)
-        const idCompany = parseInt(req?.params?.idCompany) 
-        const result = await model.findMany({where: {AND:[{id:idUser},{idCompany}]}})
+        let data;
+        const id = parseInt(req.params.id)
 
-        return res.status(200).send(result)
+        if(req.params.idCompany){
+            const idCompany = parseInt(req?.params?.idCompany) 
+            data = await model.findMany({where: {AND:[{id},{idCompany}]}})
+
+        }else{
+            data = await model.findUnique({ where: {id} })
+        }
+  
+
+        return res.status(200).send(data)
 
     }
 
@@ -25,14 +40,26 @@ const crudControllerFactory = (model) => {
         const idCompany = parseInt(req?.params?.idCompany) 
 
         if(req.body.initialDate){
-            newData = {
-                ...req.body,
-                idCompany,
-                initialDate: new Date(req?.body?.initialDate),
-                finalDate: new Date(req?.body?.finalDate)   
-            }
+            if(idCompany)
+                newData = {
+                    ...req.body,
+                    idCompany,
+                    initialDate: new Date(req?.body?.initialDate),
+                    finalDate: new Date(req?.body?.finalDate)   
+                }
+
+            else
+                newData = {
+                    ...req.body,
+                    initialDate: new Date(req?.body?.initialDate),
+                    finalDate: new Date(req?.body?.finalDate)   
+                }
+            
         }else{
-            newData = {...req.body, idCompany}
+            if(idCompany)
+                newData = {...req.body, idCompany}
+            else
+                newData = req.body
         }
 
         const data = await model.create({data:newData})
