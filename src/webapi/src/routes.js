@@ -4,6 +4,7 @@ const goalsTasksController = require("./controllers/goalsTasksController")
 const processGoalsTask = require("./controllers/processGoalsTaskController")
 const processTaskUsers = require("./controllers/processTaskUsersController")
 const projectionProcessGoalsTaskController = require("./controllers/projectionProcessGoalsTaskController")
+const projetionProcessTaskUsersController = require("./controllers/projetionProcessTaskUsersController")
 const subtasksController = require("./controllers/subtasksController")
 const tasksController = require("./controllers/tasksController")
 const taskSubtasksController = require("./controllers/taskSubtasksController")
@@ -36,7 +37,10 @@ const routes = (app) => {
 
         //goalsTasks
         app.get("/goals/c/:idCompany/tasks",goalsTasksController().getAll)
-        app.get("/goals/:idGoal/c/:idCompany/tasks",goalsTasksController().getById)
+        app.get("/goals/:idGoal/c/:idCompany/tasks",goalsTasksController().getByIdGoal)
+        app.get("/goals/:idGoal/c/:idCompany/tasks/done",goalsTasksController().getByIdGoalByDone)
+        app.get("/goals/:idGoal/c/:idCompany/q/tasks",goalsTasksController().getByIdGoalByQuantifyTask)
+        app.get("/goals/:idGoal/c/:idCompany/q/tasks/done",goalsTasksController().getByIdGoalByQuantifyTaskDone)
 
     //teams
     app.post("/teams",teamsController.create)
@@ -76,6 +80,10 @@ const routes = (app) => {
     app.put("/process/:id/goals",processGoalsTask.update)
     app.delete("/process/:id/goals",processGoalsTask.remove)
 
+        //projectionProcessGoalsTaskController
+        app.get("/process/c/:idCompany/goal",projectionProcessGoalsTaskController().getAll)
+        app.get("/process/c/:idCompany/goal/:idGoal",projectionProcessGoalsTaskController().getById)
+
     //processTaskUsers
     app.post("/process/task",processTaskUsers.create)
     app.get("/process/:id/task",processTaskUsers.getById)
@@ -83,12 +91,15 @@ const routes = (app) => {
     app.put("/process/:id/task",processTaskUsers.update)
     app.delete("/process/:id/task",processTaskUsers.remove)
 
+            //projetionProcessTaskUsersController
+            app.get("/process/task/c/:idCompany",projetionProcessTaskUsersController().getAll)
+            //app.get("/process/c/:idCompany/goal/:idGoal",projectionProcessGoalsTaskController().getById)
+
     //teamUsersProjection
     app.get("/users/p/team",teamUsersProjectionController().getAll)
     app.get("/users/team/:id",teamUsersProjectionController().getById)
 
-    //projectionProcessGoalsTaskController
-    app.get("/process/c/:idCompany/goal",projectionProcessGoalsTaskController().getAll)
+
 
 
 }

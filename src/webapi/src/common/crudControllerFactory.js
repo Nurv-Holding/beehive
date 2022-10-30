@@ -70,6 +70,7 @@ const crudControllerFactory = (model) => {
 
     const update = async (req,res) => {
         let newDate;
+        const id = parseInt(req.params.id) 
 
         if(req.body.initialDate){
             newDate = {
