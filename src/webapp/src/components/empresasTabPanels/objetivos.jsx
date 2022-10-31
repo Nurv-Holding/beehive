@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom'
+import { json, Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormObjetivos from './objetivos/formObjetivos'
 import ListaObjetivos from './objetivos/listaObjetivos'
+import { useContext } from 'react'
+import { ContextUser } from '../../context/ContextUser'
 
-function objetivos() {
+function Objetivos() {
+    const {goals} = useContext(ContextUser)
+
     return (
         <Tab.Group>
         <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
@@ -46,7 +50,7 @@ function objetivos() {
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>
-                <ListaObjetivos/>
+            <ListaObjetivos goals={goals}/>
             </Tab.Panel>
             </Tab.Panels>
         </div>
@@ -55,4 +59,4 @@ function objetivos() {
     )
 }
 
-export default objetivos
+export default Objetivos

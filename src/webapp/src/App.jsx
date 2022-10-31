@@ -1,11 +1,13 @@
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import AppRoutes from './routes'
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./appRoutes";
 
 function App() {
   return (
     <>
-      <AppRoutes />
+      <BrowserRouter>
+          <AppRoutes />
+      </BrowserRouter>
     </>
   );
 }
