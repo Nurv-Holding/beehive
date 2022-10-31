@@ -41,7 +41,7 @@ header nav span:hover{
 /*GRID CONTAINER and general attributes*/
 .grid-container{
     @apply w-full grid justify-center my-8 gap-x-8
-    lg:grid-cols-[20%,35%,35%]
+    lg:grid-cols-[20%,70%]
 }
 
 .grid-col{
@@ -54,7 +54,7 @@ header nav span:hover{
 }
 
 .container-title{
-    @apply text-base text-[#5500C3] mb-2 cursor-default
+    @apply text-sm text-[#5500C3] mb-2 cursor-default
 }
 
 .text-desc{
@@ -62,11 +62,11 @@ header nav span:hover{
 }
 
 .grid-general{
-    @apply p-4
+    @apply p-8
 }
 
 .general{
-    @apply w-[40%] max-w-[200px] border border-b border-x-0 border-t-0 border-black text-xs text-gray-700 mt-0.5
+    @apply w-[40%] max-w-[200px] text-xs text-gray-700 mt-0.5
 }
 
 .general:hover{

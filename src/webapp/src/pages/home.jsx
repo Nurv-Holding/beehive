@@ -15,21 +15,18 @@ function Home() {
 {/* FIRST COL */}
           <div className='grid-col'>
             <Profile />
-            <Compromisses />
+            <Methodology />
           </div>
 
 {/* SECOND COL */}
             <div className='grid-col'>
               <Tasks />
-              <Reminder />
             </div>
 
 {/* THIRD COL */}
-            <div className='grid-col'>
-              <Calendar />
-
+            {/* <div className='grid-col'>
               <Methodology />
-            </div>
+            </div> */}
           </div>
       </main>
     </>
