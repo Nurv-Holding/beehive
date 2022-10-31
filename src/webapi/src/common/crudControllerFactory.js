@@ -1,3 +1,4 @@
+const formatDate = require("./formateDate");
 
 
 const crudControllerFactory = (model) => {
@@ -44,15 +45,15 @@ const crudControllerFactory = (model) => {
                 newData = {
                     ...req.body,
                     idCompany,
-                    initialDate: new Date(req?.body?.initialDate),
-                    finalDate: new Date(req?.body?.finalDate)   
+                    initialDate: formatDate(req?.body?.initialDate),
+                    finalDate: formatDate(req?.body?.finalDate)   
                 }
 
             else
                 newData = {
                     ...req.body,
-                    initialDate: new Date(req?.body?.initialDate),
-                    finalDate: new Date(req?.body?.finalDate)   
+                    initialDate: formatDate(req?.body?.initialDate),
+                    finalDate: formatDate(req?.body?.finalDate)   
                 }
             
         }else{
@@ -75,8 +76,8 @@ const crudControllerFactory = (model) => {
         if(req.body.initialDate){
             newDate = {
                 ...req.body,
-                initialDate: new Date(req?.body?.initialDate),
-                finalDate: new Date(req?.body?.finalDate)  
+                initialDate: formatDate(req?.body?.initialDate),
+                finalDate: formatDate(req?.body?.finalDate) 
             }
         }else{
             newDate = req.body

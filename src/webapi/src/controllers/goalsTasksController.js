@@ -45,9 +45,9 @@ const goalsTasksController = () => {
         from tasks as tk join goals as g on tk.idGoal=g.id join teams as t on g.idTeam=t.id 
         join users as u on tk.idUser=u.id where tk.idCompany=${idCompany} and g.id=${idGoal};`
 
-        res.status(200).send(results.map((result) => { 
-            return {...result, totalTask:parseInt(result.totalTask)} 
-        }))
+        const result = results.length !== 0? results[0]: null
+
+        res.status(200).send({...result, totalTask:parseInt(result.totalTask)})
     }
 
     const getByIdGoalByQuantifyTaskDone = async (req, res) => {
@@ -59,9 +59,9 @@ const goalsTasksController = () => {
         join users as u on tk.idUser=u.id 
         where tk.idCompany=${idCompany} and g.id=${idGoal} and tk.done=true;`
 
-        res.status(200).send(results.map((result) => { 
-            return {...result, totalTaskDone:parseInt(result.totalTaskDone)} 
-        }))
+        const result = results.length !== 0? results[0]: null
+
+        res.status(200).send({...result, totalTaskDone:parseInt(result.totalTaskDone)})
     }
 
     return {
