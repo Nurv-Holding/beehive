@@ -344,5 +344,31 @@ header nav span:hover{
 }
 
 /*End Menu With Cards*/
+
+/*Tarefas Cards*/
+.container-percentage-checklist{
+    @apply w-full h-4 bg-gray-200 rounded
+}
+
+.container-bar-checklist{
+    @apply h-4 rounded bg-[#5500C3]
+}
+
+.checkbox-container{
+    @apply bg-gray-200 p-1 mt-2 flex flex-col w-full
+}
+
+.checkbox-container label{
+    @apply ml-2
+}
+
+.description-container{
+    @apply w-full bg-gray-200 rounded p-2
+}
+
+.description-container p{
+    @apply text-sm
+}
+/*End Tarefas Cards*/
 /*End Empresas*/
 
