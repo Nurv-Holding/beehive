@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Header from '../components/Header';
 import Profile from '../components/profile';
 import Compromisses from '../components/compromisses';
 import Tasks from '../components/tasks';
@@ -9,6 +9,8 @@ import Methodology from '../components/methodology';
 function Home() {
   return (
     <>
+      <Header />
+
       <main>
         <div className='grid-container'>
 

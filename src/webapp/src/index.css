@@ -315,10 +315,34 @@ header nav span:hover{
 }
 
 .submit-button{
-    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white mt-2 self-end mt-3 mr-8
+    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white self-end mr-8
 }
 
 .container-table-objectives-list-times{
     @apply w-full grid grid-cols-4 gap-2 items-center
 }
+
+.container-table-objectives-list-empresas{
+    @apply w-full grid grid-cols-2 gap-2 items-center
+}
+
+.container-table-objectives-list-tarefas{
+    @apply w-full grid grid-cols-5 gap-2 items-center
+}
+/*Menu With Cards*/
+
+.container-card-empresas{
+    @apply min-w-[15%] w-auto border border-black rounded-lg p-4 flex flex-col items-center justify-center
+}
+
+.modal-btn{
+    @apply w-[95%] border border-gray-300 mt-2 rounded-md p-1 text-gray-500 text-sm bg-gray-200
+}
+
+.modal-btn:hover{
+    @apply bg-[#5500C3] text-white border-transparent
+}
+
+/*End Menu With Cards*/
 /*End Empresas*/
+

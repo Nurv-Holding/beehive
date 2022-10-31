@@ -4,32 +4,46 @@ import { Tab } from '@headlessui/react'
 function listaTarefas() {
     return (
         <div className='flex flex-col items-center'>
-    <div className='container-table-objectives-list-times'>
-      <div>
-        <h1 className='container-title-grid'>Nome do time</h1>
+    <div className='container-table-objectives-list-tarefas'>
+    <div>
+        <h1 className='container-title-grid'>Objetivo</h1>
 
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
-        <p className='text-desc-grid'>Time X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+          <p className='text-desc-grid'>Objetivo X</p>
+        </div>
+
+      <div>
+        <h1 className='container-title-grid'>Tarefa</h1>
+
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
+        <p className='text-desc-grid'>Tarefa X</p>
       </div>
 
       <div>
         <h1 className='container-title-grid'>Descrição</h1>
 
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
-          <p className='text-desc-grid'>Time X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
+          <p className='text-desc-grid'>Tarefa X</p>
         </div>
+
 
         <div>
           <h1 className='container-title-grid'>Data Inicial</h1>

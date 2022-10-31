@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { createContext } from "react"
 import { useParams } from "react-router-dom"
 import goalsApi from "../api/goalsApi"
+import subtasksApi from "../api/subtasksApi"
 
 export const ContextUser = createContext()
 
@@ -19,7 +20,7 @@ export const ContextUserProvider = ({ children }) => {
         nameGoal:"",
         totalTaskDone: null
     })
-    const {idGoal} = useParams()
+    const { idGoal } = useParams()
 
     useEffect(() => {
         handlerGoalsTasks()
@@ -55,6 +56,11 @@ export const ContextUserProvider = ({ children }) => {
         const {data} = await goalsApi.getByIdGoalQuantifyTaskDone(idGoal)
         console.log("handleGoalTasksQuantifyDone",data)
         setTasksToGoalQuantifyDone(data)
+    }
+
+    const handlerTaskSubtasks = async () => {
+        const {data} = await subtasksApi.getByIdTaskSubtasks(tasksToGoal)
+        setTasksToGoal(data)
     }
 
     return(
