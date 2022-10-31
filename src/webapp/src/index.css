@@ -106,7 +106,7 @@ header nav span:hover{
 /*END COMPROMISSES*/
 /*TABLE STYLES*/
 .container-table-grid-team{
-    @apply w-full grid grid-cols-4 gap-2
+    @apply w-full flex flex-col items-center
 }
 /*END GRID CONTAINER*/
 

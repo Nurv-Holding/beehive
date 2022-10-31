@@ -16,8 +16,12 @@ function formObjetivos() {
             </div>
 
             <div className='input-and-label-container'>
-                <label>Integrantes</label>
-                <input className='input-style' type="text" placeholder='Digite os integrantes do objetivo'/>
+                <label for='input-integrantes'>Integrantes</label>
+                <input name='input-integrantes' list='emails' className='input-style'/>
+
+                <datalist id="emails">
+                    <option value="Email do Victor">Email do Victor</option>
+                </datalist>
             </div>
 
             <div className='input-and-label-container'>

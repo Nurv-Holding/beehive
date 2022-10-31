@@ -1,49 +1,35 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 
-function listaUsuarios() {
+function listaUsuarios({ goals }) {
     return (
         <div className='flex flex-col items-center'>
-    <div className='container-table-objectives-list'>
-      <div>
-        <h1 className='container-title-grid'>Nome</h1>
+    <div className='container-table-grid-team'>
+            <table class="table-auto w-full">
+              
+              <thead>
+                <tr>
+                  <th className='container-title-grid'>Nome</th>
+                  <th className='container-title-grid'>Email</th>
+                  <th className='container-title-grid'>Cargo</th>
+                </tr>
+              </thead>
 
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-        <p className='text-desc-grid'>Maria</p>
-      </div>
-
-      <div>
-        <h1 className='container-title-grid'>Cargo</h1>
-
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-          <p className='text-desc-grid'>Customer Sucess</p>
-        </div>
-
-        <div>
-          <h1 className='container-title-grid'>Email</h1>
-          
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-          <p className='text-desc-grid'>maria@gmail.com</p>
-        </div>
-    </div>
+              <tbody className='text-center'>
+                {(goals || []).map((goal) => {
+                    return (
+                    <>
+                      <tr>
+                        <td>Nome</td>
+                        <td>Email</td>
+                        <td>Cargo</td>
+                      </tr>
+                    </>
+                     )
+                    })}
+              </tbody>
+            </table>
+          </div>
     </div>
     )
 }
