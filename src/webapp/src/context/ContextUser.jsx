@@ -28,7 +28,7 @@ export const ContextUserProvider = ({ children }) => {
         handleGoalTasksQuantify()
         handleGoalTasksQuantifyDone()
 
-    },[])
+    },[idGoal])
 
     const handlerGoalsTasks = async () => {
         const {data} = await goalsApi.getAllGoalsTask()

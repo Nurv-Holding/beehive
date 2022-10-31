@@ -45,8 +45,8 @@ const crudControllerFactory = (model) => {
                 newData = {
                     ...req.body,
                     idCompany,
-                    initialDate: new Date(req?.body?.initialDate),
-                    finalDate: new Date(req?.body?.finalDate)   
+                    initialDate: formatDate(req?.body?.initialDate),
+                    finalDate: formatDate(req?.body?.finalDate)   
                 }
 
             else

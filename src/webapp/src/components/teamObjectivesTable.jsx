@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Disclosure } from '@headlessui/react'
+import { calcDate } from '../utilis';
 
 function teamObjectivesTable({ tasksToGoal }) {
   return (
@@ -17,7 +18,7 @@ function teamObjectivesTable({ tasksToGoal }) {
                   <span> {task.nameTask} </span>
                   <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
                 </div>
-                <span>4 dias</span>
+                <span>{calcDate(task.finalDate) >= 0? `Faltam ${calcDate(task.finalDate)} Dias`: `${calcDate(task.finalDate)} Dias de atraso`}</span>
 
                 <div className='profile-photo-task'>
                   <img src="https://thispersondoesnotexist.com/image"/>

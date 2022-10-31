@@ -65,6 +65,7 @@ const routes = (app) => {
 
         //taskSubtasks
         app.get("/tasks/:idTask/subtasks/c/:idCompany",taskSubtasksController().getById)
+        app.get("/tasks/:idTask/q/subtasks/c/:idCompany",taskSubtasksController().getByIdQuantifySubtasks)
 
     //subtasks
     app.post("/subtasks",subtasksController.create)
