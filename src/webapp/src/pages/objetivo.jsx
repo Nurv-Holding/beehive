@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
+import subtasksApi from '../api/subtasksApi';
 import Header from '../components/Header';
 import TeamObjectivesPercentage from '../components/teamObjectivesPercentage';
 import TeamObjectivesTable from '../components/teamObjectivesTable';
@@ -8,6 +11,18 @@ function Objetivo() {
   const {tasksToGoal} = useContext(ContextUser)
   const {tasksToGoalQuantify} = useContext(ContextUser)
   const {tasksToGoalQuantifyDone} = useContext(ContextUser)
+  const [total, setTotal] = useState([])
+
+  let totalArray = []
+
+  const returnQuantify = async (idTask) => {
+    
+    const {data} = await subtasksApi.getByIdTaskQuantifySubtasks(idTask)
+
+    totalArray.push({...data})
+
+    setTotal(totalArray) 
+  }
 
   return (
     <>
@@ -20,7 +35,11 @@ function Objetivo() {
             tasksToGoalQuantify={tasksToGoalQuantify}
             tasksToGoalQuantifyDone={tasksToGoalQuantifyDone}
           />
-          <TeamObjectivesTable tasksToGoal={tasksToGoal} />
+          <TeamObjectivesTable 
+            tasksToGoal={tasksToGoal} 
+            returnQuantify={returnQuantify}
+            total={total}
+          />
         </div>
       </main>
     </>

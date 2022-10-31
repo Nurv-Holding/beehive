@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { Disclosure } from '@headlessui/react'
 import { calcDate } from '../utilis';
+import TaskPercentage from './TaskPercentage';
 
-function teamObjectivesTable({ tasksToGoal }) {
+function teamObjectivesTable({ tasksToGoal, returnQuantify, total }) {
+
   return (
     <div className='flex flex-col items-center w-full'>
       <div className="w-11/12 rounded-2xl bg-white p-2 mt-4">
@@ -28,7 +30,7 @@ function teamObjectivesTable({ tasksToGoal }) {
                   <div className='percentage-bar-disclosure w-[50%]'></div>
                 </div>
 
-                <span>50% concluído</span>
+                <TaskPercentage returnQuantify={returnQuantify} idTask={task?.idTask} total={total} />
               </Disclosure.Button>
               <Disclosure.Panel className="">
                 <div className='flex flex-col ml-6'>
