@@ -12,16 +12,18 @@ function Objetivo() {
   const {tasksToGoalQuantify} = useContext(ContextUser)
   const {tasksToGoalQuantifyDone} = useContext(ContextUser)
   const [total, setTotal] = useState([])
+  const [totalDone, setTotalDone] = useState([])
 
-  let totalArray = []
+  const returnQuantify = async () => {
+    const {data} = await subtasksApi.getAllTaskQuantifySubtasks()
 
-  const returnQuantify = async (idTask) => {
-    
-    const {data} = await subtasksApi.getAllTaskQuantifySubtasks(idTask)
+    setTotal(data) 
+  }
 
-    totalArray.push({...data})
+  const returnQuantifyDone = async () => {
+    const {data} = await subtasksApi.getByIdTaskQuantifySubtasksDone()
 
-    setTotal(totalArray) 
+    setTotalDone(data) 
   }
 
   return (
@@ -38,7 +40,9 @@ function Objetivo() {
           <TeamObjectivesTable 
             tasksToGoal={tasksToGoal} 
             returnQuantify={returnQuantify}
+            returnQuantifyDone={returnQuantifyDone}
             total={total}
+            totalDone={totalDone}
           />
         </div>
       </main>
