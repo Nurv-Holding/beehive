@@ -24,10 +24,6 @@ function Home() {
           <Link to="/gerenciamentodetime">
             <span>Gerenciamento de time</span>
           </Link>
-          
-          <Link to="/carreira">
-            <span>Carreira</span>
-          </Link>
 
           <Link to="/empresas">
             <span>empresas</span>

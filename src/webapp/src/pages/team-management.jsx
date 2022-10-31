@@ -19,10 +19,6 @@ function teamManagement() {
           <Link to="/gerenciamentodetime">
             <span className='current-page'>Gerenciamento de time</span>
           </Link>
-          
-          <Link to="/carreira">
-            <span>Carreira</span>
-          </Link>
 
           <Link to="/empresas">
             <span>empresas</span>
