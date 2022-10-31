@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
+import Modal from './components/Modal'
 
-function objetivosCards() {
+function ObjetivosCards() {
     return (
-        <div className='flex flex-col'>
-        
+        <div className='flex flex-row flex-wrap gap-8 justify-center'>
+            <Modal/>
         </div>
     )
 }
 
-export default objetivosCards
+export default ObjetivosCards

@@ -329,4 +329,20 @@ header nav span:hover{
 .container-table-objectives-list-tarefas{
     @apply w-full grid grid-cols-5 gap-2 items-center
 }
+/*Menu With Cards*/
+
+.container-card-empresas{
+    @apply min-w-[15%] w-auto border border-black rounded-lg p-4 flex flex-col items-center justify-center
+}
+
+.modal-btn{
+    @apply w-[95%] border border-gray-300 mt-2 rounded-md p-1 text-gray-500 text-sm bg-gray-200
+}
+
+.modal-btn:hover{
+    @apply bg-[#5500C3] text-white border-transparent
+}
+
+/*End Menu With Cards*/
 /*End Empresas*/
+
