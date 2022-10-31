@@ -6,18 +6,18 @@ function formObjetivos() {
         <div className='flex flex-col'>
             <form className='form-container'>
             <div className='input-and-label-container'>
-                <label>Nome do Time</label>
-                <input className='input-style' type="text" placeholder='Digite o nome do time'/>
+                <label>Objetivo</label>
+                <input className='input-style' type="text" placeholder='Digite o objetivo'/>
             </div>
 
             <div className='input-and-label-container'>
                 <label>Descrição</label>
-                <input className='input-style' type="text" placeholder='Digite a descrição do time'/>
+                <input className='input-style' type="text" placeholder='Digite a descrição do objetivo'/>
             </div>
 
             <div className='input-and-label-container'>
                 <label>Integrantes</label>
-                <input className='input-style' type="text" placeholder='Digite os integrantes do time'/>
+                <input className='input-style' type="text" placeholder='Digite os integrantes do objetivo'/>
             </div>
 
             <div className='input-and-label-container'>

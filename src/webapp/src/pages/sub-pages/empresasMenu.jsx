@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Usuarios from '../../components/empresasTabPanels/usuarios'
 import Times from '../../components/empresasTabPanels/times'
-import Empresas from '../../components/empresasTabPanels/empresas'
 import Objetivos from '../../components/empresasTabPanels/objetivos'
 import Tarefas from '../../components/empresasTabPanels/tarefas'
 
@@ -49,19 +48,6 @@ export default function Example() {
                     selected ? 'text-[#5500C3]' : ''
                   }
                 >
-                  Empresas
-                </button>
-              )}
-            </Tab>
-
-            <Tab>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'text-[#5500C3]' : ''
-                  }
-                >
                   Objetivos
                 </button>
               )}
@@ -89,10 +75,6 @@ export default function Example() {
 
           <Tab.Panel>
             <Times/>
-          </Tab.Panel>
-
-          <Tab.Panel className='w-full'>
-            <Empresas/>
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>

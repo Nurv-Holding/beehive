@@ -315,10 +315,18 @@ header nav span:hover{
 }
 
 .submit-button{
-    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white mt-2 self-end mt-3 mr-8
+    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white self-end mr-8
 }
 
 .container-table-objectives-list-times{
     @apply w-full grid grid-cols-4 gap-2 items-center
+}
+
+.container-table-objectives-list-empresas{
+    @apply w-full grid grid-cols-2 gap-2 items-center
+}
+
+.container-table-objectives-list-tarefas{
+    @apply w-full grid grid-cols-5 gap-2 items-center
 }
 /*End Empresas*/
