@@ -9,32 +9,6 @@ import Methodology from '../components/methodology';
 function Home() {
   return (
     <>
-      <header>
-        <span className='cursor-default'>nossa plataforma</span>
-
-        <nav>
-          <Link to="/">
-            <span className='current-page'>Home</span>
-          </Link>
-
-          <Link to="/listadeobjetivos">
-            <span>Objetivos</span>
-          </Link>
-          
-          <Link to="/gerenciamentodetime">
-            <span>Gerenciamento de time</span>
-          </Link>
-          
-          <Link to="/carreira">
-            <span>Carreira</span>
-          </Link>
-
-          <Link to="/empresas">
-            <span>empresas</span>
-          </Link>
-        </nav>
-      </header>
-
       <main>
         <div className='grid-container'>
 
