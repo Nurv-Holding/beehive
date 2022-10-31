@@ -17,7 +17,7 @@ function Objetivo() {
 
   const returnQuantify = async (idTask) => {
     
-    const {data} = await subtasksApi.getByIdTaskQuantifySubtasks(idTask)
+    const {data} = await subtasksApi.getAllTaskQuantifySubtasks(idTask)
 
     totalArray.push({...data})
 
