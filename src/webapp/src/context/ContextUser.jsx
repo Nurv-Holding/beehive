@@ -9,13 +9,24 @@ export const ContextUserProvider = ({ children }) => {
     const [tasksToGoals, setTasksToGoals] = useState([])
     const [goals, setGoals] = useState([])
     const [tasksToGoal, setTasksToGoal] = useState([])
-    const [tasksToGoalQuantify, setTasksToGoalQuantify] = useState([])
+    const [tasksToGoalQuantify, setTasksToGoalQuantify] = useState({
+        idGoal: null,
+        nameGoal:"",
+        totalTask: null
+    })
+    const [tasksToGoalQuantifyDone, setTasksToGoalQuantifyDone] = useState({
+        idGoal: null,
+        nameGoal:"",
+        totalTaskDone: null
+    })
     const {idGoal} = useParams()
 
     useEffect(() => {
         handlerGoalsTasks()
         handlerGoals()
         handlerGoalTasks()
+        handleGoalTasksQuantify()
+        handleGoalTasksQuantifyDone()
 
     },[])
 
@@ -34,8 +45,16 @@ export const ContextUserProvider = ({ children }) => {
         setTasksToGoal(data)
     }
 
-    const handleGoalTasksQuantify = () => {
-        const {data} = goalsApi.getByIdGoalQuantifyTask(idGoal)
+    const handleGoalTasksQuantify = async () => {
+        const {data} = await goalsApi.getByIdGoalQuantifyTask(idGoal)
+        console.log("handleGoalTasksQuantify",data)
+        setTasksToGoalQuantify(data)
+    }
+
+    const handleGoalTasksQuantifyDone = async () => {
+        const {data} = await goalsApi.getByIdGoalQuantifyTaskDone(idGoal)
+        console.log("handleGoalTasksQuantifyDone",data)
+        setTasksToGoalQuantifyDone(data)
     }
 
     return(
@@ -44,6 +63,8 @@ export const ContextUserProvider = ({ children }) => {
                 {
                     tasksToGoals,
                     tasksToGoal,
+                    tasksToGoalQuantify,
+                    tasksToGoalQuantifyDone,
                     goals
                 }
             }

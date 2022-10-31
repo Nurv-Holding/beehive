@@ -1,12 +1,17 @@
-function teamObjectivesPercentage() {
+import { calcPercentage } from "../utilis"
+
+function TeamObjectivesPercentage({ tasksToGoalQuantify=null,tasksToGoalQuantifyDone=null }) {
     return(
         <div className='container-two-percentage'>
             <div className='container-percentage-okr'>
                 <div className='percentage-bar-okrs'>
-                    <p className='percentage-title'>Progresso</p>
+                    <p className='percentage-title'> Progresso do Objetivo </p>
                     <div className='container-infos-percentage'>
                         <div className='percentage-my-progress'></div>
-                        <span>50% concluído</span>
+                        <span> 
+                            {calcPercentage(tasksToGoalQuantifyDone?.totalTaskDone,tasksToGoalQuantify?.totalTask)}
+                            % concluído
+                        </span>
                     </div>
                 </div>
             </div>
@@ -28,4 +33,4 @@ function teamObjectivesPercentage() {
     )
 }
 
-export default teamObjectivesPercentage
+export default TeamObjectivesPercentage

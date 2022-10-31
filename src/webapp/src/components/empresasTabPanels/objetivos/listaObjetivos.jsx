@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
+import { Link } from "react-router-dom"
 
 function listaObjetivos({ goals }) {
     return (
@@ -9,8 +8,10 @@ function listaObjetivos({ goals }) {
           return(
             <>
             <div>
-              <h1 className='container-title-grid'>Nome do time</h1>
-              <p className='text-desc-grid'> {goal.name} </p>
+              <Link to={`/objetivo/${goal.id}`}>
+                <h1 className='container-title-grid'>Nome do Objetivo</h1>
+                <p className='text-desc-grid'> {goal.name} </p>
+              </Link>
             </div>
             <div>
               <h1 className='container-title-grid'>Descrição</h1>
