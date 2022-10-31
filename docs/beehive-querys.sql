@@ -44,12 +44,17 @@ st.updatedAt as finalDateSubtask,u.id as idUser, u.name as nameUser, u.photo as 
 from subtasks as st join tasks as t on st.idTask=t.id
 join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2;
 
-/*Projeção das quantidade de subtarefas by tarefas(taskSubtasksController)*/
+/*Projeção da quantidade de subtarefas by tarefas(taskSubtasksController)*/
 select t.id as idTask, t.name as taskName, st.id as idSubtasks, 
 st.name as nameSubtasks, count(*) as totalSubtasks
 from subtasks as st join tasks as t on st.idTask=t.id
-join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2;
+join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2 and st.done=true;
 
+/*Projeção da quantidade de subtarefas feitas by tarefas(taskSubtasksController)*/
+select t.id as idTask, t.name as taskName, st.id as idSubtasks, 
+st.name as nameSubtasks, count(*) as totalSubtasks, st.nameSubtask
+from subtasks as st join tasks as t on st.idTask=t.id
+join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2 ;
 
 /*Projeção do processo de todos os objetivos (projectionProcessGoalsTaskController)*/
 select pgt.id as idProcess, tk.name as nameTask, tk.id as idTask, g.name as nameGoal, 

@@ -25,8 +25,7 @@ const taskSubtasksController = () => {
     const getByIdQuantifySubtasks = async (req, res) => {
         const {idCompany, idTask} = req.params
 
-        const results = await prismaClient.$queryRaw`select t.id as idTask, t.name as taskName, st.id as idSubtasks, 
-        st.name as nameSubtasks, count(*) as totalSubtasks
+        const results = await prismaClient.$queryRaw`select t.id as idTask, t.name as taskName,count(*) as totalSubtasks
         from subtasks as st join tasks as t on st.idTask=t.id
         join users as u on t.idUser=u.id where t.idCompany=${idCompany} and t.id=${idTask};`
 
@@ -35,9 +34,24 @@ const taskSubtasksController = () => {
         res.status(200).send({...result, totalSubtasks: parseInt(result.totalSubtasks)})
     }
 
+    const getByIdQuantifySubtasksDone = async (req, res) => {
+        const {idCompany, idTask} = req.params
+
+        const results = await prismaClient.$queryRaw`select t.id as idTask,
+        t.name as taskName,count(*) as totalSubtasks
+        from subtasks as st join tasks as t on st.idTask=t.id
+        join users as u on t.idUser=u.id 
+        where t.idCompany=${idCompany} and t.id=${idTask} and st.done=true;`
+
+        const result = results.length !== 0? results[0]: null
+
+        res.status(200).send({...result, totalSubtasks: parseInt(result.totalSubtasks)})
+    }
+
     return {
         getById,
-        getByIdQuantifySubtasks
+        getByIdQuantifySubtasks,
+        getByIdQuantifySubtasksDone
     }
 }
 
