@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
+import { Fragment, useState } from 'react'
 import Modal from './components/Modal'
 
-function ObjetivosCards() {
+function TarefasCards() {
     return (
         <div className='flex flex-row flex-wrap gap-8 justify-center'>
             <Modal/>
@@ -9,4 +10,4 @@ function ObjetivosCards() {
     )
 }
 
-export default ObjetivosCards
+export default TarefasCards

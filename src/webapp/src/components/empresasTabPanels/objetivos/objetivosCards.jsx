@@ -35,12 +35,6 @@ function ObjetivosCards({ goals }) {
 
                         <label for="tarefa">Descrição:</label>
                         <input name='Descrição' type='text' className='input-style' />
-
-                        <label>Data Inicial</label>
-                        <input className='input-style' type="date" />
-
-                        <label>Data Final</label>
-                        <input className='input-style' type="date" />
                     </form>
 
                     <div className="mt-4">
