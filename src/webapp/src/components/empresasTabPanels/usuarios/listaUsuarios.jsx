@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 
-function listaUsuarios({ goals }) {
+function listaUsuarios({ users }) {
     return (
         <div className='flex flex-col items-center'>
     <div className='container-table-grid-team'>
@@ -16,13 +16,13 @@ function listaUsuarios({ goals }) {
               </thead>
 
               <tbody className='text-center'>
-                {(goals || []).map((goal) => {
+                {(users || []).map((user) => {
                     return (
                     <>
                       <tr>
-                        <td>Nome</td>
-                        <td>Email</td>
-                        <td>Cargo</td>
+                        <td> {user.name} </td>
+                        <td> {user.email} </td>
+                        <td> {user.occupation} </td>
                       </tr>
                     </>
                      )
