@@ -23,7 +23,13 @@ function Objetivo() {
   const [total, setTotal] = useState([])
   const [totalDone, setTotalDone] = useState([])
   const [message, setMessage] = useState("Aqui vai uma mensagem")
+  const [tasks, setTasks] = useState([])
   const { idGoal } = useParams()
+
+  useEffect(() => {
+    handlerTasks()
+
+  },[idGoal])
 
   const returnQuantify = async () => {
     const { data } = await subtasksApi.getAllTaskQuantifySubtasks()
@@ -37,7 +43,11 @@ function Objetivo() {
     setTotalDone(data)
   }
 
-  const handlerTasks = async () => {}
+  const handlerTasks = async () => {
+    const {data} = await tasksApi.getAll(1,idGoal)
+
+    setTasks(data)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -76,12 +86,12 @@ function Objetivo() {
                 )}
               </Tab>
 
-            <TeamObjectivesNewTask
+            {/* <TeamObjectivesNewTask
               item={item}
               message={message} 
               handleSubmit={handleSubmit}
               modelChange={modelChange}
-            />
+            /> */}
 
               <Tab className='nav-btn'>
                 {({ selected }) => (
@@ -127,7 +137,7 @@ function Objetivo() {
               </Tab.Panel>
 
               <Tab.Panel className='container-empresas'>
-                <TaskList/>
+                <TaskList tasks={tasks}/>
               </Tab.Panel>
             </Tab.Panels>
           </div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
+import moment from 'moment'
 
 function listaTarefas({ tasks }) {
     return (
@@ -12,7 +13,6 @@ function listaTarefas({ tasks }) {
                   <th className='container-title-grid'>Tarefa</th>
                   <th className='container-title-grid'>Data Inicial</th>
                   <th className='container-title-grid'>Data Final</th>
-                  <th className='container-title-grid'>Time</th>
                 </tr>
               </thead>
 
@@ -22,9 +22,8 @@ function listaTarefas({ tasks }) {
                     <>
                       <tr>
                         <td>{task.name}</td>
-                        <td>Data Inicial</td>
-                        <td>Data Final</td>
-                        <td>Nome do time</td>
+                        <td>{moment(task.initialDate).format("DD/MM/YY")}</td>
+                        <td>{moment(task.finalDate).format("DD/MM/YY")}</td>
                       </tr>
                     </>
                      )
