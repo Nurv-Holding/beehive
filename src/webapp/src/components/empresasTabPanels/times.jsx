@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormTimes from './times/formTimes'
 import ListaTimes from './times/listaTimes'
+import { useContext } from 'react'
+import { ContextUser } from '../../context/ContextUser'
 
-function times() {
+function Times() {
+    const {teams} = useContext(ContextUser)
+
     return (
         <Tab.Group>
         <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
@@ -46,7 +50,7 @@ function times() {
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>
-                <ListaTimes/>
+                <ListaTimes teams={teams}/>
             </Tab.Panel>
             </Tab.Panels>
         </div>
@@ -55,4 +59,4 @@ function times() {
     )
 }
 
-export default times
+export default Times

@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import subtasksApi from '../api/subtasksApi';
+import tasksApi from '../api/tasksApi';
 import Header from '../components/Header';
 import TeamObjectivesNewTask from '../components/teamObjectivesNewTask';
 import TeamObjectivesPercentage from '../components/teamObjectivesPercentage';
@@ -9,11 +11,17 @@ import TeamObjectivesTable from '../components/teamObjectivesTable';
 import { ContextUser } from '../context/ContextUser';
 
 function Objetivo() {
-  const { tasksToGoal } = useContext(ContextUser)
-  const { tasksToGoalQuantify } = useContext(ContextUser)
-  const { tasksToGoalQuantifyDone } = useContext(ContextUser)
+  const { tasksToGoal,
+    tasksToGoalQuantify,
+    tasksToGoalQuantifyDone,
+    modelChange,
+    item 
+  } = useContext(ContextUser)
+
   const [total, setTotal] = useState([])
   const [totalDone, setTotalDone] = useState([])
+  const [message, setMessage] = useState("Aqui vai uma mensagem")
+  const {idGoal} = useParams()
 
   const returnQuantify = async () => {
     const { data } = await subtasksApi.getAllTaskQuantifySubtasks()
@@ -26,6 +34,24 @@ function Objetivo() {
 
     setTotalDone(data)
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if(Object.keys(item).length === 0 && 
+    item.name === "" || item.descriptions === "" || 
+    item.initialDate === "" || item.finalDate === "")
+    {
+        setMessage("Precisa preencher os campos vazios")
+
+    }else{
+        console.log("item",item)
+        tasksApi.create({...item, idGoal})
+        .then(() => setMessage("Cadastro Realizado!"))
+        .catch(() => setMessage("Algo deu errado!!"))
+    }
+  }
+
   return (
     <>
       <Header />
@@ -39,7 +65,11 @@ function Objetivo() {
               tasksToGoalQuantifyDone={tasksToGoalQuantifyDone}
             />
 
-            <TeamObjectivesNewTask/>
+            <TeamObjectivesNewTask 
+              message={message} 
+              handleSubmit={handleSubmit}
+              modelChange={modelChange}
+            />
           </div>
 
           <TeamObjectivesTable

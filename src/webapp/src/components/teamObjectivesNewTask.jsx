@@ -1,7 +1,7 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
 import { Fragment, useState } from 'react'
 
-function TeamObjectivesPercentage() {
+function TeamObjectivesPercentage({message, handleSubmit, modelChange}) {
       //Modal
   let [isOpen, setIsOpen] = useState(false)
 
@@ -20,22 +20,22 @@ function TeamObjectivesPercentage() {
             </button>
 
             <Modal isOpen={isOpen} closeModal={closeModal} title={'Adicionar Tarefa'}>
-                <form className="mt-2 flex flex-col">
+                <form onSubmit={handleSubmit} className="mt-2 flex flex-col">
                     <label for="tarefa">Tarefa:</label>
-                    <input name='name' type='text' className='input-style' />
+                    <input onChange={modelChange} name='name' type='text' className='input-style' />
 
                     <label for="tarefa">Descrição:</label>
-                    <input name='descriptions' type='text' className='input-style' />
+                    <input onChange={modelChange}  name='descriptions' type='text' className='input-style' />
 
                     <label for="tarefa">Data Inicial:</label>
-                    <input name='initialDate' type='text' className='input-style' />
+                    <input onChange={modelChange}  name='initialDate' type='text' className='input-style' />
 
                     <label for="tarefa">Data Final:</label>
-                    <input name='finalDate' type='text' className='input-style' />
+                    <input onChange={modelChange} name='finalDate' type='text' className='input-style' />
                 </form>
 
                 <div className="mt-4">
-                    <button className='submit-button' type="submit" onClick={closeModal}>
+                    <button className='submit-button' type="submit" >
                         Adicionar
                     </button>
                 </div>

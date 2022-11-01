@@ -43,9 +43,9 @@ const routes = (app) => {
         app.get("/goals/:idGoal/c/:idCompany/q/tasks/done",goalsTasksController().getByIdGoalByQuantifyTaskDone)
 
     //teams
-    app.post("/teams",teamsController.create)
+    app.post("/teams/c/:idCompany",teamsController.create)
     app.get("/teams/:id",teamsController.getById)
-    app.get("/teams",teamsController.getAll)
+    app.get("/teams/c/:idCompany",teamsController.getAll)
     app.put("/teams/:id",teamsController.update)
     app.delete("/teams/:id",teamsController.remove)
 

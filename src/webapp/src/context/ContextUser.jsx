@@ -3,6 +3,7 @@ import { createContext } from "react"
 import { useParams } from "react-router-dom"
 import goalsApi from "../api/goalsApi"
 import subtasksApi from "../api/subtasksApi"
+import teamsApi from "../api/teamsApi"
 import usersApi from "../api/usersApi"
 
 export const ContextUser = createContext()
@@ -12,6 +13,7 @@ export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
     const [tasksToGoal, setTasksToGoal] = useState([])
     const [users, setUsers] = useState([])
+    const [teams, setTeams] = useState({})
     const [item, setItem] = useState({})
     const [tasksToGoalQuantify, setTasksToGoalQuantify] = useState({
         idGoal: null,
@@ -32,12 +34,18 @@ export const ContextUserProvider = ({ children }) => {
         handlerGoalTasks()
         handleGoalTasksQuantify()
         handleGoalTasksQuantifyDone()
+        handlerTeams()
 
     },[idGoal])
 
     const handlerUsers = async () => {
         const {data} = await usersApi.getAll()
         setUsers(data)
+    }
+
+    const handlerTeams = async () => {
+        const {data} = await teamsApi.getAll()
+        setTeams(data)
     }
 
     const handlerGoalsTasks = async () => {
@@ -88,6 +96,7 @@ export const ContextUserProvider = ({ children }) => {
                     tasksToGoalQuantifyDone,
                     goals,
                     users,
+                    teams,
                     modelChange,
                     item
                 }
