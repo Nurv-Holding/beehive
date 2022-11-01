@@ -1,7 +1,7 @@
 import moment from "moment"
 
 
-export const calcPercentage = (item=null, total=null) => {
+export const calcPercentage = (item=0, total=0) => {
     return item /(total / 100)
 }
 

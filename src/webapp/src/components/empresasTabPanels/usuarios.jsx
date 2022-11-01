@@ -1,9 +1,38 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormUsuarios from './usuarios/formUsuarios'
 import ListaUsuarios from './usuarios/listaUsuarios'
+import { useContext } from 'react'
+import { ContextUser } from '../../context/ContextUser'
+import { useState } from 'react'
+import usersApi from '../../api/usersApi'
 
-function usuarios() {
+function Usuarios() {
+    const {users} = useContext(ContextUser)
+    const {item} = useContext(ContextUser)
+    const {modelChange} = useContext(ContextUser)
+    const [message, setMessage] = useState("Aqui vai uma mensagem")
+    const {idCompany} = useParams()
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        console.log("item", item)
+
+        if(item.name === "" || item.email === "" || item.occupation === "" || item.password === "" || item.repeatPassword === ""){
+            setMessage("Precisa preencher os campos vazios")
+
+        }else if(item.password !== item.repeatPassword){
+            setMessage("Senhas precisam ser as mesmas")
+
+        }else{
+            usersApi.create(idCompany, {...item, repeatPassword:undefined})
+            .then(() => setMessage("Cadastro Realizado!"))
+            .catch(() => setMessage("Algo deu errado!!"))
+        }
+
+    }
+
     return (
         <Tab.Group>
         <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
@@ -42,11 +71,15 @@ function usuarios() {
 
             <Tab.Panels>
             <Tab.Panel className='container-empresas'>
-                <FormUsuarios/>
+                <FormUsuarios
+                    modelChange={modelChange} 
+                    message={message}
+                    handleSubmit={handleSubmit}
+                    />
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>
-                <ListaUsuarios/>
+                <ListaUsuarios users={users} />
             </Tab.Panel>
             </Tab.Panels>
         </div>
@@ -55,4 +88,4 @@ function usuarios() {
     )
 }
 
-export default usuarios
+export default Usuarios

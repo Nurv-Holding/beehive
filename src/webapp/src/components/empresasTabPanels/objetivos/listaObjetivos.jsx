@@ -3,33 +3,34 @@ import { Link } from "react-router-dom"
 function listaObjetivos({ goals }) {
     return (
     <div className='flex flex-col items-center'>
-      <div className='container-table-objectives-list-times'>
-        {(goals || []).map((goal) => {
-          return(
-            <>
-            <div>
-              <Link to={`/objetivo/${goal.id}`}>
-                <h1 className='container-title-grid'>Nome do Objetivo</h1>
-                <p className='text-desc-grid'> {goal.name} </p>
-              </Link>
-            </div>
-            <div>
-              <h1 className='container-title-grid'>Descrição</h1>
-                <p className='text-desc-grid'> {goal.descriptions} </p>
-              </div>
-              <div>
-                <h1 className='container-title-grid'>Data Inicial</h1>
-                <p className='text-desc-grid'> {goal.initialDate} </p>
-              </div>
-              <div>
-                <h1 className='container-title-grid'>Data final</h1>
-                <p className='text-desc-grid'> {goal.finalDate} </p>
-              </div>
-            </>
-          )
-        })}
+      <div className='container-table-grid-team'>
+            <table class="table-auto w-full">
+              
+              <thead>
+                <tr>
+                  <th className='container-title-grid'>Objetivo</th>
+                  <th className='container-title-grid'>Descrição</th>
+                  <th className='container-title-grid'>Data Inicial</th>
+                  <th className='container-title-grid'>Data Final</th>
+                </tr>
+              </thead>
 
-      </div>
+              <tbody className='text-center'>
+                {(goals || []).map((goal) => {
+                    return (
+                    <>
+                      <tr>
+                        <td>{goal.name}</td>
+                        <td>{goal.descriptons}</td>
+                        <td>17/10/2022</td>
+                        <td>31/11/2022</td>
+                      </tr>
+                    </>
+                     )
+                    })}
+              </tbody>
+            </table>
+          </div>
     </div>
     )
 }

@@ -63,6 +63,8 @@ const crudControllerFactory = (model) => {
                 newData = req.body
         }
 
+        console.log("newData",newData)
+
         const data = await model.create({data:newData})
 
         return res.status(200).send(data)

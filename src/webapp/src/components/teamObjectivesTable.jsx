@@ -3,7 +3,7 @@ import { Disclosure } from '@headlessui/react'
 import { calcDate } from '../utilis';
 import TaskPercentage from './TaskPercentage';
 
-function teamObjectivesTable({ tasksToGoal, returnQuantify, total }) {
+function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, returnQuantifyDone }) {
 
   return (
     <div className='flex flex-col items-center w-full'>
@@ -30,7 +30,13 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total }) {
                   <div className='percentage-bar-disclosure w-[50%]'></div>
                 </div>
 
-                <TaskPercentage returnQuantify={returnQuantify} idTask={task?.idTask} total={total} />
+                <TaskPercentage 
+                  returnQuantify={returnQuantify} 
+                  idTask={task?.idTask} 
+                  total={total}
+                  totalDone={totalDone}
+                  returnQuantifyDone={returnQuantifyDone}
+                />
               </Disclosure.Button>
               <Disclosure.Panel className="">
                 <div className='flex flex-col ml-6'>

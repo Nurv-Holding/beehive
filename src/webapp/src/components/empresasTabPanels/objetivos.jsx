@@ -64,7 +64,7 @@ function Objetivos() {
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>
-                <ObjetivosCards/>
+                <ObjetivosCards goals={goals}/>
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>

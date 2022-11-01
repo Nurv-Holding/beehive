@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormTarefas from './tarefas/formTarefas'
+import TarefasCards from './tarefas/tarefasCards'
 import ListaTarefas from './tarefas/listaTarefas'
 
 function tarefas() {
@@ -17,6 +18,19 @@ function tarefas() {
                     }
                     >
                     Cadrastamento
+                    </button>
+                )}
+                </Tab>
+
+                <Tab className='nav-btn'>
+                {({ selected }) => (
+                    /* Use the `selected` state to conditionally style the selected tab. */
+                    <button
+                    className={
+                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                    }
+                    >
+                    Tarefas
                     </button>
                 )}
                 </Tab>
@@ -43,6 +57,10 @@ function tarefas() {
             <Tab.Panels>
             <Tab.Panel className='container-empresas'>
                 <FormTarefas/>
+            </Tab.Panel>
+
+            <Tab.Panel className='container-empresas'>
+                <TarefasCards/>
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>

@@ -3,6 +3,7 @@ import { createContext } from "react"
 import { useParams } from "react-router-dom"
 import goalsApi from "../api/goalsApi"
 import subtasksApi from "../api/subtasksApi"
+import usersApi from "../api/usersApi"
 
 export const ContextUser = createContext()
 
@@ -10,6 +11,8 @@ export const ContextUserProvider = ({ children }) => {
     const [tasksToGoals, setTasksToGoals] = useState([])
     const [goals, setGoals] = useState([])
     const [tasksToGoal, setTasksToGoal] = useState([])
+    const [users, setUsers] = useState([])
+    const [item, setItem] = useState({})
     const [tasksToGoalQuantify, setTasksToGoalQuantify] = useState({
         idGoal: null,
         nameGoal:"",
@@ -23,6 +26,7 @@ export const ContextUserProvider = ({ children }) => {
     const { idGoal } = useParams()
 
     useEffect(() => {
+        handlerUsers()
         handlerGoalsTasks()
         handlerGoals()
         handlerGoalTasks()
@@ -30,6 +34,11 @@ export const ContextUserProvider = ({ children }) => {
         handleGoalTasksQuantifyDone()
 
     },[idGoal])
+
+    const handlerUsers = async () => {
+        const {data} = await usersApi.getAll()
+        setUsers(data)
+    }
 
     const handlerGoalsTasks = async () => {
         const {data} = await goalsApi.getAllGoalsTask()
@@ -63,6 +72,12 @@ export const ContextUserProvider = ({ children }) => {
         setTasksToGoal(data)
     }
 
+    const modelChange = ({ target }) => {
+        setItem((state) => {
+            return {...state,[target.name]: target.value}
+        })
+    }
+
     return(
         <ContextUser.Provider 
             value={
@@ -71,7 +86,10 @@ export const ContextUserProvider = ({ children }) => {
                     tasksToGoal,
                     tasksToGoalQuantify,
                     tasksToGoalQuantifyDone,
-                    goals
+                    goals,
+                    users,
+                    modelChange,
+                    item
                 }
             }
         >
