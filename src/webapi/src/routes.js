@@ -58,7 +58,8 @@ const routes = (app) => {
 
     //tasks
     app.post("/tasks/c/:idCompany",tasksController.create)
-    app.get("/tasks/:id",tasksController.getById)
+    app.get("/tasks/:id/c/:idCompany",tasksController.getById)
+    app.get("/tasks/c/:idCompany/goal/:idGoal",tasksController.getByIdGoal)
     app.get("/tasks/c/:idCompany",tasksController.getAll)
     app.put("/tasks/:id",tasksController.update)
     app.delete("/tasks/:id",tasksController.remove)

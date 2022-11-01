@@ -45,8 +45,8 @@ function Objetivo() {
         setMessage("Precisa preencher os campos vazios")
 
     }else{
-        console.log("item",item)
-        tasksApi.create({...item, idGoal})
+        const newIdGoal = parseInt(idGoal)
+        tasksApi.create(1,{...item, idGoal:newIdGoal})
         .then(() => setMessage("Cadastro Realizado!"))
         .catch(() => setMessage("Algo deu errado!!"))
     }
@@ -65,7 +65,8 @@ function Objetivo() {
               tasksToGoalQuantifyDone={tasksToGoalQuantifyDone}
             />
 
-            <TeamObjectivesNewTask 
+            <TeamObjectivesNewTask
+              item={item}
               message={message} 
               handleSubmit={handleSubmit}
               modelChange={modelChange}

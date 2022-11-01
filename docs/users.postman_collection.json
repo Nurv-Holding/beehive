@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "78b49eba-8335-461c-9dc4-3ecc0b19d6d3",
-		"name": "users",
+		"_postman_id": "790c7b03-ae0e-4eb3-83c8-9311fcad3ba3",
+		"name": "companies",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15353671"
 	},
@@ -12,12 +12,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/users",
+					"raw": "{{host}}/companies",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"users"
+						"companies"
 					]
 				}
 			},
@@ -29,13 +29,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/users/2",
+					"raw": "{{host}}/companies/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"users",
-						"2"
+						"companies",
+						"1"
 					]
 				}
 			},
@@ -47,13 +47,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/users/2",
+					"raw": "{{host}}/companies/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"users",
-						"2"
+						"companies",
+						"1"
 					]
 				}
 			},
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idCompany\": 1,\r\n    \"name\": \"João\",\r\n    \"email\": \"João@gmail.com\",\r\n    \"occupation\": \"Desenvolvedor\"\r\n}",
+					"raw": "{\r\n    \"name\": \"tec\",\r\n    \"cnpj\": \"1234567dd\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,12 +74,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/users",
+					"raw": "{{host}}/companies",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"users"
+						"companies"
 					]
 				}
 			},
@@ -92,7 +92,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idCompany\": 1,\r\n    \"name\": \"João\",\r\n    \"email\": \"João@gmail.com\",\r\n    \"occupation\": \"Desenvolvedor\"\r\n}",
+					"raw": "{\r\n    \"name\": \"nurvs\",\r\n    \"cnpj\": \"1234567\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -100,13 +100,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/users/2",
+					"raw": "{{host}}/companies/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"users",
-						"2"
+						"companies",
+						"1"
 					]
 				}
 			},
