@@ -12,7 +12,7 @@ function Modal() {
     }
 
     function openModal() {
-        setIsOpen(true)
+        setIsOpen(true) 
     }
     //END MODAL SCRIPT
     return (
@@ -20,12 +20,8 @@ function Modal() {
             <div className='container-table-objectives-list-times'>
 
                 <>
-                    <div className='container-card-empresas'>
-                        <button
-                            onClick={openModal}
-                        >
-                            <span>Tarefa</span>
-                        </button>
+                    <div className='container-card-empresas hover:cursor-pointer' onClick={openModal}>
+                        <span className="">Tarefa</span>
                     </div>
 
                     <Transition appear show={isOpen} as={Fragment}>
