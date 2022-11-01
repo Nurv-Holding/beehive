@@ -20,6 +20,11 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
                   <span> {task.nameTask} </span>
                   <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
                 </div>
+
+                <Link>
+                  LINK PARA TASK
+                </Link>
+                
                 <span>{calcDate(task.finalDate) >= 0? `Faltam ${calcDate(task.finalDate)} Dias`: `${calcDate(task.finalDate)} Dias de atraso`}</span>
 
                 <div className='profile-photo-task'>

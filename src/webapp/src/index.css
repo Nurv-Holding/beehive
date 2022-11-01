@@ -367,7 +367,7 @@ header nav span:hover{
 }
 
 .description-container{
-    @apply w-full bg-gray-200 rounded p-2
+    @apply w-full bg-gray-200 rounded p-2 mb-4
 }
 
 .description-container p{

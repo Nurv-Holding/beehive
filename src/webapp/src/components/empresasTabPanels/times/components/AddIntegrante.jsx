@@ -50,7 +50,7 @@ function AddIntegrante() {
                                 <Dialog.Panel className="flex flex-col w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     <Dialog.Title
                                         as="h3"
-                                        className="text-lg font-medium leading-6 text-[#5500C3]"
+                                        className="text-lg font-medium leading-6 text-[#5500C3] p-2"
                                     >
                                         Adicionar Integrante
                                     </Dialog.Title>

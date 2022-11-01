@@ -16,28 +16,23 @@ function TimesCards({ teams }) {
         <div>
             <div className='flex flex-row flex-wrap gap-8 justify-center'>
                 <div className='container-card-empresas hover:cursor-pointer' onClick={openModal}>
-                    <span>{team.name}</span>
+                    <span>Nome do Time</span>
                 </div>
 
                 <Modal isOpen={isOpen} closeModal={closeModal} title={'Nome do time'}>
-                    <span className="text-xs text-gray-500">Objetivo</span>
 
-                    <span className="mt-4">Descrição</span>
+                    <span className="mt-8">Descrição</span>
                     <div className="description-container">
                         <p>Descrição</p>
                     </div>
 
 
-                    <span className="mt-4">Integrantes</span>
-                    <div className="flex flex-row justify-center items-center gap-4">
-                        <span className="text-sm text-gray-500">50%</span>
-                        <div className="container-percentage-checklist">
-                            <div className="container-bar-checklist w-[50%]"></div>
-                        </div>
+                    <span className="mt-8">Integrantes</span>
+                    <div className="flex flex-row gap-4 mt-2">
                         <AddIntegrantes />
                     </div>
 
-                    <div className="checkbox-container">
+                    <div className="checkbox-container mt-2">
                         <div>
                             <span>LISTA DE USUARIOS AQUI</span>
                         </div>
