@@ -14,7 +14,7 @@ function menuTeamManagement() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'bg-[#5500C3] text-white' : 'bg-white'
                   }
                 >
                   Time
@@ -28,7 +28,7 @@ function menuTeamManagement() {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
-                    selected ? 'bg-[#5500C3] text-white' : 'bg-[#E6E6E6]'
+                    selected ? 'bg-[#5500C3] text-white' : 'bg-white'
                   }
                 >
                   Plano de desenvolvimento pessoal

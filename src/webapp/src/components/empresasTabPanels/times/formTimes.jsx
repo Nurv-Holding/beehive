@@ -16,15 +16,6 @@ function formTimes() {
                 </div>
 
                 <div className='input-and-label-container'>
-                    <label for='input-integrantes'>Integrantes</label>
-                    <input name='input-integrantes' list='emails' className='input-style' placeholder='Digite os Integrantes' />
-
-                    <datalist id="emails">
-                        <option value="Email do Victor">Email do Victor</option>
-                    </datalist>
-                </div>
-
-                <div className='input-and-label-container'>
                     <label>Data Inicial</label>
                     <input className='input-style' type="date" />
                 </div>

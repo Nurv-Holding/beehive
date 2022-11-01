@@ -7,7 +7,7 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
 
   return (
     <div className='flex flex-col items-center w-full'>
-      <div className="w-11/12 rounded-2xl bg-white p-2 mt-4">
+      <div className="w-full rounded-2xl bg-white p-2 mt-4">
         {(tasksToGoal || []).map((task) => {
           return(
             <>
