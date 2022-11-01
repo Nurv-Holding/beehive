@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 
-function listaTarefas({ goals }) {
+function listaTarefas({ tasks }) {
     return (
         <div className='flex flex-col items-center'>
           <div className='container-table-grid-team'>
@@ -9,24 +9,22 @@ function listaTarefas({ goals }) {
               
               <thead>
                 <tr>
-                  <th className='container-title-grid'>Objetivo</th>
                   <th className='container-title-grid'>Tarefa</th>
-                  <th className='container-title-grid'>Descrição</th>
                   <th className='container-title-grid'>Data Inicial</th>
                   <th className='container-title-grid'>Data Final</th>
+                  <th className='container-title-grid'>Time</th>
                 </tr>
               </thead>
 
               <tbody className='text-center'>
-                {(goals || []).map((goal) => {
+                {(tasks || []).map((task) => {
                     return (
                     <>
                       <tr>
-                        <td>{goal.name}</td>
-                        <td>Tarefa</td>
-                        <td>Descrição</td>
+                        <td>{task.name}</td>
                         <td>Data Inicial</td>
                         <td>Data Final</td>
+                        <td>Nome do time</td>
                       </tr>
                     </>
                      )

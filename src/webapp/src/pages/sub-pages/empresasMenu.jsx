@@ -52,19 +52,6 @@ export default function Example() {
                 </button>
               )}
             </Tab>
-
-            <Tab>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'text-[#5500C3]' : ''
-                  }
-                >
-                  Tarefas
-                </button>
-              )}
-            </Tab>
         </Tab.List>
 
         <div className='w-full'>
@@ -79,10 +66,6 @@ export default function Example() {
 
           <Tab.Panel className='w-full'>
             <Objetivos/>
-          </Tab.Panel>
-
-          <Tab.Panel className='w-full'>
-            <Tarefas/>
           </Tab.Panel>
         </Tab.Panels>
         </div>

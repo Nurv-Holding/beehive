@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
-function Addsubtarefa() {
+function AddIntegrante() {
     //MODAL SCRIPT
     let [isOpen, setIsOpen] = useState(false)
 
@@ -19,7 +19,7 @@ function Addsubtarefa() {
             <button className="border border-gray-400 rounded py-1 text-xs hover:bg-gray-400 hover:text-white"
                 onClick={openModal}
             >
-                <span>Adicionar Subtarefa</span>
+                <span>Adicionar Integrante</span>
             </button>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -50,16 +50,22 @@ function Addsubtarefa() {
                                 <Dialog.Panel className="flex flex-col w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     <Dialog.Title
                                         as="h3"
-                                        className="text-lg font-medium leading-6 text-[#5500C3]"
+                                        className="text-lg font-medium leading-6 text-[#5500C3] p-2"
                                     >
-                                        Adicionar Subtarefa
+                                        Adicionar Integrante
                                     </Dialog.Title>
 
                                     <span className="text-xs text-gray-500">Tarefa</span>
 
                                     <form className="mt-2 flex flex-col">
-                                        <label for="tarefa">Subtarefa:</label>
-                                        <input name='tarefa' type='text' className='input-style' />
+                                        <div className='input-and-label-container'>
+                                            <label for='input-integrantes'>Integrantes</label>
+                                            <input name='input-integrantes' list='emails' className='input-style' placeholder='Digite os Integrantes' />
+
+                                            <datalist id="emails">
+                                                <option value="Email do Victor">Email do Victor</option>
+                                            </datalist>
+                                        </div>
                                     </form>
 
                                     <div className="mt-4">
@@ -80,4 +86,4 @@ function Addsubtarefa() {
     )
 }
 
-export default Addsubtarefa
+export default AddIntegrante

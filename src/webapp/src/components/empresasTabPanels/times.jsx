@@ -4,6 +4,7 @@ import FormTimes from './times/formTimes'
 import ListaTimes from './times/listaTimes'
 import { useContext } from 'react'
 import { ContextUser } from '../../context/ContextUser'
+import TimesCards from './times/TimesCards'
 
 function Times() {
     const {teams} = useContext(ContextUser)
@@ -21,6 +22,19 @@ function Times() {
                     }
                     >
                     Cadrastamento
+                    </button>
+                )}
+                </Tab>
+
+                <Tab className='nav-btn'>
+                {({ selected }) => (
+                    /* Use the `selected` state to conditionally style the selected tab. */
+                    <button
+                    className={
+                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                    }
+                    >
+                    Times
                     </button>
                 )}
                 </Tab>
@@ -47,6 +61,10 @@ function Times() {
             <Tab.Panels>
             <Tab.Panel className='container-empresas'>
                 <FormTimes/>
+            </Tab.Panel>
+
+            <Tab.Panel className='container-empresas'>
+                <TimesCards/>
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>
