@@ -7,7 +7,7 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
 
   return (
     <div className='flex flex-col items-center w-full'>
-      <div className="w-11/12 rounded-2xl bg-white p-2 mt-4">
+      <div className="w-full rounded-2xl bg-white p-2 mt-4">
         {(tasksToGoal || []).map((task) => {
           return(
             <>
@@ -20,6 +20,11 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
                   <span> {task.nameTask} </span>
                   <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
                 </div>
+
+                <Link>
+                  LINK PARA TASK
+                </Link>
+                
                 <span>{calcDate(task.finalDate) >= 0? `Faltam ${calcDate(task.finalDate)} Dias`: `${calcDate(task.finalDate)} Dias de atraso`}</span>
 
                 <div className='profile-photo-task'>

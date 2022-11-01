@@ -37,15 +37,15 @@ const routes = (app) => {
 
         //goalsTasks
         app.get("/goals/c/:idCompany/tasks",goalsTasksController().getAll)
-        app.get("/goals/:idGoal/c/:idCompany/tasks",goalsTasksController().getByIdGoal)
+        app.get("/goals/:idGoal/c/:idCompany/tasks/users",goalsTasksController().getByIdGoalUsers)
         app.get("/goals/:idGoal/c/:idCompany/tasks/done",goalsTasksController().getByIdGoalByDone)
         app.get("/goals/:idGoal/c/:idCompany/q/tasks",goalsTasksController().getByIdGoalByQuantifyTask)
         app.get("/goals/:idGoal/c/:idCompany/q/tasks/done",goalsTasksController().getByIdGoalByQuantifyTaskDone)
 
     //teams
-    app.post("/teams",teamsController.create)
+    app.post("/teams/c/:idCompany",teamsController.create)
     app.get("/teams/:id",teamsController.getById)
-    app.get("/teams",teamsController.getAll)
+    app.get("/teams/c/:idCompany",teamsController.getAll)
     app.put("/teams/:id",teamsController.update)
     app.delete("/teams/:id",teamsController.remove)
 
@@ -99,7 +99,7 @@ const routes = (app) => {
 
     //teamUsersProjection
     app.get("/users/p/team",teamUsersProjectionController().getAll)
-    app.get("/users/team/:id",teamUsersProjectionController().getById)
+    app.get("/users/team/:idTeam/c/:idCompany",teamUsersProjectionController().getById)
 
 
 

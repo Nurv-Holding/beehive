@@ -14,7 +14,7 @@ u.name as nameUser, tk.descriptions, tk.initialDate, tk.finalDate, t.id as idTea
 from tasks as tk join goals as g on tk.idGoal=g.id join teams as t on g.idTeam=t.id 
 join users as u on tk.idUser=u.id where tk.idCompany=1;
 
-/*Projeção de um objetivos e as tarefas (goalsTasksController)*/
+/*Projeção de um objetivo e as tarefas (goalsTasksController)*/
 select tk.id as idTask, tk.name as nameTask, g.id as idGoal, g.name as nameGoal,u.id as idUser, 
 u.name as nameUser, tk.descriptions, tk.initialDate, tk.finalDate, t.id as idTeam, t.name as nameTeam
 from tasks as tk join goals as g on tk.idGoal=g.id join teams as t on g.idTeam=t.id 
@@ -45,16 +45,15 @@ from subtasks as st join tasks as t on st.idTask=t.id
 join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2;
 
 /*Projeção da quantidade de subtarefas by tarefas(taskSubtasksController)*/
-select t.id as idTask, t.name as taskName, st.id as idSubtasks, 
-st.name as nameSubtasks, count(*) as totalSubtasks
-from subtasks as st join tasks as t on st.idTask=t.id
-join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2 and st.done=true;
+select t.id as idTask, t.name as taskName, st.name as nameSubtask, count(*) as totalSubtasks
+from subtasks as st left join tasks as t on st.idTask=t.id
+left join users as u on t.idUser=u.id where t.idCompany=1 group by t.id;
 
 /*Projeção da quantidade de subtarefas feitas by tarefas(taskSubtasksController)*/
 select t.id as idTask, t.name as taskName, st.id as idSubtasks, 
-st.name as nameSubtasks, count(*) as totalSubtasks, st.nameSubtask
+st.name as nameSubtasks, st.done as doneSubtasks, count(*) as totalSubtasksDone
 from subtasks as st join tasks as t on st.idTask=t.id
-join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2 ;
+join users as u on t.idUser=u.id where t.idCompany=1 and st.done=true;
 
 /*Projeção do processo de todos os objetivos (projectionProcessGoalsTaskController)*/
 select pgt.id as idProcess, tk.name as nameTask, tk.id as idTask, g.name as nameGoal, 

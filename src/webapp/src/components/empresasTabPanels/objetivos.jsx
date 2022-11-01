@@ -1,7 +1,6 @@
 import { json, Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormObjetivos from './objetivos/formObjetivos'
-import ObjetivosCards from './objetivos/objetivosCards'
 import ListaObjetivos from './objetivos/listaObjetivos'
 import { useContext } from 'react'
 import { ContextUser } from '../../context/ContextUser'
@@ -18,34 +17,20 @@ function Objetivos() {
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Cadrastamento
                     </button>
                 )}
-                </Tab>
+                </Tab>            
 
                 <Tab className='nav-btn'>
                 {({ selected }) => (
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
-                    }
-                    >
-                    Objetivos
-                    </button>
-                )}
-                </Tab>
-                
-
-                <Tab className='nav-btn'>
-                {({ selected }) => (
-                    /* Use the `selected` state to conditionally style the selected tab. */
-                    <button
-                    className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Lista
@@ -61,10 +46,6 @@ function Objetivos() {
             <Tab.Panels>
             <Tab.Panel className='container-empresas'>
                 <FormObjetivos/>
-            </Tab.Panel>
-
-            <Tab.Panel className='container-empresas'>
-                <ObjetivosCards goals={goals}/>
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>

@@ -19,7 +19,10 @@ function Usuarios() {
 
         console.log("item", item)
 
-        if(item.name === "" || item.email === "" || item.occupation === "" || item.password === "" || item.repeatPassword === ""){
+        if(Object.keys(item).length === 0 && 
+        item.name === "" || item.email === "" || 
+        item.occupation === "" || item.password === "" || 
+        item.repeatPassword === ""){
             setMessage("Precisa preencher os campos vazios")
 
         }else if(item.password !== item.repeatPassword){
@@ -42,7 +45,7 @@ function Usuarios() {
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Cadrastamento
@@ -56,7 +59,7 @@ function Usuarios() {
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Lista
