@@ -78,7 +78,6 @@ function Modal() {
                                                 <div>
                                                     <input type="checkbox" />
                                                     <label>Subtarefa</label>
-                                                    <span className="text-sm text-gray-500 ml-4">Dias Restantes</span>
                                                 </div>
                                             </div>
 

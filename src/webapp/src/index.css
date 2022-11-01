@@ -336,7 +336,7 @@ header nav span:hover{
 }
 
 .modal-btn{
-    @apply w-[95%] border border-gray-300 mt-2 rounded-md p-1 text-gray-500 text-sm bg-gray-200
+    @apply w-[95%] border border-gray-300 mt-2 rounded-md p-1 text-gray-500 text-sm bg-gray-200 text-center
 }
 
 .modal-btn:hover{

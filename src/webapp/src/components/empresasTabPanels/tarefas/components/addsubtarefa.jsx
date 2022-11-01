@@ -60,12 +60,6 @@ function Addsubtarefa() {
                                     <form className="mt-2 flex flex-col">
                                         <label for="tarefa">Subtarefa:</label>
                                         <input name='tarefa' type='text' className='input-style' />
-                                        
-                                        <label>Data Inicial</label>
-                                        <input className='input-style' type="date" />
-
-                                        <label>Data Final</label>
-                                        <input className='input-style' type="date" />
                                     </form>
 
                                     <div className="mt-4">
