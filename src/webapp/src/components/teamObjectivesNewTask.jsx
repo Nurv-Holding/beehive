@@ -22,10 +22,16 @@ function TeamObjectivesPercentage() {
             <Modal isOpen={isOpen} closeModal={closeModal} title={'Adicionar Tarefa'}>
                 <form className="mt-2 flex flex-col">
                     <label for="tarefa">Tarefa:</label>
-                    <input name='tarefa' type='text' className='input-style' />
+                    <input name='name' type='text' className='input-style' />
 
                     <label for="tarefa">Descrição:</label>
-                    <input name='Descrição' type='text' className='input-style' />
+                    <input name='descriptions' type='text' className='input-style' />
+
+                    <label for="tarefa">Data Inicial:</label>
+                    <input name='initialDate' type='text' className='input-style' />
+
+                    <label for="tarefa">Data Final:</label>
+                    <input name='finalDate' type='text' className='input-style' />
                 </form>
 
                 <div className="mt-4">

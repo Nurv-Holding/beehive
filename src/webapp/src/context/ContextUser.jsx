@@ -51,7 +51,7 @@ export const ContextUserProvider = ({ children }) => {
     }
 
     const handlerGoalTasks = async () => {
-        const {data} = await goalsApi.getByIdGoalTask(idGoal)
+        const {data} = await goalsApi.getByIdGoalTasksUsers(idGoal)
         setTasksToGoal(data)
     }
 

@@ -19,7 +19,10 @@ function Usuarios() {
 
         console.log("item", item)
 
-        if(item.name === "" || item.email === "" || item.occupation === "" || item.password === "" || item.repeatPassword === ""){
+        if(Object.keys(item).length === 0 && 
+        item.name === "" || item.email === "" || 
+        item.occupation === "" || item.password === "" || 
+        item.repeatPassword === ""){
             setMessage("Precisa preencher os campos vazios")
 
         }else if(item.password !== item.repeatPassword){

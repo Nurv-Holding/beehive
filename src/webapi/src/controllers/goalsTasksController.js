@@ -14,7 +14,7 @@ const goalsTasksController = () => {
         res.status(200).send(results)
     }
 
-    const getByIdGoal = async (req, res) => {
+    const getByIdGoalUsers = async (req, res) => {
         const {idCompany, idGoal} = req.params
 
         const results = await prismaClient.$queryRaw`select tk.id as idTask, tk.name as nameTask, 
@@ -66,7 +66,7 @@ const goalsTasksController = () => {
 
     return {
         getAll,
-        getByIdGoal,
+        getByIdGoalUsers,
         getByIdGoalByDone,
         getByIdGoalByQuantifyTask,
         getByIdGoalByQuantifyTaskDone

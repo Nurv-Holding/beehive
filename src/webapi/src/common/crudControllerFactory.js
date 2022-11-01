@@ -14,7 +14,6 @@ const crudControllerFactory = (model) => {
             data = await model.findMany()
         }
   
-
         return res.status(200).send(data)
 
     }
