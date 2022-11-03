@@ -22,7 +22,7 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
                 </div>
 
                 <Link>
-                  LINK PARA TASK
+                  LINK PARA KR
                 </Link>
                 
                 <span>{calcDate(task.finalDate) >= 0? `Faltam ${calcDate(task.finalDate)} Dias`: `${calcDate(task.finalDate)} Dias de atraso`}</span>

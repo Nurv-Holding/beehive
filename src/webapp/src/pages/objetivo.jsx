@@ -101,7 +101,7 @@ function Objetivo() {
                       selected ? 'bg-[#5500C3] text-white' : 'bg-white'
                     }
                   >
-                    Tarefas
+                    KR's
                   </button>
                 )}
               </Tab>

@@ -12,7 +12,7 @@ function listaTarefas({ tasks }) {
 
           <thead>
             <tr>
-              <th className='container-title-grid'>Tarefa</th>
+              <th className='container-title-grid'>KR</th>
               <th className='container-title-grid'>Data Inicial</th>
               <th className='container-title-grid'>Data Final</th>
             </tr>
@@ -32,7 +32,9 @@ function listaTarefas({ tasks }) {
               return (
                 <>
                   <tr>
-                    <td onClick={openModal}>{task.name}</td>
+                    <td onClick={openModal} className='cursor-pointer'>{task.name}</td>
+                    <td>{moment(task.initialDate).format("DD/MM/YY")}</td>
+                    <td>{moment(task.finalDate).format("DD/MM/YY")}</td>
 
                     <Modal isOpen={isOpen} closeModal={closeModal} title={'Adicionar Integrante'}>
                       <form className="mt-2 flex flex-col">
@@ -51,9 +53,6 @@ function listaTarefas({ tasks }) {
                         </div>
                       </form>
                     </Modal>
-
-                    <td>{moment(task.initialDate).format("DD/MM/YY")}</td>
-                    <td>{moment(task.finalDate).format("DD/MM/YY")}</td>
                   </tr>
                 </>
               )
