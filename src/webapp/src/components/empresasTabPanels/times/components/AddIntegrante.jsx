@@ -19,7 +19,7 @@ function AddIntegrante() {
             <button className="border border-gray-400 rounded py-1 text-xs hover:bg-gray-400 hover:text-white"
                 onClick={openModal}
             >
-                <span>Adicionar Integrante</span>
+                <span className='p-1'>Adicionar Integrante</span>
             </button>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -59,7 +59,7 @@ function AddIntegrante() {
 
                                     <form className="mt-2 flex flex-col">
                                         <div className='input-and-label-container'>
-                                            <label for='input-integrantes'>Integrantes</label>
+                                            <label for='input-integrantes'>Integrante</label>
                                             <input name='input-integrantes' list='emails' className='input-style' placeholder='Digite os Integrantes' />
 
                                             <datalist id="emails">
