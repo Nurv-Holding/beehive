@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import subtasksApi from '../api/subtasksApi';
 import tasksApi from '../api/tasksApi';
-import Header from '../components/Header';
+import Header from '../components/header';
 import TeamObjectivesNewTask from '../components/teamObjectivesNewTask';
 import TeamObjectivesPercentage from '../components/teamObjectivesPercentage';
 import TeamObjectivesTable from '../components/teamObjectivesTable';
@@ -101,7 +101,7 @@ function Objetivo() {
                       selected ? 'bg-[#5500C3] text-white' : 'bg-white'
                     }
                   >
-                    Tarefas
+                    KRs
                   </button>
                 )}
               </Tab>

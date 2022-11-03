@@ -359,7 +359,7 @@ header nav span:hover{
 }
 
 .checkbox-container{
-    @apply bg-gray-200 p-1 mt-2 flex flex-col w-full
+    @apply bg-gray-200 p-1 mt-2 flex flex-col w-full rounded-md text-sm
 }
 
 .checkbox-container label{

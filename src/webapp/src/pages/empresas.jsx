@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../components/header';
 import EmpresasMenu from './sub-pages/empresasMenu';
 
 function empresas() {

@@ -1,9 +1,6 @@
-import Header from '../components/Header';
+import Header from '../components/header';
 import Profile from '../components/profile';
-import Compromisses from '../components/compromisses';
 import Tasks from '../components/tasks';
-import Reminder from '../components/reminder';
-import Calendar from '../components/calendar';
 import Methodology from '../components/methodology';
 
 function Home() {

@@ -6,8 +6,8 @@ function formTarefas() {
         <div className='flex flex-col'>
             <form className='form-container'>
             <div className='input-and-label-container'>
-                <label>Tarefa</label>
-                <input className='input-style' type="text" placeholder='Digite o nome da tarefa'/>
+                <label>KR</label>
+                <input className='input-style' type="text" placeholder='Digite o nome do KR'/>
             </div>
 
             <div className='input-and-label-container'>

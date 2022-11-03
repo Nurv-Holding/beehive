@@ -22,7 +22,7 @@ function profile() {
             </div>
 
             <div className='profile-nav mt-0.5'>
-              <Link to="/historico">
+              <Link to="/alterarPerfil">
                 <span>Alterar Perfil</span>
               </Link>
             </div>

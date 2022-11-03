@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom'
-import Header from '../components/Header';
+import Header from '../components/header';
 import { ContextUser } from '../context/ContextUser';
 
 function ObjectivesList() {

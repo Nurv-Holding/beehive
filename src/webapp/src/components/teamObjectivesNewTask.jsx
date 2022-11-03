@@ -16,12 +16,12 @@ function TeamObjectivesPercentage({message, handleSubmit, modelChange, item}) {
     return (
         <div className='container-percentage-okr flex flex-col items-center justify-center'>
             <button className="modal-btn h-[50px]" onClick={openModal}>
-                Adicionar Tarefa
+                Adicionar KR
             </button>
 
             <Modal isOpen={isOpen} closeModal={closeModal} title={item}>
                 <form onSubmit={handleSubmit} className="mt-2 flex flex-col">
-                    <label for="tarefa">Tarefa:</label>
+                    <label for="tarefa">KR:</label>
                     <input onChange={modelChange} name='name' type='text' className='input-style' />
 
                     <label for="tarefa">Descrição:</label>
