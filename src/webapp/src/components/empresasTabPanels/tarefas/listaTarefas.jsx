@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
 import moment from 'moment'
 
 function listaTarefas({ tasks }) {

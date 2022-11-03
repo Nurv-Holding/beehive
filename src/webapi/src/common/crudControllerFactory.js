@@ -84,6 +84,8 @@ const crudControllerFactory = (model) => {
             newDate = req.body
         }
 
+        console.log("newDate", newDate)
+
         const result = await model.update({where:{id}, data:newDate})
 
         return res.status(200).send(result)

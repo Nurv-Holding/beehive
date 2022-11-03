@@ -8,6 +8,13 @@ select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, t.id as idTeam, 
 from teamusers as tu join teams as t on tu.idTeam=t.id
 join users as u on tu.idUser=u.id where tu.idCompany=1 and t.id=1;
 
+/*Projeção de um o time e integrantes por objetivo (teamUsersProjectionController)*/
+select tu.id as idTeamUser, g.id as idGoal, g.name as nameGoal, u.id as idUser, 
+u.name as nameUser, t.id as idTeam, t.name as nameTeam
+from teamusers as tu join teams as t on tu.idTeam=t.id
+join goals as g on g.idTeam=t.id
+join users as u on tu.idUser=u.id where tu.idCompany=1 and t.id=1;
+
 /*Projeção dos objetivos e as tarefas (goalsTasksController)*/
 select tk.id as idTask, tk.name as nameTask, g.id as idGoal, g.name as nameGoal,u.id as idUser,tk.done as doneTask, 
 u.name as nameUser, tk.descriptions, tk.initialDate, tk.finalDate, t.id as idTeam, t.name as nameTeam, count(*) as totalTask
@@ -43,6 +50,14 @@ st.descriptions as descriptionsSubtask, st.done as doneSubTask, st.initialDate a
 st.updatedAt as finalDateSubtask,u.id as idUser, u.name as nameUser, u.photo as userPhoto
 from subtasks as st join tasks as t on st.idTask=t.id
 join users as u on t.idUser=u.id where t.idCompany=1 and t.id=2;
+
+/*Projeção de total de sutarefas by tarefa (goalsTasksController)*/
+select t.name as nameTask, st.name as nameSubtask, count(*) as totalSubtask
+from subTasks as st join tasks as t on st.idTask=t.id where t.id=2;
+
+/*Projeção de total de sutarefas feitas by tarefa (goalsTasksController)*/
+select t.name as nameTask, st.name as nameSubtask, count(*) as totalSubtask
+from subTasks as st join tasks as t on st.idTask=t.id where st.done=true and t.id=2;
 
 /*Projeção da quantidade de subtarefas by tarefas(taskSubtasksController)*/
 select t.id as idTask, t.name as taskName, st.name as nameSubtask, count(*) as totalSubtasks
@@ -93,4 +108,4 @@ join processgoalstask as pgt on ptu.idProcessGoalsTask=pgt.id
 join goals as g on pgt.idGoal=g.id 
 where pgt.idCompany=1 and ptu.done=false;
 
-select * from tasks where idCompany=1;
+select * from goals ;
