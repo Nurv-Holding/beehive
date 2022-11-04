@@ -1,8 +1,8 @@
 import moment from "moment"
 
 
-export const calcPercentage = (item=0, total=0) => {
-    return item /(total / 100)
+export const calcPercentage = (CurrentItem=0, total=0) => {
+    return CurrentItem /(total / 100)
 }
 
 export const calcDate = (date) => {

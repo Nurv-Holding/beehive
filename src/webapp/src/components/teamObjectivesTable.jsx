@@ -9,23 +9,27 @@ function TeamObjectivesTable({ goalKrs }) {
     const [goalKrName, setGoalKrName] = useState("")
     const [goalKrQuarterly, setGoalKrQuarterly] = useState("")
     const [goalKryearly, setGoalKrYearly] = useState("")
+    const [goalKrDone, setGoalKrDone] = useState(0)
 
     function closeModal() {
       setIsOpen(false)
     }
   
-    function openModal(name,quarterly,yearly) {
+    function openModal(name,quarterly,yearly, done) {
       setIsOpen(true)
       setGoalKrName(name)
       setGoalKrQuarterly(quarterly)
       setGoalKrYearly(yearly)
+      setGoalKrDone(done)
     }
+
+    const goalKrsUpdate = () => {}
 
     return (
       <>
         {(goalKrs || []).map((goalKr) => {
           return(
-              <div key={goalKr.id} onClick={() => openModal(goalKr.nameGoalsKr, goalKr.QuarterlyGoalKrs, goalKr.nameGoalsKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 rounded-lg cursor-pointer'>
+              <div key={goalKr.id} onClick={() => openModal(goalKr.nameGoalsKr, goalKr.QuarterlyGoalKrs, goalKr.yearlyGoalsKr, goalKr.yearlyGoalsKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 rounded-lg cursor-pointer'>
               <div className='flex items-center'>
                 <span> {goalKr.nameGoalsKr} </span>
                 <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
