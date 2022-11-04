@@ -18,7 +18,7 @@ function Times() {
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Cadrastamento
@@ -31,7 +31,7 @@ function Times() {
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Times
@@ -45,7 +45,7 @@ function Times() {
                     /* Use the `selected` state to conditionally style the selected tab. */
                     <button
                     className={
-                        selected ? 'bg-[#5500C3]' : 'bg-[#E6E6E6] text-black'
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                     }
                     >
                     Lista

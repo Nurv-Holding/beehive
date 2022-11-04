@@ -44,14 +44,14 @@ function TeamObjectivesTable({ goalKrs }) {
   
           <div className="flex gap-[2%] mt-4">
             <div className="flex flex-col w-[48%]">
-              <span>Objetivo Trimestral</span>
+              <span>Meta Trimestral</span>
               <div className='percentage-container-disclosure w-[90%]'>
                 <div className='percentage-bar-disclosure w-[45%]'></div>
               </div>
             </div>
   
             <div className="flex flex-col w-[48%]">
-              <span>Objetivo Anual</span>
+              <span>Meta Anual</span>
               <div className='percentage-container-disclosure w-[90%]'>
                 <div className='percentage-bar-disclosure w-[45%]'></div>
               </div>

@@ -21,7 +21,7 @@ export default function Example() {
                 selected ? 'text-[#5500C3]' : ''
               }
             >
-              Usuários
+              Objetivos
             </button>
           )}
         </Tab>
@@ -47,7 +47,7 @@ export default function Example() {
                 selected ? 'text-[#5500C3]' : ''
               }
             >
-              Objetivos
+              Usuários
             </button>
           )}
         </Tab>
@@ -56,7 +56,7 @@ export default function Example() {
       <div className='w-full'>
         <Tab.Panels className='text-white'>
           <Tab.Panel>
-            <Usuarios />
+            <Objetivos />
           </Tab.Panel>
 
           <Tab.Panel>
@@ -64,7 +64,7 @@ export default function Example() {
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            <Objetivos />
+            <Usuarios />
           </Tab.Panel>
         </Tab.Panels>
       </div>

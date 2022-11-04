@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react'
 function formObjetivos() {
     return (
         <div className='flex flex-col'>
-            <form className='form-container'>
+            <form className='form-container px-4'>
                 <div className='input-and-label-container'>
                     <label>Objetivo</label>
                     <input className='input-style' type="text" placeholder='Digite o objetivo' />
@@ -17,16 +17,16 @@ function formObjetivos() {
 
                 <div className='input-and-label-container'>
                     <label>Data Inicial</label>
-                    <input className='input-style' type="date" />
+                    <input className='input-style' type="text" placeholder='Digite a data inicial'/>
                 </div>
 
                 <div className='input-and-label-container'>
                     <label>Data Final</label>
-                    <input className='input-style' type="date" />
+                    <input className='input-style' type="text" placeholder='Digite a data final'/>
                 </div>
-            </form>
 
-            <button className='submit-button' type="submit">Enviar</button>
+                <button className='submit-button' type="submit">Enviar</button>
+            </form>
         </div>
     )
 }
