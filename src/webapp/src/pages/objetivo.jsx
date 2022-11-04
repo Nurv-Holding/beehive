@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import tasksApi from '../api/tasksApi';
 import Header from '../components/header';
 import TeamObjectivesNewTask from '../components/teamObjectivesNewTask';
 import TeamObjectivesTable from '../components/teamObjectivesTable';
@@ -78,7 +77,7 @@ function Objetivo() {
               <span className='text-bold text-2xl text-white'>{goal.name}</span>
               <span className='text-bold text-lg mt-2 text-gray-400'>Empresa 1</span>
             </div>
-
+            
             <TeamObjectivesNewTask
               message={message}
               handleSubmit={handleSubmit}
@@ -90,8 +89,7 @@ function Objetivo() {
             />
           </div>
 
-          <TeamObjectivesTable goalKrs={goalKrs}
-          />
+          <TeamObjectivesTable goalKrs={goalKrs} />
         </div>
       </main>
     </>

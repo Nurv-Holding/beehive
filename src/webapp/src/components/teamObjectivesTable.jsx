@@ -6,20 +6,26 @@ import TaskPercentage from './TaskPercentage';
 function TeamObjectivesTable({ goalKrs }) {
     //Modal
     let [isOpen, setIsOpen] = useState(false)
+    const [goalKrName, setGoalKrName] = useState("")
+    const [goalKrQuarterly, setGoalKrQuarterly] = useState("")
+    const [goalKryearly, setGoalKrYearly] = useState("")
 
     function closeModal() {
       setIsOpen(false)
     }
   
-    function openModal() {
+    function openModal(name,quarterly,yearly) {
       setIsOpen(true)
+      setGoalKrName(name)
+      setGoalKrQuarterly(quarterly)
+      setGoalKrYearly(yearly)
     }
 
     return (
       <>
         {(goalKrs || []).map((goalKr) => {
           return(
-              <div onClick={openModal} className='flex flex-row items-center justify-around w-full bg-white p-4 rounded-lg cursor-pointer'>
+              <div key={goalKr.id} onClick={() => openModal(goalKr.nameGoalsKr, goalKr.QuarterlyGoalKrs, goalKr.nameGoalsKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 rounded-lg cursor-pointer'>
               <div className='flex items-center'>
                 <span> {goalKr.nameGoalsKr} </span>
                 <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
@@ -39,8 +45,8 @@ function TeamObjectivesTable({ goalKrs }) {
             </div>
           )
         })}
-        <Modal isOpen={isOpen} closeModal={closeModal} title={"Faturar R$500.000"}>
-          <span className="text-gray-500">Precisamos Faturar R$500.000</span>
+        <Modal isOpen={isOpen} closeModal={closeModal} title={goalKrName}>
+          <span className="text-gray-500"> {goalKrName} </span>
   
           <div className="flex gap-[2%] mt-4">
             <div className="flex flex-col w-[48%]">
