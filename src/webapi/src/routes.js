@@ -7,6 +7,7 @@ const goalsTemaKrsController = require("./controllers/goalstemaKrsController")
 const processGoalsTask = require("./controllers/processGoalsTaskController")
 const processTaskUsers = require("./controllers/processTaskUsersController")
 const profilesController = require("./controllers/profilesController")
+const projectionGoalKrsController = require("./controllers/projectionGoalKrs")
 const projectionProcessGoalsTaskController = require("./controllers/projectionProcessGoalsTaskController")
 const projetionProcessTaskUsersController = require("./controllers/projetionProcessTaskUsersController")
 const subtasksController = require("./controllers/subtasksController")
@@ -52,6 +53,9 @@ const routes = (app) => {
         app.get("/goalsKrs/c/:idCompany",goalsKrsController.getAll)
         app.put("/goalsKrs/:id",goalsKrsController.update)
         app.delete("/goalsKrs/:id",goalsKrsController.remove)
+
+                //goalsKrs
+                app.get("/goals/:idGoal/krs/c/:idCompany",projectionGoalKrsController().getByGoal)
 
     //goalsKrs
     app.post("/goalsTeam/c/:idCompany",goalsTemaController.create)
