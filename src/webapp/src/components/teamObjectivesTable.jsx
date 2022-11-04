@@ -7,8 +7,13 @@ function TeamObjectivesTable({ goalKrs }) {
   //Modal
   let [isOpen, setIsOpen] = useState(false)
   const [goalKrName, setGoalKrName] = useState("")
+  const [done, setDone] = useState(0)
   const [goalKrQuarterly, setGoalKrQuarterly] = useState("")
   const [goalKryearly, setGoalKrYearly] = useState("")
+
+  function stateDone({target}) {
+    setDone(target.value)
+  }
 
   function closeModal() {
     setIsOpen(false)
@@ -50,8 +55,8 @@ function TeamObjectivesTable({ goalKrs }) {
 
         <div className="flex flex-col gap-[2%] mt-4">
           <div className="flex gap-2 items-center">
-            <div w->
-              <input type="text" className="input-style" />
+            <div>
+              <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados"/>
             </div>
             <button className="submit-button">ADD</button>
             <button className="submit-button">OK</button>
@@ -61,7 +66,7 @@ function TeamObjectivesTable({ goalKrs }) {
             <div className='percentage-container-disclosure w-[90%] mt-2'>
               <div className='percentage-bar-disclosure w-[45%]'></div>
             </div>
-            <span className="text-gray-600 text-sm mt-2">Atual: R$30.000</span>
+            <span className="text-gray-600 text-sm mt-2">Atual: {done}</span>
           </div>
 
           <div className="flex flex-col gap-[2%] mt-4">
