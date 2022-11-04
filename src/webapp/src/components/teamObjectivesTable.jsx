@@ -15,18 +15,21 @@ function TeamObjectivesTable({ goalKrs }) {
     setIsOpen(false)
   }
 
-  function openModal(name, quarterly, yearly) {
+  function openModal(name, quarterly, yearly, done) {
     setIsOpen(true)
     setGoalKrName(name)
     setGoalKrQuarterly(quarterly)
     setGoalKrYearly(yearly)
+    setGoalKrDone(done)
   }
+
+  const goalKrsUpdate = () => {}
 
   return (
     <>
       {(goalKrs || []).map((goalKr) => {
         return (
-          <div key={goalKr.id} onClick={() => openModal(goalKr.nameGoalsKr, goalKr.QuarterlyGoalKrs, goalKr.yearlyGoalsKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 mb-4 rounded-lg cursor-pointer'>
+          <div key={goalKr.id} onClick={() => openModal(goalKr.nameGoalsKr, goalKr.QuarterlyGoalKrs, goalKr.yearlyGoalsKr, goalKr.doneGoalsKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 mb-4 rounded-lg cursor-pointer'>
             <div className='flex items-center'>
               <span> {goalKr.nameGoalsKr} </span>
               <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
@@ -62,7 +65,7 @@ function TeamObjectivesTable({ goalKrs }) {
             <div className='percentage-container-disclosure w-[90%] mt-2'>
               <div className='percentage-bar-disclosure w-[45%]'></div>
             </div>
-            <span className="text-gray-600 text-sm mt-2">Atual: R$30.000</span>
+            <span className="text-gray-600 text-sm mt-2">Atual: {goalKrDone}</span>
           </div>
 
           <div className="flex flex-col gap-[2%] mt-4">
@@ -70,7 +73,7 @@ function TeamObjectivesTable({ goalKrs }) {
             <div className='percentage-container-disclosure w-[90%] mt-2'>
               <div className='percentage-bar-disclosure w-[45%]'></div>
             </div>
-            <span className="text-gray-600 text-sm mt-2">Atual: R$30.000</span>
+            <span className="text-gray-600 text-sm mt-2">Atual: {goalKrDone}</span>
           </div>
         </div>
       </Modal>
