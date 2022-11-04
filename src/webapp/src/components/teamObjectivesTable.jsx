@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Disclosure } from '@headlessui/react'
-import { calcDate } from '../utilis';
 import TaskPercentage from './TaskPercentage';
 
-function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, returnQuantifyDone }) {
+function teamObjectivesTable({ goalKrs }) {
 
   return (
     <div className='flex flex-col items-center w-full'>
       <div className="w-full rounded-2xl bg-white p-2 mt-4">
-        {(tasksToGoal || []).map((task) => {
+        {(goalKrs || []).map((goalKr) => {
           return(
             <>
             <Disclosure>
@@ -17,7 +16,7 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
               <Disclosure.Button className="flex flex-row w-full items-center justify-between rounded-lg px-4 py-2">
                 <div className='flex flex-row items-center'>
                   <span>&gt;&nbsp;</span>
-                  <span> {task.nameTask} </span>
+                  <span> {goalKr.nameGoalsKr} </span>
                   <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
                 </div>
 
@@ -25,7 +24,7 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
                   LINK PARA KR
                 </Link>
                 
-                <span>{calcDate(task.finalDate) >= 0? `Faltam ${calcDate(task.finalDate)} Dias`: `${calcDate(task.finalDate)} Dias de atraso`}</span>
+                <span>???? </span>
 
                 <div className='profile-photo-task'>
                   <img src="https://thispersondoesnotexist.com/image"/>
@@ -36,23 +35,19 @@ function teamObjectivesTable({ tasksToGoal, returnQuantify, total, totalDone, re
                 </div>
 
                 <TaskPercentage 
-                  returnQuantify={returnQuantify} 
-                  idTask={task?.idTask} 
-                  total={total}
-                  totalDone={totalDone}
-                  returnQuantifyDone={returnQuantifyDone}
+
                 />
               </Disclosure.Button>
               <Disclosure.Panel className="">
                 <div className='flex flex-col ml-6'>
 
                 <div className='flex flex-row items-center'>
-                  <span className='task-doer'> {task.nameUser} </span>
+                  <span className='task-doer'> ??? </span>
                 </div>
 
                 <div className='task-date'>
-                  <span> {task.initialDate} </span>
-                  <span> {task.finalDate} </span>
+                  <span> ??? </span>
+                  <span> ???? </span>
                 </div>
 
                 </div>

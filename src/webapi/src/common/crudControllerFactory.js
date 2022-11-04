@@ -27,9 +27,10 @@ const crudControllerFactory = (model) => {
         }else{
             data = await model.findUnique({ where: {id} })
         }
-  
 
-        return res.status(200).send(data)
+        let item = data.length !== 0? data[0]: null
+  
+        return res.status(200).send(item)
 
     }
 

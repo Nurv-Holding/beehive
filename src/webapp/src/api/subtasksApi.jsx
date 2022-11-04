@@ -2,14 +2,10 @@ import axios from "axios"
 
 const host = 'http://localhost:3002'
 
-const getAll = () => axios.get(`${host}/subtasks`)
-const getByIdTaskSubtasks = (idTask) => axios.get(`${host}/tasks/${idTask}/subtasks/c/${1}`)
-const getAllTaskQuantifySubtasks = () => axios.get(`${host}/tasks/t/q/subtasks/c/${1}`)
-const getByIdTaskQuantifySubtasksDone = () => axios.get(`${host}/tasks/t/q/subtasks/c/${1}/done`)
+const getAll = (idCompany=1) => axios.get(`${host}/goalsKrs/c/${idCompany}`)
+const create = (idCompany=1,data) => axios.get(`${host}/goalsTeam/${idCompany}`,data)
 
 export default {
     getAll,
-    getByIdTaskSubtasks,
-    getAllTaskQuantifySubtasks,
-    getByIdTaskQuantifySubtasksDone
+    create
 }
