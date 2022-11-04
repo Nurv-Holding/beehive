@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 html {
-    background-color: #1E1E1E;
+    background-color: rgb(148 163 184);
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -185,11 +185,11 @@ header nav span:hover{
 /*End General CONTAINER*/
 
 .container-two-percentage{
-    @apply w-full h-[100px] flex flex-row my-8 justify-between
+    @apply w-full h-[60px] flex flex-row my-8 justify-between
 }
 
 .container-percentage-okr{
-    @apply w-[48.8%] h-full rounded-2xl p-2
+    @apply w-[48.8%] h-full rounded-xl p-2
 }
 
 .percentage-my-progress{
@@ -251,7 +251,7 @@ header nav span:hover{
 }
 
 .percentage-container-disclosure{
-    @apply w-[20%] bg-[#D9D9D9] h-4 rounded
+    @apply bg-[#D9D9D9] h-4 rounded
 }
 
 .percentage-bar-disclosure{
@@ -339,11 +339,7 @@ header nav span:hover{
 }
 
 .modal-btn{
-    @apply w-[50%] border border-gray-300 rounded-md p-1 text-gray-500 text-sm bg-gray-200 text-center
-}
-
-.modal-btn:hover{
-    @apply bg-[#5500C3] text-white border-transparent
+    @apply w-[40%] rounded-md p-1 text-white text-sm text-center bg-[#5500C3]
 }
 
 /*End Menu With Cards*/

@@ -71,11 +71,10 @@ function Objetivo() {
 
       <main className='flex flex-col items-center'>
         <div className='w-11/12'>
-          <h1 className='text-white text-bold text-2xl mt-2'> {tasksToGoalQuantify.nameGoal} </h1>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
-              <span className='text-bold text-2xl text-white'>Ser uma empresa financeiramente sustentavel</span>
-              <span className='text-bold text-lg mt-2 text-gray-400'>Empresa 1</span>
+              <span className='text-bold text-2xl text-black'>Ser uma empresa financeiramente sustentavel</span>
+              <span className='text-bold text-lg mt-2 text-black'>Empresa 1</span>
             </div>
 
             <TeamObjectivesNewTask
@@ -85,13 +84,7 @@ function Objetivo() {
             />
           </div>
 
-          <TeamObjectivesTable
-            tasksToGoal={tasksToGoal}
-            returnQuantify={returnQuantify}
-            returnQuantifyDone={returnQuantifyDone}
-            total={total}
-            totalDone={totalDone}
-          />
+          <TeamObjectivesTable/>
         </div>
       </main>
     </>

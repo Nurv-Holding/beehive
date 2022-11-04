@@ -14,8 +14,8 @@ function TeamObjectivesPercentage({ message, handleSubmit, modelChange, item }) 
     }
 
     return (
-        <div className='container-percentage-okr bg-white flex flex-col items-center justify-center'>
-            <button className="modal-btn h-[50px]" onClick={openModal}>
+        <div className='container-percentage-okr flex flex-col items-center justify-center'>
+            <button className="modal-btn h-[40px]" onClick={openModal}>
                 Adicionar KR
             </button>
 
