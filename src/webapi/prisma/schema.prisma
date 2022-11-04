@@ -85,15 +85,14 @@ model User {
 model Goal {
   id           Int         @id @default(autoincrement())
   idCompany    Int
-  idGoalKr     Int?
   name         String
   descriptions String
-  done         Int     @default(0)
+  done         Int         @default(0)
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   company      Company     @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  goalKr       GoalKr?     @relation(fields: [idGoalKr], references: [id])
   GoalsTeam    GoalsTeam[]
+  GoalKr       GoalKr[]
 
   @@map("goals")
 }
@@ -102,23 +101,22 @@ model GoalsTeam {
   id               Int                @id @default(autoincrement())
   idCompany        Int
   idGoal           Int
-  idGoalTeamKr     Int?
   name             String
   descriptions     String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   goal             Goal               @relation(fields: [idGoal], references: [id], onDelete: Cascade)
   company          Company            @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  goalTeamKr       GoalTeamKr?        @relation(fields: [idGoalTeamKr], references: [id])
   ProcessGoalsTeam ProcessGoalsTeam[]
+  GoalTeamKr       GoalTeamKr[]
 
   @@map("goalsTeams")
 }
 
 model ProcessGoalsTeam {
   id          Int        @id @default(autoincrement())
-  idGoalsTeam Int
-  idTeam      Int
+  idGoalsTeam Int?
+  idTeam      Int?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   goalsTeam   GoalsTeam? @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
@@ -128,17 +126,18 @@ model ProcessGoalsTeam {
 }
 
 model GoalTeamKr {
-  id           Int         @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   idCompany    Int
+  idGoalsTeam  Int
   name         String
   descriptions String
   from         Int
   to           Int
-  done         Int     @default(0)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  company      Company     @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  GoalsTeam    GoalsTeam[]
+  done         Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  company      Company   @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  goalsTeam    GoalsTeam @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
 
   @@map("goalTeamKrs")
 }
@@ -146,15 +145,16 @@ model GoalTeamKr {
 model GoalKr {
   id           Int      @id @default(autoincrement())
   idCompany    Int
+  idGoal       Int
   name         String
   descriptions String
   from         Int
   to           Int
-  done         Int     @default(0)
+  done         Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   company      Company  @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  Goal         Goal[]
+  goal         Goal     @relation(fields: [idGoal], references: [id], onDelete: Cascade)
 
   @@map("goalKrs")
 }
