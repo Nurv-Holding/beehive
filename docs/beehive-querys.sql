@@ -109,3 +109,5 @@ join goals as g on pgt.idGoal=g.id
 where pgt.idCompany=1 and ptu.done=false;
 
 select * from goals ;
+
+drop database behider;

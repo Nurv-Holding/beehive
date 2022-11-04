@@ -1,5 +1,3 @@
-const formatDate = require("./formateDate");
-
 
 const crudControllerFactory = (model) => {
 
@@ -39,28 +37,10 @@ const crudControllerFactory = (model) => {
         let newData;
         const idCompany = parseInt(req?.params?.idCompany) 
 
-        if(req.body.initialDate){
-            if(idCompany)
-                newData = {
-                    ...req.body,
-                    idCompany,
-                    initialDate: formatDate(req?.body?.initialDate),
-                    finalDate: formatDate(req?.body?.finalDate)   
-                }
-
-            else
-                newData = {
-                    ...req.body,
-                    initialDate: formatDate(req?.body?.initialDate),
-                    finalDate: formatDate(req?.body?.finalDate)   
-                }
-            
-        }else{
-            if(idCompany)
-                newData = {...req.body, idCompany}
-            else
-                newData = req.body
-        }
+        if(idCompany)
+            newData = {...req.body, idCompany}
+        else
+            newData = req.body
 
         console.log("newData",newData)
 
@@ -71,22 +51,10 @@ const crudControllerFactory = (model) => {
     }
 
     const update = async (req,res) => {
-        let newDate;
+        let data = req.body
         const id = parseInt(req.params.id) 
 
-        if(req.body.initialDate){
-            newDate = {
-                ...req.body,
-                initialDate: formatDate(req?.body?.initialDate),
-                finalDate: formatDate(req?.body?.finalDate) 
-            }
-        }else{
-            newDate = req.body
-        }
-
-        console.log("newDate", newDate)
-
-        const result = await model.update({where:{id}, data:newDate})
+        const result = await model.update({where:{id}, data})
 
         return res.status(200).send(result)
 

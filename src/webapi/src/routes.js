@@ -3,6 +3,7 @@ const goalsController = require("./controllers/goalsController")
 const goalsTasksController = require("./controllers/goalsTasksController")
 const processGoalsTask = require("./controllers/processGoalsTaskController")
 const processTaskUsers = require("./controllers/processTaskUsersController")
+const profilesController = require("./controllers/profilesController")
 const projectionProcessGoalsTaskController = require("./controllers/projectionProcessGoalsTaskController")
 const projetionProcessTaskUsersController = require("./controllers/projetionProcessTaskUsersController")
 const subtasksController = require("./controllers/subtasksController")
@@ -21,6 +22,13 @@ const routes = (app) => {
     app.put("/users/:id",userController.update)
     app.delete("/users/:id",userController.remove)
 
+    //profiles
+    app.get("/profiles",profilesController.getAll)
+    app.get("/profiles/:id",profilesController.getById)
+    app.post("/profiles",profilesController.create)
+    app.put("/profiles/:id",profilesController.update)
+    app.delete("/profiles/:id",profilesController.remove)
+
     //companies
     app.post("/companies",companiesController.create)
     app.get("/companies/:id",companiesController.getById)
@@ -29,18 +37,18 @@ const routes = (app) => {
     app.delete("/companies/:id",companiesController.remove)
 
     //goals
-    app.post("/goals",goalsController.create)
-    app.get("/goals/:id",goalsController.getById)
-    app.get("/goals",goalsController.getAll)
+    app.post("/goals/c/:idCompany",goalsController.create)
+    app.get("/goals/:id/c/:idCompany",goalsController.getById)
+    app.get("/goals/c/:idCompany",goalsController.getAll)
     app.put("/goals/:id",goalsController.update)
     app.delete("/goals/:id",goalsController.remove)
 
-        //goalsTasks
-        app.get("/goals/c/:idCompany/tasks",goalsTasksController().getAll)
-        app.get("/goals/:idGoal/c/:idCompany/tasks/users",goalsTasksController().getByIdGoalUsers)
-        app.get("/goals/:idGoal/c/:idCompany/tasks/done",goalsTasksController().getByIdGoalByDone)
-        app.get("/goals/:idGoal/c/:idCompany/q/tasks",goalsTasksController().getByIdGoalByQuantifyTask)
-        app.get("/goals/:idGoal/c/:idCompany/q/tasks/done",goalsTasksController().getByIdGoalByQuantifyTaskDone)
+        //goalsKrs
+        app.post("/goalsKrs/c/:idCompany",goalsController.create)
+        app.get("/goalsKrs/:id/c/:idCompany",goalsController.getById)
+        app.get("/goalsKrs/c/:idCompany",goalsController.getAll)
+        app.put("/goalsKrs/:id",goalsController.update)
+        app.delete("/goalsKrs/:id",goalsController.remove)
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)

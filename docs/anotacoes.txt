@@ -1,0 +1,7 @@
+USUÁRIOS
+Adm. Be hive: 
+	Pode fazer tudo: cadastrar empresa, cadastrar OKRs de empresas, cadastrar usuários de todas as empresas, ver OKRs de qualquer empresa
+Adm EMpresa: 
+	Pode cadastrar OKR da empresa onde está viculado, Pode cadastrar usuario da empresa onde está cadastrado, pode ver todos os  OKRs da empresa onde está cadastrado
+Usuario da empresas: 
+	POde consultar os OKRs em que está cadastrada da empresa onde esta cadastrado.
