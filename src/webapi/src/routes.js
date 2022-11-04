@@ -1,6 +1,9 @@
 const companiesController = require("./controllers/companiesController")
 const goalsController = require("./controllers/goalsController")
+const goalsKrsController = require("./controllers/goalsKrsController")
 const goalsTasksController = require("./controllers/goalsTasksController")
+const goalsTemaController = require("./controllers/goalsTeamController")
+const goalsTemaKrsController = require("./controllers/goalstemaKrsController")
 const processGoalsTask = require("./controllers/processGoalsTaskController")
 const processTaskUsers = require("./controllers/processTaskUsersController")
 const profilesController = require("./controllers/profilesController")
@@ -44,11 +47,25 @@ const routes = (app) => {
     app.delete("/goals/:id",goalsController.remove)
 
         //goalsKrs
-        app.post("/goalsKrs/c/:idCompany",goalsController.create)
-        app.get("/goalsKrs/:id/c/:idCompany",goalsController.getById)
-        app.get("/goalsKrs/c/:idCompany",goalsController.getAll)
-        app.put("/goalsKrs/:id",goalsController.update)
-        app.delete("/goalsKrs/:id",goalsController.remove)
+        app.post("/goalsKrs/c/:idCompany",goalsKrsController.create)
+        app.get("/goalsKrs/:id/c/:idCompany",goalsKrsController.getById)
+        app.get("/goalsKrs/c/:idCompany",goalsKrsController.getAll)
+        app.put("/goalsKrs/:id",goalsKrsController.update)
+        app.delete("/goalsKrs/:id",goalsKrsController.remove)
+
+    //goalsKrs
+    app.post("/goalsTeam/c/:idCompany",goalsTemaController.create)
+    app.get("/goalsTeam/:id/c/:idCompany",goalsTemaController.getById)
+    app.get("/goalsTeam/c/:idCompany",goalsTemaController.getAll)
+    app.put("/goalsTeam/:id",goalsTemaController.update)
+    app.delete("/goalsTeam/:id",goalsTemaController.remove)
+
+        //goalsKrs
+        app.post("/goalsTeamKrs/c/:idCompany",goalsTemaKrsController.create)
+        app.get("/goalsTeamKrs/:id/c/:idCompany",goalsTemaKrsController.getById)
+        app.get("/goalsTeamKrs/c/:idCompany",goalsTemaKrsController.getAll)
+        app.put("/goalsTeamKrs/:id",goalsTemaKrsController.update)
+        app.delete("/goalsTeamKrs/:id",goalsTemaKrsController.remove)
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)
