@@ -6,7 +6,6 @@
 
 html {
     background-color: #1E1E1E;
-    ;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -190,7 +189,7 @@ header nav span:hover{
 }
 
 .container-percentage-okr{
-    @apply w-[48.8%] h-full bg-[#F5F5F5] rounded-2xl p-4
+    @apply w-[48.8%] h-full rounded-2xl p-2
 }
 
 .percentage-my-progress{

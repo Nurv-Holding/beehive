@@ -23,7 +23,20 @@ function Objetivos() {
                     Cadrastamento
                     </button>
                 )}
-                </Tab>            
+                </Tab>
+
+                <Tab className='nav-btn'>
+                {({ selected }) => (
+                    /* Use the `selected` state to conditionally style the selected tab. */
+                    <button
+                    className={
+                        selected ? 'bg-[#5500C3]' : 'bg-white text-black'
+                    }
+                    >
+                    Objetivos
+                    </button>
+                )}
+                </Tab>       
 
                 <Tab className='nav-btn'>
                 {({ selected }) => (
@@ -46,6 +59,10 @@ function Objetivos() {
             <Tab.Panels>
             <Tab.Panel className='container-empresas'>
                 <FormObjetivos/>
+            </Tab.Panel>
+
+            <Tab.Panel className='container-empresas'>
+                <ListaObjetivos goals={goals}/>
             </Tab.Panel>
 
             <Tab.Panel className='container-empresas'>

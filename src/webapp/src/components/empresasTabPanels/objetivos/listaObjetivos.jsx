@@ -24,8 +24,8 @@ function listaObjetivos({ goals }) {
                       <td>{goal.name}</td>
                     </Link>
                     <td>{goal.descriptons}</td>
-                    <td>17/10/2022</td>
-                    <td>31/11/2022</td>
+                    <td>{goal.initialDate}</td>
+                    <td>{goal.finalDate}</td>
                   </tr>
                 </>
               )

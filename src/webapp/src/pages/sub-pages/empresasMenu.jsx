@@ -12,63 +12,62 @@ function classNames(...classes) {
 export default function Example() {
   return (
     <Tab.Group>
-        <Tab.List className='container-nav-empresas'>
-            <Tab>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'text-[#5500C3]' : ''
-                  }
-                >
-                  Usuários
-                </button>
-              )}
-            </Tab>
-            
+      <Tab.List className='container-nav-empresas'>
+        <Tab>
+          {({ selected }) => (
+            /* Use the `selected` state to conditionally style the selected tab. */
+            <button
+              className={
+                selected ? 'text-[#5500C3]' : ''
+              }
+            >
+              Usuários
+            </button>
+          )}
+        </Tab>
 
-            <Tab>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'text-[#5500C3]' : ''
-                  }
-                >
-                  Times
-                </button>
-              )}
-            </Tab>
+        <Tab>
+          {({ selected }) => (
+            /* Use the `selected` state to conditionally style the selected tab. */
+            <button
+              className={
+                selected ? 'text-[#5500C3]' : ''
+              }
+            >
+              Times
+            </button>
+          )}
+        </Tab>
 
-            <Tab>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'text-[#5500C3]' : ''
-                  }
-                >
-                  Objetivos
-                </button>
-              )}
-            </Tab>
-        </Tab.List>
+        <Tab>
+          {({ selected }) => (
+            /* Use the `selected` state to conditionally style the selected tab. */
+            <button
+              className={
+                selected ? 'text-[#5500C3]' : ''
+              }
+            >
+              Objetivos
+            </button>
+          )}
+        </Tab>
+      </Tab.List>
 
-        <div className='w-full'>
+      <div className='w-full'>
         <Tab.Panels className='text-white'>
           <Tab.Panel>
-            <Usuarios/>
+            <Usuarios />
           </Tab.Panel>
 
           <Tab.Panel>
-            <Times/>
+            <Times />
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            <Objetivos/>
+            <Objetivos />
           </Tab.Panel>
         </Tab.Panels>
-        </div>
-      </Tab.Group>
+      </div>
+    </Tab.Group>
   )
 }

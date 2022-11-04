@@ -29,7 +29,7 @@ function Objetivo() {
   useEffect(() => {
     handlerTasks()
 
-  },[idGoal])
+  }, [idGoal])
 
   const returnQuantify = async () => {
     const { data } = await subtasksApi.getAllTaskQuantifySubtasks()
@@ -44,7 +44,7 @@ function Objetivo() {
   }
 
   const handlerTasks = async () => {
-    const {data} = await tasksApi.getAll(1,idGoal)
+    const { data } = await tasksApi.getAll(1, idGoal)
 
     setTasks(data)
   }
@@ -57,9 +57,9 @@ function Objetivo() {
       item.initialDate === "" || item.finalDate === "") {
       setMessage("Precisa preencher os campos vazios")
 
-    }else{
-        const newIdGoal = parseInt(idGoal)
-        tasksApi.create(1,{...item, idGoal:newIdGoal})
+    } else {
+      const newIdGoal = parseInt(idGoal)
+      tasksApi.create(1, { ...item, idGoal: newIdGoal })
         .then(() => setMessage("Cadastro Realizado!"))
         .catch(() => setMessage("Algo deu errado!!"))
     }
@@ -70,78 +70,29 @@ function Objetivo() {
       <Header />
 
       <main className='flex flex-col items-center'>
-        <Tab.Group>
-          <Tab.List className='w-11/12 mt-4'>
-            <div className='w-full flex flex-row gap-2'>
-              <Tab className='nav-btn'>
-                {({ selected }) => (
-                  /* Use the `selected` state to conditionally style the selected tab. */
-                  <button
-                    className={
-                      selected ? 'bg-[#5500C3] text-white' : 'bg-white'
-                    }
-                  >
-                    Objetivo
-                  </button>
-                )}
-              </Tab>
+        <div className='w-11/12'>
+          <h1 className='text-white text-bold text-2xl mt-2'> {tasksToGoalQuantify.nameGoal} </h1>
+          <div className='container-two-percentage'>
+            <div className='container-percentage-okr flex flex-col'>
+              <span className='text-bold text-2xl text-white'>Ser uma empresa financeiramente sustentavel</span>
+              <span className='text-bold text-lg mt-2 text-gray-400'>Empresa 1</span>
+            </div>
 
-            {/* <TeamObjectivesNewTask
-              item={item}
-              message={message} 
+            <TeamObjectivesNewTask
+              message={message}
               handleSubmit={handleSubmit}
               modelChange={modelChange}
-            /> */}
-
-              <Tab className='nav-btn'>
-                {({ selected }) => (
-                  /* Use the `selected` state to conditionally style the selected tab. */
-                  <button
-                    className={
-                      selected ? 'bg-[#5500C3] text-white' : 'bg-white'
-                    }
-                  >
-                    KRs
-                  </button>
-                )}
-              </Tab>
-            </div>
-          </Tab.List>
-
-          <div className='w-11/12'>
-            <Tab.Panels>
-              <Tab.Panel>
-                <div className='flex flex-col items-center'>
-                  <h1 className='text-white text-bold text-2xl mt-2'> {tasksToGoalQuantify.nameGoal} </h1>
-                  <div className='container-two-percentage'>
-                    <TeamObjectivesPercentage
-                      tasksToGoalQuantify={tasksToGoalQuantify}
-                      tasksToGoalQuantifyDone={tasksToGoalQuantifyDone}
-                    />
-
-                    <TeamObjectivesNewTask
-                      message={message}
-                      handleSubmit={handleSubmit}
-                      modelChange={modelChange}
-                    />
-                  </div>
-
-                  <TeamObjectivesTable
-                    tasksToGoal={tasksToGoal}
-                    returnQuantify={returnQuantify}
-                    returnQuantifyDone={returnQuantifyDone}
-                    total={total}
-                    totalDone={totalDone}
-                  />
-                </div>
-              </Tab.Panel>
-
-              <Tab.Panel className='container-empresas'>
-                <TaskList tasks={tasks}/>
-              </Tab.Panel>
-            </Tab.Panels>
+            />
           </div>
-        </Tab.Group>
+
+          <TeamObjectivesTable
+            tasksToGoal={tasksToGoal}
+            returnQuantify={returnQuantify}
+            returnQuantifyDone={returnQuantifyDone}
+            total={total}
+            totalDone={totalDone}
+          />
+        </div>
       </main>
     </>
   );
