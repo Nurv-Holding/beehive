@@ -19,9 +19,9 @@ function TeamObjectivesNewTask({ message, handleSubmit, modelChange, isOpen, clo
                     <label for="tarefa">Descrição:</label>
                     <input onChange={modelChange} name='descriptions' type='text' className='input-style' placeholder="Digite a descrição do KR"/>
 
-                    <div className="flex flex-row">
+                    <div className="flex flex-row justify-between">
 
-                        <div className="flex flex-col w-[48%] mx-[2%]">
+                        <div className="flex flex-col w-[48%]">
                             <label for="tarefa">Meta Trimestral:</label>
                             <input onChange={modelChange} name='x' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
                         </div>
@@ -38,7 +38,6 @@ function TeamObjectivesNewTask({ message, handleSubmit, modelChange, isOpen, clo
                             Adicionar
                         </button>
                     </div>
-                    <span> {message} </span>
                 </form>
             </Modal>
         </div>
