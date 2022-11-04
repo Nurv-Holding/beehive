@@ -26,10 +26,12 @@ function TeamObjectivesTable({ goalKrs }) {
   }
 
   const goalKrsUpdate = (idGoalKrs,done) => {
-    const data = { done }
+    const data = { done: parseInt(done) }
 
     goalKrsApi.update(idGoalKrs, data)
-    .then(() => {})
+    .then(() => {
+      setMessage("Atualizado")
+    })
     .catch((error) => {
       console.error(error)
       setMessage("Algo deu errado")
