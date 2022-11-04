@@ -1,6 +1,6 @@
 import Header from '../components/header';
 import Profile from '../components/profile';
-import Tasks from '../components/tasks';
+import Companies from '../components/companiesList';
 import Methodology from '../components/methodology';
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
 
 {/* SECOND COL */}
             <div className='grid-col'>
-              <Tasks />
+              <Companies />
             </div>
 
 {/* THIRD COL */}

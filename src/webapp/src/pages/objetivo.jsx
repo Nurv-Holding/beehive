@@ -71,11 +71,10 @@ function Objetivo() {
 
       <main className='flex flex-col items-center'>
         <div className='w-11/12'>
-          <h1 className='text-white text-bold text-2xl mt-2'> "" </h1>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
-              <span className='text-bold text-2xl text-white'>{goal.name}</span>
-              <span className='text-bold text-lg mt-2 text-gray-400'>Empresa 1</span>
+              <span className='text-bold text-xl text-white uppercase'>{goal.name}</span>
+              <span className='text-bold text-lg mt-2 text-white'>Empresa 1</span>
             </div>
             
             <TeamObjectivesNewTask

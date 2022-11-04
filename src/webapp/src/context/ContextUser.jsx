@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { createContext } from "react"
 import { useParams } from "react-router-dom"
+import companiesApi from "../api/companiesApi"
 import goalsApi from "../api/goalsApi"
 import subtasksApi from "../api/subtasksApi"
 import teamsApi from "../api/teamsApi"
@@ -13,12 +14,14 @@ export const ContextUserProvider = ({ children }) => {
     const [users, setUsers] = useState([])
     const [teams, setTeams] = useState({})
     const [item, setItem] = useState({})
+    const [companies, setCompanies] = useState([])
     const { idGoal } = useParams()
 
     useEffect(() => {
         handlerUsers()
         handlerGoals()
         handlerTeams()
+        handlerCompanies()
 
     },[idGoal])
 
@@ -43,6 +46,11 @@ export const ContextUserProvider = ({ children }) => {
         })
     }
 
+    const handlerCompanies = async () => {
+        const {data} = await companiesApi.getAll()
+        setCompanies(data)
+    }
+
     return(
         <ContextUser.Provider 
             value={
@@ -51,7 +59,8 @@ export const ContextUserProvider = ({ children }) => {
                     users,
                     teams,
                     modelChange,
-                    item
+                    item,
+                    companies
                 }
             }
         >
