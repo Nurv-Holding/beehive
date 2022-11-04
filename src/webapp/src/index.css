@@ -107,6 +107,10 @@ header nav span:hover{
 .container-table-grid-team{
     @apply w-full flex flex-col
 }
+
+.container-table-grid-team thead{
+    @apply border-b border-[#5500C3]
+}
 /*END GRID CONTAINER*/
 
 /*team management*/
@@ -302,7 +306,11 @@ header nav span:hover{
 }
 
 .form-container{
-    @apply grid grid-cols-2 gap-4 max-w-[75%]
+    @apply grid grid-cols-2 gap-4 max-w-[75%] px-4
+}
+
+.submit-button{
+    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white 
 }
 
 .form-container label{
@@ -315,10 +323,6 @@ header nav span:hover{
 
 .input-style{
     @apply mb-2 w-full text-[#5500C3] text-base bg-gray-200 rounded-lg hover:bg-[#C5C5C5] outline-none focus:bg-[#C5C5C5] py-2 px-2
-}
-
-.submit-button{
-    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white 
 }
 
 .container-table-objectives-list-times{

@@ -6,7 +6,7 @@ function listaObjetivos({ goals }) {
       <div className='container-table-grid-team'>
         <table class="table-auto w-full">
 
-          <thead className="border-b solid border-[#5500C3]">
+          <thead>
             <tr>
               <th className='container-title-grid w-[25%]'>Objetivo</th>
               <th className='container-title-grid w-[25%]'>Descrição</th>

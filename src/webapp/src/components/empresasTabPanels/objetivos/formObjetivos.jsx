@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react'
 function formObjetivos() {
     return (
         <div className='flex flex-col'>
-            <form className='form-container px-4'>
+            <form className='form-container'>
                 <div className='input-and-label-container'>
                     <label>Objetivo</label>
                     <input className='input-style' type="text" placeholder='Digite o objetivo' />
