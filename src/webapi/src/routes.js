@@ -66,7 +66,7 @@ const routes = (app) => {
     app.put("/goalsTeam/:id",goalsTemaController.update)
     app.delete("/goalsTeam/:id",goalsTemaController.remove)
 
-        //goalsKrs
+        //goalsTeamKrs
         app.post("/goalsTeamKrs/c/:idCompany",goalsTemaKrsController.create)
         app.get("/goalsTeamKrs/:id/c/:idCompany",goalsTemaKrsController.getById)
         app.get("/goalsTeamKrs/c/:idCompany",goalsTemaKrsController.getAll)
