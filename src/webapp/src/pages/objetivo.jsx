@@ -23,6 +23,16 @@ function Objetivo() {
 
   }, [idGoal])
 
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+      setIsOpen(false)
+  }
+
+  function openModal() {
+      setIsOpen(true)
+  }
+
   const handleGoal = async () => {
     const {data} = await goalsApi.getById(idGoal,1)
 
@@ -38,17 +48,22 @@ function Objetivo() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (Object.keys(item).length === 0 &&
-      item.name === "" || item.descriptions === "" ||
-      item.initialDate === "" || item.finalDate === "") {
-      setMessage("Precisa preencher os campos vazios")
-
-    } else {
-      const newIdGoal = parseInt(idGoal)
-      tasksApi.create(1, { ...item, idGoal: newIdGoal })
-        .then(() => setMessage("Cadastro Realizado!"))
-        .catch(() => setMessage("Algo deu errado!!"))
+    const data = {
+      ...item,
+      idGoal:parseInt(idGoal),
+      quarterly:parseInt(item.quarterly),
+      yearly:parseInt(item.yearly)
     }
+
+    goalKrsApi.create(1,data)
+    .then(() => {
+      setMessage("KR criado com sucesso")
+      closeModal()
+    })
+    .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+    })
   }
 
   return (
@@ -68,6 +83,10 @@ function Objetivo() {
               message={message}
               handleSubmit={handleSubmit}
               modelChange={modelChange}
+              isOpen={isOpen}
+              closeModal={closeModal}
+              openModal={openModal}
+              item={item}
             />
           </div>
 

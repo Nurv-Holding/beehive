@@ -131,8 +131,8 @@ model GoalTeamKr {
   idGoalsTeam  Int
   name         String
   descriptions String
-  from         Int
-  to           Int
+  quarterly    Int
+  yearly       Int
   done         Int       @default(0)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -148,8 +148,8 @@ model GoalKr {
   idGoal       Int
   name         String
   descriptions String
-  from         Int
-  to           Int
+  quarterly    Int
+  yearly       Int
   done         Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
