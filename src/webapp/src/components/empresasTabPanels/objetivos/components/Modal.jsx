@@ -37,7 +37,7 @@ function Modal({ isOpen, children, closeModal, title }) {
                                                 as="h3"
                                                 className="text-lg font-medium leading-6 text-gray-900 my-4"
                                             >
-                                               {JSON.stringify(title)}
+                                               {title}
                                             </Dialog.Title>
 
                                             {children}

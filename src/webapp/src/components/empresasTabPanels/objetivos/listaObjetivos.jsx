@@ -8,10 +8,10 @@ function listaObjetivos({ goals }) {
 
           <thead>
             <tr>
-              <th className='container-title-grid'>Objetivo</th>
-              <th className='container-title-grid'>Descrição</th>
-              <th className='container-title-grid'>Data Inicial</th>
-              <th className='container-title-grid'>Data Final</th>
+              <th className='container-title-grid w-[25%]'>Objetivo</th>
+              <th className='container-title-grid w-[25%]'>Descrição</th>
+              <th className='container-title-grid w-[25%]'>Data Inicial</th>
+              <th className='container-title-grid w-[25%]'>Data Final</th>
             </tr>
           </thead>
 
