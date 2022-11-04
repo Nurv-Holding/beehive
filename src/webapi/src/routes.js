@@ -17,6 +17,8 @@ const teamsController = require("./controllers/teamsController")
 const teamUsersController = require("./controllers/teamUsersController")
 const teamUsersProjectionController = require("./controllers/teamUsersProjectionController")
 const userController = require("./controllers/usersController")
+const projectionGoalTeamKrsController = require("./controllers/projectionGoalsTeamKrs")
+const processGoalTeamController = require("./controllers/processGoalTeamController")
 
 const routes = (app) => {
     //users
@@ -57,7 +59,7 @@ const routes = (app) => {
                 //goalsKrs
                 app.get("/goals/:idGoal/krs/c/:idCompany",projectionGoalKrsController().getByGoal)
 
-    //goalsKrs
+    //goalsTeam
     app.post("/goalsTeam/c/:idCompany",goalsTemaController.create)
     app.get("/goalsTeam/:id/c/:idCompany",goalsTemaController.getById)
     app.get("/goalsTeam/c/:idCompany",goalsTemaController.getAll)
@@ -70,6 +72,16 @@ const routes = (app) => {
         app.get("/goalsTeamKrs/c/:idCompany",goalsTemaKrsController.getAll)
         app.put("/goalsTeamKrs/:id",goalsTemaKrsController.update)
         app.delete("/goalsTeamKrs/:id",goalsTemaKrsController.remove)
+
+            //processGoalTeam
+            app.post("/goalsTeam/process",processGoalTeamController.create)
+            app.get("/goalsTeam/process/:id",processGoalTeamController.getById)
+            app.get("/goalsTeam/process",processGoalTeamController.getAll)
+            app.put("/goalsTeam/process/:id",processGoalTeamController.update)
+            app.delete("/goalsTeam/process/:id",processGoalTeamController.remove)
+
+            //goalsKrs
+            app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)
