@@ -8,11 +8,16 @@ function TeamObjectivesTable({ goalKrs }) {
   //Modal
   let [isOpen, setIsOpen] = useState(false)
   const [goalKrName, setGoalKrName] = useState("")
+  const [done, setDone] = useState(0)
   const [goalKrQuarterly, setGoalKrQuarterly] = useState("")
   const [goalKryearly, setGoalKrYearly] = useState("")
   const [goalKrDone, setGoalKrDone] = useState(0)
   const [idGoalsKr, setIdGoalsKr] = useState(null)
   const [message, setMessage] = useState("")
+
+  function stateDone({target}) {
+    setDone(target.value)
+  }
 
   function closeModal() {
     setIsOpen(false)
@@ -68,7 +73,7 @@ function TeamObjectivesTable({ goalKrs }) {
         <div className="flex flex-col gap-[2%] mt-4">
           <div className="flex gap-2 items-center">
             <div>
-              <input type="text" className="input-style" />
+              <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados"/>
             </div>
             <button onClick={() => {goalKrsUpdate(idGoalsKr)}} className="submit-button">ADD</button>
             <button className="submit-button">OK</button>
