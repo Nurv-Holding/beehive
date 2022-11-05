@@ -1,10 +1,10 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
 import { useState } from 'react'
-import { calcDate } from '../utilis';
+import { calcDate, calcPercentage } from '../utilis';
 import TaskPercentage from './TaskPercentage';
 import goalKrsApi from "../api/goalKrsApi";
 
-function TeamObjectivesTable({ goalKrs }) {
+function TeamObjectivesTable({ goalKrs, updateData, update }) {
   //Modal
   let [isOpen, setIsOpen] = useState(false)
   const [done, setDone] = useState(0)
@@ -13,7 +13,7 @@ function TeamObjectivesTable({ goalKrs }) {
   const [goalKrDone, setGoalKrDone] = useState(0)
   const [message, setMessage] = useState("")
 
-  function stateDone({target}) {
+  function stateDone({ target }) {
     setDone(target.value)
   }
 
@@ -23,19 +23,20 @@ function TeamObjectivesTable({ goalKrs }) {
 
   function openModal(goalKr) {
     setGoalKr(goalKr)
+    setIsOpen(true)
   }
 
-  const goalKrsUpdate = (idGoalKrs,done) => {
+  const goalKrsUpdate = (idGoalKrs, done) => {
     const data = { done: parseInt(done) + goalKr?.doneGoalsKr}
 
     goalKrsApi.update(idGoalKrs, data)
-    .then(() => {
-      setMessage("Atualizado")
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado")
-    })
+      .then(() => {
+        setMessage("Atualizado")
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado")
+      })
   }
 
   return (
@@ -64,34 +65,35 @@ function TeamObjectivesTable({ goalKrs }) {
       })}
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <span className="text-lg uppercase"> {goalKr.nameGoalsKr} <span className="text-gray-600 text-xs">Atualizado: 04/11/22</span></span>
-
         <div className="flex flex-col gap-[2%] mt-4">
           <div className="flex gap-2 items-center">
             <div>
-              <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados"/>
+              <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
             </div>
-            <button onClick={() => {goalKrsUpdate(goalKr.idgoalsKr, done)}} className="submit-button">ADD</button>
-            <button className="submit-button">OK</button>
+            <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, done) }} className="submit-button">ADD</button>
+            <button type="button" className="submit-button" onClick={() => updateData()}>OK</button>
           </div>
           <div className="flex flex-col gap-[2%] mt-4">
             <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
             <div className='percentage-container-disclosure w-[90%] mt-2'>
-              <div className={`percentage-bar-disclosure w-[50%]`}></div>
+              <div className='percentage-bar-disclosure w-[45%]'></div>
             </div>
-            <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.QuarterlyGoalKrs}</span>
+            <span className="text-xs">{calcPercentage(goalKr.doneGoalsKr,goalKr.QuarterlyGoalKrs)}% concluído</span>
+            <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
           </div>
 
           <div className="flex flex-col gap-[2%] mt-4">
-            <span>Meta Anual <span className="text-gray-600 text-xs">{goalKr.doneGoalsKr}</span></span>
+            <span>Meta Anual <span className="text-gray-600 text-xs">{goalKr.yearlyGoalsKr}</span></span>
             <div className='percentage-container-disclosure w-[90%] mt-2'>
               <div className='percentage-bar-disclosure w-[45%]'></div>
             </div>
+            <span className="tetx-xs">{calcPercentage(goalKr.doneGoalsKr,goalKr.yearlyGoalsKr)}% concluído</span>
             <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
           </div>
         </div>
       </Modal>
     </>
-  );
+  )
 }
 
 export default TeamObjectivesTable;
