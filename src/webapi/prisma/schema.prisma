@@ -8,6 +8,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Company {
@@ -83,16 +84,17 @@ model User {
 }
 
 model Goal {
-  id           Int         @id @default(autoincrement())
-  idCompany    Int
-  name         String
-  descriptions String
-  done         Int         @default(0)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  company      Company     @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  GoalsTeam    GoalsTeam[]
-  GoalKr       GoalKr[]
+  id            Int             @id @default(autoincrement())
+  idCompany     Int
+  name          String
+  descriptions  String
+  done          Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  company       Company         @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  GoalsTeam     GoalsTeam[]
+  GoalKr        GoalKr[]
+  HistoryGoalKr HistoryGoalKr[]
 
   @@map("goals")
 }
@@ -114,47 +116,74 @@ model GoalsTeam {
 }
 
 model ProcessGoalsTeam {
-  id          Int        @id @default(autoincrement())
-  idGoalsTeam Int?
-  idTeam      Int?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  goalsTeam   GoalsTeam? @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
-  team        Team?      @relation(fields: [idTeam], references: [id], onDelete: Cascade)
+  id                 Int                  @id @default(autoincrement())
+  idGoalsTeam        Int?
+  idTeam             Int?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  goalsTeam          GoalsTeam?           @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
+  team               Team?                @relation(fields: [idTeam], references: [id], onDelete: Cascade)
+  HistoryGoalsTeamKr HistoryGoalsTeamKr[]
 
   @@map("processGoalsTeams")
 }
 
 model GoalTeamKr {
-  id           Int       @id @default(autoincrement())
-  idCompany    Int
-  idGoalsTeam  Int
-  name         String
-  descriptions String
-  quarterly    Int
-  yearly       Int
-  done         Int       @default(0)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  company      Company   @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  goalsTeam    GoalsTeam @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
+  id                 Int                  @id @default(autoincrement())
+  idCompany          Int
+  idGoalsTeam        Int
+  name               String
+  descriptions       String
+  quarterly          Int
+  yearly             Int
+  done               Int                  @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  company            Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  goalsTeam          GoalsTeam            @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
+  HistoryGoalsTeamKr HistoryGoalsTeamKr[]
 
   @@map("goalTeamKrs")
 }
 
 model GoalKr {
-  id           Int      @id @default(autoincrement())
-  idCompany    Int
-  idGoal       Int
-  name         String
-  descriptions String
-  quarterly    Int
-  yearly       Int
-  done         Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  company      Company  @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  goal         Goal     @relation(fields: [idGoal], references: [id], onDelete: Cascade)
+  id            Int             @id @default(autoincrement())
+  idCompany     Int
+  idGoal        Int
+  name          String
+  descriptions  String
+  quarterly     Int
+  yearly        Int
+  done          Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  company       Company         @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  goal          Goal            @relation(fields: [idGoal], references: [id], onDelete: Cascade)
+  HistoryGoalKr HistoryGoalKr[]
 
   @@map("goalKrs")
+}
+
+model HistoryGoalKr {
+  id        Int      @id @default(autoincrement())
+  idGoalKr  Int
+  idGoal    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  goalKr    GoalKr   @relation(fields: [idGoalKr], references: [id], onDelete: Cascade)
+  goal      Goal     @relation(fields: [idGoal], references: [id], onDelete: Cascade)
+
+  @@map("historyGoalKrs")
+}
+
+model HistoryGoalsTeamKr {
+  id                Int              @id @default(autoincrement())
+  idProcessGoalTeam Int
+  idGoalsTeamKr     Int
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  processGoalsTeam  ProcessGoalsTeam @relation(fields: [idProcessGoalTeam], references: [id], onDelete: Cascade)
+  goalTeamKr        GoalTeamKr       @relation(fields: [idGoalsTeamKr], references: [id], onDelete: Cascade)
+
+  @@map("historyGoalsTeamKrs")
 }

@@ -5,7 +5,7 @@ const projectionGoalKrsController = () => {
         const {idCompany, idGoal} = req.params
 
         try {
-            const goalKrs = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal, gk.id as idgoalsKr, gk.name as nameGoalsKr,
+            const goalKrs = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal, gk.id as idgoalsKr, gk.name as nameGoalsKr, gk.updatedAt as updateGoalsTasks,
             gk.descriptions as descriptionsGoalsKr, gk.quarterly as QuarterlyGoalKrs, gk.yearly as yearlyGoalsKr, gk.done as doneGoalsKr
             from goals as g left join goalKrs as gk on gk.idGoal=g.id where gk.idCompany=${idCompany} and g.id=${idGoal}`
     

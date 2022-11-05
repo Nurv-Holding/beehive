@@ -1,19 +1,7 @@
-import Modal from "./empresasTabPanels/objetivos/components/Modal"
-import { useState } from 'react'
-import { calcDate } from '../utilis';
+import { json } from 'react-router-dom';
 import TaskPercentage from './TaskPercentage';
 
-function TeamObjectivesTeams({ teams }) {
-  //Modal
-  let [isOpen, setIsOpen] = useState(false)
-
-  function openModal() {
-    setIsOpen(true)
-  }
-
-  function closeModal() {
-    setIsOpen(false)
-  }
+function TeamObjectivesTeams({ teams=null }) {
 
   return (
     <>

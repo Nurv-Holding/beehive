@@ -1,31 +1,20 @@
-import { Link } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
 
-function formObjetivos() {
+function formObjetivos({ modelChange, handleSubmit, message }) {
     return (
         <div className='flex flex-col'>
-            <form className='form-container'>
+            <form onSubmit={handleSubmit} className='form-container'>
                 <div className='input-and-label-container'>
                     <label>Objetivo</label>
-                    <input className='input-style' type="text" placeholder='Digite o objetivo' />
+                    <input className='input-style' onChange={modelChange} name="name" type="text" placeholder='Digite o objetivo' />
                 </div>
 
                 <div className='input-and-label-container'>
                     <label>Descrição</label>
-                    <input className='input-style' type="text" placeholder='Digite a descrição do objetivo' />
-                </div>
-
-                <div className='input-and-label-container'>
-                    <label>Data Inicial</label>
-                    <input className='input-style' type="text" placeholder='Digite a data inicial'/>
-                </div>
-
-                <div className='input-and-label-container'>
-                    <label>Data Final</label>
-                    <input className='input-style' type="text" placeholder='Digite a data final'/>
+                    <input className='input-style' onChange={modelChange} name="descriptions" type="text" placeholder='Digite a descrição do objetivo' />
                 </div>
 
                 <button className='submit-button' type="submit">Enviar</button>
+                <span> {message} </span>
             </form>
         </div>
     )

@@ -1,17 +1,20 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { calcDate, calcPercentage } from '../utilis';
 import TaskPercentage from './TaskPercentage';
 import goalKrsApi from "../api/goalKrsApi";
+import moment from "moment";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { ContextUser } from "../context/ContextUser";
 
-function TeamObjectivesTable({ goalKrs, updateData, update }) {
-  //Modal
+function TeamObjectivesTable({ goalKrs }) {
   let [isOpen, setIsOpen] = useState(false)
+  const { idGoal } = useContext(ContextUser)
   const [done, setDone] = useState(0)
   const [goalKr, setGoalKr] = useState({})
-  const [goalKrQuarterly, setGoalKrQuarterly] = useState("")
-  const [goalKrDone, setGoalKrDone] = useState(0)
   const [message, setMessage] = useState("")
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   function stateDone({ target }) {
     setDone(target.value)
@@ -32,6 +35,13 @@ function TeamObjectivesTable({ goalKrs, updateData, update }) {
     goalKrsApi.update(idGoalKrs, data)
       .then(() => {
         setMessage("Atualizado")
+        navigate({
+          pathname: `/objetivo/${idGoal}`,
+          search: '?update=true'
+        })
+        searchParams.delete("update")
+
+        closeModal()
       })
       .catch((error) => {
         console.error(error)
@@ -48,7 +58,6 @@ function TeamObjectivesTable({ goalKrs, updateData, update }) {
               <span> {goalKr.nameGoalsKr} </span>
               <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
             </div>
-            <span>Faltam 4 dias</span>
 
             <div className='profile-photo-task'>
               <img src="https://thispersondoesnotexist.com/image" />
@@ -64,14 +73,16 @@ function TeamObjectivesTable({ goalKrs, updateData, update }) {
         )
       })}
       <Modal isOpen={isOpen} closeModal={closeModal}>
-        <span className="text-lg uppercase"> {goalKr.nameGoalsKr} <span className="text-gray-600 text-xs">Atualizado: 04/11/22</span></span>
+        <span className="text-lg uppercase mx-2"> {goalKr.nameGoalsKr}</span>
+        <span className="text-gray-600 text-xs mx-2">
+            Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')} 
+        </span>
         <div className="flex flex-col gap-[2%] mt-4">
           <div className="flex gap-2 items-center">
             <div>
               <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
             </div>
-            <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, done) }} className="submit-button">ADD</button>
-            <button type="button" className="submit-button" onClick={() => updateData()}>OK</button>
+            <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, done) }} className="submit-button">OK</button>
           </div>
           <div className="flex flex-col gap-[2%] mt-4">
             <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>

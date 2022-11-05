@@ -1,3 +1,4 @@
+import moment from "moment"
 import { Link } from "react-router-dom"
 
 function listaObjetivos({ goals }) {
@@ -10,8 +11,8 @@ function listaObjetivos({ goals }) {
             <tr>
               <th className='container-title-grid w-[25%]'>Objetivo</th>
               <th className='container-title-grid w-[25%]'>Descrição</th>
-              <th className='container-title-grid w-[25%]'>Data Inicial</th>
-              <th className='container-title-grid w-[25%]'>Data Final</th>
+              <th className='container-title-grid w-[25%]'>Criado em</th>
+              <th className='container-title-grid w-[25%]'>Última atualização</th>
             </tr>
           </thead>
 
@@ -23,9 +24,9 @@ function listaObjetivos({ goals }) {
                     <Link to={`/objetivo/${goal.id}`}>
                       <td>{goal.name}</td>
                     </Link>
-                    <td>{goal.descriptons}</td>
-                    <td>{goal.initialDate}</td>
-                    <td>{goal.finalDate}</td>
+                    <td>{goal.descriptions}</td>
+                    <td>{moment(goal.createdAt).format('DD/MM/YY')}</td>
+                    <td>{moment(goal.updatedAt).format('DD/MM/YY')}</td>
                   </tr>
                 </>
               )

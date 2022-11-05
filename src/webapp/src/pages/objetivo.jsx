@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/header';
 import TeamObjectivesNewTask from '../components/teamObjectivesNewTask';
 import TeamObjectivesTable from '../components/teamObjectivesTable';
@@ -11,24 +11,18 @@ import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
 
 function Objetivo() {
-  const { teams } = useContext(ContextUser)
+  const { teams, idGoal, goal, goalKrs } = useContext(ContextUser)
   const [update, setUpdate] = useState(false)
   const { modelChange, item } = useContext(ContextUser)
-  const [goal, setGoal] = useState({})
-  const [goalKrs, setGoalKrs] = useState([])
   const [message, setMessage] = useState("Aqui vai uma mensagem")
-  const { idGoal } = useParams()
-
-  useEffect(() => {
-    handleGoal()
-    handleGoalKrs()
-
-  }, [idGoal, update])
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   let [isOpen, setIsOpen] = useState(false)
 
   function updateData() {
-    setUpdate((x)=> !x)
+    setIsOpen(false)
   }
 
   function closeModal() {
@@ -37,18 +31,6 @@ function Objetivo() {
 
   function openModal() {
     setIsOpen(true)
-  }
-
-  const handleGoal = async () => {
-    const { data } = await goalsApi.getById(idGoal, 1)
-
-    setGoal(data)
-  }
-
-  const handleGoalKrs = async () => {
-    const { data } = await goalKrsApi.getByGoal(1, idGoal)
-
-    setGoalKrs(data)
   }
 
   const handleSubmit = (event) => {
@@ -64,6 +46,12 @@ function Objetivo() {
     goalKrsApi.create(1, data)
       .then(() => {
         setMessage("KR criado com sucesso")
+        navigate({
+          pathname: `/objetivo/${idGoal}`,
+          search: '?update=true'
+        })
+        searchParams.delete("update")
+        
         closeModal()
       })
       .catch((error) => {
@@ -86,6 +74,7 @@ function Objetivo() {
 
             <TeamObjectivesNewTask
               message={message}
+              nameGoal={goal.name}
               handleSubmit={handleSubmit}
               modelChange={modelChange}
               isOpen={isOpen}
@@ -95,10 +84,15 @@ function Objetivo() {
             />
           </div>
 
-          <TeamObjectivesTable goalKrs={goalKrs} updateData={updateData} update={update} />
+          <TeamObjectivesTable 
+            goalKrs={goalKrs} 
+            updateData={updateData} 
+            update={update}
+            loading={loading}
+            />
 
           <div className='border-t mt-6 pt-8 border-white'>
-            <span className='text-bold text-lg text-white uppercase'>Times</span>
+            <span className='text-bold text-lg text-white uppercase'>TIMES</span>
             <TeamObjectivesTeams teams={teams} />
           </div>
         </div>
