@@ -26,7 +26,7 @@ function TeamObjectivesTable({ goalKrs }) {
   }
 
   const goalKrsUpdate = (idGoalKrs,done) => {
-    const data = { done: parseInt(done) }
+    const data = { done: parseInt(done) + goalKr?.doneGoalsKr}
 
     goalKrsApi.update(idGoalKrs, data)
     .then(() => {
@@ -76,7 +76,7 @@ function TeamObjectivesTable({ goalKrs }) {
           <div className="flex flex-col gap-[2%] mt-4">
             <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
             <div className='percentage-container-disclosure w-[90%] mt-2'>
-              <div className='percentage-bar-disclosure w-[45%]'></div>
+              <div className={`percentage-bar-disclosure w-[50%]`}></div>
             </div>
             <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.QuarterlyGoalKrs}</span>
           </div>
