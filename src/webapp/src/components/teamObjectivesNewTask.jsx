@@ -10,7 +10,7 @@ function TeamObjectivesNewTask({
     nameGoal }) {
 
     return (
-        <div className='container-percentage-okr flex flex-col items-center justify-center'>
+        <div className="w-[50%] ml-28">
             <button className="modal-btn h-[40px]" onClick={openModal}>
                 Adicionar KR
             </button>

@@ -11,7 +11,7 @@ const AddTeam = ({
     teams }) => {
 
     return (
-        <div className='container-percentage-okr flex flex-col items-center justify-center'>
+        <div className="w-[50%]">
             <button className="modal-btn h-[40px]" onClick={openModal}>
                 Adicionar Time
             </button>

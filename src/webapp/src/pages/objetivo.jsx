@@ -36,7 +36,7 @@ function Objetivo() {
     handleGoalTeam()
     handleGoalTeams()
 
-  },[idGoal,idCompany, update])
+  }, [idGoal, idCompany, update])
 
   function updateData() {
     setIsOpen(false)
@@ -65,15 +65,15 @@ function Objetivo() {
   }
 
   const handleGoalTeamsKrs = async () => {
-      const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
+    const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
 
-      setGoalTeamsKrs(data)
+    setGoalTeamsKrs(data)
   }
 
   const handleGoalTeam = async () => {
-      const { data } = await goalsTeamApi.getById(idCompany, idGoal)
+    const { data } = await goalsTeamApi.getById(idCompany, idGoal)
 
-      setGoalTeam(data)
+    setGoalTeam(data)
   }
 
   const handleGoalTeams = async () => {
@@ -96,28 +96,28 @@ function Objetivo() {
 
     const { data } = await goalsTeamApi.getByTeam(idCompany, idTeam)
 
-    if(Object.keys(item).length === 0){
+    if (Object.keys(item).length === 0) {
       setMessage("Precisa selecionar um time")
 
-    }else if(data.length !== 0){
+    } else if (data.length !== 0) {
       setMessage("Time já selecionado")
 
-    }else{
-      goalsTeamApi.createProcess(idCompany,{idTeam, idGoal:newIdGoal})
-      .then(() => {
-        setMessage("Time adicionado sucesso")
-        navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: '?update=true'
+    } else {
+      goalsTeamApi.createProcess(idCompany, { idTeam, idGoal: newIdGoal })
+        .then(() => {
+          setMessage("Time adicionado sucesso")
+          navigate({
+            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            search: '?update=true'
+          })
+          searchParams.delete("update")
+
+          closeModal()
         })
-        searchParams.delete("update")
-        
-        closeModal()
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado!")
-      })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado!")
+        })
     }
   }
 
@@ -126,25 +126,25 @@ function Objetivo() {
 
     const newIdGoal = parseInt(idGoal)
 
-    const {data} = await goalsTeamApi.create(idCompany,{...item,idGoal:newIdGoal})
+    const { data } = await goalsTeamApi.create(idCompany, { ...item, idGoal: newIdGoal })
     const idGoalsTeam = data.id
     const goalsTeamByTeam = goalTeamsKrs.filter(e => e.idTeam === idTeam)
 
-    goalsTeamApi.updateProcess(goalsTeamByTeam.idProcessGoalsTeams, {idGoalsTeam})
-    .then(() => {
-      setMessage("Ojetivo criado com sucesso")
-      navigate({
-        pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-        search: '?update=true'
+    goalsTeamApi.updateProcess(goalsTeamByTeam.idProcessGoalsTeams, { idGoalsTeam })
+      .then(() => {
+        setMessage("Ojetivo criado com sucesso")
+        navigate({
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          search: '?update=true'
+        })
+        searchParams.delete("update")
+
+        closeModal()
       })
-      searchParams.delete("update")
-      
-      closeModal()
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado!")
-    })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
   }
 
   const handleSubmit = (event) => {
@@ -165,7 +165,7 @@ function Objetivo() {
           search: '?update=true'
         })
         searchParams.delete("update")
-        
+
         closeModal()
       })
       .catch((error) => {
@@ -185,39 +185,40 @@ function Objetivo() {
               <span className='text-bold text-xl text-white uppercase'>{goal.name}</span>
               <span className='text-bold text-lg mt-2 text-white'>Empresa 1</span>
             </div>
-            
-            <TeamObjectivesNewTask
-              message={message}
-              nameGoal={goal.name}
-              handleSubmit={handleSubmit}
-              modelChange={modelChange}
-              isOpen={isOpen}
-              closeModal={closeModal}
-              openModal={openModal}
-              item={item}
-            />
 
-            <AddTeam
-              message={message}
-              handleSubmit={handleSubmit}
-              modelChange={modelChange}
-              isOpen={isOpenTeam}
-              closeModal={closeModalTeam}
-              openModal={openModalTeam}
-              teams={teams}
-              item={item}
-              addTeamInGoal={addTeamInGoal}
-            />
+            <div className='container-percentage-okr flex flex-row justify-around'>
+              <TeamObjectivesNewTask
+                message={message}
+                nameGoal={goal.name}
+                handleSubmit={handleSubmit}
+                modelChange={modelChange}
+                isOpen={isOpen}
+                closeModal={closeModal}
+                openModal={openModal}
+                item={item}
+              />
 
+              <AddTeam
+                message={message}
+                handleSubmit={handleSubmit}
+                modelChange={modelChange}
+                isOpen={isOpenTeam}
+                closeModal={closeModalTeam}
+                openModal={openModalTeam}
+                teams={teams}
+                item={item}
+                addTeamInGoal={addTeamInGoal}
+              />
+            </div>
           </div>
 
-          <TeamObjectivesTable 
-            goalKrs={goalKrs} 
-            updateData={updateData} 
+          <TeamObjectivesTable
+            goalKrs={goalKrs}
+            updateData={updateData}
             update={update}
             loading={loading}
             idCompany={idCompany}
-            />
+          />
 
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-lg text-white uppercase'>TIMES</span>

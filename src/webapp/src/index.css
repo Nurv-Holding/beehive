@@ -343,7 +343,7 @@ header nav span:hover{
 }
 
 .modal-btn{
-    @apply w-[40%] rounded-md p-1 text-white text-sm text-center bg-[#5500C3]
+    @apply w-[50%] rounded-md p-1 text-white text-sm text-center bg-[#5500C3]
 }
 
 /*End Menu With Cards*/
