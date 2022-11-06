@@ -11,6 +11,7 @@ import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
 import goalsTeamApi from '../api/goalsTeamApi';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
+import AddTeam from '../components/addTeam';
 
 function Objetivo() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
@@ -78,6 +79,65 @@ function Objetivo() {
     setGoalKrs(data)
   }
 
+  const addTeamInGoal = async (event) => {
+    event.preventDefault()
+
+    const idTeam = parseInt(item?.team)
+    const newIdGoal = parseInt(idGoal)
+
+    const { data } = await goalsTeamApi.getByTeam(idCompany, idTeam)
+
+    if(Object.keys(item).length === 0){
+      setMessage("Precisa selecionar um time")
+
+    }else if(data.length !== 0){
+      setMessage("Time já selecionado")
+
+    }else{
+      goalsTeamApi.createProcess(idCompany,{idTeam, idGoal:newIdGoal})
+      .then(() => {
+        setMessage("Time adicionado sucesso")
+        navigate({
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          search: '?update=true'
+        })
+        searchParams.delete("update")
+        
+        closeModal()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
+    }
+  }
+
+  const createGoalsTeam = async (event, idTeam) => {
+    event.preventDefault()
+
+    const newIdGoal = parseInt(idGoal)
+
+    const {data} = await goalsTeamApi.create(idCompany,{...item,idGoal:newIdGoal})
+    const idGoalsTeam = data.id
+    const goalsTeamByTeam = goalTeamsKrs.filter(e => e.idTeam === idTeam)
+
+    goalsTeamApi.updateProcess(goalsTeamByTeam.idProcessGoalsTeams, {idGoalsTeam})
+    .then(() => {
+      setMessage("Ojetivo criado com sucesso")
+      navigate({
+        pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+        search: '?update=true'
+      })
+      searchParams.delete("update")
+      
+      closeModal()
+    })
+    .catch((error) => {
+      console.error(error)
+      setMessage("Algo deu errado!")
+    })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -116,7 +176,7 @@ function Objetivo() {
               <span className='text-bold text-xl text-white uppercase'>{goal.name}</span>
               <span className='text-bold text-lg mt-2 text-white'>Empresa 1</span>
             </div>
-
+            
             <TeamObjectivesNewTask
               message={message}
               nameGoal={goal.name}
@@ -127,6 +187,19 @@ function Objetivo() {
               openModal={openModal}
               item={item}
             />
+
+            <AddTeam
+              message={message}
+              handleSubmit={handleSubmit}
+              modelChange={modelChange}
+              isOpen={isOpen}
+              closeModal={closeModal}
+              openModal={openModal}
+              teams={teams}
+              item={item}
+              addTeamInGoal={addTeamInGoal}
+            />
+
           </div>
 
           <TeamObjectivesTable 

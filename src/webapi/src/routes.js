@@ -80,12 +80,13 @@ const routes = (app) => {
             //processGoalTeam
             app.post("/goalsTeam/process/c/:idCompany",processGoalTeamController.create)
             app.get("/goalsTeam/process/:id",processGoalTeamController.getById)
-            app.get("/goalsTeam/process/c/:idCompany",processGoalTeamController.getAll)
+            app.get("/goalsTeam/c/process/:idCompany",processGoalTeamController.getAll)
             app.put("/goalsTeam/process/:id",processGoalTeamController.update)
             app.delete("/goalsTeam/process/:id",processGoalTeamController.remove)
 
-            //goalsKrs
+            //goalsTeamKrs
             app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)
+            app.get("/goalsTeam/t/:idTeam/c/:idCompany",projectionGoalTeamKrsController().getByTeam)
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)

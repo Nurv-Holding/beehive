@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "790c7b03-ae0e-4eb3-83c8-9311fcad3ba3",
-		"name": "companies",
+		"_postman_id": "c7ed5856-b5bb-4843-a245-c6561199ea02",
+		"name": "teams",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15353671"
 	},
@@ -12,12 +12,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/companies",
+					"raw": "{{host}}/teams/c/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"companies"
+						"teams",
+						"c",
+						"1"
 					]
 				}
 			},
@@ -29,12 +31,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/companies/1",
+					"raw": "{{host}}/teams/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"companies",
+						"teams",
 						"1"
 					]
 				}
@@ -47,13 +49,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/companies/1",
+					"raw": "{{host}}/teams/2",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"companies",
-						"1"
+						"teams",
+						"2"
 					]
 				}
 			},
@@ -66,7 +68,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"tec\",\r\n    \"cnpj\": \"1234567dd\"\r\n}",
+					"raw": "{\r\n    \"name\": \"squad victor\",\r\n    \"descriptions\": \"frgtyhnjum\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,12 +76,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/companies",
+					"raw": "{{host}}/teams/c/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"companies"
+						"teams",
+						"c",
+						"1"
 					]
 				}
 			},
@@ -92,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"nurvs\",\r\n    \"cnpj\": \"1234567\"\r\n}",
+					"raw": "{\r\n    \"idCompany\": 1,\r\n    \"name\": \"João\",\r\n    \"email\": \"João@gmail.com\",\r\n    \"occupation\": \"Desenvolvedor\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -100,13 +104,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/companies/1",
+					"raw": "{{host}}/teams/2",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"companies",
-						"1"
+						"teams",
+						"2"
 					]
 				}
 			},
