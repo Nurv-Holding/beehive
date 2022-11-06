@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { ContextUser } from '../context/ContextUser';
 
-function CompaniesList() {
-    const { companies } = useContext(ContextUser);
+function CompaniesList({ companies }) {
 
     return (
         <div className='grid-row grid-general min-h-[525px]'>

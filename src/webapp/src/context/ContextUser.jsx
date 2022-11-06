@@ -4,6 +4,7 @@ import { useParams, useSearchParams } from "react-router-dom"
 import companiesApi from "../api/companiesApi"
 import goalKrsApi from "../api/goalKrsApi"
 import goalsApi from "../api/goalsApi"
+import goalsTeamApi from "../api/goalsTeamApi"
 import teamsApi from "../api/teamsApi"
 import usersApi from "../api/usersApi"
 
@@ -11,12 +12,9 @@ export const ContextUser = createContext()
 
 export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
-    const [goal, setGoal] = useState({})
-    const [goalKrs, setGoalKrs] = useState([])
     const [users, setUsers] = useState([])
     const [teams, setTeams] = useState([])
     const [item, setItem] = useState({})
-    const [companies, setCompanies] = useState([])
     const [searchParams] = useSearchParams()
     const { idGoal, idCompany } = useParams()
     const update = searchParams.get('update')
@@ -25,36 +23,21 @@ export const ContextUserProvider = ({ children }) => {
         handlerUsers()
         handlerGoals()
         handlerTeams()
-        handlerCompanies()
-        handleGoal()
-        handleGoalKrs()
-
-    },[idGoal, update])
+        
+    },[idCompany, update])
 
     const handlerUsers = async () => {
         const {data} = await usersApi.getAll()
         setUsers(data)
     }
 
-    const handleGoal = async () => {
-        const { data } = await goalsApi.getById(idGoal, 1)
-    
-        setGoal(data)
-      }
-    
-      const handleGoalKrs = async () => {
-        const { data } = await goalKrsApi.getByGoal(1, idGoal)
-    
-        setGoalKrs(data)
-      }
-
     const handlerTeams = async () => {
-        const {data} = await teamsApi.getAll()
+        const {data} = await teamsApi.getAll(idCompany)
         setTeams(data)
     }
 
     const handlerGoals = async () => {
-        const {data} = await goalsApi.getAll()
+        const {data} = await goalsApi.getAll(idCompany)
         setGoals(data)
     }
 
@@ -64,24 +47,16 @@ export const ContextUserProvider = ({ children }) => {
         })
     }
 
-    const handlerCompanies = async () => {
-        const {data} = await companiesApi.getAll()
-        setCompanies(data)
-    }
-
     return(
         <ContextUser.Provider 
             value={
                 {
                     goals,
-                    goal,
                     idGoal,
-                    goalKrs,
                     users,
                     teams,
                     modelChange,
                     item,
-                    companies,
                     idCompany
                 }
             }

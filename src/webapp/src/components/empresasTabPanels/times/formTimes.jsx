@@ -1,31 +1,21 @@
-import { Link } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
 
-function formTimes() {
+function formTimes({ changeModel, message, handleSubmit, item }) {
     return (
         <div className='flex flex-col'>
-            <form className='form-container'>
+            {JSON.stringify(item)}
+            <form onSubmit={handleSubmit} className='form-container'>
                 <div className='input-and-label-container'>
                     <label>Nome do Time</label>
-                    <input className='input-style' type="text" placeholder='Digite o nome do time' />
+                    <input onChange={changeModel} className='input-style' name="name" type="text" placeholder='Digite o nome do time' />
                 </div>
 
                 <div className='input-and-label-container'>
                     <label>Descrição</label>
-                    <input className='input-style' type="text" placeholder='Digite a descrição do time' />
-                </div>
-
-                <div className='input-and-label-container'>
-                    <label>Data Inicial</label>
-                    <input className='input-style' type="text" placeholder='Digite a data inicial' />
-                </div>
-
-                <div className='input-and-label-container'>
-                    <label>Data Final</label>
-                    <input className='input-style' type="text" placeholder='Digite a data final' />
+                    <input onChange={changeModel} className='input-style' name="descriptions" type="text" placeholder='Digite a descrição do time' />
                 </div>
 
                 <button className='submit-button' type="submit">Enviar</button>
+                <span> {message} </span>
             </form>
         </div>
     )

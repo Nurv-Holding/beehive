@@ -9,17 +9,32 @@ import TeamObjectivesTeams from '../components/teamObjectivesTeams';
 import { ContextUser } from '../context/ContextUser';
 import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
+import goalsTeamApi from '../api/goalsTeamApi';
+import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 
 function Objetivo() {
-  const { teams, idGoal, goal, goalKrs } = useContext(ContextUser)
+  const { idGoal, idCompany, teams } = useContext(ContextUser)
   const [update, setUpdate] = useState(false)
   const { modelChange, item } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
+  const [goal, setGoal] = useState({})
+  const [goalKrs, setGoalKrs] = useState([])
+  const [ooalTeamsKrs, setGoalTeamsKrs] = useState([])
+  const [ooalTeam, setGoalTeam] = useState([])
+  const [ooalTeams, setGoalTeams] = useState([])
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const [isOpen, setIsOpen] = useState(false)
 
-  let [isOpen, setIsOpen] = useState(false)
+  useEffect(() => {
+    handleGoal()
+    handleGoalKrs()
+    handleGoalTeamsKrs()
+    handleGoalTeam()
+    handleGoalTeams()
+
+  },[idGoal,idCompany])
 
   function updateData() {
     setIsOpen(false)
@@ -31,6 +46,36 @@ function Objetivo() {
 
   function openModal() {
     setIsOpen(true)
+  }
+
+  const handleGoal = async () => {
+    const { data } = await goalsApi.getById(idGoal, idCompany)
+
+    setGoal(data)
+  }
+
+  const handleGoalTeamsKrs = async () => {
+      const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
+
+      setGoalTeamsKrs(data)
+  }
+
+  const handleGoalTeam = async () => {
+      const { data } = await goalsTeamApi.getById(idCompany, idGoal)
+
+      setGoalTeam(data)
+  }
+
+  const handleGoalTeams = async () => {
+    const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)
+
+    setGoalTeams(data)
+  }
+
+  const handleGoalKrs = async () => {
+    const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
+
+    setGoalKrs(data)
   }
 
   const handleSubmit = (event) => {

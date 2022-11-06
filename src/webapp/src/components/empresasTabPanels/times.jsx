@@ -1,13 +1,41 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormTimes from './times/formTimes'
 import ListaTimes from './times/listaTimes'
 import { useContext } from 'react'
 import { ContextUser } from '../../context/ContextUser'
 import TimesCards from './times/TimesCards'
+import { useState } from 'react'
+import teamsApi from '../../api/teamsApi'
 
 function Times() {
-    const { teams } = useContext(ContextUser)
+    const { teams, modelChange, item, idCompany } = useContext(ContextUser)
+    const [message, setMessage] = useState("Aqui vai uma mensagem")
+    const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        if(Object.keys(item).length === 0 || item.name === "" || item.descriptions === ""){
+            setMessage("Precisa preencher os campos vazios")
+
+        }else{
+            teamsApi.create(idCompany, item)
+            .then(() => {
+                setMessage("Time criado com sucesso")
+                navigate({
+                  pathname: `/empresas/${idCompany}`,
+                  search: '?update=true'
+                })
+                searchParams.delete("update")
+            })
+            .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+            })
+        }
+    }
 
     return (
         <Tab.Group>
@@ -50,7 +78,12 @@ function Times() {
                         </Tab.Panel>
 
                         <Tab.Panel className='container-empresas'>
-                            <FormTimes />
+                            <FormTimes 
+                                changeModel={modelChange}
+                                handleSubmit={handleSubmit}
+                                message={message}
+                                item={item}
+                            />
                         </Tab.Panel>
                     </Tab.Panels>
                 </div>
