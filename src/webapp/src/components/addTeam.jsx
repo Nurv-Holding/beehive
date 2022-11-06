@@ -1,5 +1,4 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
-import ModalTeam from "./empresasTabPanels/objetivos/components/ModalTeam"
 
 const AddTeam = ({ 
     message,
@@ -17,7 +16,7 @@ const AddTeam = ({
                 Adicionar Time
             </button>
 
-            <ModalTeam isOpen={isOpen} closeModal={closeModal} title={"Adicionar KR"}>
+            <Modal isOpen={isOpen} closeModal={closeModal} title={"Adicionar KR"}>
                 <form onSubmit={addTeamInGoal} className="mt-2 flex flex-col">
                     {JSON.stringify(item)}
                     <select onChange={modelChange} name="team" id="teams">
@@ -36,7 +35,7 @@ const AddTeam = ({
                         <span> {message} </span>
                     </div>
                 </form>
-            </ModalTeam>
+            </Modal>
         </div>
     )
 }

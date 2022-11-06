@@ -26,6 +26,7 @@ function Objetivo() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenTeam, setIsOpenTeam] = useState(false)
   const update = searchParams.get('update')
 
   useEffect(() => {
@@ -45,8 +46,16 @@ function Objetivo() {
     setIsOpen(false)
   }
 
+  function closeModalTeam() {
+    setIsOpenTeam(false)
+  }
+
   function openModal() {
     setIsOpen(true)
+  }
+
+  function openModalTeam() {
+    setIsOpenTeam(true)
   }
 
   const handleGoal = async () => {
@@ -192,9 +201,9 @@ function Objetivo() {
               message={message}
               handleSubmit={handleSubmit}
               modelChange={modelChange}
-              isOpen={isOpen}
-              closeModal={closeModal}
-              openModal={openModal}
+              isOpen={isOpenTeam}
+              closeModal={closeModalTeam}
+              openModal={openModalTeam}
               teams={teams}
               item={item}
               addTeamInGoal={addTeamInGoal}
