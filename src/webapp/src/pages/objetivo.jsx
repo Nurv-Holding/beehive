@@ -14,18 +14,18 @@ import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 
 function Objetivo() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
-  const [update, setUpdate] = useState(false)
   const { modelChange, item } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})
   const [goalKrs, setGoalKrs] = useState([])
-  const [ooalTeamsKrs, setGoalTeamsKrs] = useState([])
+  const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
+  const update = searchParams.get('update')
 
   useEffect(() => {
     handleGoal()
@@ -34,7 +34,7 @@ function Objetivo() {
     handleGoalTeam()
     handleGoalTeams()
 
-  },[idGoal,idCompany])
+  },[idGoal,idCompany, update])
 
   function updateData() {
     setIsOpen(false)
@@ -92,7 +92,7 @@ function Objetivo() {
       .then(() => {
         setMessage("KR criado com sucesso")
         navigate({
-          pathname: `/objetivo/${idGoal}`,
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: '?update=true'
         })
         searchParams.delete("update")
@@ -134,11 +134,12 @@ function Objetivo() {
             updateData={updateData} 
             update={update}
             loading={loading}
+            idCompany={idCompany}
             />
 
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-lg text-white uppercase'>TIMES</span>
-            <TeamObjectivesTeams teams={teams} />
+            <TeamObjectivesTeams goalTeamsKrs={goalTeamsKrs} />
           </div>
         </div>
       </main>

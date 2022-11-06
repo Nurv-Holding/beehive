@@ -7,7 +7,7 @@ import moment from "moment";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 
-function TeamObjectivesTable({ goalKrs }) {
+function TeamObjectivesTable({ goalKrs, idCompany }) {
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
   const [done, setDone] = useState(0)
@@ -36,7 +36,7 @@ function TeamObjectivesTable({ goalKrs }) {
       .then(() => {
         setMessage("Atualizado")
         navigate({
-          pathname: `/objetivo/${idGoal}`,
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: '?update=true'
         })
         searchParams.delete("update")

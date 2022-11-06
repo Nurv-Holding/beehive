@@ -7,23 +7,24 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("LOCAL")
   // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Company {
-  id         Int          @id @default(autoincrement())
-  name       String
-  cnpj       String
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  TeamUser   TeamUser[]
-  Team       Team[]
-  User       User[]
-  Goal       Goal[]
-  GoalsTeam  GoalsTeam[]
-  GoalTeamKr GoalTeamKr[]
-  GoalKr     GoalKr[]
+  id               Int                @id @default(autoincrement())
+  name             String
+  cnpj             String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  TeamUser         TeamUser[]
+  Team             Team[]
+  User             User[]
+  Goal             Goal[]
+  GoalsTeam        GoalsTeam[]
+  GoalTeamKr       GoalTeamKr[]
+  GoalKr           GoalKr[]
+  ProcessGoalsTeam ProcessGoalsTeam[]
 
   @@map("companies")
 }
@@ -84,17 +85,18 @@ model User {
 }
 
 model Goal {
-  id            Int             @id @default(autoincrement())
-  idCompany     Int
-  name          String
-  descriptions  String
-  done          Int             @default(0)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  company       Company         @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  GoalsTeam     GoalsTeam[]
-  GoalKr        GoalKr[]
-  HistoryGoalKr HistoryGoalKr[]
+  id               Int                @id @default(autoincrement())
+  idCompany        Int
+  name             String
+  descriptions     String
+  done             Int                @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  company          Company            @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  GoalsTeam        GoalsTeam[]
+  GoalKr           GoalKr[]
+  HistoryGoalKr    HistoryGoalKr[]
+  ProcessGoalsTeam ProcessGoalsTeam[]
 
   @@map("goals")
 }
@@ -119,10 +121,14 @@ model ProcessGoalsTeam {
   id                 Int                  @id @default(autoincrement())
   idGoalsTeam        Int?
   idTeam             Int?
+  idGoal             Int?
+  idCompany          Int
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   goalsTeam          GoalsTeam?           @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
   team               Team?                @relation(fields: [idTeam], references: [id], onDelete: Cascade)
+  goal               Goal?                @relation(fields: [idGoal], references: [id], onDelete: Cascade)
+  comapany           Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
   HistoryGoalsTeamKr HistoryGoalsTeamKr[]
 
   @@map("processGoalsTeams")

@@ -78,9 +78,9 @@ const routes = (app) => {
         app.delete("/goalsTeamKrs/:id",goalsTemaKrsController.remove)
 
             //processGoalTeam
-            app.post("/goalsTeam/process",processGoalTeamController.create)
+            app.post("/goalsTeam/process/c/:idCompany",processGoalTeamController.create)
             app.get("/goalsTeam/process/:id",processGoalTeamController.getById)
-            app.get("/goalsTeam/process",processGoalTeamController.getAll)
+            app.get("/goalsTeam/process/c/:idCompany",processGoalTeamController.getAll)
             app.put("/goalsTeam/process/:id",processGoalTeamController.update)
             app.delete("/goalsTeam/process/:id",processGoalTeamController.remove)
 

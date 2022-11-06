@@ -13,7 +13,7 @@ select gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idgoalTeamsKr, gt
 gtk.descriptions as descriptionsGoalsTeamKr, gtk.quarterly as quarterlyGoalsTeamKr, 
 gtk.yearly as yearlyGoalsTeamKr, gtk.done as doneGoalsTeamKr, t.id as idTeam, t.name as nameTeam
 from processGoalsTeams as pgt left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-join teams as t on pgt.idTeam=t.id 
-join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id where gtk.idCompany=1;
+left join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
+left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id where pgt.idCompany=1 and g.id=1 group by gtk.id;
 
 select * from goalsteams;
