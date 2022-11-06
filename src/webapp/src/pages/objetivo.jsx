@@ -121,14 +121,13 @@ function Objetivo() {
     }
   }
 
-  const createGoalsTeam = async (event, idTeam) => {
-    event.preventDefault()
+  const createGoalsTeam = async (idTeam) => {
 
     const newIdGoal = parseInt(idGoal)
 
     const { data } = await goalsTeamApi.create(idCompany, { ...item, idGoal: newIdGoal })
     const idGoalsTeam = data.id
-    const goalsTeamByTeam = goalTeamsKrs.filter(e => e.idTeam === idTeam)
+    const goalsTeamByTeam = goalTeamsKrs.filter(e => e.idTeam === idTeam)[0]
 
     goalsTeamApi.updateProcess(goalsTeamByTeam.idProcessGoalsTeams, { idGoalsTeam })
       .then(() => {
@@ -139,7 +138,7 @@ function Objetivo() {
         })
         searchParams.delete("update")
 
-        closeModal()
+        closeModalTeam()
       })
       .catch((error) => {
         console.error(error)
@@ -222,7 +221,11 @@ function Objetivo() {
 
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-xl mt-2 text-white'>Times</span>
-            <TeamObjectivesTeams goalTeamsKrs={goalTeamsKrs} />
+            <TeamObjectivesTeams 
+              goalTeamsKrs={goalTeamsKrs}
+              createGoalsTeam={createGoalsTeam}
+              modelChange={modelChange}
+            />
           </div>
         </div>
       </main>

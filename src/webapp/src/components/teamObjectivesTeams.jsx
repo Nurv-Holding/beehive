@@ -1,12 +1,13 @@
-import { json } from 'react-router-dom';
 import { useState } from 'react'
 import TaskPercentage from './TaskPercentage';
-import Modal from "./empresasTabPanels/objetivos/components/Modal"
 import { Disclosure } from '@headlessui/react'
-import AddTeamKR from './addTeamKR';
+import AddGoalTeam from './addGoalTeam';
+import AddTeamKr from './addTeamKr';
 
-function TeamObjectivesTeams({ teams = null, goalTeamsKrs }) {
-  let [isOpen, setIsOpen] = useState(false)
+function TeamObjectivesTeams({ teams = null, goalTeamsKrs, createGoalsTeam, modelChange }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
+  const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
   const [done, setDone] = useState(0)
   const [goalKr, setGoalKr] = useState({})
   const [isOpenTeam, setIsOpenTeam] = useState(false)
@@ -19,17 +20,25 @@ function TeamObjectivesTeams({ teams = null, goalTeamsKrs }) {
     setIsOpen(false)
   }
 
+  function closeModalGoalTeam() {
+    setIsOpenGoalTeam(false)
+  }
+
   function openModal(goalKr) {
     setGoalKr(goalKr)
     setIsOpen(true)
   }
 
-  function openModalTeam() {
-    setIsOpenTeam(true)
+  function openModalGoalTeam() {
+    setIsOpenGoalTeam(true)
   }
 
-  function closeModalTeam() {
-    setIsOpenTeam(false)
+  function openModalTeamKr() {
+    setIsOpenTeamKr(true)
+  }
+
+  function closeModalTeamKr() {
+    setIsOpenTeamKr(false)
   }
 
   return (
@@ -51,47 +60,27 @@ function TeamObjectivesTeams({ teams = null, goalTeamsKrs }) {
                   <TaskPercentage
                   />
 
-                  <AddTeamKR
+                  <AddGoalTeam 
+                    closeModal={closeModalGoalTeam}
+                    openModal={openModalGoalTeam}
+                    isOpen={isOpenGoalTeam}
+                    createGoalsTeam={createGoalsTeam}
+                    modelChange={modelChange}
+                    idTeam={goalTeamsKr.idTeam}
                   />
                 </Disclosure.Button>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
                   <div className='text-gray-600 bg-[#D9D9D9] rounded-md px-2 py-1 my-1 flex flex-row justify-around items-center'>
-                    <span className=''>Aumentar número de clientes
-                      <span className="text-gray-400 text-xs mx-2">Objetivo: Faturamento</span></span>
-
-                    <span className='cursor-pointer' onClick={openModal}>Metas</span>
-                    <Modal isOpen={isOpen} closeModal={closeModal}>
-                      <span className="text-lg uppercase mx-2">Aumentar número de clientes</span>
-                      <span className="text-gray-600 text-xs mx-2">
-                        Atualizado em:
-                      </span>
-                      <div className="flex flex-col gap-[2%] mt-4">
-                        <div className="flex gap-2 items-center">
-                          <div>
-                            <input type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
-                          </div>
-                          <button type="button" className="submit-button">OK</button>
-                        </div>
-                        <div className="flex flex-col gap-[2%] mt-4">
-                          <span>Meta Trimestral <span className="text-gray-600 text-xs"></span></span>
-                          <div className='percentage-container-disclosure w-[90%] mt-2'>
-                            <div className='percentage-bar-disclosure w-[45%]'></div>
-                          </div>
-                          <span className="text-xs">% concluído</span>
-                          <span className="text-gray-600 text-sm mt-2">Atual:</span>
-                        </div>
-
-                        <div className="flex flex-col gap-[2%] mt-4">
-                          <span>Meta Anual <span className="text-gray-600 text-xs"></span></span>
-                          <div className='percentage-container-disclosure w-[90%] mt-2'>
-                            <div className='percentage-bar-disclosure w-[45%]'></div>
-                          </div>
-                          <span className="tetx-xs">% concluído</span>
-                          <span className="text-gray-600 text-sm mt-2">Atual: </span>
-                        </div>
-                      </div>
-                    </Modal>
+                    <span className=''> {goalTeamsKr.nameGoalTeam}
+                      <span className="text-gray-400 text-xs mx-2"> descrição </span>
+                    </span>
+                    
+                    <AddTeamKr 
+                      closeModal={closeModalTeamKr} 
+                      isOpen={isOpenTeamKr}
+                      openModal={openModalTeamKr} 
+                    />
                   </div>
                 </Disclosure.Panel>
               </div>

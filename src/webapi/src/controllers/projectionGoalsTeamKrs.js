@@ -12,7 +12,7 @@ const projectionGoalTeamKrsController = () => {
             from processGoalsTeams as pgt left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
             left join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
             left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id 
-            where pgt.idCompany=${idCompany} and g.id=${idGoal};`
+            where pgt.idCompany=${idCompany} and pgt.idGoal=${idGoal};`
     
             res.status(200).send(goalTeamsKrs)
             
