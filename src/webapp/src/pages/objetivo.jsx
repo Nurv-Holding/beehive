@@ -221,7 +221,7 @@ function Objetivo() {
           />
 
           <div className='border-t mt-6 pt-8 border-white'>
-            <span className='text-bold text-lg text-white uppercase'>TIMES</span>
+            <span className='text-bold text-xl mt-2 text-white'>Times</span>
             <TeamObjectivesTeams goalTeamsKrs={goalTeamsKrs} />
           </div>
         </div>

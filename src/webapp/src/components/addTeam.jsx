@@ -18,9 +18,8 @@ const AddTeam = ({
 
             <Modal isOpen={isOpen} closeModal={closeModal} title={"Adicionar KR"}>
                 <form onSubmit={addTeamInGoal} className="mt-2 flex flex-col">
-                    {JSON.stringify(item)}
-                    <select onChange={modelChange} name="team" id="teams">
-                        <option disabled selected >Selecionar time</option>
+                    <select onChange={modelChange} name="team" id="teams" className="input-style">
+                        <option disabled selected>Selecionar time</option>
                         {(teams || []).map((team) => {
                             return(
                                 <option key={team.id} value={team.id}> {team.name} </option>
