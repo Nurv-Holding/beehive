@@ -33,7 +33,7 @@ function TeamObjectivesTeams({
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
 
   function stateDone({ target }) {
-    setDone(target.value)
+    setDone(parseInt(target.value))
   }
 
   function closeTeamKrModal() {
@@ -107,6 +107,26 @@ function TeamObjectivesTeams({
     }
   }
 
+  const goalTeamKrsUpdate = (idGoalTeamKrs) => {
+    const data = { done:done + krs?.doneGoalsTeamKr }
+
+    goalTeamsKrsApi.update(idGoalTeamKrs, data)
+      .then(() => {
+        setMessage("Atualizado")
+        navigate({
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          search: '?update=true'
+        })
+        searchParams.delete("update")
+
+        closeTeamKrModal()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado")
+      })
+  }
+
   return (
     <>
       {(goalTeamsByTeam || []).map((goalTeams) => {
@@ -170,11 +190,13 @@ function TeamObjectivesTeams({
                                       Metas
                                   </span>
                                   <TeamKrModal
+                                    stateDone={stateDone}
                                     nameGoalTeam={kr.nameGoalsTeamKr}
                                     closeModal={closeTeamKrModal}
                                     openModal={openTeamKrModal}
                                     isOpen={isOpenTeamKrModal}
                                     krs={krs}
+                                    goalTeamKrsUpdate={goalTeamKrsUpdate}
                                   />
                                 </div>
                               </>

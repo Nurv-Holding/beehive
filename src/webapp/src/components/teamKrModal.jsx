@@ -5,7 +5,9 @@ import Modal from "./empresasTabPanels/objetivos/components/Modal"
 const TeamKrModal = ({
     closeModal,
     krs,
-    isOpen
+    isOpen,
+    stateDone,
+    goalTeamKrsUpdate
 }) => {
 
     return (
@@ -19,9 +21,9 @@ const TeamKrModal = ({
                 <div className="flex flex-col gap-[2%] mt-4">
                     <div className="flex gap-2 items-center">
                         <div>
-                            <input type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
+                            <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
                         </div>
-                        <button type="button" className="submit-button">OK</button>
+                        <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr)} type="button" className="submit-button">OK</button>
                     </div>
                     <div className="flex flex-col gap-[2%] mt-4">
                         <span>Meta Trimestral <span className="text-gray-600 text-xs"> {krs.quarterlyGoalsTeamKr} </span></span>
