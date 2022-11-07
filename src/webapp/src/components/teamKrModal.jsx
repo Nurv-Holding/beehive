@@ -1,22 +1,20 @@
+import moment from "moment"
+import { calcPercentage } from "../utilis"
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
 
 const TeamKrModal = ({
-    nameGoalTeam,
     closeModal,
-    openModal,
+    krs,
     isOpen
 }) => {
 
     return (
         <div className="w-2/4">
-            <span onClick={openModal} className='cursor-pointer'>
-                Metas
-            </span>
 
             <Modal isOpen={isOpen} closeModal={closeModal}>
-                <span className="text-lg uppercase mx-2">{nameGoalTeam}</span>
+                <span className="text-lg uppercase mx-2">{krs.nameGoalTeam}</span>
                 <span className="text-gray-600 text-xs mx-2">
-                    Atualizado em:
+                    Atualizado em: {moment(krs.updateGoalsTeamKrs).format("DD/MM/YY")}
                 </span>
                 <div className="flex flex-col gap-[2%] mt-4">
                     <div className="flex gap-2 items-center">
@@ -26,21 +24,21 @@ const TeamKrModal = ({
                         <button type="button" className="submit-button">OK</button>
                     </div>
                     <div className="flex flex-col gap-[2%] mt-4">
-                        <span>Meta Trimestral <span className="text-gray-600 text-xs">xxx</span></span>
+                        <span>Meta Trimestral <span className="text-gray-600 text-xs"> {krs.quarterlyGoalsTeamKr} </span></span>
                         <div className='percentage-container-disclosure w-[90%] mt-2'>
                             <div className='percentage-bar-disclosure w-[45%]'></div>
                         </div>
-                        <span className="text-xs">3% concluído</span>
-                        <span className="text-gray-600 text-sm mt-2">Atual: xxx</span>
+                        <span className="text-xs">{calcPercentage(krs.doneGoalsTeamKr,krs.quarterlyGoalsTeamKr)}% concluído</span>
+                        <span className="text-gray-600 text-sm mt-2">Atual: {krs.doneGoalsTeamKr}</span>
                     </div>
 
                     <div className="flex flex-col gap-[2%] mt-4">
-                        <span>Meta Anual <span className="text-gray-600 text-xs">xxxx</span></span>
+                        <span>Meta Anual <span className="text-gray-600 text-xs"> {krs.yearlyGoalsTeamKr} </span></span>
                         <div className='percentage-container-disclosure w-[90%] mt-2'>
                             <div className='percentage-bar-disclosure w-[45%]'></div>
                         </div>
-                        <span className="tetx-xs">4% concluído</span>
-                        <span className="text-gray-600 text-sm mt-2">Atual: xxx</span>
+                        <span className="tetx-xs">{calcPercentage(krs.doneGoalsTeamKr,krs.yearlyGoalsTeamKr)}% concluído</span>
+                        <span className="text-gray-600 text-sm mt-2">Atual: {krs.doneGoalsTeamKr}</span>
                     </div>
                 </div>
             </Modal>

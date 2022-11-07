@@ -21,6 +21,7 @@ function TeamObjectivesTeams({
   navigate }) {
 
   const [isOpen, setIsOpen] = useState(false)
+  const [krs, setKrs] = useState({})
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
   const [done, setDone] = useState(0)
@@ -39,8 +40,9 @@ function TeamObjectivesTeams({
     setIsOpenTeamKrModal(false)
   }
 
-  function openTeamKrModal() {
+  function openTeamKrModal(item) {
     setIsOpenTeamKrModal(true)
+    setKrs(item)
   }
 
   function closeModal() {
@@ -164,12 +166,15 @@ function TeamObjectivesTeams({
                                   <div className='w-2/4'>
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
-
+                                  <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>
+                                      Metas
+                                  </span>
                                   <TeamKrModal
                                     nameGoalTeam={kr.nameGoalsTeamKr}
                                     closeModal={closeTeamKrModal}
                                     openModal={openTeamKrModal}
                                     isOpen={isOpenTeamKrModal}
+                                    krs={krs}
                                   />
                                 </div>
                               </>
