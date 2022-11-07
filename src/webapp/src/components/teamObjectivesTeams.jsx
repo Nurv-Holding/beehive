@@ -140,46 +140,52 @@ function TeamObjectivesTeams({
                 </Disclosure.Button>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
-                  <div className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-1 flex flex-row justify-around items-center'>
-                    <span className='uppercase text-lg'> {goalTeams.nameGoalTeam}
-                      <span className="text-gray-400 text-xs mx-2"> descrição </span>
-                    </span>
+                  {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x) => {
+                    return (
+                      <>
+                        <div className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
+                          <span className=''> {x.nameGoalTeam}
+                            <span className="text-gray-400 text-xs mx-2"> descrição </span>
+                          </span>
 
+                          <AddTeamKr
+                            closeModal={closeModalTeamKr}
+                            isOpen={isOpenTeamKr}
+                            openModal={openModalTeamKr}
+                            nameGoalTeam={goalTeams.nameGoalTeam}
+                            handleSubmit={handleSubmit}
+                            modelChange={modelChange}
+                            idGoalTeam={goalTeams.idGoalTeam}
+                            message={message}
+                            item={item}
+                          />
+                        </div>
 
-                    <AddTeamKr
-                      closeModal={closeModalTeamKr}
-                      isOpen={isOpenTeamKr}
-                      openModal={openModalTeamKr}
-                      nameGoalTeam={goalTeams.nameGoalTeam}
-                      handleSubmit={handleSubmit}
-                      modelChange={modelChange}
-                      idGoalTeam={goalTeams.idGoalTeam}
-                      message={message}
-                      item={item}
-                    />
-                  </div>
+                        <div className='flex flex-col items-center rounded-b-md bg-[#c3c2c2]'>
+                          {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr) => {
+                            return (
+                              <>
+                                <div className='flex flex-row justify-around items-center w-full px-2'>
+                                  <div className='w-2/4'>
+                                    <p> {kr.nameGoalsTeamKr} </p>
+                                  </div>
 
-                  <div className='text-gray-600 bg-[#c4c4c4] rounded-b-md px-2 py-1 flex flex-col justify-center'>
-                    {(goalTeamsKrs || []).map((kr) => {
-                      return (
-                        <>
-                          <div className='mt-1 flex flex-row items-center'>
-                            <div className='w-2/4'>
-                              <p> {kr.nameGoalsTeamKr} </p>
-                            </div>
+                                  <TeamKrModal
+                                    nameGoalTeam={kr.nameGoalsTeamKr}
+                                    closeModal={closeTeamKrModal}
+                                    openModal={openTeamKrModal}
+                                    isOpen={isOpenTeamKrModal}
+                                  />
+                                </div>
+                              </>
 
-                            <TeamKrModal
-                              nameGoalTeam={kr.nameGoalsTeamKr}
-                              closeModal={closeTeamKrModal}
-                              openModal={openTeamKrModal}
-                              isOpen={isOpenTeamKrModal}
-                            />
-                          </div>
-                        </>
-                      )
-                    })}
+                            )
+                          })}
 
-                  </div>
+                        </div>
+                      </>
+                    )
+                  })}
                 </Disclosure.Panel>
               </div>
             </Disclosure>

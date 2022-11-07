@@ -6,6 +6,7 @@ import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
+import { Disclosure } from '@headlessui/react'
 
 function TeamObjectivesTable({ goalKrs, idCompany }) {
   let [isOpen, setIsOpen] = useState(false)
@@ -30,7 +31,7 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
   }
 
   const goalKrsUpdate = (idGoalKrs, done) => {
-    const data = { done: parseInt(done) + goalKr?.doneGoalsKr}
+    const data = { done: parseInt(done) + goalKr?.doneGoalsKr }
 
     goalKrsApi.update(idGoalKrs, data)
       .then(() => {
@@ -52,6 +53,32 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
   return (
     <>
       {(goalKrs || []).map((goalKr) => {
+        return (
+          <Disclosure>
+            <Disclosure.Button key={goalKr.id} onClick={() => openModal(goalKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 mb-4 rounded-lg cursor-pointer'>
+              <div className='flex items-center'>
+                <span> {goalKr.nameGoalsKr} </span>
+                <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
+              </div>
+
+              <div className='profile-photo-task'>
+                <img src="https://thispersondoesnotexist.com/image" />
+              </div>
+
+              <span>Atualizado em</span>
+
+              <span>Atualizar valores</span>
+            </Disclosure.Button>
+            <Disclosure.Panel className="text-gray-500">
+              Yes! You can purchase a license that you can share with your entire
+              team.
+            </Disclosure.Panel>
+          </Disclosure>
+        )
+      })}
+
+
+      {/* {(goalKrs || []).map((goalKr) => {
         return (
           <div key={goalKr.id} onClick={() => openModal(goalKr)} className='flex flex-row items-center justify-around w-full bg-white p-4 mb-4 rounded-lg cursor-pointer'>
             <div className='flex items-center'>
@@ -102,7 +129,7 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
             <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   )
 }

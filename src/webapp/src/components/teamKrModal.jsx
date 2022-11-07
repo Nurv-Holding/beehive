@@ -2,14 +2,14 @@ import Modal from "./empresasTabPanels/objetivos/components/Modal"
 
 const TeamKrModal = ({
     nameGoalTeam,
-    closeModal,  
+    closeModal,
     openModal,
     isOpen
- }) => {
+}) => {
 
     return (
         <div className="w-2/4">
-            <span onClick={openModal}>
+            <span onClick={openModal} className='cursor-pointer'>
                 Metas
             </span>
 
