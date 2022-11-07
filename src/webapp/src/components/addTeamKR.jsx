@@ -6,7 +6,7 @@ const  AddTeamKr = ( { closeModal, openModal, isOpen } ) => {
         <>
         <span className='cursor-pointer' onClick={openModal}>Metas</span>
         <Modal isOpen={isOpen} closeModal={closeModal}>
-            <span className="text-lg uppercase mx-2">Aumentar número de clientes</span>
+            <span className="text-lg uppercase mx-2">Ser relevante no mercado</span>
             <span className="text-gray-600 text-xs mx-2">
             Atualizado em:
             </span>
