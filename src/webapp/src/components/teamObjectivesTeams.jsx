@@ -146,8 +146,8 @@ function TeamObjectivesTeams({
                       item={item}
                     />
                   </div>
-                </Disclosure.Panel>
-                <div>
+
+                  <div>
                   {(goalTeamsKrs || []).map((kr) => {
                     return(
                       <>
@@ -157,6 +157,7 @@ function TeamObjectivesTeams({
                   })}
    
                 </div>
+                </Disclosure.Panel>
               </div>
             </Disclosure>
           </>

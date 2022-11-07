@@ -84,7 +84,7 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
             </div>
             <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, done) }} className="submit-button">OK</button>
           </div>
-          {/* <div className="flex flex-col gap-[2%] mt-4">
+          <div className="flex flex-col gap-[2%] mt-4">
             <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
             <div className='percentage-container-disclosure w-[90%] mt-2'>
               <div className='percentage-bar-disclosure w-[45%]'></div>
@@ -100,7 +100,7 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
             </div>
             <span className="tetx-xs">{calcPercentage(goalKr.doneGoalsKr,goalKr.yearlyGoalsKr)}% concluído</span>
             <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
-          </div> */}
+          </div>
         </div>
       </Modal>
     </>
