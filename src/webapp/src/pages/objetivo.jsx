@@ -24,12 +24,15 @@ function Objetivo() {
   const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
   const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
   const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
+  const [queryUpdate, setQueryUpdate] = useState(false)
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
+  const [itemGoal, setItemGoal] = useState({name:"",descriptions:""})
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenTeam, setIsOpenTeam] = useState(false)
+  const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const update = searchParams.get('update')
 
   useEffect(() => {
@@ -46,6 +49,14 @@ function Objetivo() {
 
   function updateData() {
     setIsOpen(false)
+  }
+
+  function closeModalGoalTeam() {
+    setIsOpenGoalTeam(false)
+  }
+
+  function openModalGoalTeam() {
+    setIsOpenGoalTeam(true)
   }
 
   function closeModal() {
@@ -130,9 +141,10 @@ function Objetivo() {
       goalsTeamApi.createProcess(idCompany, { idTeam, idGoal: newIdGoal })
         .then(() => {
           setMessage("Time adicionado sucesso")
+          setQueryUpdate((x) => !x)
           navigate({
             pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-            search: '?update=true'
+            search: `?update=${queryUpdate}`
           })
           searchParams.delete("update")
 
@@ -149,7 +161,14 @@ function Objetivo() {
 
     const newIdGoal = parseInt(idGoal)
 
-    const { data } = await goalsTeamApi.create(idCompany, { ...item, idGoal: newIdGoal })
+    const newData = {
+      ...itemGoal, 
+      idGoal: newIdGoal
+    }
+
+    console.log("newData",newData)
+
+    const { data } = await goalsTeamApi.create(idCompany, newData)
     const idGoalsTeam = data.id
     
     const goalsTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
@@ -165,13 +184,14 @@ function Objetivo() {
       goalsTeamApi.createProcess(idCompany, data)
       .then(() => {
         setMessage("Ojetivo criado com sucesso")
+        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: '?update=true'
+          search: `?update=${queryUpdate}`
         })
         searchParams.delete("update")
 
-        closeModalTeam()
+        closeModalGoalTeam()
       })
       .catch((error) => {
         console.error(error)
@@ -182,9 +202,10 @@ function Objetivo() {
       goalsTeamApi.updateProcess(goalsTeam.idProcessGoalsTeams, { idGoalsTeam })
       .then(() => {
         setMessage("Ojetivo criado com sucesso")
+        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: '?update=true'
+          search: `?update=${queryUpdate}`
         })
         searchParams.delete("update")
 
@@ -196,7 +217,12 @@ function Objetivo() {
       })
     }
 
+  }
 
+  const changeModel = ({ target }) => {
+    setItemGoal((state) => {
+      return {...state,[target.name]: target.value}
+    })
   }
 
   const handleSubmit = (event) => {
@@ -212,9 +238,10 @@ function Objetivo() {
     goalKrsApi.create(1, data)
       .then(() => {
         setMessage("KR criado com sucesso")
+        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: '?update=true'
+          search: `?update=${queryUpdate}`
         })
         searchParams.delete("update")
 
@@ -270,6 +297,8 @@ function Objetivo() {
             update={update}
             loading={loading}
             idCompany={idCompany}
+            setQueryUpdate={setQueryUpdate}
+            queryUpdate={queryUpdate}
           />
 
           <div className='border-t mt-6 pt-8 border-white'>
@@ -279,13 +308,16 @@ function Objetivo() {
               goalTeamsByTeam={goalTeamsByTeam}
               goalTeamsKrs={goalTeamsKrs}
               createGoalsTeam={createGoalsTeam}
-              modelChange={modelChange}
+              modelChange={changeModel}
               searchParams={searchParams}
               navigate={navigate}
               idCompany={idCompany}
+              closeModalGoalTeam={closeModalGoalTeam}
+              isOpenGoalTeam={isOpenGoalTeam}
+              openModalGoalTeam={openModalGoalTeam}
               idGoal={idGoal}
               goalTeamByKrs={goalTeamByKrs}
-              item={item}
+              item={itemGoal}
             />
           </div>
         </div>

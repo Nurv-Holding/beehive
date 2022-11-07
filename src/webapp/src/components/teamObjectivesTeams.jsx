@@ -15,14 +15,16 @@ function TeamObjectivesTeams({
   modelChange,
   item,
   goalTeamByGoalTeam,
+  closeModalGoalTeam,
   goalTeamsKrs,
+  openModalGoalTeam,
+  isOpenGoalTeam,
   goalTeamByKrs,
   searchParams,
   navigate }) {
 
   const [isOpen, setIsOpen] = useState(false)
   const [krs, setKrs] = useState({})
-  const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
   const [done, setDone] = useState(0)
   const [idGoalsTeam, setIdGoalsTeam] = useState(null)
@@ -49,17 +51,9 @@ function TeamObjectivesTeams({
     setIsOpen(false)
   }
 
-  function closeModalGoalTeam() {
-    setIsOpenGoalTeam(false)
-  }
-
   function openModal(goalKr) {
     setGoalKr(goalKr)
     setIsOpen(true)
-  }
-
-  function openModalGoalTeam() {
-    setIsOpenGoalTeam(true)
   }
 
   function openModalTeamKr(id) {
@@ -154,6 +148,7 @@ function TeamObjectivesTeams({
                     createGoalsTeam={createGoalsTeam}
                     modelChange={modelChange}
                     idTeam={goalTeams.idTeam}
+                    item={item}
                   />
                 </Disclosure.Button>
 

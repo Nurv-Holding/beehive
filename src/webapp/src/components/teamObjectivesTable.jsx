@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 
-function TeamObjectivesTable({ goalKrs, idCompany }) {
+function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }) {
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
   const [done, setDone] = useState(0)
@@ -36,9 +36,10 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
     goalKrsApi.update(idGoalKrs, data)
       .then(() => {
         setMessage("Atualizado")
+        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: '?update=true'
+          search: `?update=${queryUpdate}`
         })
         searchParams.delete("update")
 

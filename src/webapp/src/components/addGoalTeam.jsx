@@ -1,6 +1,6 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
 
-function AddGoalTeam( { closeModal, openModal, isOpen, createGoalsTeam, modelChange, idTeam } ) {
+function AddGoalTeam( { closeModal, openModal, isOpen, createGoalsTeam, modelChange, idTeam, item } ) {
 
     const goalTealSubmit = (event) => {
         event.preventDefault()
@@ -15,6 +15,7 @@ function AddGoalTeam( { closeModal, openModal, isOpen, createGoalsTeam, modelCha
             </button>
 
             <Modal isOpen={isOpen} closeModal={closeModal} title={"Adicionar KR"}>
+                {JSON.stringify(item)}
                 <h5> Nome do time </h5>
                 <form onSubmit={goalTealSubmit} className="mt-2 flex flex-col">
 
