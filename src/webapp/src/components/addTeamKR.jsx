@@ -1,40 +1,56 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
 
-const  AddTeamKr = ( { closeModal, openModal, isOpen } ) => {
+const  AddTeamKr = ( { 
+    closeModal,
+    message,
+    openModal, 
+    isOpen,
+    item, 
+    nameGoalTeam, 
+    handleSubmit, 
+    modelChange, 
+    idGoalTeam } ) => {
+
+    const createGoalTeamKr = (event) => {
+        event.preventDefault()
+
+        handleSubmit(idGoalTeam)
+    }
 
     return (
         <>
-        <span className='cursor-pointer' onClick={openModal}>Metas</span>
+        <span className='cursor-pointer' onClick={openModal}>Adicionar Krs</span>
         <Modal isOpen={isOpen} closeModal={closeModal}>
-            <span className="text-lg uppercase mx-2">Aumentar número de clientes</span>
-            <span className="text-gray-600 text-xs mx-2">
-            Atualizado em:
-            </span>
-            <div className="flex flex-col gap-[2%] mt-4">
-                <div className="flex gap-2 items-center">
-                    <div>
-                        <input type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
+            {JSON.stringify(item)}
+            <h5> {nameGoalTeam} </h5>
+            <form onSubmit={createGoalTeamKr} className="mt-2 flex flex-col">
+                <label for="tarefa">KR:</label>
+                <input onChange={modelChange} name='name' type='text' className='input-style' placeholder="Digite o nome do KR"/>
+
+                <label for="tarefa">Descrição:</label>
+                <input onChange={modelChange} name='descriptions' type='text' className='input-style' placeholder="Digite a descrição do KR"/>
+
+                <div className="flex flex-row justify-between">
+
+                    <div className="flex flex-col w-[48%]">
+                        <label for="tarefa">Meta Trimestral:</label>
+                        <input onChange={modelChange} name='quarterly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
                     </div>
-                    <button type="button" className="submit-button">OK</button>
-                </div>
-                <div className="flex flex-col gap-[2%] mt-4">
-                    <span>Meta Trimestral <span className="text-gray-600 text-xs"></span></span>
-                    <div className='percentage-container-disclosure w-[90%] mt-2'>
-                        <div className='percentage-bar-disclosure w-[45%]'></div>
+
+                    <div className="flex flex-col w-[48%]">
+                        <label for="tarefa">Meta Anual:</label>
+                        <input onChange={modelChange} name='yearly' type='text' className='input-style' placeholder="Digite a meta anual do KR"/>
                     </div>
-                    <span className="text-xs">% concluído</span>
-                    <span className="text-gray-600 text-sm mt-2">Atual:</span>
                 </div>
 
-                <div className="flex flex-col gap-[2%] mt-4">
-                    <span>Meta Anual <span className="text-gray-600 text-xs"></span></span>
-                    <div className='percentage-container-disclosure w-[90%] mt-2'>
-                        <div className='percentage-bar-disclosure w-[45%]'></div>
-                    </div>
-                    <span className="tetx-xs">% concluído</span>
-                    <span className="text-gray-600 text-sm mt-2">Atual: </span>
+
+                <div className="mt-4">
+                    <button className='submit-button' type="submit" >
+                        Adicionar
+                    </button>
+                    <span> {message} </span>
                 </div>
-            </div>
+            </form>
          </Modal>
          </>
     )

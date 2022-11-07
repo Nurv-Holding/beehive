@@ -20,6 +20,7 @@ function Objetivo() {
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})
   const [goalKrs, setGoalKrs] = useState([])
+  const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
   const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
@@ -32,9 +33,10 @@ function Objetivo() {
   useEffect(() => {
     handleGoal()
     handleGoalKrs()
-    handleGoalTeamsKrs()
+    handleGoalTeamsByTeam()
     handleGoalTeam()
     handleGoalTeams()
+    handleGoalTeamsKrs()
 
   }, [idGoal, idCompany, update])
 
@@ -62,6 +64,12 @@ function Objetivo() {
     const { data } = await goalsApi.getById(idGoal, idCompany)
 
     setGoal(data)
+  }
+
+  const handleGoalTeamsByTeam = async () => {
+    const { data } = await goalTeamsKrsApi.getByTeam(idCompany, idGoal)
+
+    setGoalTeamsByTeam(data)
   }
 
   const handleGoalTeamsKrs = async () => {
@@ -127,7 +135,7 @@ function Objetivo() {
 
     const { data } = await goalsTeamApi.create(idCompany, { ...item, idGoal: newIdGoal })
     const idGoalsTeam = data.id
-    const goalsTeamByTeam = goalTeamsKrs.filter(e => e.idTeam === idTeam)[0]
+    const goalsTeamByTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
 
     goalsTeamApi.updateProcess(goalsTeamByTeam.idProcessGoalsTeams, { idGoalsTeam })
       .then(() => {
@@ -222,9 +230,15 @@ function Objetivo() {
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-xl mt-2 text-white'>Times</span>
             <TeamObjectivesTeams 
+              goalTeamsByTeam={goalTeamsByTeam}
               goalTeamsKrs={goalTeamsKrs}
               createGoalsTeam={createGoalsTeam}
               modelChange={modelChange}
+              searchParams={searchParams}
+              navigate={navigate}
+              idCompany={idCompany}
+              idGoal={idGoal}
+              item={item}
             />
           </div>
         </div>

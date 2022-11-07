@@ -86,7 +86,8 @@ const routes = (app) => {
 
             //goalsTeamKrs
             app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)
-            app.get("/goalsTeam/t/:idTeam/c/:idCompany",projectionGoalTeamKrsController().getByTeam)
+            app.get("/goalsTeam/p/:idGoal/c/:idCompany",projectionGoalTeamKrsController().getByTeam)
+            app.get("/goalsTeam/t/krs/:idTeam/c/:idCompany",projectionGoalTeamKrsController().getByTeamAndKrs)
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)
