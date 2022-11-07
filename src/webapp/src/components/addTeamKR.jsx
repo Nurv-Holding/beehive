@@ -4,8 +4,7 @@ const  AddTeamKr = ( {
     closeModal,
     message,
     openModal, 
-    isOpen,
-    item, 
+    isOpen, 
     nameGoalTeam, 
     handleSubmit, 
     modelChange, 
@@ -21,7 +20,6 @@ const  AddTeamKr = ( {
         <>
         <span className='cursor-pointer' onClick={openModal}>Adicionar Krs</span>
         <Modal isOpen={isOpen} closeModal={closeModal}>
-            {JSON.stringify(item)}
             <h5> {nameGoalTeam} </h5>
             <form onSubmit={createGoalTeamKr} className="mt-2 flex flex-col">
                 <label for="tarefa">KR:</label>

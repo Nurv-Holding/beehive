@@ -2,7 +2,6 @@
 function formTimes({ changeModel, message, handleSubmit, item }) {
     return (
         <div className='flex flex-col'>
-            {JSON.stringify(item)}
             <form onSubmit={handleSubmit} className='form-container'>
                 <div className='input-and-label-container'>
                     <label>Nome do Time</label>
