@@ -139,7 +139,7 @@ function TeamObjectivesTeams({
                   {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x) => {
                     return (
                       <>
-                      <div className='text-gray-600 bg-[#D9D9D9] rounded-md px-2 py-1 my-1 flex flex-row justify-around items-center'>
+                      <div className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
                         <span className=''> {x.nameGoalTeam}
                           <span className="text-gray-400 text-xs mx-2"> descrição </span>
                         </span>
