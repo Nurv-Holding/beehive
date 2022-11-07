@@ -189,7 +189,7 @@ header nav span:hover{
 /*End General CONTAINER*/
 
 .container-two-percentage{
-    @apply w-full h-[60px] flex flex-row my-8 justify-between
+    @apply w-full h-[60px] flex flex-row mt-8 mb-12 justify-between
 }
 
 .container-percentage-okr{
