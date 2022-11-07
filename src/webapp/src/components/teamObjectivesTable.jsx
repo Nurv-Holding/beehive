@@ -54,7 +54,7 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
     <>
       {(goalKrs || []).map((goalKr) => {
         return (
-          <div className="bg-white rounded-md p-0.5 mt-4">
+          <div className="bg-white rounded-md p-0.5 mt-4 flex flex-col">
             <Disclosure>
               <Disclosure.Button key={goalKr.id} className='flex flex-row items-center justify-around w-full bg-white p-4 cursor-pointer'>
                 <div className='flex items-center'>
@@ -69,13 +69,8 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
                 <span>Atualizado em</span>
               </Disclosure.Button>
 
-              <Disclosure.Panel className='bg-white px-2 py-1 mb-4 flex flex-col justify-around'>
-                <div className="flex flex-col ml-44">
-                  <div className="w-2/6 self-end">
-                    <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
-                      Atualizar valores
-                    </button>
-                  </div>
+              <Disclosure.Panel className='w-1/4 ml-44 bg-white px-2 py-1 mb-4 flex flex-col'>
+                <div className="flex flex-col items-center w-full">
 
                   <Modal isOpen={isOpen} closeModal={closeModal}>
                     <span className="text-gray-600 text-xs mx-2">
@@ -91,7 +86,7 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
                     </div>
                   </Modal>
 
-                  <div>
+                  <div className="w-full">
                     <div className="flex flex-col gap-[2%] mt-4">
                       <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
@@ -109,6 +104,10 @@ function TeamObjectivesTable({ goalKrs, idCompany }) {
                       <span className="tetx-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.yearlyGoalsKr)}% concluído</span>
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
+
+                    <button className="modal-btn h-[30px] mt-2" onClick={() => openModal(goalKr)}>
+                      Atualizar valores
+                    </button>
                   </div>
                 </div>
 
