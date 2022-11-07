@@ -3,25 +3,16 @@ import Modal from "./empresasTabPanels/objetivos/components/Modal"
 const  AddTeamKr = ( { 
     closeModal,
     message,
-    openModal, 
     isOpen, 
-    nameGoalTeam, 
-    handleSubmit, 
+    nameGoalTeam,
     modelChange, 
-    idGoalTeam } ) => {
-
-    const createGoalTeamKr = (event) => {
-        event.preventDefault()
-
-        handleSubmit(idGoalTeam)
-    }
+    handleSubmit } ) => {
 
     return (
         <>
-        <span className='cursor-pointer' onClick={openModal}>Adicionar Krs</span>
         <Modal isOpen={isOpen} closeModal={closeModal}>
             <h5> {nameGoalTeam} </h5>
-            <form onSubmit={createGoalTeamKr} className="mt-2 flex flex-col">
+            <form onSubmit={handleSubmit} className="mt-2 flex flex-col">
                 <label for="tarefa">KR:</label>
                 <input onChange={modelChange} name='name' type='text' className='input-style' placeholder="Digite o nome do KR"/>
 

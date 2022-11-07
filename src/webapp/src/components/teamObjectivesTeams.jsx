@@ -23,6 +23,7 @@ function TeamObjectivesTeams({
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
   const [done, setDone] = useState(0)
+  const [idGoalsTeam, setIdGoalsTeam] = useState(null)
   const [goalKr, setGoalKr] = useState({})
   const [isOpenTeam, setIsOpenTeam] = useState(false)
   const [krsByTeam, setKrsByTeam] = useState([])
@@ -49,22 +50,17 @@ function TeamObjectivesTeams({
     setIsOpenGoalTeam(true)
   }
 
-  function openModalTeamKr() {
+  function openModalTeamKr(id) {
     setIsOpenTeamKr(true)
+    setIdGoalsTeam(id)
   }
 
   function closeModalTeamKr() {
     setIsOpenTeamKr(false)
   }
 
-  const handleKrsByTeam = (idTeam) => {
-
-    return goalTeamsKrsApi.getByTeamAndKrs(idCompany, idTeam)
-    .then(x => setKrsByTeam(x.data))
-    
-  }
-
-  const handleSubmit = (idGoalsTeam) => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     
     if(Object.keys(item).length === 0 || 
     item.name === "" || 
@@ -137,15 +133,14 @@ function TeamObjectivesTeams({
                         <span className=''> {x.nameGoalTeam}
                           <span className="text-gray-400 text-xs mx-2"> descrição </span>
                         </span>
+                        <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>
                         
                         <AddTeamKr 
-                          closeModal={closeModalTeamKr} 
-                          isOpen={isOpenTeamKr}
-                          openModal={openModalTeamKr}
-                          nameGoalTeam={goalTeams.nameGoalTeam}
+                          closeModal={closeModalTeamKr}
                           handleSubmit={handleSubmit}
+                          isOpen={isOpenTeamKr}
+                          nameGoalTeam={goalTeams.nameGoalTeam}
                           modelChange={modelChange}
-                          idGoalTeam={goalTeams.idGoalTeam}
                           message={message}
                           item={item}
                         />
