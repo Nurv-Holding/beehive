@@ -10,6 +10,7 @@ const getAllProcess = (idCompany) => axios.get(`${host}/goalsTeam/c/process/${id
 const createProcess = (idCompany,data) => axios.post(`${host}/goalsTeam/process/c/${idCompany}`,data)
 const updateProcess = (id,data) => axios.put(`${host}/goalsTeam/process/${id}`,data)
 const getByTeam = (idCompany, idTeam) => axios.get(`${host}/goalsTeam/t/${idTeam}/c/${idCompany}`)
+const getGroupByTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/${idGoal}/c/${idCompany}`)
 
 export default {
     getAll,
@@ -19,5 +20,6 @@ export default {
     getAllProcess,
     getByTeam,
     createProcess,
-    updateProcess
+    updateProcess,
+    getGroupByTeam
 }

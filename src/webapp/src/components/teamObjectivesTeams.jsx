@@ -13,7 +13,9 @@ function TeamObjectivesTeams({
   createGoalsTeam, 
   modelChange, 
   item,
-  goalTeamsKrs, 
+  goalTeamByGoalTeam,
+  goalTeamsKrs,
+  goalTeamByKrs, 
   searchParams, 
   navigate }) {
 
@@ -128,35 +130,40 @@ function TeamObjectivesTeams({
                 </Disclosure.Button>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
-                  <div className='text-gray-600 bg-[#D9D9D9] rounded-md px-2 py-1 my-1 flex flex-row justify-around items-center'>
-                    <span className=''> {goalTeams.nameGoalTeam}
-                      <span className="text-gray-400 text-xs mx-2"> descrição </span>
-                    </span>
-                    
-                    
-                    <AddTeamKr 
-                      closeModal={closeModalTeamKr} 
-                      isOpen={isOpenTeamKr}
-                      openModal={openModalTeamKr}
-                      nameGoalTeam={goalTeams.nameGoalTeam}
-                      handleSubmit={handleSubmit}
-                      modelChange={modelChange}
-                      idGoalTeam={goalTeams.idGoalTeam}
-                      message={message}
-                      item={item}
-                    />
-                  </div>
-
-                  <div>
-                  {(goalTeamsKrs || []).map((kr) => {
+                  {(goalTeamByGoalTeam.filter(e=> e.idTeam === goalTeams.idTeam) || []).map((x) => {
                     return(
                       <>
-                        <p> {kr.nameGoalsTeamKr} </p>
+                      <div className='text-gray-600 bg-[#D9D9D9] rounded-md px-2 py-1 my-1 flex flex-row justify-around items-center'>
+                        <span className=''> {x.nameGoalTeam}
+                          <span className="text-gray-400 text-xs mx-2"> descrição </span>
+                        </span>
+                        
+                        <AddTeamKr 
+                          closeModal={closeModalTeamKr} 
+                          isOpen={isOpenTeamKr}
+                          openModal={openModalTeamKr}
+                          nameGoalTeam={goalTeams.nameGoalTeam}
+                          handleSubmit={handleSubmit}
+                          modelChange={modelChange}
+                          idGoalTeam={goalTeams.idGoalTeam}
+                          message={message}
+                          item={item}
+                        />
+                      </div>
+
+                      <div>
+                      {(goalTeamByKrs.filter(e=> e.idGoalTeam === x.idGoalTeam) || []).map((kr) => {
+                        return(
+                          <>
+                            <p> {kr.nameGoalsTeamKr} </p>
+                          </>
+                        )
+                      })}
+      
+                      </div>
                       </>
                     )
                   })}
-   
-                </div>
                 </Disclosure.Panel>
               </div>
             </Disclosure>

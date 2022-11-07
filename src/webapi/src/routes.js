@@ -84,10 +84,13 @@ const routes = (app) => {
             app.put("/goalsTeam/process/:id",processGoalTeamController.update)
             app.delete("/goalsTeam/process/:id",processGoalTeamController.remove)
 
-            //goalsTeamKrs
+            //goalsTeam
             app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)
-            app.get("/goalsTeam/p/:idGoal/c/:idCompany",projectionGoalTeamKrsController().getByTeam)
+            app.get("/goalsTeam/t/:idTeam/c/:idCompany",projectionGoalTeamKrsController().getByTeam)
+            app.get("/goalsTeam/g/t/:idGoal/c/:idCompany",projectionGoalTeamKrsController().getGroupByTeam)
             app.get("/goalsTeam/t/krs/:idTeam/c/:idCompany",projectionGoalTeamKrsController().getByTeamAndKrs)
+            app.get("/goalsTeam/g/t/goal/:idGoal/c/:idCompany",projectionGoalTeamKrsController().getGroupByGoalTeam)
+            app.get("/goalsTeamKrs/krs/g/goal/:idGoal/c/:idCompany",projectionGoalTeamKrsController().getGroupByKrs)
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)

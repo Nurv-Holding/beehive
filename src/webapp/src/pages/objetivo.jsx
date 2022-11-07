@@ -22,6 +22,8 @@ function Objetivo() {
   const [goalKrs, setGoalKrs] = useState([])
   const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
   const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
+  const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
+  const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
   const navigate = useNavigate()
@@ -37,6 +39,8 @@ function Objetivo() {
     handleGoalTeam()
     handleGoalTeams()
     handleGoalTeamsKrs()
+    handleGoalTeamByGoalTeam()
+    handleGoalTeamByKrs()
 
   }, [idGoal, idCompany, update])
 
@@ -60,6 +64,18 @@ function Objetivo() {
     setIsOpenTeam(true)
   }
 
+  const handleGoalTeamByGoalTeam = async () => {
+    const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
+
+    setGoalTeamByGoalTeam(data)
+  }
+
+  const handleGoalTeamByKrs = async () => {
+    const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
+
+    setGoalTeamByKrs(data)
+  }
+
   const handleGoal = async () => {
     const { data } = await goalsApi.getById(idGoal, idCompany)
 
@@ -67,7 +83,7 @@ function Objetivo() {
   }
 
   const handleGoalTeamsByTeam = async () => {
-    const { data } = await goalTeamsKrsApi.getByTeam(idCompany, idGoal)
+    const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
 
     setGoalTeamsByTeam(data)
   }
@@ -120,7 +136,7 @@ function Objetivo() {
           })
           searchParams.delete("update")
 
-          closeModal()
+          closeModalTeam()
         })
         .catch((error) => {
           console.error(error)
@@ -135,9 +151,18 @@ function Objetivo() {
 
     const { data } = await goalsTeamApi.create(idCompany, { ...item, idGoal: newIdGoal })
     const idGoalsTeam = data.id
-    const goalsTeamByTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
+    
+    const goalsTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
+    console.log("goalsTeam",goalsTeam)
 
-    goalsTeamApi.updateProcess(goalsTeamByTeam.idProcessGoalsTeams, { idGoalsTeam })
+    if(goalsTeam?.idGoalTeam){
+      const data = {
+        idGoalsTeam,
+        idGoal: newIdGoal,
+        idTeam
+      }
+
+      goalsTeamApi.createProcess(idCompany, data)
       .then(() => {
         setMessage("Ojetivo criado com sucesso")
         navigate({
@@ -152,6 +177,26 @@ function Objetivo() {
         console.error(error)
         setMessage("Algo deu errado!")
       })
+
+    }else{
+      goalsTeamApi.updateProcess(goalsTeam.idProcessGoalsTeams, { idGoalsTeam })
+      .then(() => {
+        setMessage("Ojetivo criado com sucesso")
+        navigate({
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          search: '?update=true'
+        })
+        searchParams.delete("update")
+
+        closeModalTeam()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
+    }
+
+
   }
 
   const handleSubmit = (event) => {
@@ -229,7 +274,8 @@ function Objetivo() {
 
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-xl mt-2 text-white'>Times</span>
-            <TeamObjectivesTeams 
+            <TeamObjectivesTeams
+              goalTeamByGoalTeam={goalTeamByGoalTeam} 
               goalTeamsByTeam={goalTeamsByTeam}
               goalTeamsKrs={goalTeamsKrs}
               createGoalsTeam={createGoalsTeam}
@@ -238,6 +284,7 @@ function Objetivo() {
               navigate={navigate}
               idCompany={idCompany}
               idGoal={idGoal}
+              goalTeamByKrs={goalTeamByKrs}
               item={item}
             />
           </div>
