@@ -44,13 +44,13 @@ function TeamObjectivesTable({
     const newData = {
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr.idgoalsKr,
-      quaPercentage:calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),
-      yeaPercentage:calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)
+      quaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),
+      yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)
     }
 
-    console.log("goalKr",goalKr)
+    console.log("goalKr", goalKr)
 
-    console.log("newData",newData)
+    console.log("newData", newData)
 
     goalKrsApi.update(goalKr.idgoalsKr, data)
       .then(() => {
@@ -58,7 +58,7 @@ function TeamObjectivesTable({
 
         historyGoalKrApi.create(idCompany, newData)
 
-        console.log("queryUpdate",queryUpdate)
+        console.log("queryUpdate", queryUpdate)
         setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
@@ -120,25 +120,29 @@ function TeamObjectivesTable({
                   </div>
                 </div>
 
-                <ChartGoalKrs
-                  items={
-                    historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
-                  }
-                  title={"Trimestral"}
-                />
+                <div>
+                  <ChartGoalKrs
+                    items={
+                      historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                    }
+                    title={"Trimestral"}
+                  />
+                </div>
 
-                <ChartGoalTeamKrs
-                  items={
-                    historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
-                  }
-                  title={"Anual"}
-                />
+                <div>
+                  <ChartGoalTeamKrs
+                    items={
+                      historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                    }
+                    title={"Anual"}
+                  />
+                </div>
 
               </Disclosure.Panel>
               <Modal isOpen={isOpen} closeModal={closeModal}>
-                
+
                 <span className="text-gray-600 text-xs mx-2">
-                {JSON.stringify(goalKr.doneGoalsKr)}
+                  {JSON.stringify(goalKr.doneGoalsKr)}
                   Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
                 </span>
                 <div className="flex flex-col gap-[2%] mt-4">
@@ -146,7 +150,7 @@ function TeamObjectivesTable({
                     <div>
                       <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
                     </div>
-                    <button type="button" onClick={() => { goalKrsUpdate()}} className="submit-button">OK</button>
+                    <button type="button" onClick={() => { goalKrsUpdate() }} className="submit-button">OK</button>
                   </div>
                 </div>
               </Modal>
