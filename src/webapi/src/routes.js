@@ -59,7 +59,7 @@ const routes = (app) => {
         app.put("/goalsKrs/:id",goalsKrsController.update)
         app.delete("/goalsKrs/:id",goalsKrsController.remove)
 
-                  //historyGoalsTeamKrs
+                  //historyGoalsKrs
                   app.post("/hGoalsKrs/history/:idCompany",historyGoalsKrsController.create)
                   app.get("/hGoalsKrs/history/:idCompany",historyGoalsKrsController.getAll)
                   app.delete("/hGoalsKrs/history/:id",historyGoalsKrsController.remove)

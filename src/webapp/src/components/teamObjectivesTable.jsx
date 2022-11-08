@@ -8,14 +8,14 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
-import ChartQuartely from "./chartQuartely";
+import ChartQuartelyGoalKrs from "./ChartQuartelyGoalKrs";
 
 function TeamObjectivesTable({ 
   goalKrs, 
   idCompany, 
   setQueryUpdate, 
   queryUpdate, 
-  historyGoalTeamKrs }) {
+  historyGoalKrs }) {
 
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
@@ -114,7 +114,11 @@ function TeamObjectivesTable({
                     </button>
                   </div>
                 </div>
-                <ChartQuartely />
+                <ChartQuartelyGoalKrs 
+                historyGoalKrs={
+                  historyGoalKrs.filter(e => e.idGoal === goalKr.idGoal && e.idGoalKr === goalKr.idgoalsKr)
+                }
+                />
               </Disclosure.Panel>
               <Modal isOpen={isOpen} closeModal={closeModal}>
                     <span className="text-gray-600 text-xs mx-2">

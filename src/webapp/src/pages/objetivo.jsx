@@ -26,6 +26,7 @@ function Objetivo() {
   const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
   const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
+  const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [queryUpdate, setQueryUpdate] = useState(false)
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
@@ -46,6 +47,8 @@ function Objetivo() {
     handleGoalTeamsKrs()
     handleGoalTeamByGoalTeam()
     handleGoalTeamByKrs()
+    handleHistoryGoalTeamKrs()
+    handleHistoryGoalKrs()
 
   }, [idGoal, idCompany, update])
 
@@ -81,6 +84,12 @@ function Objetivo() {
     const {data} = await historyGoalTeamKrApi.getByKrs()
 
     setHistoryGoalTeamKrs(data)
+  }
+
+  const handleHistoryGoalKrs = async () => {
+    const {data} = await historyGoalTeamKrApi.getByKrs()
+
+    setHistoryGoalKrs(data)
   }
 
   const handleGoalTeamByGoalTeam = async () => {
@@ -307,7 +316,7 @@ function Objetivo() {
             idCompany={idCompany}
             setQueryUpdate={setQueryUpdate}
             queryUpdate={queryUpdate}
-            historyGoalTeamKrs={historyGoalTeamKrs}
+            historyGoalKrs={historyGoalKrs}
           />
 
           <div className='border-t mt-6 pt-8 border-white'>

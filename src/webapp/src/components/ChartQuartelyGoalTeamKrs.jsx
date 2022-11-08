@@ -1,7 +1,6 @@
 import StockChart from "./chart"
 
-
-const ChartQuartely = () => {
+const ChartQuartelyGoalTeamKrs = ({historyGoalTeamKrs}) => {
     const data = {
         stockFullName: "SW Limited.",
         stockShortName: "ASX:SFW",
@@ -53,4 +52,4 @@ const ChartQuartely = () => {
     )
 }
 
-export default ChartQuartely
+export default ChartQuartelyGoalTeamKrs
