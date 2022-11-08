@@ -64,10 +64,12 @@ const StockChart = ({ info }) => {
 
     return (
         <>
-            <div className="rounded shadow-xl overflow-hidden w-full md:flex" style={{ maxWidth: '900px' }}>
-                <div className="flex w-full md:w-1/2 px-5 pb-4 pt-8 bg-indigo-500 text-white items-center">
+            <div className="overflow-hidden">
+                <div className="w-full rounded bg-indigo-500 text-white">
                     <Line type="line" data={data} options={options} />
                 </div>
+
+                <span className="text-gray-400 text-sm">Trimestral</span>
                 {/* <div className="flex w-full md:w-1/2 p-10 bg-gray-100 text-gray-600 items-center">
                     <div className="w-full">
                         <h3 className="text-lg font-semibold leading-tight text-gray-800">{info?.stockFullName}</h3>

@@ -10,11 +10,11 @@ import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
 import ChartQuartelyGoalKrs from "./ChartQuartelyGoalKrs";
 
-function TeamObjectivesTable({ 
-  goalKrs, 
-  idCompany, 
-  setQueryUpdate, 
-  queryUpdate, 
+function TeamObjectivesTable({
+  goalKrs,
+  idCompany,
+  setQueryUpdate,
+  queryUpdate,
   historyGoalKrs }) {
 
   let [isOpen, setIsOpen] = useState(false)
@@ -42,8 +42,8 @@ function TeamObjectivesTable({
     const data = { done: done + goalKr?.doneGoalsKr }
 
     const newData = {
-      idGoal:parseInt(idGoal),
-      idGoalKr:idGoalKrs,
+      idGoal: parseInt(idGoal),
+      idGoalKr: idGoalKrs,
       quaPercentage,
       yeaPercentage
     }
@@ -85,11 +85,11 @@ function TeamObjectivesTable({
                   <img src="https://thispersondoesnotexist.com/image" />
                 </div>
 
-                <span>Atualizado em</span>
+                <span className="text-gray-600 text-sm">Atualizado {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}</span>
               </Disclosure.Button>
 
-              <Disclosure.Panel className='w-1/4 ml-44 bg-white px-2 py-1 mb-4 flex flex-col'>
-                <div className="flex flex-col items-center w-full">
+              <Disclosure.Panel className='w-full bg-white p-8 grid grid-cols-3 gap-4 justify-center items-center'>
+                <div className="flex flex-col items-center">
                   <div className="w-full">
                     <div className="flex flex-col gap-[2%] mt-4">
                       <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
@@ -114,25 +114,27 @@ function TeamObjectivesTable({
                     </button>
                   </div>
                 </div>
-                <ChartQuartelyGoalKrs 
-                historyGoalKrs={
-                  historyGoalKrs.filter(e => e.idGoal === goalKr.idGoal && e.idGoalKr === goalKr.idgoalsKr)
-                }
+
+                <ChartQuartelyGoalKrs
+                  historyGoalKrs={
+                    historyGoalKrs.filter(e => e.idGoal === goalKr.idGoal && e.idGoalKr === goalKr.idgoalsKr)
+                  }
                 />
+
               </Disclosure.Panel>
               <Modal isOpen={isOpen} closeModal={closeModal}>
-                    <span className="text-gray-600 text-xs mx-2">
-                      Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
-                    </span>
-                    <div className="flex flex-col gap-[2%] mt-4">
-                      <div className="flex gap-2 items-center">
-                        <div>
-                          <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
-                        </div>
-                        <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)) }} className="submit-button">OK</button>
-                      </div>
+                <span className="text-gray-600 text-xs mx-2">
+                  Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
+                </span>
+                <div className="flex flex-col gap-[2%] mt-4">
+                  <div className="flex gap-2 items-center">
+                    <div>
+                      <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
                     </div>
-                  </Modal>
+                    <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs), calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)) }} className="submit-button">OK</button>
+                  </div>
+                </div>
+              </Modal>
             </Disclosure>
           </div>
         )
