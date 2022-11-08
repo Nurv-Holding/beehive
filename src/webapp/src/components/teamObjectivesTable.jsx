@@ -7,6 +7,7 @@ import moment from "moment";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
+import historyGoalKrApi from "../api/historyGoalKrApi";
 
 function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }) {
   let [isOpen, setIsOpen] = useState(false)
@@ -18,7 +19,7 @@ function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }
   const [searchParams] = useSearchParams()
 
   function stateDone({ target }) {
-    setDone(target.value)
+    setDone(parseInt(target.value))
   }
 
   function closeModal() {
@@ -30,12 +31,22 @@ function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }
     setIsOpen(true)
   }
 
-  const goalKrsUpdate = (idGoalKrs, done) => {
-    const data = { done: parseInt(done) + goalKr?.doneGoalsKr }
+  const goalKrsUpdate = (idGoalKrs, quaPercentage, yeaPercentage) => {
+    const data = { done: done + goalKr?.doneGoalsKr }
+
+    const newData = {
+      idGoal:parseInt(idGoal),
+      idGoalKr:idGoalKrs,
+      quaPercentage,
+      yeaPercentage
+    }
 
     goalKrsApi.update(idGoalKrs, data)
       .then(() => {
         setMessage("Atualizado")
+
+        historyGoalKrApi.create(idCompany, newData)
+
         setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
@@ -82,7 +93,7 @@ function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }
                         <div>
                           <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
                         </div>
-                        <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, done) }} className="submit-button">OK</button>
+                        <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)) }} className="submit-button">OK</button>
                       </div>
                     </div>
                   </Modal>

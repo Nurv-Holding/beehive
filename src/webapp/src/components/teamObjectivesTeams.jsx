@@ -5,6 +5,7 @@ import AddGoalTeam from './addGoalTeam';
 import AddTeamKr from './addTeamKr';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import TeamKrModal from './teamKrModal';
+import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 
 function TeamObjectivesTeams({
   teams = null,
@@ -101,11 +102,22 @@ function TeamObjectivesTeams({
     }
   }
 
-  const goalTeamKrsUpdate = (idGoalTeamKrs) => {
+  const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
     const data = { done:done + krs?.doneGoalsTeamKr }
 
     goalTeamsKrsApi.update(idGoalTeamKrs, data)
       .then(() => {
+        const newData = {
+          idProcessGoalTeam:idProcessGoalsTeams,
+          idGoalsTeamKr:idGoalTeamKrs,
+          quaPercentage,
+          yeaPercentage
+        }
+
+        console.log("newData",newData)
+
+        historyGoalTeamKrApi.create(idCompany, newData)
+
         setMessage("Atualizado")
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
@@ -114,6 +126,7 @@ function TeamObjectivesTeams({
         searchParams.delete("update")
 
         closeTeamKrModal()
+
       })
       .catch((error) => {
         console.error(error)
@@ -186,6 +199,7 @@ function TeamObjectivesTeams({
                                   </span>
                                   <TeamKrModal
                                     stateDone={stateDone}
+                                    done={done}
                                     nameGoalTeam={kr.nameGoalsTeamKr}
                                     closeModal={closeTeamKrModal}
                                     openModal={openTeamKrModal}
