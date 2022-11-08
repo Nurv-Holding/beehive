@@ -12,6 +12,7 @@ import goalKrsApi from '../api/goalKrsApi';
 import goalsTeamApi from '../api/goalsTeamApi';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import AddTeam from '../components/addTeam';
+import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 
 function Objetivo() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
@@ -24,6 +25,7 @@ function Objetivo() {
   const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
   const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
   const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
+  const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [queryUpdate, setQueryUpdate] = useState(false)
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
@@ -73,6 +75,12 @@ function Objetivo() {
 
   function openModalTeam() {
     setIsOpenTeam(true)
+  }
+
+  const handleHistoryGoalTeamKrs = async () => {
+    const {data} = await historyGoalTeamKrApi.getByKrs()
+
+    setHistoryGoalTeamKrs(data)
   }
 
   const handleGoalTeamByGoalTeam = async () => {
@@ -299,6 +307,7 @@ function Objetivo() {
             idCompany={idCompany}
             setQueryUpdate={setQueryUpdate}
             queryUpdate={queryUpdate}
+            historyGoalTeamKrs={historyGoalTeamKrs}
           />
 
           <div className='border-t mt-6 pt-8 border-white'>

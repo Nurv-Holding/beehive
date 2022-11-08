@@ -8,8 +8,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
+import ChartQuartely from "./chartQuartely";
 
-function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }) {
+function TeamObjectivesTable({ 
+  goalKrs, 
+  idCompany, 
+  setQueryUpdate, 
+  queryUpdate, 
+  historyGoalTeamKrs }) {
+
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
   const [done, setDone] = useState(0)
@@ -83,21 +90,6 @@ function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }
 
               <Disclosure.Panel className='w-1/4 ml-44 bg-white px-2 py-1 mb-4 flex flex-col'>
                 <div className="flex flex-col items-center w-full">
-
-                  <Modal isOpen={isOpen} closeModal={closeModal}>
-                    <span className="text-gray-600 text-xs mx-2">
-                      Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
-                    </span>
-                    <div className="flex flex-col gap-[2%] mt-4">
-                      <div className="flex gap-2 items-center">
-                        <div>
-                          <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
-                        </div>
-                        <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)) }} className="submit-button">OK</button>
-                      </div>
-                    </div>
-                  </Modal>
-
                   <div className="w-full">
                     <div className="flex flex-col gap-[2%] mt-4">
                       <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
@@ -122,8 +114,21 @@ function TeamObjectivesTable({ goalKrs, idCompany, setQueryUpdate, queryUpdate }
                     </button>
                   </div>
                 </div>
-
+                <ChartQuartely />
               </Disclosure.Panel>
+              <Modal isOpen={isOpen} closeModal={closeModal}>
+                    <span className="text-gray-600 text-xs mx-2">
+                      Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
+                    </span>
+                    <div className="flex flex-col gap-[2%] mt-4">
+                      <div className="flex gap-2 items-center">
+                        <div>
+                          <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
+                        </div>
+                        <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)) }} className="submit-button">OK</button>
+                      </div>
+                    </div>
+                  </Modal>
             </Disclosure>
           </div>
         )
