@@ -48,13 +48,13 @@ from processGoalsTeams as pgt left join goalsTeams as gt on pgt.idGoalsTeam=gt.i
 left join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
 left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id where pgt.idCompany=1 and t.id=1 group by pgt.idTeam;
 
-/*Projeção de um objetivo de time os Krs com um time (projectionGoalTeamKrsController)*/
+/*Projeção de historico de krs de objetivo de time()*/
 select gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gtk.updatedAt as updateGoalTeamKr, 
 gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, hgtk.id as idHistoryGoalTeamsKr,
 hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory
 from historyGoalsTeamKrs as hgtk join goalTeamKrs as gtk on hgtk.idGoalsTeamKr=gtk.id
 join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
-join goalsTeams as gt on pgt.idGoalsTeam=gt.id where gt.id=17;
+join goalsTeams as gt on pgt.idGoalsTeam=gt.id where gt.id=17 and hgtk.idGoalsTeamKr=14;
 
 
 

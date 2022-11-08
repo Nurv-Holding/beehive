@@ -1,6 +1,13 @@
 const crudControllerFactory = require("../common/crudControllerFactory");
 const { prismaClient } = require("../database/prismaClient");
 
-const historyGoalsKrsController = crudControllerFactory(prismaClient.historyGoalKr)
+const crudFunction = crudControllerFactory(prismaClient.historyGoalKr)
+
+const progectionHistoryGoalKrByKr = (req, res) => {}
+
+const historyGoalsKrsController = {
+    ...crudFunction,
+    progectionHistoryGoalKrByKr
+}
 
 module.exports = historyGoalsKrsController
