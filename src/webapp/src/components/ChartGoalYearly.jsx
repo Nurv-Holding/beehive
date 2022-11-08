@@ -1,7 +1,7 @@
 import moment from "moment";
 import StockChart from "./chart"
 
-const ChartGoalTeamKrs = ({ items = [], title = "" }) => {
+const ChartGoalYearly = ({ items = [], title = "" }) => {
   const historyDate = items.map(x => moment(x.updatedAt).format('DD/MM'))
   historyDate.unshift("start")
 
@@ -35,4 +35,4 @@ const ChartGoalTeamKrs = ({ items = [], title = "" }) => {
   )
 }
 
-export default ChartGoalTeamKrs
+export default ChartGoalYearly

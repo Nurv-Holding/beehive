@@ -18,6 +18,7 @@ function TeamObjectivesTeams({
   goalTeamByGoalTeam,
   closeModalGoalTeam,
   goalTeamsKrs,
+  historyGoalTeamKrs,
   openModalGoalTeam,
   isOpenGoalTeam,
   goalTeamByKrs,
@@ -204,6 +205,7 @@ function TeamObjectivesTeams({
                                     closeModal={closeTeamKrModal}
                                     openModal={openTeamKrModal}
                                     isOpen={isOpenTeamKrModal}
+                                    historyGoalTeamKrs={historyGoalTeamKrs}
                                     krs={krs}
                                     goalTeamKrsUpdate={goalTeamKrsUpdate}
                                   />
