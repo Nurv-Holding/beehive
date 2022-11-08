@@ -7,8 +7,8 @@ import { json, useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
-import ChartGoalKrs from "./ChartGoalKrs";
-import ChartGoalTeamKrs from "./ChartGoalTeamKrs";
+import ChartGoalQuartely from "./ChartGoalQuartely";
+import ChartGoalYearly from "./ChartGoalYearly";
 
 function TeamObjectivesTable({
   goalKrs,
@@ -121,7 +121,7 @@ function TeamObjectivesTable({
                 </div>
 
                 <div>
-                  <ChartGoalKrs
+                  <ChartGoalQuartely
                     items={
                       historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
                     }
@@ -130,7 +130,7 @@ function TeamObjectivesTable({
                 </div>
 
                 <div>
-                  <ChartGoalTeamKrs
+                  <ChartGoalYearly
                     items={
                       historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
                     }

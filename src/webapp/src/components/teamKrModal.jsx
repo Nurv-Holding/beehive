@@ -1,8 +1,10 @@
 import moment from "moment"
 import { calcPercentage } from "../utilis"
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
-import ChartGoalKrs from "./ChartGoalKrs"
-import ChartGoalTeamKrs from "./ChartGoalTeamKrs"
+import ChartGoalQuartely from "./ChartGoalQuartely"
+import ChartGoalYearly from "./ChartGoalYearly"
+import ChartGoalTeamQuartely from "./ChartGoalTeamQuartely"
+import ChartGoalTeamYearly from "./ChartGoalTeamYearly"
 
 const TeamKrModal = ({
     closeModal,
@@ -10,6 +12,7 @@ const TeamKrModal = ({
     isOpen,
     stateDone,
     goalTeamKrsUpdate,
+    historyGoalTeamKrs,
     done
 }) => {
 
@@ -47,23 +50,23 @@ const TeamKrModal = ({
                     </div>
 
                     <div className="w-[60%] self-center">
-                        <ChartGoalKrs
-                            /*
+                        <ChartGoalTeamQuartely
+                            
                             items={
-                                historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                                historyGoalTeamKrs.filter(e => e?.idGoalsTeamKr === krs.idgoalTeamsKr)
                             }
-                            */
+                            
                             title={"Trimestral"}
                         />
                     </div>
 
                     <div className="w-[60%] self-center mt-8">
-                        <ChartGoalTeamKrs
-                            /*
+                        <ChartGoalTeamYearly
+                            
                             items={
-                                historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                                historyGoalTeamKrs.filter(e => e?.idGoalsTeamKr === krs.idgoalTeamsKr)
                             }
-                            */
+                            
                             title={"Anual"}
                         />
                     </div>

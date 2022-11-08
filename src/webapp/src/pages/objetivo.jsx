@@ -337,6 +337,7 @@ function Objetivo() {
               idGoal={idGoal}
               goalTeamByKrs={goalTeamByKrs}
               item={itemGoal}
+              historyGoalTeamKrs={historyGoalTeamKrs}
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import moment from "moment";
 import StockChart from "./chart"
 
-const ChartGoalKrs = ({ items = [], title = "" }) => {
+const ChartGoalQuartely = ({ items = [], title = "" }) => {
   const historyDate = items.map(x => moment(x.updatedAt).format('DD/MM'))
   historyDate.unshift("start")
 
@@ -35,4 +35,4 @@ const ChartGoalKrs = ({ items = [], title = "" }) => {
   )
 }
 
-export default ChartGoalKrs
+export default ChartGoalQuartely
