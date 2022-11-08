@@ -13,6 +13,7 @@ import goalsTeamApi from '../api/goalsTeamApi';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import AddTeam from '../components/addTeam';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
+import historyGoalKrApi from '../api/historyGoalKrApi';
 
 function Objetivo() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
@@ -87,7 +88,7 @@ function Objetivo() {
   }
 
   const handleHistoryGoalKrs = async () => {
-    const {data} = await historyGoalTeamKrApi.getByKrs()
+    const {data} = await historyGoalKrApi.getAll(idCompany)
 
     setHistoryGoalKrs(data)
   }

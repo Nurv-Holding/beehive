@@ -1,14 +1,14 @@
 import Modal from "./empresasTabPanels/objetivos/components/Modal"
 import { useContext, useState } from 'react'
-import { calcDate, calcPercentage } from '../utilis';
-import TaskPercentage from './TaskPercentage';
+import { calcPercentage } from '../utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { json, useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
-import ChartQuartelyGoalKrs from "./ChartQuartelyGoalKrs";
+import ChartGoalKrs from "./ChartGoalKrs";
+import ChartGoalTeamKrs from "./ChartGoalTeamKrs";
 
 function TeamObjectivesTable({
   goalKrs,
@@ -38,22 +38,27 @@ function TeamObjectivesTable({
     setIsOpen(true)
   }
 
-  const goalKrsUpdate = (idGoalKrs, quaPercentage, yeaPercentage) => {
+  const goalKrsUpdate = () => {
     const data = { done: done + goalKr?.doneGoalsKr }
 
     const newData = {
       idGoal: parseInt(idGoal),
-      idGoalKr: idGoalKrs,
-      quaPercentage,
-      yeaPercentage
+      idGoalKr: goalKr.idgoalsKr,
+      quaPercentage:calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),
+      yeaPercentage:calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)
     }
 
-    goalKrsApi.update(idGoalKrs, data)
+    console.log("goalKr",goalKr)
+
+    console.log("newData",newData)
+
+    goalKrsApi.update(goalKr.idgoalsKr, data)
       .then(() => {
         setMessage("Atualizado")
 
         historyGoalKrApi.create(idCompany, newData)
 
+        console.log("queryUpdate",queryUpdate)
         setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
@@ -115,15 +120,25 @@ function TeamObjectivesTable({
                   </div>
                 </div>
 
-                <ChartQuartelyGoalKrs
-                  historyGoalKrs={
-                    historyGoalKrs.filter(e => e.idGoal === goalKr.idGoal && e.idGoalKr === goalKr.idgoalsKr)
+                <ChartGoalKrs
+                  items={
+                    historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
                   }
+                  title={"Trimestral"}
+                />
+
+                <ChartGoalTeamKrs
+                  items={
+                    historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                  }
+                  title={"Anual"}
                 />
 
               </Disclosure.Panel>
               <Modal isOpen={isOpen} closeModal={closeModal}>
+                
                 <span className="text-gray-600 text-xs mx-2">
+                {JSON.stringify(goalKr.doneGoalsKr)}
                   Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
                 </span>
                 <div className="flex flex-col gap-[2%] mt-4">
@@ -131,7 +146,7 @@ function TeamObjectivesTable({
                     <div>
                       <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
                     </div>
-                    <button type="button" onClick={() => { goalKrsUpdate(goalKr.idgoalsKr, calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs), calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)) }} className="submit-button">OK</button>
+                    <button type="button" onClick={() => { goalKrsUpdate()}} className="submit-button">OK</button>
                   </div>
                 </div>
               </Modal>
