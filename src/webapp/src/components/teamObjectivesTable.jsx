@@ -40,6 +40,7 @@ function TeamObjectivesTable({
 
   const goalKrsUpdate = () => {
     const data = { done: done + goalKr?.doneGoalsKr }
+    setQueryUpdate((x) => !x)
 
     const newData = {
       idGoal: parseInt(idGoal),
@@ -59,7 +60,7 @@ function TeamObjectivesTable({
         historyGoalKrApi.create(idCompany, newData)
 
         console.log("queryUpdate", queryUpdate)
-        setQueryUpdate((x) => !x)
+        
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: `?update=${queryUpdate}`

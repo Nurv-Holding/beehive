@@ -5,7 +5,7 @@ const ChartGoalTeamYearly = ({ items = [], title = "" }) => {
   const historyDate = items.map(x => moment(x.updatedAt).format('DD/MM'))
   historyDate.unshift("start")
 
-  const historyPercentage = items.map(x => x.yeaPercentage)
+  const historyPercentage = items.map(x => x.yeaPercentageHistory)
   historyPercentage.push(100)
   historyPercentage.unshift(0)
 

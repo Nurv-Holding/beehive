@@ -56,8 +56,11 @@ from historyGoalsTeamKrs as hgtk join goalTeamKrs as gtk on hgtk.idGoalsTeamKr=g
 join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
 join goalsTeams as gt on pgt.idGoalsTeam=gt.id;
 
-select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalsKr,
+select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,
+hgk.quaPercentage, hgk.yeaPerventage, gk.name as nameGoalKr
+from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
+join goalKrs as gk on hgk.idGoalKr=gk.id;
 
 
 
-select * from historyGoalsTeamKrs;
+select * from historyGoalKrs;
