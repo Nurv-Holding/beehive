@@ -32,8 +32,17 @@ const TeamKrModal = ({
                     <div className="flex flex-col gap-[2%] mt-4">
                         <span>Meta Trimestral <span className="text-gray-600 text-xs"> {krs.quarterlyGoalsTeamKr} </span></span>
                         <div className='percentage-container-disclosure w-[90%] mt-2'>
-                            <div className='percentage-bar-disclosure w-[45%]'></div>
+                            <div className='percentage-bar-quartely'></div>
                         </div>
+                            <style>{`
+                                .percentage-bar-quartely {
+                                  height: 1rem;
+                                  border-radius: 0.25rem;
+                                  --tw-bg-opacity: 1;
+                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  width: ${calcPercentage(krs.doneGoalsTeamKr, krs.quarterlyGoalsTeamKr)}%;
+                                }
+                            `}</style>
                         <span className="text-xs">{calcPercentage(krs.doneGoalsTeamKr, krs.quarterlyGoalsTeamKr)}% concluído</span>
                         <span className="text-gray-600 text-sm mt-2">Atual: {krs.doneGoalsTeamKr}</span>
                     </div>
@@ -41,8 +50,17 @@ const TeamKrModal = ({
                     <div className="flex flex-col gap-[2%] mt-4">
                         <span>Meta Anual <span className="text-gray-600 text-xs"> {krs.yearlyGoalsTeamKr} </span></span>
                         <div className='percentage-container-disclosure w-[90%] mt-2'>
-                            <div className='percentage-bar-disclosure w-[45%]'></div>
+                            <div className='percentage-bar-yearly'></div>
                         </div>
+                        <style>{`
+                                .percentage-bar-yearly {
+                                  height: 1rem;
+                                  border-radius: 0.25rem;
+                                  --tw-bg-opacity: 1;
+                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  width: ${calcPercentage(krs.doneGoalsTeamKr, krs.yearlyGoalsTeamKr)}%;
+                                }
+                            `}</style>
                         <span className="tetx-xs">{calcPercentage(krs.doneGoalsTeamKr, krs.yearlyGoalsTeamKr)}% concluído</span>
                         <span className="text-gray-600 text-sm mt-2">Atual: {krs.doneGoalsTeamKr}</span>
                     </div>

@@ -3,12 +3,13 @@ import { useContext, useState } from 'react'
 import { calcPercentage } from '../utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
-import { json, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
 import ChartGoalQuartely from "./ChartGoalQuartely";
 import ChartGoalYearly from "./ChartGoalYearly";
+import { useEffect } from "react";
 
 function TeamObjectivesTable({
   goalKrs,
@@ -49,10 +50,6 @@ function TeamObjectivesTable({
       yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)
     }
 
-    console.log("goalKr", goalKr)
-
-    console.log("newData", newData)
-
     goalKrsApi.update(goalKr.idgoalsKr, data)
       .then(() => {
         setMessage("Atualizado")
@@ -77,11 +74,11 @@ function TeamObjectivesTable({
 
   return (
     <>
-      {(goalKrs || []).map((goalKr) => {
+      {(goalKrs || []).map((goalKr, i) => {
         return (
-          <div className="bg-white rounded-md p-0.5 mt-4 flex flex-col">
+          <div key={i} className="bg-white rounded-md p-0.5 mt-4 flex flex-col">
             <Disclosure>
-              <Disclosure.Button key={goalKr.id} className='flex flex-row items-center justify-around w-full bg-white p-4 cursor-pointer'>
+              <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white p-4 cursor-pointer'>
                 <div className='flex items-center'>
                   <span> {goalKr.nameGoalsKr} </span>
                   <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
@@ -100,8 +97,17 @@ function TeamObjectivesTable({
                     <div className="flex flex-col gap-[2%] mt-4">
                       <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
-                        <div className='percentage-bar-disclosure w-[45%]'></div>
+                        <div className="percentage-bar-quartely"></div>
                       </div>
+                            <style>{`
+                                .percentage-bar-quartely {
+                                  height: 1rem;
+                                  border-radius: 0.25rem;
+                                  --tw-bg-opacity: 1;
+                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.QuarterlyGoalKrs)}%;
+                                }
+                            `}</style>
                       <span className="text-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.QuarterlyGoalKrs)}% concluído</span>
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
@@ -109,8 +115,17 @@ function TeamObjectivesTable({
                     <div className="flex flex-col gap-[2%] mt-4">
                       <span>Meta Anual <span className="text-gray-600 text-xs">{goalKr.yearlyGoalsKr}</span></span>
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
-                        <div className='percentage-bar-disclosure w-[45%]'></div>
+                        <div className='percentage-bar-yearly'></div>
                       </div>
+                            <style>{`
+                                .percentage-bar-yearly {
+                                  height: 1rem;
+                                  border-radius: 0.25rem;
+                                  --tw-bg-opacity: 1;
+                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.yearlyGoalsKr)}%;
+                                }
+                            `}</style>
                       <span className="tetx-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.yearlyGoalsKr)}% concluído</span>
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
@@ -141,9 +156,7 @@ function TeamObjectivesTable({
 
               </Disclosure.Panel>
               <Modal isOpen={isOpen} closeModal={closeModal}>
-
                 <span className="text-gray-600 text-xs mx-2">
-                  {JSON.stringify(goalKr.doneGoalsKr)}
                   Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
                 </span>
                 <div className="flex flex-col gap-[2%] mt-4">

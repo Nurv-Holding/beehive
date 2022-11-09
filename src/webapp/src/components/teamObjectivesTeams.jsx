@@ -137,10 +137,10 @@ function TeamObjectivesTeams({
 
   return (
     <>
-      {(goalTeamsByTeam || []).map((goalTeams) => {
+      {(goalTeamsByTeam || []).map((goalTeams, i) => {
         return (
           <>
-            <Disclosure>
+            <Disclosure key={i}>
               <div className='flex flex-col w-full bg-white p-4 my-4 rounded-lg'>
                 <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white rounded-lg cursor-pointer'>
                   <div className='flex items-center'>
@@ -167,10 +167,10 @@ function TeamObjectivesTeams({
                 </Disclosure.Button>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
-                  {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x) => {
+                  {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x,i) => {
                     return (
                       <>
-                      <div className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
+                      <div key={i} className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
                         <span className=''> {x.nameGoalTeam}
                           <span className="text-gray-400 text-xs mx-2"> descrição </span>
                         </span>
@@ -188,10 +188,10 @@ function TeamObjectivesTeams({
                       </div>
 
                         <div className='flex flex-col items-center rounded-b-md bg-[#c3c2c2]'>
-                          {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr) => {
+                          {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div className='flex flex-row justify-around items-center w-full px-2'>
+                                <div key={i} className='flex flex-row justify-around items-center w-full px-2'>
                                   <div className='w-2/4'>
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
