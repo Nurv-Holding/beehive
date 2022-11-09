@@ -4,4 +4,4 @@
 
 # Comando para executar o front
 
-## npm start -w project-beehive-webap
+## npm start -w project-beehive-webapp
