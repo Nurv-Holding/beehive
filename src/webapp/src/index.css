@@ -382,3 +382,14 @@ header nav span:hover{
 /*End Tarefas Cards*/
 /*End Empresas*/
 
+/*login*/
+.login-container {
+    @apply bg-white w-2/4 mt-[20%] rounded-md overflow-hidden 
+}
+.login-title {
+   @apply text-xl flex flex-col items-center mt-7
+}
+.login-form-container {
+    @apply bg-pink-300 flex flex-col items-center justify-center mt-7 gap-5
+}
+/*end login*/
