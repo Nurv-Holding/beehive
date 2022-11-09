@@ -57,7 +57,7 @@ function TeamObjectivesTable({
         historyGoalKrApi.create(idCompany, newData)
 
         console.log("queryUpdate", queryUpdate)
-        
+
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: `?update=${queryUpdate}`
@@ -99,7 +99,7 @@ function TeamObjectivesTable({
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
                         <div className="percentage-bar-quartely"></div>
                       </div>
-                            <style>{`
+                      <style>{`
                                 .percentage-bar-quartely {
                                   height: 1rem;
                                   border-radius: 0.25rem;
@@ -117,7 +117,7 @@ function TeamObjectivesTable({
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
                         <div className='percentage-bar-yearly'></div>
                       </div>
-                            <style>{`
+                      <style>{`
                                 .percentage-bar-yearly {
                                   height: 1rem;
                                   border-radius: 0.25rem;
@@ -133,6 +133,23 @@ function TeamObjectivesTable({
                     <button className="modal-btn h-[30px] mt-2" onClick={() => openModal(goalKr)}>
                       Atualizar valores
                     </button>
+
+                    <div className="w-2/4">
+                      <Modal isOpen={isOpen} closeModal={closeModal}>
+                        <span className="text-gray-600 text-xs mx-2">
+                          Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
+                        </span>
+                        <div className="flex flex-col gap-[2%] mt-4">
+                          <div className="flex gap-2 items-center">
+                            <div>
+                              <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
+                            </div>
+                            <button type="button" onClick={() => { goalKrsUpdate() }} className="submit-button">OK</button>
+                          </div>
+                        </div>
+                      </Modal>
+                    </div>
+
                   </div>
                 </div>
 
@@ -155,19 +172,6 @@ function TeamObjectivesTable({
                 </div>
 
               </Disclosure.Panel>
-              <Modal isOpen={isOpen} closeModal={closeModal}>
-                <span className="text-gray-600 text-xs mx-2">
-                  Atualizado em: {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}
-                </span>
-                <div className="flex flex-col gap-[2%] mt-4">
-                  <div className="flex gap-2 items-center">
-                    <div>
-                      <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
-                    </div>
-                    <button type="button" onClick={() => { goalKrsUpdate() }} className="submit-button">OK</button>
-                  </div>
-                </div>
-              </Modal>
             </Disclosure>
           </div>
         )
