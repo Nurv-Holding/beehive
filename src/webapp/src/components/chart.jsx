@@ -64,7 +64,7 @@ const StockChart = ({ info, title }) => {
 
     return (
         <>
-                <div className="w-full rounded bg-indigo-500 text-white">
+                <div className="w-full rounded bg-[#5500c3] text-white">
                     <Line type="line" data={data} options={options} />
                 </div>
 

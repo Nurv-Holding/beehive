@@ -64,7 +64,7 @@ const TeamKrModal = ({
                         <span className="text-gray-600 text-sm mt-2">Atual: {krs.doneGoalsTeamKr}</span>
                     </div>
 
-                    {/* <div className="w-[60%] self-center">
+                    <div className="w-[60%] self-center">
                         <ChartGoalTeamQuartely
                             
                             items={
@@ -84,7 +84,7 @@ const TeamKrModal = ({
                             
                             title={"Anual"}
                         />
-                    </div> */}
+                    </div>
                 </div>
             </Modal>
         </div>

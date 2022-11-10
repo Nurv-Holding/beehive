@@ -153,7 +153,7 @@ function TeamObjectivesTable({
                   </div>
                 </div>
 
-                {/* <div>
+                <div>
                   <ChartGoalQuartely
                     items={
                       historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
@@ -169,7 +169,7 @@ function TeamObjectivesTable({
                     }
                     title={"Anual"}
                   />
-                </div> */}
+                </div>
 
               </Disclosure.Panel>
             </Disclosure>
