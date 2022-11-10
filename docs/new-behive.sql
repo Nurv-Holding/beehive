@@ -48,7 +48,7 @@ from processGoalsTeams as pgt left join goalsTeams as gt on pgt.idGoalsTeam=gt.i
 left join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
 left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id where pgt.idCompany=1 and t.id=1 group by pgt.idTeam;
 
-/*Projeção de historico de krs de objetivo de time()*/
+/*Projeção de historico de krs de objetivo de time(progectionHistoryGoalTeamKrByKr)*/
 select gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gtk.updatedAt as updateGoalTeamKr, 
 gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, hgtk.id as idHistoryGoalTeamsKr,
 hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory
@@ -56,11 +56,17 @@ from historyGoalsTeamKrs as hgtk join goalTeamKrs as gtk on hgtk.idGoalsTeamKr=g
 join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
 join goalsTeams as gt on pgt.idGoalsTeam=gt.id;
 
+/*Projeção de historico de krs(historyGoalsKrsController)*/
 select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,
 hgk.quaPercentage, hgk.yeaPerventage, gk.name as nameGoalKr
 from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
 join goalKrs as gk on hgk.idGoalKr=gk.id;
 
-
+/*Projeção de times e integrantes(historyGoalsKrsController)*/
+select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, u.occupation as occupationUser,
+u.email as emailUser, u.photo as photoUser, p.name as profile, t.id as idTeam, t.name as nameTeam
+from teamUsers as tu join users as u on tu.idUser=u.id
+join profiles as p on u.idProfile=p.id
+join teams as t on tu.idTeam=t.id;
 
 select * from historyGoalKrs;

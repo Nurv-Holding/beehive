@@ -113,9 +113,10 @@ const routes = (app) => {
     app.delete("/teams/:id",teamsController.remove)
 
     //teamUsers
-    app.post("/members/teams",teamUsersController.create)
+    app.post("/members/teams/c/:idCompany",teamUsersController.create)
     app.get("/members/:id/teams",teamUsersController.getById)
-    app.get("/members/teams",teamUsersController.getAll)
+    app.get("/members/p/teams/c/:idCompany",teamUsersController.getAllTeamsAndUsers)
+    app.get("/members/teams/c/:idCompany",teamUsersController.getAll)
     app.put("/members/:id/teams",teamUsersController.update)
     app.delete("/members/:id/teams",teamUsersController.remove)
 
