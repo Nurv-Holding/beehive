@@ -26,7 +26,7 @@ const TeamKrModal = ({
                         <div>
                             <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
                         </div>
-                        <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.yearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.quarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
+                        <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
                     </div>
                     <div className="flex flex-col gap-[2%] mt-4">
                         <span>Meta Trimestral <span className="text-gray-600 text-xs"> {krs.fromQuarterlyGoalsTeamKr} </span></span>

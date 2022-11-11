@@ -73,16 +73,20 @@ function TeamObjectivesTeams({
     if(Object.keys(item).length === 0 || 
     item.name === "" || 
     item.descriptions === "" ||
-    item.quarterly === "" ||
-    item.yearly === ""
+    item.toQuarterly === "" ||
+    item.toYearly === "" ||
+    item.fromQuarterly === "" ||
+    item.fromYearly === ""
     ){
       setMessage("Precisa preeencher os campos vazios")
     } else {
       const data = {
         ...item,
         idGoalsTeam,
-        quarterly: parseInt(item.quarterly),
-        yearly: parseInt(item.yearly)
+        toQuarterly: parseInt(item.toQuarterly),
+        toYearly: parseInt(item.toYearly),
+        fromQuarterly: parseInt(item.fromQuarterly),
+        fromYearly: parseInt(item.fromYearly)
       }
 
       goalTeamsKrsApi.create(idCompany, data)
