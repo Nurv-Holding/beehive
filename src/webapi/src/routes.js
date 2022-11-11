@@ -22,6 +22,7 @@ const processGoalTeamController = require("./controllers/processGoalTeamControll
 const projectionGoalsTeam = require("./controllers/projectionGoalsTeam")
 const historyGoalsTeamKrsController = require("./controllers/historyGoalsTeamKrsController")
 const historyGoalsKrsController = require("./controllers/historyGoalsKrsController")
+const taskUsersController = require("./controllers/taskUsersControler")
 
 const routes = (app) => {
     //users
@@ -128,10 +129,9 @@ const routes = (app) => {
     app.put("/tasks/:id",tasksController.update)
     app.delete("/tasks/:id",tasksController.remove)
 
-        //taskSubtasks
-        app.get("/tasks/:idTask/subtasks/c/:idCompany",taskSubtasksController().getById)
-        app.get("/tasks/t/:idTask/q/subtasks/c/:idCompany",taskSubtasksController().getByIdQuantifySubtasks)
-        app.get("/tasks/t/:idTask/q/subtasks/c/:idCompany/done",taskSubtasksController().getQuantifySubtasksDone)
+        //taskUsers
+        app.get("/taskUsers/c/:idCompany",taskUsersController.getAll)
+        app.post("/taskUsers/c/:idCompany",taskUsersController.create)
 
     //subtasks
     app.post("/subtasks",subtasksController.create)

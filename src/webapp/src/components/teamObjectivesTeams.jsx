@@ -6,6 +6,9 @@ import AddTeamKr from './addTeamKr';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import TeamKrModal from './teamKrModal';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
+import tasksApi from '../api/tasksApi';
+import teamsUsersApi from '../api/teamsUsersApi';
+import taskUsersApi from '../api/taskUsersApi';
 
 function TeamObjectivesTeams({
   teams = null,
@@ -105,6 +108,51 @@ function TeamObjectivesTeams({
           setMessage("Algo deu errado!")
         })
     }
+  }
+
+  const createTask = async (idGoalsTeamKr) => {
+    const {data} = await tasksApi.create(idCompany, {...item,idGoalsTeamKr})
+    const idTaskCreated = data.id
+
+    const newData = {
+      idTeamUser: null,
+      idTask: idTaskCreated
+    }
+
+    taskUsersApi.create(idCompany, newData)
+    .then(() => {
+      setMessage("Tarefa criada com sucesso")
+      navigate({
+        pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+        search: '?update=true'
+      })
+      searchParams.delete("update")
+
+      closeModalTeamKr()
+    })
+    .catch((error) => {
+      console.error(error)
+      setMessage("Algo deu errado!")
+    })
+
+  }
+
+  const updateTask = (idTaskUser, idTeamUser) => {
+    taskUsersApi.update(idTaskUser, { idTeamUser })
+    .then(() => {
+      setMessage("Usuário adicionado com sucesso")
+      navigate({
+        pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+        search: '?update=true'
+      })
+      searchParams.delete("update")
+
+      closeModalTeamKr()
+    })
+    .catch((error) => {
+      console.error(error)
+      setMessage("Algo deu errado!")
+    })
   }
 
   const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
