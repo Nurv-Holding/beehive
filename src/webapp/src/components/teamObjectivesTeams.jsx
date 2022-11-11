@@ -9,6 +9,7 @@ import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import tasksApi from '../api/tasksApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import taskUsersApi from '../api/taskUsersApi';
+import AddTask from './addTask';
 
 function TeamObjectivesTeams({
   teams = null,
@@ -34,13 +35,24 @@ function TeamObjectivesTeams({
   const [done, setDone] = useState(0)
   const [idGoalsTeam, setIdGoalsTeam] = useState(null)
   const [goalKr, setGoalKr] = useState({})
+  const [addTaskModal, setAddTaskModal] = useState(false)
   const [isOpenTeam, setIsOpenTeam] = useState(false)
   const [krsByTeam, setKrsByTeam] = useState([])
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
+  const [itemTask, setItemTask] = useState({name:"", finalDate:""})
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
+  }
+
+  const closeAddTaskModal = () => {
+    setAddTaskModal(false)
+  }
+
+  const openAddTaskModal = (items) => {
+    setAddTaskModal(true)
+    setKrs(items)
   }
 
   function closeTeamKrModal() {
@@ -110,8 +122,17 @@ function TeamObjectivesTeams({
     }
   }
 
-  const createTask = async (idGoalsTeamKr) => {
-    const {data} = await tasksApi.create(idCompany, {...item,idGoalsTeamKr})
+  const changeModal = ({ target }) => {
+    setItemTask((state) => {
+      return {...state,[target.name]: target.value}
+    })
+  }
+
+  const createTask = async (event) => {
+    event.preventDefault()
+
+    const idGoalsTeamKr = krs.idgoalTeamsKr
+    const {data} = await tasksApi.create(idCompany, {...itemTask,idGoalsTeamKr})
     const idTaskCreated = data.id
 
     const newData = {
@@ -243,12 +264,15 @@ function TeamObjectivesTeams({
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div key={i} className='flex flex-row justify-around items-center w-full px-2'>
+                                <div key={i} className='flex items-center w-full px-2'>
                                   <div className='w-2/4'>
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
-                                  <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>
+                                  <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer w-2/4'>
                                       Metas
+                                  </span>
+                                  <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center w-2/4'>
+                                      Adicionar Tarefas
                                   </span>
                                   <TeamKrModal
                                     stateDone={stateDone}
@@ -260,6 +284,14 @@ function TeamObjectivesTeams({
                                     historyGoalTeamKrs={historyGoalTeamKrs}
                                     krs={krs}
                                     goalTeamKrsUpdate={goalTeamKrsUpdate}
+                                  />
+                                  <AddTask
+                                    isOpen={addTaskModal}
+                                    message={message}
+                                    closeModal={closeAddTaskModal}
+                                    modelChange={changeModal}
+                                    createTask={createTask}
+                                    item={itemTask}
                                   />
                                 </div>
                               </>

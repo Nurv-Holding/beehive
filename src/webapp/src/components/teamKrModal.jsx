@@ -17,6 +17,7 @@ const TeamKrModal = ({
     return (
         <div className="w-2/4">
             <Modal isOpen={isOpen} closeModal={closeModal}>
+            {JSON.stringify(krs)}
                 <span className="text-lg uppercase mx-2">{krs.nameGoalTeam}</span>
                 {JSON.stringify(krs.idTeam)}
                 <span className="text-gray-600 text-xs mx-2">
