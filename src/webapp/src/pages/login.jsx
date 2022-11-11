@@ -7,17 +7,17 @@ const Login = () => {
                 <div className="login-container">
                     <h1 className="login-title">Entre em sua conta</h1>
                     <form className="login-form-container">
-                        <div>
+                        <div className="w-[65%]">
                         <label htmlFor="">Usuário</label>
                         <input className="input-style" type="text" placeholder="Escreva seu usuário"/>
                         </div>
               
-                        <div>
+                        <div className="w-[65%]">
                         <label htmlFor="">Senha</label>
                         <input className="input-style" type="password" placeholder="Escreva sua senha" />    
                         </div>
                         
-                        <button className="submit-button" type= "submit">Entrar no portal</button>
+                        <button className="form-submit-button" type= "submit">Entrar no portal</button>
                     </form>
                 </div>
             </main>
