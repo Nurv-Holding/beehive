@@ -144,8 +144,10 @@ model GoalTeamKr {
   idGoalsTeam        Int
   name               String
   descriptions       String
-  quarterly          Int
-  yearly             Int
+  toQuarterly        Int
+  fromQuarterly      Int
+  toYearly           Int
+  fromYearly         Int
   done               Int                  @default(0)
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
@@ -163,8 +165,10 @@ model GoalKr {
   idGoal        Int
   name          String
   descriptions  String
-  quarterly     Int
-  yearly        Int
+  toQuarterly   Int
+  fromQuarterly Int
+  toYearly      Int
+  fromYearly    Int
   done          Int             @default(0)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
@@ -231,19 +235,6 @@ model TaskUser {
   updatedAt  DateTime  @updatedAt
   teamUser   TeamUser? @relation(fields: [idTeamUser], references: [id], onDelete: Cascade)
   task       Task      @relation(fields: [idTask], references: [id], onDelete: Cascade)
-  SubTask    SubTask[]
 
   @@map("taskUsers")
-}
-
-model SubTask {
-  id         Int      @id @default(autoincrement())
-  idTaskUser Int
-  name       String
-  done       Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  taskUser   TaskUser @relation(fields: [idTaskUser], references: [id], onDelete: Cascade)
-
-  @@map("subTasks")
 }

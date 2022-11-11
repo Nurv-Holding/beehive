@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/header';
-import TeamObjectivesNewTask from '../components/teamObjectivesNewTask';
+import AddKr from '../components/addKr';
 import TeamObjectivesTable from '../components/teamObjectivesTable';
 import TeamObjectivesTeams from '../components/teamObjectivesTeams';
 import { ContextUser } from '../context/ContextUser';
@@ -249,8 +249,10 @@ function Objetivo() {
     const data = {
       ...item,
       idGoal: parseInt(idGoal),
-      quarterly: parseInt(item.quarterly),
-      yearly: parseInt(item.yearly)
+      toQuarterly: parseInt(item.toQuarterly),
+      toYearly: parseInt(item.toYearly),
+      fromQuarterly: parseInt(item.fromQuarterly),
+      fromYearly: parseInt(item.fromYearly)
     }
 
     goalKrsApi.create(1, data)
@@ -284,7 +286,7 @@ function Objetivo() {
             </div>
 
             <div className='container-percentage-okr flex flex-row justify-around'>
-              <TeamObjectivesNewTask
+              <AddKr
                 message={message}
                 nameGoal={goal.name}
                 handleSubmit={handleSubmit}

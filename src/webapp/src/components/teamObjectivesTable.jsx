@@ -46,8 +46,8 @@ function TeamObjectivesTable({
     const newData = {
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr.idgoalsKr,
-      quaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.QuarterlyGoalKrs),
-      yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.yearlyGoalsKr)
+      quaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromQuarterlyGoalKrs),
+      yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromYearlyGoalsKr)
     }
 
     goalKrsApi.update(goalKr.idgoalsKr, data)
@@ -95,7 +95,7 @@ function TeamObjectivesTable({
                 <div className="flex flex-col items-center">
                   <div className="w-full">
                     <div className="flex flex-col gap-[2%] mt-4">
-                      <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.QuarterlyGoalKrs}</span></span>
+                      <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.fromQuarterlyGoalKrs}</span></span>
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
                         <div className="percentage-bar-quartely"></div>
                       </div>
@@ -105,15 +105,15 @@ function TeamObjectivesTable({
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
                                   background-color: rgb(85 0 195 / var(--tw-bg-opacity));
-                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.QuarterlyGoalKrs)}%;
+                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromQuarterlyGoalKrs)}%;
                                 }
                             `}</style>
-                      <span className="text-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.QuarterlyGoalKrs)}% concluído</span>
+                      <span className="text-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.fromQuarterlyGoalKrs)}% concluído</span>
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
 
                     <div className="flex flex-col gap-[2%] mt-4">
-                      <span>Meta Anual <span className="text-gray-600 text-xs">{goalKr.yearlyGoalsKr}</span></span>
+                      <span>Meta Anual <span className="text-gray-600 text-xs">{goalKr.fromYearlyGoalsKr}</span></span>
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
                         <div className='percentage-bar-yearly'></div>
                       </div>
@@ -123,10 +123,10 @@ function TeamObjectivesTable({
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
                                   background-color: rgb(85 0 195 / var(--tw-bg-opacity));
-                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.yearlyGoalsKr)}%;
+                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromYearlyGoalsKr)}%;
                                 }
                             `}</style>
-                      <span className="tetx-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.yearlyGoalsKr)}% concluído</span>
+                      <span className="tetx-xs">{calcPercentage(goalKr.doneGoalsKr, goalKr.fromYearlyGoalsKr)}% concluído</span>
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
 
@@ -153,7 +153,7 @@ function TeamObjectivesTable({
                   </div>
                 </div>
 
-                {/* <div>
+                <div>
                   <ChartGoalQuartely
                     items={
                       historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
@@ -169,7 +169,7 @@ function TeamObjectivesTable({
                     }
                     title={"Anual"}
                   />
-                </div> */}
+                </div>
 
               </Disclosure.Panel>
             </Disclosure>
