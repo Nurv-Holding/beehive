@@ -17,9 +17,7 @@ const TeamKrModal = ({
     return (
         <div className="w-2/4">
             <Modal isOpen={isOpen} closeModal={closeModal}>
-            {JSON.stringify(krs)}
                 <span className="text-lg uppercase mx-2">{krs.nameGoalTeam}</span>
-                {JSON.stringify(krs.idTeam)}
                 <span className="text-gray-600 text-xs mx-2">
                     Atualizado em: {moment(krs.updateGoalsTeamKrs).format("DD/MM/YY")}
                 </span>
@@ -31,7 +29,11 @@ const TeamKrModal = ({
                         <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
                     </div>
                     <div className="flex flex-col gap-[2%] mt-4">
-                        <span>Meta Trimestral <span className="text-gray-600 text-xs"> {krs.fromQuarterlyGoalsTeamKr} </span></span>
+                    <h5>Meta Trimestral:</h5>
+                      <div className="flex flex-row">
+                        <span className="text-gray-600 text-xs mr-4">De: {krs.toQuarterlyGoalsTeamKr}</span>
+                        <span className="text-gray-600 text-xs ml-4">Para: {krs.fromQuarterlyGoalsTeamKr}</span>
+                      </div>
                         <div className='percentage-container-disclosure w-[90%] mt-2'>
                             <div className='percentage-bar-quartely'></div>
                         </div>
@@ -49,7 +51,11 @@ const TeamKrModal = ({
                     </div>
 
                     <div className="flex flex-col gap-[2%] mt-4">
-                        <span>Meta Anual <span className="text-gray-600 text-xs"> {krs.fromYearlyGoalsTeamKr} </span></span>
+                    <h5>Meta Anual:</h5>
+                      <div className="flex flex-row">
+                        <span className="text-gray-600 text-xs mr-4">De: {krs.toYearlyGoalsTeamKr}</span>
+                        <span className="text-gray-600 text-xs ml-4">Para: {krs.fromYearlyGoalsTeamKr}</span>
+                      </div>
                         <div className='percentage-container-disclosure w-[90%] mt-2'>
                             <div className='percentage-bar-yearly'></div>
                         </div>

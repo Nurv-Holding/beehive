@@ -26,11 +26,9 @@ const create = async (req, res) => {
     const finalDate = formatDate(req?.body?.finalDate)
     const newData = {...req.body, idCompany, finalDate}
 
-    console.log("newData",newData)
-
     try {
 
-        const data = await prismaClient.task.create(newData)
+        const data = await prismaClient.task.create({data:newData})
         return res.status(200).send(data)
         
     } catch (error) {
@@ -40,6 +38,7 @@ const create = async (req, res) => {
     }
 
 }
+
 
 const tasksController = {
     ...crudFuctions,

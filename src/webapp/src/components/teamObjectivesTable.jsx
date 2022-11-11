@@ -95,7 +95,12 @@ function TeamObjectivesTable({
                 <div className="flex flex-col items-center">
                   <div className="w-full">
                     <div className="flex flex-col gap-[2%] mt-4">
-                      <span>Meta Trimestral <span className="text-gray-600 text-xs">{goalKr.fromQuarterlyGoalKrs}</span></span>
+                      <h5>Meta Trimestral:</h5>
+                      <div className="flex flex-row">
+                        <span className="text-gray-600 text-xs mr-4">De: {goalKr.toQuarterlyGoalKrs}</span>
+                        <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromQuarterlyGoalKrs}</span>
+                      </div>
+
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
                         <div className="percentage-bar-quartely"></div>
                       </div>
@@ -113,7 +118,11 @@ function TeamObjectivesTable({
                     </div>
 
                     <div className="flex flex-col gap-[2%] mt-4">
-                      <span>Meta Anual <span className="text-gray-600 text-xs">{goalKr.fromYearlyGoalsKr}</span></span>
+                    <h5>Meta Anual:</h5>
+                      <div className="flex flex-row">
+                        <span className="text-gray-600 text-xs mr-4">De: {goalKr.toYearlyGoalsKr}</span>
+                        <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromYearlyGoalsKr}</span>
+                      </div>
                       <div className='percentage-container-disclosure w-[90%] mt-2'>
                         <div className='percentage-bar-yearly'></div>
                       </div>
