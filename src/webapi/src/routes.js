@@ -22,6 +22,7 @@ const processGoalTeamController = require("./controllers/processGoalTeamControll
 const projectionGoalsTeam = require("./controllers/projectionGoalsTeam")
 const historyGoalsTeamKrsController = require("./controllers/historyGoalsTeamKrsController")
 const historyGoalsKrsController = require("./controllers/historyGoalsKrsController")
+const taskUsersController = require("./controllers/taskUsersControler")
 
 const routes = (app) => {
     //users
@@ -59,7 +60,7 @@ const routes = (app) => {
         app.put("/goalsKrs/:id",goalsKrsController.update)
         app.delete("/goalsKrs/:id",goalsKrsController.remove)
 
-                  //historyGoalsTeamKrs
+                  //historyGoalsKrs
                   app.post("/hGoalsKrs/history/:idCompany",historyGoalsKrsController.create)
                   app.get("/hGoalsKrs/history/:idCompany",historyGoalsKrsController.getAll)
                   app.delete("/hGoalsKrs/history/:id",historyGoalsKrsController.remove)
@@ -87,6 +88,7 @@ const routes = (app) => {
             //historyGoalsTeamKrs
             app.post("/hGoalsTeamKrs/history/:idCompany",historyGoalsTeamKrsController.create)
             app.get("/hGoalsTeamKrs/history/:idCompany",historyGoalsTeamKrsController.getAll)
+            app.get("/hGoalsTeamKrs/p/history/krs",historyGoalsTeamKrsController.progectionHistoryGoalTeamKrByKr)
             app.delete("/hGoalsTeamKrs/history/:id",historyGoalsTeamKrsController.remove)
 
             //processGoalTeam
@@ -112,9 +114,10 @@ const routes = (app) => {
     app.delete("/teams/:id",teamsController.remove)
 
     //teamUsers
-    app.post("/members/teams",teamUsersController.create)
+    app.post("/members/teams/c/:idCompany",teamUsersController.create)
     app.get("/members/:id/teams",teamUsersController.getById)
-    app.get("/members/teams",teamUsersController.getAll)
+    app.get("/members/p/teams/c/:idCompany",teamUsersController.getAllTeamsAndUsers)
+    app.get("/members/teams/c/:idCompany",teamUsersController.getAll)
     app.put("/members/:id/teams",teamUsersController.update)
     app.delete("/members/:id/teams",teamUsersController.remove)
 
@@ -126,10 +129,9 @@ const routes = (app) => {
     app.put("/tasks/:id",tasksController.update)
     app.delete("/tasks/:id",tasksController.remove)
 
-        //taskSubtasks
-        app.get("/tasks/:idTask/subtasks/c/:idCompany",taskSubtasksController().getById)
-        app.get("/tasks/t/:idTask/q/subtasks/c/:idCompany",taskSubtasksController().getByIdQuantifySubtasks)
-        app.get("/tasks/t/:idTask/q/subtasks/c/:idCompany/done",taskSubtasksController().getQuantifySubtasksDone)
+        //taskUsers
+        app.get("/taskUsers/c/:idCompany",taskUsersController.getAll)
+        app.post("/taskUsers/c/:idCompany",taskUsersController.create)
 
     //subtasks
     app.post("/subtasks",subtasksController.create)

@@ -9,10 +9,10 @@ function profile() {
 
           <div className='flex flex-col self-center cursor-default'>
             <div>
-              <p className='profile-name'>Laura Beatriz</p>
-              <p className='text-desc mb-4'>Customer Sucess</p>
-              <p className='text-desc mb-0.5'>Team Leader</p>
-              <p className='text-desc'>laurabeatriz@gmail.com</p>
+              <p className='profile-name'>Pedro Augusto</p>
+              <p className='text-desc mb-4'>Team Leader</p>
+              <p className='text-desc mb-0.5'>Administrator</p>
+              <p className='text-desc'>pedroaugusto@gmail.com</p>
             </div>
 
             <div className='profile-nav mt-8'>

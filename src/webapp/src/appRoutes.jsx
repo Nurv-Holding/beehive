@@ -6,10 +6,13 @@ import Objetivo from "./pages/objetivo";
 import Users from "./components/Users";
 import Test from "./pages/test";
 
+import Login from "./pages/login";
+
 function AppRoutes() {
   return (
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/teste" element={<Test/>}/>
         <Route path="/empresas/:idCompany" element={<Users />}>
           <Route index element={<Empresas />} />

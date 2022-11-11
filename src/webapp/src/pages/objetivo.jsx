@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/header';
-import TeamObjectivesNewTask from '../components/teamObjectivesNewTask';
+import AddKr from '../components/addKr';
 import TeamObjectivesTable from '../components/teamObjectivesTable';
 import TeamObjectivesTeams from '../components/teamObjectivesTeams';
 import { ContextUser } from '../context/ContextUser';
@@ -12,6 +12,8 @@ import goalKrsApi from '../api/goalKrsApi';
 import goalsTeamApi from '../api/goalsTeamApi';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import AddTeam from '../components/addTeam';
+import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
+import historyGoalKrApi from '../api/historyGoalKrApi';
 
 function Objetivo() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
@@ -24,6 +26,8 @@ function Objetivo() {
   const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
   const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
   const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
+  const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
+  const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [queryUpdate, setQueryUpdate] = useState(false)
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
@@ -44,6 +48,8 @@ function Objetivo() {
     handleGoalTeamsKrs()
     handleGoalTeamByGoalTeam()
     handleGoalTeamByKrs()
+    handleHistoryGoalTeamKrs()
+    handleHistoryGoalKrs()
 
   }, [idGoal, idCompany, update])
 
@@ -73,6 +79,18 @@ function Objetivo() {
 
   function openModalTeam() {
     setIsOpenTeam(true)
+  }
+
+  const handleHistoryGoalTeamKrs = async () => {
+    const {data} = await historyGoalTeamKrApi.getByKrs()
+
+    setHistoryGoalTeamKrs(data)
+  }
+
+  const handleHistoryGoalKrs = async () => {
+    const {data} = await historyGoalKrApi.getAll(idCompany)
+
+    setHistoryGoalKrs(data)
   }
 
   const handleGoalTeamByGoalTeam = async () => {
@@ -231,8 +249,10 @@ function Objetivo() {
     const data = {
       ...item,
       idGoal: parseInt(idGoal),
-      quarterly: parseInt(item.quarterly),
-      yearly: parseInt(item.yearly)
+      toQuarterly: parseInt(item.toQuarterly),
+      toYearly: parseInt(item.toYearly),
+      fromQuarterly: parseInt(item.fromQuarterly),
+      fromYearly: parseInt(item.fromYearly)
     }
 
     goalKrsApi.create(1, data)
@@ -266,7 +286,7 @@ function Objetivo() {
             </div>
 
             <div className='container-percentage-okr flex flex-row justify-around'>
-              <TeamObjectivesNewTask
+              <AddKr
                 message={message}
                 nameGoal={goal.name}
                 handleSubmit={handleSubmit}
@@ -299,6 +319,7 @@ function Objetivo() {
             idCompany={idCompany}
             setQueryUpdate={setQueryUpdate}
             queryUpdate={queryUpdate}
+            historyGoalKrs={historyGoalKrs}
           />
 
           <div className='border-t mt-6 pt-8 border-white'>
@@ -318,6 +339,7 @@ function Objetivo() {
               idGoal={idGoal}
               goalTeamByKrs={goalTeamByKrs}
               item={itemGoal}
+              historyGoalTeamKrs={historyGoalTeamKrs}
             />
           </div>
         </div>

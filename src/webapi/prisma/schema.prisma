@@ -27,20 +27,23 @@ model Company {
   ProcessGoalsTeam   ProcessGoalsTeam[]
   HistoryGoalKr      HistoryGoalKr[]
   HistoryGoalsTeamKr HistoryGoalsTeamKr[]
+  Task               Task[]
+  TaskUser           TaskUser[]
 
   @@map("companies")
 }
 
 model TeamUser {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   idCompany Int
   idUser    Int
   idTeam    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  company   Company  @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [idUser], references: [id])
-  team      Team     @relation(fields: [idTeam], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  company   Company    @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [idUser], references: [id])
+  team      Team       @relation(fields: [idTeam], references: [id], onDelete: Cascade)
+  TaskUser  TaskUser[]
 
   @@map("teamUsers")
 }
@@ -70,7 +73,7 @@ model Profile {
 
 model User {
   id         Int        @id @default(autoincrement())
-  idCompany  Int
+  idCompany  Int?
   idProfile  Int?
   name       String
   photo      String?
@@ -80,7 +83,7 @@ model User {
   roles      String?
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  company    Company    @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  company    Company?   @relation(fields: [idCompany], references: [id], onDelete: Cascade)
   TeamUser   TeamUser[]
 
   @@map("users")
@@ -142,14 +145,17 @@ model GoalTeamKr {
   idGoalsTeam        Int
   name               String
   descriptions       String
-  quarterly          Int
-  yearly             Int
+  toQuarterly        Int
+  fromQuarterly      Int
+  toYearly           Int
+  fromYearly         Int
   done               Int                  @default(0)
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   company            Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
   goalsTeam          GoalsTeam            @relation(fields: [idGoalsTeam], references: [id], onDelete: Cascade)
   HistoryGoalsTeamKr HistoryGoalsTeamKr[]
+  Task               Task[]
 
   @@map("goalTeamKrs")
 }
@@ -160,8 +166,10 @@ model GoalKr {
   idGoal        Int
   name          String
   descriptions  String
-  quarterly     Int
-  yearly        Int
+  toQuarterly   Int
+  fromQuarterly Int
+  toYearly      Int
+  fromYearly    Int
   done          Int             @default(0)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
@@ -202,4 +210,34 @@ model HistoryGoalsTeamKr {
   company           Company          @relation(fields: [idCompany], references: [id], onDelete: Cascade)
 
   @@map("historyGoalsTeamKrs")
+}
+
+model Task {
+  id            Int        @id @default(autoincrement())
+  idGoalsTeamKr Int
+  idCompany     Int
+  name          String
+  finalDate     DateTime
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  goalTeamKr    GoalTeamKr @relation(fields: [idGoalsTeamKr], references: [id], onDelete: Cascade)
+  company       Company    @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  TaskUser      TaskUser[]
+
+  @@map("tasks")
+}
+
+model TaskUser {
+  id         Int       @id @default(autoincrement())
+  idTeamUser Int?
+  idCompany  Int
+  idTask     Int
+  done       Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  teamUser   TeamUser? @relation(fields: [idTeamUser], references: [id], onDelete: Cascade)
+  task       Task      @relation(fields: [idTask], references: [id], onDelete: Cascade)
+  company    Company   @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+
+  @@map("taskUsers")
 }
