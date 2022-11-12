@@ -62,7 +62,6 @@ function TeamObjectivesTable({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
-        searchParams.delete("update")
 
         closeModal()
       })

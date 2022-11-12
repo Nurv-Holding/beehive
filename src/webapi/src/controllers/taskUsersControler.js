@@ -4,7 +4,7 @@ const { prismaClient } = require("../database/prismaClient");
 const crudFunctions = crudControllerFactory(prismaClient.taskUser)
 
 const getByUserAndKrs = async (req, res) => {
-    const {idCompany} = req.params
+    const {idCompany, idGoal} = req.params
 
     try {
         const taskUsers = await prismaClient.$queryRaw`select u.id as idUser, u.name as nameUser, u.email as emailUser, p.name as profile,
@@ -14,7 +14,7 @@ const getByUserAndKrs = async (req, res) => {
         join goalTeamKrs as gtk on tk.idGoalsTeamKr=gtk.id join goalsTeams as gt on gtk.idGoalsTeam=gt.id
         left join teamUsers as tu on tku.idTeamUser=tu.id left join users as u on tu.idUser=u.id
         left join profiles as p on u.idProfile=p.id left join teams as t on tu.idTeam=t.id 
-        where tku.idCompany=${idCompany};`
+        where tku.idCompany=${idCompany} and gt.idGoal=${idGoal};`
 
         res.status(200).send(taskUsers)
         

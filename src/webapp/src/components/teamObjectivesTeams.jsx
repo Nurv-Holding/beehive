@@ -115,11 +115,11 @@ function TeamObjectivesTeams({
       goalTeamsKrsApi.create(idCompany, data)
         .then(() => {
           setMessage("KR criado com sucesso")
+          setQueryUpdate((x) => !x)
           navigate({
             pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-            search: '?update=true'
+            search: `?update=${queryUpdate}`
           })
-          searchParams.delete("update")
 
           closeModalTeamKr()
         })
@@ -156,9 +156,8 @@ function TeamObjectivesTeams({
         pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
         search: `?update=${queryUpdate}`
       })
-      searchParams.delete("update")
 
-      closeModalTeamKr()
+      closeAddTaskModal()
     })
     .catch((error) => {
       console.error(error)
@@ -171,18 +170,15 @@ function TeamObjectivesTeams({
     const user = teamUsers?.filter(e=> e.idUser === parseInt(idUser))[0]
     const idTeamUser = user.idTeamUser
 
-    console.log("idTaskUser", idTaskUser)
-    console.log("idTeamUser", idTeamUser)
-
     taskUsersApi.update(idTaskUser, { idTeamUser })
     .then(() => {
       setMessage("Usuário adicionado com sucesso")
+      setQueryUpdate((x) => !x)
       navigate({
         pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-        search: '?update=true'
+        search: `?update=${queryUpdate}`
       })
-      setUser("")
-      searchParams.delete("update")
+      
     })
     .catch((error) => {
       console.error(error)
@@ -202,16 +198,14 @@ function TeamObjectivesTeams({
           yeaPercentage
         }
 
-        console.log("newData",newData)
-
         historyGoalTeamKrApi.create(idCompany, newData)
 
         setMessage("Atualizado")
+        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: '?update=true'
+          search: `?update=${queryUpdate}`
         })
-        searchParams.delete("update")
 
         closeTeamKrModal()
 
@@ -261,7 +255,7 @@ function TeamObjectivesTeams({
                         <span className=''> {x.nameGoalTeam}
                           <span className="text-gray-400 text-xs mx-2"> descrição </span>
                         </span>
-                        <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>
+                        {x.idGoalTeam && <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>}
                         
                         <AddTeamKr 
                           closeModal={closeModalTeamKr}
@@ -315,6 +309,11 @@ function TeamObjectivesTeams({
                                   setUser={setUser}
                                   updateTask={updateTask}
                                   user={user}
+                                  navigate={navigate}
+                                  idGoal={idGoal}
+                                  idCompany={idCompany}
+                                  setQueryUpdate={setQueryUpdate}
+                                  queryUpdate={queryUpdate}
                                 />
                               </>
 

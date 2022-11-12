@@ -88,7 +88,7 @@ function Objetivo() {
   }
 
   const handleTasksUser = async () => {
-    const {data} = await  taskUsersApi.getByUserAndKrs(idCompany)
+    const {data} = await  taskUsersApi.getByUserAndKrs(idCompany, idGoal)
     setTasksUser(data)
   }
 
@@ -166,10 +166,12 @@ function Objetivo() {
 
     const { data } = await goalsTeamApi.getByTeam(idCompany, idTeam)
 
+    const hasTeam = data.filter(e => e.idGoal == idGoal && e.idTeam == idTeam)
+
     if (Object.keys(item).length === 0) {
       setMessage("Precisa selecionar um time")
 
-    } else if (data.length !== 0) {
+    } else if (hasTeam.length !== 0) {
       setMessage("Time já selecionado")
 
     } else {
@@ -181,7 +183,6 @@ function Objetivo() {
             pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
             search: `?update=${queryUpdate}`
           })
-          searchParams.delete("update")
 
           closeModalTeam()
         })
@@ -224,9 +225,9 @@ function Objetivo() {
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
-        searchParams.delete("update")
 
         closeModalGoalTeam()
+
       })
       .catch((error) => {
         console.error(error)
@@ -242,7 +243,6 @@ function Objetivo() {
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
-        searchParams.delete("update")
 
         closeModalTeam()
       })
@@ -272,7 +272,7 @@ function Objetivo() {
       fromYearly: parseInt(item.fromYearly)
     }
 
-    goalKrsApi.create(1, data)
+    goalKrsApi.create(idCompany, data)
       .then(() => {
         setMessage("KR criado com sucesso")
         setQueryUpdate((x) => !x)
@@ -280,7 +280,6 @@ function Objetivo() {
           pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
-        searchParams.delete("update")
 
         closeModal()
       })

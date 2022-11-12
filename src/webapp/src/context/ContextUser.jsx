@@ -23,6 +23,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerUsers()
         handlerGoals()
         handlerTeams()
+        setItem({})
         
     },[idCompany, update])
 

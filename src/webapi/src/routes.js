@@ -131,7 +131,7 @@ const routes = (app) => {
 
         //taskUsers
         app.get("/taskUsers/c/:idCompany",taskUsersController.getAll)
-        app.get("/taskUsers/user/krs/c/:idCompany",taskUsersController.getByUserAndKrs)
+        app.get("/taskUsers/user/:idGoal/krs/c/:idCompany",taskUsersController.getByUserAndKrs)
         app.post("/taskUsers/c/:idCompany",taskUsersController.create)
         app.put("/taskUsers/:id",taskUsersController.update)
 
