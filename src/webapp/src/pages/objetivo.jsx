@@ -14,6 +14,8 @@ import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import AddTeam from '../components/addTeam';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
+import taskUsersApi from '../api/taskUsersApi';
+import teamsUsersApi from '../api/teamsUsersApi';
 
 function Objetivo() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
@@ -29,6 +31,7 @@ function Objetivo() {
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [queryUpdate, setQueryUpdate] = useState(false)
+  const [teamUsers, setTeamUsers] = useState([])
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
   const [itemGoal, setItemGoal] = useState({name:"",descriptions:""})
@@ -37,6 +40,7 @@ function Objetivo() {
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenTeam, setIsOpenTeam] = useState(false)
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
+  const [tasksUser, setTasksUser] = useState([])
   const update = searchParams.get('update')
 
   useEffect(() => {
@@ -50,6 +54,8 @@ function Objetivo() {
     handleGoalTeamByKrs()
     handleHistoryGoalTeamKrs()
     handleHistoryGoalKrs()
+    handleTasksUser()
+    handleTemaUsers()
 
   }, [idGoal, idCompany, update])
 
@@ -81,10 +87,21 @@ function Objetivo() {
     setIsOpenTeam(true)
   }
 
+  const handleTasksUser = async () => {
+    const {data} = await  taskUsersApi.getByUserAndKrs(idCompany)
+    setTasksUser(data)
+  }
+
+  const handleTemaUsers = async () => {
+    const {data} = await  teamsUsersApi.getAllTeamsAndUsers(idCompany)
+    console.log("users", data)
+    setTeamUsers(data)
+  }
+
   const handleHistoryGoalTeamKrs = async () => {
     const {data} = await historyGoalTeamKrApi.getByKrs()
-
     setHistoryGoalTeamKrs(data)
+
   }
 
   const handleHistoryGoalKrs = async () => {
@@ -340,6 +357,10 @@ function Objetivo() {
               goalTeamByKrs={goalTeamByKrs}
               item={itemGoal}
               historyGoalTeamKrs={historyGoalTeamKrs}
+              tasksUser={tasksUser}
+              teamUsers={teamUsers}
+              setQueryUpdate={setQueryUpdate}
+              queryUpdate={queryUpdate}
             />
           </div>
         </div>

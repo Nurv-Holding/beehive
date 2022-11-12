@@ -84,6 +84,6 @@ t.id as idTeam, t.name as nameTeam from taskUsers as tku join tasks as tk on tku
 join goalTeamKrs as gtk on tk.idGoalsTeamKr=gtk.id join goalsTeams as gt on gtk.idGoalsTeam=gt.id
 left join teamUsers as tu on tku.idTeamUser=tu.id left join users as u on tu.idUser=u.id
 left join profiles as p on u.idProfile=p.id left join teams as t on tu.idTeam=t.id 
-where tku.idCompany=1 and gtk.id=16;  
+where tku.idCompany=1;  
 
 select * from goalTeamKrs;

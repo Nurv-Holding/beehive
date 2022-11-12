@@ -10,6 +10,9 @@ import tasksApi from '../api/tasksApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import taskUsersApi from '../api/taskUsersApi';
 import AddTask from './addTask';
+import { calcDate } from '../utilis';
+import moment from 'moment';
+import ListTasks from './listTasks';
 
 function TeamObjectivesTeams({
   teams = null,
@@ -26,6 +29,10 @@ function TeamObjectivesTeams({
   openModalGoalTeam,
   isOpenGoalTeam,
   goalTeamByKrs,
+  teamUsers,
+  tasksUser,
+  setQueryUpdate,
+  queryUpdate,
   searchParams,
   navigate }) {
 
@@ -34,6 +41,7 @@ function TeamObjectivesTeams({
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
   const [done, setDone] = useState(0)
   const [idGoalsTeam, setIdGoalsTeam] = useState(null)
+  const [user, setUser] = useState(null)
   const [goalKr, setGoalKr] = useState({})
   const [addTaskModal, setAddTaskModal] = useState(false)
   const [isOpenTeam, setIsOpenTeam] = useState(false)
@@ -143,9 +151,10 @@ function TeamObjectivesTeams({
     taskUsersApi.create(idCompany, newData)
     .then(() => {
       setMessage("Tarefa criada com sucesso")
+      setQueryUpdate((x) => !x)
       navigate({
         pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-        search: '?update=true'
+        search: `?update=${queryUpdate}`
       })
       searchParams.delete("update")
 
@@ -158,7 +167,13 @@ function TeamObjectivesTeams({
 
   }
 
-  const updateTask = (idTaskUser, idTeamUser) => {
+  const updateTask = (idTaskUser, idUser) => {
+    const user = teamUsers?.filter(e=> e.idUser === parseInt(idUser))[0]
+    const idTeamUser = user.idTeamUser
+
+    console.log("idTaskUser", idTaskUser)
+    console.log("idTeamUser", idTeamUser)
+
     taskUsersApi.update(idTaskUser, { idTeamUser })
     .then(() => {
       setMessage("Usuário adicionado com sucesso")
@@ -166,9 +181,8 @@ function TeamObjectivesTeams({
         pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
         search: '?update=true'
       })
+      setUser("")
       searchParams.delete("update")
-
-      closeModalTeamKr()
     })
     .catch((error) => {
       console.error(error)
@@ -264,7 +278,7 @@ function TeamObjectivesTeams({
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div key={i} className='flex items-center w-full px-2'>
+                                <div key={i} className='flex items-center w-full p-2'>
                                   <div className='w-2/4'>
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
@@ -294,6 +308,14 @@ function TeamObjectivesTeams({
                                     item={itemTask}
                                   />
                                 </div>
+                                <ListTasks
+                                  tasksUser={tasksUser}
+                                  kr={kr}
+                                  teamUsers={teamUsers}
+                                  setUser={setUser}
+                                  updateTask={updateTask}
+                                  user={user}
+                                />
                               </>
 
                             )
