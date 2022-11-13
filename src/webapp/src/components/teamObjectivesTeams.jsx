@@ -48,7 +48,7 @@ function TeamObjectivesTeams({
   const [krsByTeam, setKrsByTeam] = useState([])
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
-  const [itemTask, setItemTask] = useState({name:"", finalDate:""})
+  const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -92,15 +92,15 @@ function TeamObjectivesTeams({
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    
-    if(Object.keys(item).length === 0 || 
-    item.name === "" || 
-    item.descriptions === "" ||
-    item.toQuarterly === "" ||
-    item.toYearly === "" ||
-    item.fromQuarterly === "" ||
-    item.fromYearly === ""
-    ){
+
+    if (Object.keys(item).length === 0 ||
+      item.name === "" ||
+      item.descriptions === "" ||
+      item.toQuarterly === "" ||
+      item.toYearly === "" ||
+      item.fromQuarterly === "" ||
+      item.fromYearly === ""
+    ) {
       setMessage("Precisa preeencher os campos vazios")
     } else {
       const data = {
@@ -132,7 +132,7 @@ function TeamObjectivesTeams({
 
   const changeModal = ({ target }) => {
     setItemTask((state) => {
-      return {...state,[target.name]: target.value}
+      return { ...state, [target.name]: target.value }
     })
   }
 
@@ -140,7 +140,7 @@ function TeamObjectivesTeams({
     event.preventDefault()
 
     const idGoalsTeamKr = krs.idgoalTeamsKr
-    const {data} = await tasksApi.create(idCompany, {...itemTask,idGoalsTeamKr})
+    const { data } = await tasksApi.create(idCompany, { ...itemTask, idGoalsTeamKr })
     const idTaskCreated = data.id
 
     const newData = {
@@ -149,51 +149,51 @@ function TeamObjectivesTeams({
     }
 
     taskUsersApi.create(idCompany, newData)
-    .then(() => {
-      setMessage("Tarefa criada com sucesso")
-      setQueryUpdate((x) => !x)
-      navigate({
-        pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-        search: `?update=${queryUpdate}`
-      })
+      .then(() => {
+        setMessage("Tarefa criada com sucesso")
+        setQueryUpdate((x) => !x)
+        navigate({
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          search: `?update=${queryUpdate}`
+        })
 
-      closeAddTaskModal()
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado!")
-    })
+        closeAddTaskModal()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
 
   }
 
   const updateTask = (idTaskUser, idUser) => {
-    const user = teamUsers?.filter(e=> e.idUser === parseInt(idUser))[0]
+    const user = teamUsers?.filter(e => e.idUser === parseInt(idUser))[0]
     const idTeamUser = user.idTeamUser
 
     taskUsersApi.update(idTaskUser, { idTeamUser })
-    .then(() => {
-      setMessage("Usuário adicionado com sucesso")
-      setQueryUpdate((x) => !x)
-      navigate({
-        pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-        search: `?update=${queryUpdate}`
+      .then(() => {
+        setMessage("Usuário adicionado com sucesso")
+        setQueryUpdate((x) => !x)
+        navigate({
+          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          search: `?update=${queryUpdate}`
+        })
+
       })
-      
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado!")
-    })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
   }
 
   const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
-    const data = { done:done + krs?.doneGoalsTeamKr }
+    const data = { done: done + krs?.doneGoalsTeamKr }
 
     goalTeamsKrsApi.update(idGoalTeamKrs, data)
       .then(() => {
         const newData = {
-          idProcessGoalTeam:idProcessGoalsTeams,
-          idGoalsTeamKr:idGoalTeamKrs,
+          idProcessGoalTeam: idProcessGoalsTeams,
+          idGoalsTeamKr: idGoalTeamKrs,
           quaPercentage,
           yeaPercentage
         }
@@ -248,25 +248,25 @@ function TeamObjectivesTeams({
                 </Disclosure.Button>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
-                  {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x,i) => {
+                  {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x, i) => {
                     return (
                       <>
-                      <div key={i} className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
-                        <span className=''> {x.nameGoalTeam}
-                          <span className="text-gray-400 text-xs mx-2"> descrição </span>
-                        </span>
-                        {x.idGoalTeam && <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>}
-                        
-                        <AddTeamKr 
-                          closeModal={closeModalTeamKr}
-                          handleSubmit={handleSubmit}
-                          isOpen={isOpenTeamKr}
-                          nameGoalTeam={goalTeams.nameGoalTeam}
-                          modelChange={modelChange}
-                          message={message}
-                          item={item}
-                        />
-                      </div>
+                        <div key={i} className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
+                          <span className=''> {x.nameGoalTeam}
+                            <span className="text-gray-400 text-xs mx-2"> descrição </span>
+                          </span>
+                          {x.idGoalTeam && <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>}
+
+                          <AddTeamKr
+                            closeModal={closeModalTeamKr}
+                            handleSubmit={handleSubmit}
+                            isOpen={isOpenTeamKr}
+                            nameGoalTeam={goalTeams.nameGoalTeam}
+                            modelChange={modelChange}
+                            message={message}
+                            item={item}
+                          />
+                        </div>
 
                         <div className='flex flex-col items-center rounded-b-md bg-[#c3c2c2]'>
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
@@ -277,11 +277,21 @@ function TeamObjectivesTeams({
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
                                   <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer w-2/4'>
-                                      Metas
+                                    Metas
                                   </span>
+
                                   <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center w-2/4'>
-                                      Adicionar Tarefas
+                                    Adicionar Tarefas
                                   </span>
+                                  <AddTask
+                                    isOpen={addTaskModal}
+                                    message={message}
+                                    closeModal={closeAddTaskModal}
+                                    modelChange={changeModal}
+                                    createTask={createTask}
+                                    item={itemTask}
+                                  />
+
                                   <TeamKrModal
                                     stateDone={stateDone}
                                     done={done}
@@ -292,14 +302,6 @@ function TeamObjectivesTeams({
                                     historyGoalTeamKrs={historyGoalTeamKrs}
                                     krs={krs}
                                     goalTeamKrsUpdate={goalTeamKrsUpdate}
-                                  />
-                                  <AddTask
-                                    isOpen={addTaskModal}
-                                    message={message}
-                                    closeModal={closeAddTaskModal}
-                                    modelChange={changeModal}
-                                    createTask={createTask}
-                                    item={itemTask}
                                   />
                                 </div>
                                 <ListTasks

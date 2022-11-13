@@ -10,11 +10,11 @@ function AddGoalTeam( { closeModal, openModal, isOpen, createGoalsTeam, modelCha
 
     return (
         <div className="w-[20%]">
-            <button className="modal-btn h-[60px]" onClick={openModal}>
+            <button className="modal-btn h-[56px]" onClick={openModal}>
                 Adicionar objetivo
             </button>
 
-            <Modal isOpen={isOpen} closeModal={closeModal} title={"Adicionar KR"}>
+            <Modal isOpen={isOpen} closeModal={closeModal}>
                 <h5> Nome do time </h5>
                 <form onSubmit={goalTealSubmit} className="mt-2 flex flex-col">
 

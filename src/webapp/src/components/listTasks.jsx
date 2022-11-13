@@ -43,16 +43,16 @@ const ListTasks = ({
     }
 
     return(
-        <div className='w-full p-2'>
+        <div className='w-full'>
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
-                <div className={`${i === 0 || i%2==0? 'flex justify-between bg-rose-300 m-1 p-4': 'flex justify-between bg-rose-200 m-1 p-4'}`}>
-                    <span className='mr-4'> {task.nameTask} </span>
-                    <span className='ml-4'> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
+                <div className={`${i === 0 || i%2==0? 'flex justify-between items-center rounded-lg bg-rose-300 mx-2 p-2 my-2': 'flex justify-between items-center rounded-lg bg-rose-200 mx-2 p-2 my-2'}`}>
+                    <span> {task.nameTask} </span>
+                    <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
                     <>
-                    <span className='ml-4'> {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)} dias`: `${calcDate(task.finalDate) * -1} de atraso`} </span>
+                    <span> {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)} dias`: `${calcDate(task.finalDate) * -1} de atraso`} </span>
                     <span>
                         <SwitchToggle 
                             setEnabled={setEnabled} 
@@ -66,8 +66,8 @@ const ListTasks = ({
                     </span>
                     </>
                     }
-                    <div>
-                    <select onChange={({ target }) => setUser(target.value)} className='mr-2' name="user">
+                    <div className="flex">
+                    <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
                     <option selected disabled >Adicionar Usuário</option>
                         {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
                         return(
@@ -75,7 +75,7 @@ const ListTasks = ({
                         )
                         })}
                     </select>
-                    <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='ml-2'> OK </button>
+                    <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 mt-1'> OK </button>
                     </div>
                     <span> Data Final: {moment(task.finalDate).format('DD/MM/YY')} </span>
                 </div>
