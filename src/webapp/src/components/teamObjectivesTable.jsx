@@ -100,7 +100,7 @@ function TeamObjectivesTable({
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromQuarterlyGoalKrs}</span>
                       </div>
 
-                      <div className='percentage-container-disclosure w-[90%] mt-2'>
+                      <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
                         <div className="percentage-bar-quartely"></div>
                       </div>
                       <style>{`
@@ -122,7 +122,7 @@ function TeamObjectivesTable({
                         <span className="text-gray-600 text-xs mr-4">De: {goalKr.toYearlyGoalsKr}</span>
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromYearlyGoalsKr}</span>
                       </div>
-                      <div className='percentage-container-disclosure w-[90%] mt-2'>
+                      <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
                         <div className='percentage-bar-yearly'></div>
                       </div>
                       <style>{`
