@@ -44,7 +44,6 @@ const ListTasks = ({
 
     return(
         <div className='w-full p-2'>
-            {JSON.stringify(enabled)}
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
