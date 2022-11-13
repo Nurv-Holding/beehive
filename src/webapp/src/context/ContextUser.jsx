@@ -6,6 +6,7 @@ import goalKrsApi from "../api/goalKrsApi"
 import goalsApi from "../api/goalsApi"
 import goalsTeamApi from "../api/goalsTeamApi"
 import teamsApi from "../api/teamsApi"
+import teamsUsersApi from "../api/teamsUsersApi"
 import usersApi from "../api/usersApi"
 
 export const ContextUser = createContext()
@@ -17,15 +18,22 @@ export const ContextUserProvider = ({ children }) => {
     const [item, setItem] = useState({})
     const [searchParams] = useSearchParams()
     const { idGoal, idCompany } = useParams()
+    const [teamUsers, setTeamUsers] = useState([])
     const update = searchParams.get('update')
 
     useEffect(() => {
         handlerUsers()
         handlerGoals()
         handlerTeams()
+        handlerTeamUsers()
         setItem({})
         
     },[idCompany, update])
+
+    const handlerTeamUsers = async () => {
+        const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+        setTeamUsers(data)
+    }
 
     const handlerUsers = async () => {
         const {data} = await usersApi.getAll()
@@ -57,6 +65,7 @@ export const ContextUserProvider = ({ children }) => {
                     users,
                     teams,
                     modelChange,
+                    teamUsers,
                     item,
                     idCompany
                 }
