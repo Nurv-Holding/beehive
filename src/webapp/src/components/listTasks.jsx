@@ -26,11 +26,6 @@ const ListTasks = ({
         setEnabled((x) => !x)
         setIndex(i)
 
-        console.log("index", index)
-        console.log("i", i)
-
-        console.log("enabled",!enabled)
-
         taskUsersApi.update(idTask, {done:!enabled})
         .then(() => {
             setMessage("Tarefa concluída")
