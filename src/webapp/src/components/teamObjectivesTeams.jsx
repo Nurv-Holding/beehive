@@ -280,17 +280,19 @@ function TeamObjectivesTeams({
                                     Metas
                                   </span>
 
-                                  <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center w-2/4'>
-                                    Adicionar Tarefas
-                                  </span>
-                                  <AddTask
-                                    isOpen={addTaskModal}
-                                    message={message}
-                                    closeModal={closeAddTaskModal}
-                                    modelChange={changeModal}
-                                    createTask={createTask}
-                                    item={itemTask}
-                                  />
+                                  <div>
+                                    <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center w-2/4'>
+                                      Adicionar Tarefas
+                                    </span>
+                                    <AddTask
+                                      isOpen={addTaskModal}
+                                      message={message}
+                                      closeModal={closeAddTaskModal}
+                                      modelChange={changeModal}
+                                      createTask={createTask}
+                                      item={itemTask}
+                                    />
+                                  </div>
 
                                   <TeamKrModal
                                     stateDone={stateDone}
