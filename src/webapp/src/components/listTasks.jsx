@@ -26,7 +26,12 @@ const ListTasks = ({
         setEnabled((x) => !x)
         setIndex(i)
 
-        taskUsersApi.update(idTask, {done:!enabled && index === i})
+        console.log("index", index)
+        console.log("i", i)
+
+        console.log("enabled",!enabled)
+
+        taskUsersApi.update(idTask, {done:!enabled})
         .then(() => {
             setMessage("Tarefa concluída")
             setQueryUpdate((x) => !x)
@@ -47,7 +52,7 @@ const ListTasks = ({
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
-                <div className={`${i === 0 || i%2==0? 'flex justify-between items-center rounded-lg bg-rose-300 mx-2 p-2 my-2': 'flex justify-between items-center rounded-lg bg-rose-200 mx-2 p-2 my-2'}`}>
+                <div className={`${i === 0 || i%2===0? 'flex justify-between items-center rounded-lg bg-rose-300 mx-2 p-2 my-2': 'flex justify-between items-center rounded-lg bg-rose-200 mx-2 p-2 my-2'}`}>
                     <span> {task.nameTask} </span>
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&

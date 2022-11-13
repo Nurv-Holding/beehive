@@ -272,7 +272,7 @@ function TeamObjectivesTeams({
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div key={i} className='flex items-center w-full p-2'>
+                                <div key={i} className={`${i===0 || i%2===0? "flex items-center w-full p-2 bg-gray-300": "flex items-center w-full p-2 bg-gray-200"}`}>
                                   <div className='w-2/4'>
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
