@@ -71,7 +71,7 @@ const ListTasks = ({
                     <option selected disabled >Adicionar Usuário</option>
                         {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
                         return(
-                            <option value={user.idUser} > {user.nameUser} </option>
+                            <option value={user.idUser} > {user.emailUser} </option>
                         )
                         })}
                     </select>
