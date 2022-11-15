@@ -1,7 +1,7 @@
 import Header from '../components/header';
 import Profile from '../components/profile';
 import Companies from '../components/companiesList';
-import Methodology from '../components/methodology';
+import AddEmpresa from '../components/addEmpresa';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import companiesApi from '../api/companiesApi';
@@ -29,18 +29,13 @@ function Home() {
 {/* FIRST COL */}
           <div className='grid-col'>
             <Profile />
-            <Methodology />
+            <AddEmpresa />
           </div>
 
 {/* SECOND COL */}
             <div className='grid-col'>
               <Companies companies={companies} />
             </div>
-
-{/* THIRD COL */}
-            {/* <div className='grid-col'>
-              <Methodology />
-            </div> */}
           </div>
       </main>
     </>
