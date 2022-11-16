@@ -229,7 +229,7 @@ function TeamObjectivesTeams({
                   </div>
 
                   <div className='percentage-container-disclosure w-[20%]'>
-                    <div className='percentage-bar-disclosure w-[45%]'></div>
+                    <div className='percentage-bar-disclosure w-[0%]'></div>
                   </div>
 
                   <TaskPercentage
@@ -267,21 +267,24 @@ function TeamObjectivesTeams({
                           />
                         </div>
 
-                        <div className='flex flex-col items-center rounded-b-md bg-[#c3c2c2]'>
+                        <div className='flex flex-col w-full justify-center rounded-b-md bg-[#c3c2c2]'>
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div key={i} className={`${i===0 || i%2===0? "flex items-center w-full p-2 bg-gray-300": "flex items-center w-full p-2 bg-gray-200"}`}>
-                                  <div className='w-2/4'>
+                                <div key={i} className={`${i === 0 || i % 2 === 0 ? "flex items-center justify-around w-full p-2 bg-gray-300" : "flex items-center justify-around w-full p-2 bg-gray-200"}`}>
+                                  <div>
                                     <p> {kr.nameGoalsTeamKr} </p>
                                   </div>
-                                  <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer w-2/4'>
-                                    Metas
-                                  </span>
 
                                   <div>
-                                    <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center w-2/4'>
-                                      Adicionar Tarefas
+                                    <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>
+                                      Metas
+                                    </span>
+                                  </div>
+
+                                  <div>
+                                    <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
+                                      Adicionar tarefas
                                     </span>
                                     <AddTask
                                       isOpen={addTaskModal}

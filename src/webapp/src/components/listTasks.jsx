@@ -52,7 +52,7 @@ const ListTasks = ({
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
                     <>
-                    <span> {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)} dias`: `${calcDate(task.finalDate) * -1} de atraso`} </span>
+                    <span> {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} </span>
                     <span>
                         <SwitchToggle 
                             setEnabled={setEnabled} 
