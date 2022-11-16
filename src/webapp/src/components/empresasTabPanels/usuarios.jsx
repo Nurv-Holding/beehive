@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormUsuarios from './usuarios/formUsuarios'
 import ListaUsuarios from './usuarios/listaUsuarios'
@@ -8,16 +8,14 @@ import { useState } from 'react'
 import usersApi from '../../api/usersApi'
 
 function Usuarios() {
-    const { users } = useContext(ContextUser)
-    const { item } = useContext(ContextUser)
-    const { modelChange } = useContext(ContextUser)
+    const { users, item, modelChange } = useContext(ContextUser)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const { idCompany } = useParams()
+    const [queryUpdate, setQueryUpdate] = useState(false)
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-
-        console.log("item", item)
 
         if (Object.keys(item).length === 0 &&
             item.name === "" || item.email === "" ||
@@ -29,9 +27,19 @@ function Usuarios() {
             setMessage("Senhas precisam ser as mesmas")
 
         } else {
-            usersApi.create(idCompany, { ...item, repeatPassword: undefined })
-                .then(() => setMessage("Cadastro Realizado!"))
-                .catch(() => setMessage("Algo deu errado!!"))
+            usersApi.createEmployee(idCompany, { ...item, repeatPassword: undefined })
+            .then(() => {
+                setMessage("Usuário criado com sucesso")
+                setQueryUpdate((x) => !x)
+                navigate({
+                  pathname: `/empresas/${idCompany}`,
+                  search: `?update=${queryUpdate}`
+                })
+              })
+              .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+              })
         }
 
     }

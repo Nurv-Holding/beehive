@@ -32,6 +32,9 @@ const routes = (app) => {
     app.put("/users/:id",userController.update)
     app.delete("/users/:id",userController.remove)
 
+        //employee
+        app.post("/employees/c/:idCompany",userController.createEmployee)
+
     //profiles
     app.get("/profiles",profilesController.getAll)
     app.get("/profiles/:id",profilesController.getById)

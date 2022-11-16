@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { ContextUser } from '../context/ContextUser';
 
 function CompaniesList({ companies }) {
 

@@ -228,7 +228,6 @@ function TeamObjectivesTeams({
                     <span> {goalTeams.nameTeam} </span>
                   </div>
 
-
                   <div className='percentage-container-disclosure w-[20%]'>
                     <div className='percentage-bar-disclosure w-[45%]'></div>
                   </div>

@@ -8,10 +8,12 @@ import companiesApi from '../api/companiesApi';
 
 function Home() {
   const [companies, setCompanies] = useState([])
+  const [queryUpdate, setQueryUpdate] = useState(false)
 
   useEffect(() => {
     handlerCompanies()
-  },[])
+
+  },[queryUpdate])
 
   const handlerCompanies = async () => {
     const {data} = await companiesApi.getAll()
@@ -29,7 +31,10 @@ function Home() {
 {/* FIRST COL */}
           <div className='grid-col'>
             <Profile />
-            <AddEmpresa />
+            <AddEmpresa 
+              setQueryUpdate={setQueryUpdate}
+              queryUpdate={queryUpdate}
+            />
           </div>
 
 {/* SECOND COL */}

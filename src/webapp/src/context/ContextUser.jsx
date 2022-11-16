@@ -36,7 +36,7 @@ export const ContextUserProvider = ({ children }) => {
     }
 
     const handlerUsers = async () => {
-        const {data} = await usersApi.getAll()
+        const {data} = await usersApi.getAll(idCompany)
         setUsers(data)
     }
 
