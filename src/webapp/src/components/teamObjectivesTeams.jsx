@@ -267,60 +267,65 @@ function TeamObjectivesTeams({
                           />
                         </div>
 
-                        <div className='flex flex-col w-full justify-center rounded-b-md bg-[#c3c2c2]'>
+                        <div className='flex flex-col w-full justify-center rounded-b-md'>
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div key={i} className={`${i === 0 || i % 2 === 0 ? "flex items-center justify-around w-full p-2 bg-gray-300" : "flex items-center justify-around w-full p-2 bg-gray-200"}`}>
-                                  <div>
-                                    <p> {kr.nameGoalsTeamKr} </p>
-                                  </div>
+                                <div className={`${i === 0 || i % 2 === 0 ? "flex flex-col bg-gray-300" : "flex flex-col bg-gray-200"}`}>
+                                  <div key={i} className={`${i === 0 || i % 2 === 0 ? "flex items-center justify-around w-full p-2" : "flex items-center justify-around w-full p-2"}`}>
+                                    <div>
+                                      <p> {kr.nameGoalsTeamKr} </p>
+                                    </div>
 
-                                  <div>
-                                    <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>
-                                      Metas
-                                    </span>
-                                  </div>
+                                    <div>
+                                      <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>
+                                        Metas
+                                      </span>
+                                    </div>
 
-                                  <div>
-                                    <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
-                                      Adicionar tarefas
-                                    </span>
-                                    <AddTask
-                                      isOpen={addTaskModal}
-                                      message={message}
-                                      closeModal={closeAddTaskModal}
-                                      modelChange={changeModal}
-                                      createTask={createTask}
-                                      item={itemTask}
+                                    <div>
+                                      <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
+                                        Adicionar tarefas
+                                      </span>
+                                      <AddTask
+                                        isOpen={addTaskModal}
+                                        message={message}
+                                        closeModal={closeAddTaskModal}
+                                        modelChange={changeModal}
+                                        createTask={createTask}
+                                        item={itemTask}
+                                      />
+                                    </div>
+
+                                    <TeamKrModal
+                                      stateDone={stateDone}
+                                      done={done}
+                                      nameGoalTeam={kr.nameGoalsTeamKr}
+                                      closeModal={closeTeamKrModal}
+                                      openModal={openTeamKrModal}
+                                      isOpen={isOpenTeamKrModal}
+                                      historyGoalTeamKrs={historyGoalTeamKrs}
+                                      krs={krs}
+                                      goalTeamKrsUpdate={goalTeamKrsUpdate}
                                     />
                                   </div>
 
-                                  <TeamKrModal
-                                    stateDone={stateDone}
-                                    done={done}
-                                    nameGoalTeam={kr.nameGoalsTeamKr}
-                                    closeModal={closeTeamKrModal}
-                                    openModal={openTeamKrModal}
-                                    isOpen={isOpenTeamKrModal}
-                                    historyGoalTeamKrs={historyGoalTeamKrs}
-                                    krs={krs}
-                                    goalTeamKrsUpdate={goalTeamKrsUpdate}
+                                  <ListTasks
+                                    tasksUser={tasksUser}
+                                    kr={kr}
+                                    teamUsers={teamUsers}
+                                    setUser={setUser}
+                                    updateTask={updateTask}
+                                    user={user}
+                                    navigate={navigate}
+                                    idGoal={idGoal}
+                                    idCompany={idCompany}
+                                    setQueryUpdate={setQueryUpdate}
+                                    queryUpdate={queryUpdate}
                                   />
+
                                 </div>
-                                <ListTasks
-                                  tasksUser={tasksUser}
-                                  kr={kr}
-                                  teamUsers={teamUsers}
-                                  setUser={setUser}
-                                  updateTask={updateTask}
-                                  user={user}
-                                  navigate={navigate}
-                                  idGoal={idGoal}
-                                  idCompany={idCompany}
-                                  setQueryUpdate={setQueryUpdate}
-                                  queryUpdate={queryUpdate}
-                                />
+
                               </>
 
                             )
