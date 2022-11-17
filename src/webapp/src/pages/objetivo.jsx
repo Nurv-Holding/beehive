@@ -202,8 +202,6 @@ function Objetivo() {
       idGoal: newIdGoal
     }
 
-    console.log("newData",newData)
-
     const { data } = await goalsTeamApi.create(idCompany, newData)
     const idGoalsTeam = data.id
     
