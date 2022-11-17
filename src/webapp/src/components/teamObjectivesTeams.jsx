@@ -223,17 +223,21 @@ function TeamObjectivesTeams({
           <>
             <Disclosure key={i}>
               <div className='flex flex-col w-full bg-white p-4 my-4 rounded-lg'>
-                <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white rounded-lg cursor-pointer'>
-                  <div className='flex items-center'>
-                    <span> {goalTeams.nameTeam} </span>
-                  </div>
+                <div className='flex flex-row w-full'>
+                  <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white rounded-lg cursor-pointer'>
+                    <div className='flex items-center'>
+                      <span> {goalTeams.nameTeam} </span>
+                    </div>
 
-                  <div className='percentage-container-disclosure w-[20%]'>
-                    <div className='percentage-bar-disclosure w-[0%]'></div>
-                  </div>
+                    <div className='percentage-container-disclosure w-[20%]'>
+                      <div className='percentage-bar-disclosure w-[0%]'></div>
+                    </div>
 
-                  <TaskPercentage
-                  />
+                    <TaskPercentage
+                    />
+
+
+                  </Disclosure.Button>
 
                   <AddGoalTeam
                     closeModal={closeModalGoalTeam}
@@ -244,7 +248,7 @@ function TeamObjectivesTeams({
                     idTeam={goalTeams.idTeam}
                     item={item}
                   />
-                </Disclosure.Button>
+                </div>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
                   {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x, i) => {
