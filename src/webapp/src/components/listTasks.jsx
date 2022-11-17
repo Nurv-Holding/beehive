@@ -21,7 +21,7 @@ const ListTasks = ({
     const [enabled, setEnabled] = useState(false)
     const [index, setIndex] = useState(null)
     const [message, setMessage] = useState("")
-    const [background, setBackground] = useState("flex justify-between items-center rounded-lg bg-rose-300 mx-2 p-2 my-2")
+    const [background, setBackground] = useState("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
 
     const taskDone = (i, idTask) => {
         setEnabled((x) => !x)
@@ -33,7 +33,7 @@ const ListTasks = ({
             if(!enabled)
                 setBackground("flex justify-between items-center rounded-lg bg-blue-300 mx-2 p-2 my-2")
             else
-                setBackground("flex justify-between items-center rounded-lg bg-rose-300 mx-2 p-2 my-2")
+                setBackground("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
             
             setQueryUpdate((x) => !x)
             navigate({
@@ -53,19 +53,14 @@ const ListTasks = ({
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
-                <div className={`
-                    ${(i === 0 || i%2===0) && !task?.nameUser? 
-                    background:
-                    (i !== 0 || i%2!==0) && !task?.nameUser?
-                    'flex justify-between items-center rounded-lg bg-rose-200 mx-2 p-2 my-2':
-                    background
-                    }`
-                    }>
+                <div className={`${background}`}>
                     <span> {task.nameTask} </span>
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
                     <>
-                    <span> {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} </span>
+                    <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
+                        {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
+                    </span>
                     <span>
                         <SwitchToggle 
                             setEnabled={setEnabled} 
