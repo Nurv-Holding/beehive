@@ -59,7 +59,7 @@ const ListTasks = ({
                     {task.nameUser &&
                     <>
                     <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
-                        {task.done? "Tarefa concluída":calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
+                        {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
                     </span>
                     <span>
                         <SwitchToggle 
