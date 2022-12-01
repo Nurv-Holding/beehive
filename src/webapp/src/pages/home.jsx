@@ -1,10 +1,10 @@
 import Header from '../components/header';
 import Profile from '../components/profile';
-import CompaniesList from '../components/CompaniesList';
 import AddCompanies from '../components/AddCompanies';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import companiesApi from '../api/companiesApi';
+import CompaniesList from '../components/companiesList';
 
 function Home() {
   const [companies, setCompanies] = useState([])

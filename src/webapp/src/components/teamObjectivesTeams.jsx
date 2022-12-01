@@ -2,7 +2,6 @@ import { useState } from 'react'
 import TaskPercentage from './TaskPercentage';
 import { Disclosure } from '@headlessui/react'
 import AddGoalTeam from './addGoalTeam';
-import AddTeamKr from './addTeamKr';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import TeamKrModal from './teamKrModal';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
@@ -13,6 +12,7 @@ import AddTask from './addTask';
 import { calcDate } from '../utilis';
 import moment from 'moment';
 import ListTasks from './listTasks';
+import AddTeamKr from './addTeamKr';
 
 function TeamObjectivesTeams({
   teams = null,
