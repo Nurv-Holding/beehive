@@ -10,6 +10,8 @@ import historyGoalKrApi from "../api/historyGoalKrApi";
 import ChartGoalQuartely from "./ChartGoalQuartely";
 import ChartGoalYearly from "./ChartGoalYearly";
 import { useEffect } from "react";
+import CloseKr from "./CloseKr";
+import { Link } from "react-router-dom";
 
 function GoalKrs({
   goalKrs,
@@ -25,6 +27,7 @@ function GoalKrs({
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const [isOpenCloseKr, setIsOpenCloseKr] = useState(false)
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -69,6 +72,18 @@ function GoalKrs({
         console.error(error)
         setMessage("Algo deu errado")
       })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  }
+
+  function openModalCloseKr() {
+    setIsOpenCloseKr(true)
+  }
+
+  function closeModalCloseKr() {
+    setIsOpenCloseKr(false)
   }
 
   return (
@@ -117,7 +132,7 @@ function GoalKrs({
                     </div>
 
                     <div className="flex flex-col gap-[2%] mt-4">
-                    <h5>Meta Anual:</h5>
+                      <h5>Meta Anual:</h5>
                       <div className="flex flex-row">
                         <span className="text-gray-600 text-xs mr-4">De: {goalKr.toYearlyGoalsKr}</span>
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromYearlyGoalsKr}</span>
@@ -141,6 +156,20 @@ function GoalKrs({
                     <button className="modal-btn h-[30px] mt-2" onClick={() => openModal(goalKr)}>
                       Atualizar valores
                     </button>
+
+                    <Link to={`/history`}>
+                      <button className="modal-btn h-[30px] mt-2 ml-2" onClick={() => openModal(goalKr)}>
+                        Histórico
+                      </button>
+                    </Link>
+
+                    <CloseKr
+                      nameKr={goalKr.nameGoalsKr}
+                      handleSubmit={handleSubmit}
+                      isOpen={isOpenCloseKr}
+                      closeModal={closeModalCloseKr}
+                      openModal={openModalCloseKr}
+                    />
 
                     <div className="w-2/4">
                       <Modal isOpen={isOpen} closeModal={closeModal}>
