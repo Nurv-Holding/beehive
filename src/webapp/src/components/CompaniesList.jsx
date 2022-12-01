@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function CompaniesList({ companies }) {
 
     return (
-        <div className='grid-row grid-general min-h-[525px]'>
+        <div className='grid-row grid-general min-h-[475px]'>
             <h1 className='container-title'>Empresas</h1>
 
             <div>
