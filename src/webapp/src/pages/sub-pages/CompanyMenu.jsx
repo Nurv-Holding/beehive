@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Usuarios from '../../components/CompanyMenuPanel/usuarios'
 import Times from '../../components/CompanyMenuPanel/times'
-import Goals from '../../components/CompanyMenuPanel/objetivos'
+import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
 import Tarefas from '../../components/CompanyMenuPanel/tarefas'
 
 function classNames(...classes) {

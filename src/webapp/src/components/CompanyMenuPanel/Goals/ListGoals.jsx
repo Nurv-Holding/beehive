@@ -1,7 +1,7 @@
 import moment from "moment"
 import { Link } from "react-router-dom"
 
-function listaObjetivos({ goals }) {
+function ListGoals({ goals }) {
   return (
     <div className='flex flex-col items-center'>
       <div className='container-table-grid-team'>
@@ -38,4 +38,4 @@ function listaObjetivos({ goals }) {
   )
 }
 
-export default listaObjetivos
+export default ListGoals

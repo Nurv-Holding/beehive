@@ -1,5 +1,5 @@
 
-function formObjetivos({ modelChange, handleSubmit, message }) {
+function FormGoal({ modelChange, handleSubmit, message }) {
     return (
         <div className='flex flex-col'>
             <form onSubmit={handleSubmit} className='form-container'>
@@ -20,4 +20,4 @@ function formObjetivos({ modelChange, handleSubmit, message }) {
     )
 }
 
-export default formObjetivos
+export default FormGoal

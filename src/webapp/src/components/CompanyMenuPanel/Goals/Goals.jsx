@@ -1,11 +1,11 @@
 import { json, Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
-import FormObjetivos from './Goals/formObjetivos'
-import ListaObjetivos from './Goals/listaObjetivos'
+import FormObjetivos from './FormGoal'
+import ListaObjetivos from './ListGoals'
 import { useContext } from 'react'
-import { ContextUser } from '../../context/ContextUser'
+import { ContextUser } from '../../../context/ContextUser'
 import { useState } from 'react'
-import goalsApi from '../../api/goalsApi'
+import goalsApi from '../../../api/goalsApi'
 
 function Objetivos() {
     const {goals, item, modelChange, idCompany} = useContext(ContextUser)
