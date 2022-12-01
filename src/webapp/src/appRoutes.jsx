@@ -4,8 +4,6 @@ import Home from "./pages/home";
 import Companies from "./pages/Company";
 import Goal from "./pages/Goal";
 import Users from "./components/Users";
-import Test from "./pages/test";
-
 import Login from "./pages/login";
 
 function AppRoutes() {
@@ -13,7 +11,6 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/teste" element={<Test/>}/>
         <Route path="/company/:idCompany" element={<Users />}>
           <Route index element={<Companies />} />
           <Route path="goal/:idGoal" element={<Goal />} />
