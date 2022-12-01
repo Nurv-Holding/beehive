@@ -106,9 +106,9 @@ function GoalKrs({
               </Disclosure.Button>
 
               <Disclosure.Panel className='w-full bg-white p-8 grid grid-cols-3 gap-4 justify-center items-center'>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col">
                   <div className="w-full">
-                    <div className="flex flex-col gap-[2%] mt-4">
+                    <div className="flex flex-col mt-4">
                       <h5>Meta Trimestral:</h5>
                       <div className="flex flex-row">
                         <span className="text-gray-600 text-xs mr-4">De: {goalKr.toQuarterlyGoalKrs}</span>
@@ -131,7 +131,7 @@ function GoalKrs({
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
 
-                    <div className="flex flex-col gap-[2%] mt-4">
+                    <div className="flex flex-col">
                       <h5>Meta Anual:</h5>
                       <div className="flex flex-row">
                         <span className="text-gray-600 text-xs mr-4">De: {goalKr.toYearlyGoalsKr}</span>
@@ -153,24 +153,6 @@ function GoalKrs({
                       <span className="text-gray-600 text-sm mt-2">Atual: {goalKr.doneGoalsKr}</span>
                     </div>
 
-                    <button className="modal-btn h-[30px] mt-2" onClick={() => openModal(goalKr)}>
-                      Atualizar valores
-                    </button>
-
-                    <Link to={`/history`}>
-                      <button className="modal-btn h-[30px] mt-2 ml-2" onClick={() => openModal(goalKr)}>
-                        Histórico
-                      </button>
-                    </Link>
-
-                    <CloseKr
-                      nameKr={goalKr.nameGoalsKr}
-                      handleSubmit={handleSubmit}
-                      isOpen={isOpenCloseKr}
-                      closeModal={closeModalCloseKr}
-                      openModal={openModalCloseKr}
-                    />
-
                     <div className="w-2/4">
                       <Modal isOpen={isOpen} closeModal={closeModal}>
                         <span className="text-gray-600 text-xs mx-2">
@@ -187,6 +169,26 @@ function GoalKrs({
                       </Modal>
                     </div>
 
+                  </div>
+
+                  <div className="flex gap-2 mt-2">
+                    <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
+                      Atualizar valores
+                    </button>
+
+                    <Link to={`/history`}>
+                      <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
+                        Histórico
+                      </button>
+                    </Link>
+
+                    <CloseKr
+                      nameKr={goalKr.nameGoalsKr}
+                      handleSubmit={handleSubmit}
+                      isOpen={isOpenCloseKr}
+                      closeModal={closeModalCloseKr}
+                      openModal={openModalCloseKr}
+                    />
                   </div>
                 </div>
 

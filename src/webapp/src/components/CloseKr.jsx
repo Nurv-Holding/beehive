@@ -10,7 +10,7 @@ const CloseKr = ({
 
     return (
         <div>
-            <button className="modal-btn h-[30px] mt-2" onClick={openModal}>
+            <button className="modal-btn h-[30px]" onClick={openModal}>
                 Encerrar Kr
             </button>
 
