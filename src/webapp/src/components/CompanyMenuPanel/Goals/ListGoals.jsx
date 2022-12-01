@@ -9,10 +9,11 @@ function ListGoals({ goals }) {
 
           <thead>
             <tr>
-              <th className='container-title-grid w-[25%]'>Objetivo</th>
-              <th className='container-title-grid w-[25%]'>Descrição</th>
-              <th className='container-title-grid w-[25%]'>Criado em</th>
-              <th className='container-title-grid w-[25%]'>Última atualização</th>
+              <th className='container-title-grid w-[20%]'>Objetivo</th>
+              <th className='container-title-grid w-[20%]'>Descrição</th>
+              <th className='container-title-grid w-[20%]'>Criado em</th>
+              <th className='container-title-grid w-[20%]'>Última atualização</th>
+              <th className='container-title-grid w-[20%]'>Status</th>
             </tr>
           </thead>
 
@@ -27,6 +28,7 @@ function ListGoals({ goals }) {
                     <td>{goal.descriptions}</td>
                     <td>{moment(goal.createdAt).format('DD/MM/YY')}</td>
                     <td>{moment(goal.updatedAt).format('DD/MM/YY')}</td>
+                    <td>Ativo/encerrado</td>
                   </tr>
                 </>
               )
