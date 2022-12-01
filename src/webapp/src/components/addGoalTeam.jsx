@@ -1,4 +1,4 @@
-import Modal from "./empresasTabPanels/objetivos/components/Modal"
+import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
 function AddGoalTeam({ closeModal, openModal, isOpen, createGoalsTeam, modelChange, idTeam, item }) {
 

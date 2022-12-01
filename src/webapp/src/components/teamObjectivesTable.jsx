@@ -1,4 +1,4 @@
-import Modal from "./empresasTabPanels/objetivos/components/Modal"
+import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import { useContext, useState } from 'react'
 import { calcPercentage } from '../utilis';
 import goalKrsApi from "../api/goalKrsApi";

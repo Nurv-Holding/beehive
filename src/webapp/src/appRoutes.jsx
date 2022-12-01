@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Routes, Route} from "react-router-dom";
 import Home from "./pages/home";
-import Empresas from "./pages/empresas";
+import Companies from "./pages/Companies";
 import Objetivo from "./pages/objetivo";
 import Users from "./components/Users";
 import Test from "./pages/test";
@@ -14,8 +14,8 @@ function AppRoutes() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/teste" element={<Test/>}/>
-        <Route path="/empresas/:idCompany" element={<Users />}>
-          <Route index element={<Empresas />} />
+        <Route path="/companies/:idCompany" element={<Users />}>
+          <Route index element={<Companies />} />
           <Route path="objetivo/:idGoal" element={<Objetivo />} />
         </Route>
       </Routes>

@@ -1,7 +1,7 @@
 import Header from '../components/header';
 import Profile from '../components/profile';
-import Companies from '../components/companiesList';
-import AddEmpresa from '../components/addEmpresa';
+import CompaniesList from '../components/CompaniesList';
+import AddCompanies from '../components/AddCompanies';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import companiesApi from '../api/companiesApi';
@@ -27,19 +27,17 @@ function Home() {
 
       <main>
         <div className='grid-container'>
-
-{/* FIRST COL */}
           <div className='grid-col'>
             <Profile />
-            <AddEmpresa 
+            
+            <AddCompanies
               setQueryUpdate={setQueryUpdate}
               queryUpdate={queryUpdate}
             />
           </div>
 
-{/* SECOND COL */}
             <div className='grid-col'>
-              <Companies companies={companies} />
+              <CompaniesList companies={companies} />
             </div>
           </div>
       </main>

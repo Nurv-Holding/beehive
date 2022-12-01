@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import { useState } from 'react'
-import Modal from '../objetivos/components/Modal'
+import Modal from '../Goals/components/Modal'
 
 import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'

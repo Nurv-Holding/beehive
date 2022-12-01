@@ -1,7 +1,7 @@
 import Header from '../components/header';
-import EmpresasMenu from './sub-pages/empresasMenu';
+import EmpresasMenu from './sub-pages/CompanyMenu';
 
-function empresas() {
+function Companies() {
   return (
     <>
       <Header />
@@ -13,4 +13,4 @@ function empresas() {
   );
 }
 
-export default empresas;
+export default Companies;

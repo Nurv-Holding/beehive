@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
-import Modal from './empresasTabPanels/objetivos/components/Modal'
+import Modal from './CompanyMenuPanel/Goals/components/Modal'
 import { useState } from 'react'
 import companiesApi from '../api/companiesApi'
 
-function AddEmpresa( { queryUpdate, setQueryUpdate } ) {  
+function AddCompanies( { queryUpdate, setQueryUpdate } ) {  
   let [isOpen, setIsOpen] = useState(false)
   const [company, setCompany] = useState({
     name:"",
@@ -70,4 +70,4 @@ function AddEmpresa( { queryUpdate, setQueryUpdate } ) {
     )
 }
 
-export default AddEmpresa
+export default AddCompanies

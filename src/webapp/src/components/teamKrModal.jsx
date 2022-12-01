@@ -1,6 +1,6 @@
 import moment from "moment"
 import { calcPercentage } from "../utilis"
-import Modal from "./empresasTabPanels/objetivos/components/Modal"
+import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import ChartGoalTeamQuartely from "./ChartGoalTeamQuartely"
 import ChartGoalTeamYearly from "./ChartGoalTeamYearly"
 

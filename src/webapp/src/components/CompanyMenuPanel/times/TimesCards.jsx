@@ -1,4 +1,4 @@
-import Modal from "../objetivos/components/Modal"
+import Modal from "../Goals/components/Modal"
 import AddIntegrantes from "./components/AddIntegrante"
 import { Fragment, useState } from 'react'
 

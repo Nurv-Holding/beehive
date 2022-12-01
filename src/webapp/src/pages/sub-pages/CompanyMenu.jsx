@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
-import Usuarios from '../../components/empresasTabPanels/usuarios'
-import Times from '../../components/empresasTabPanels/times'
-import Objetivos from '../../components/empresasTabPanels/objetivos'
-import Tarefas from '../../components/empresasTabPanels/tarefas'
+import Usuarios from '../../components/CompanyMenuPanel/usuarios'
+import Times from '../../components/CompanyMenuPanel/times'
+import Goals from '../../components/CompanyMenuPanel/objetivos'
+import Tarefas from '../../components/CompanyMenuPanel/tarefas'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function CompanyMenu() {
   return (
     <Tab.Group>
       <Tab.List className='container-nav-empresas'>
@@ -56,7 +56,7 @@ export default function Example() {
       <div className='w-full'>
         <Tab.Panels className='text-white'>
           <Tab.Panel>
-            <Objetivos />
+            <Goals />
           </Tab.Panel>
 
           <Tab.Panel>

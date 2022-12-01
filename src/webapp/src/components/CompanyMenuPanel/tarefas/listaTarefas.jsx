@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
-import Modal from '../objetivos/components/Modal'
+import Modal from '../Goals/components/Modal'
 import { useState } from "react"
 import moment from 'moment'
 
