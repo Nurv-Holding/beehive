@@ -37,7 +37,7 @@ const ListTasks = ({
             
             setQueryUpdate((x) => !x)
             navigate({
-              pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+              pathname: `/companies/${idCompany}/objetivo/${idGoal}`,
               search: `?update=${queryUpdate}`
             })
             
