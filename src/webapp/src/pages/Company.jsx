@@ -1,5 +1,5 @@
 import Header from '../components/header';
-import EmpresasMenu from './sub-pages/CompanyMenu';
+import CompanyMenu from './sub-pages/CompanyMenu';
 
 function Company() {
   return (
@@ -7,7 +7,7 @@ function Company() {
       <Header />
 
       <main className='w-full flex flex-row'>
-          <EmpresasMenu/>
+          <CompanyMenu/>
       </main>
     </>
   );
