@@ -10,7 +10,7 @@ function AddKr({
     nameGoal }) {
 
     return (
-        <div className="w-[50%] ml-28">
+        <div>
             <button className="modal-btn h-[40px]" onClick={openModal}>
                 Adicionar KR
             </button>

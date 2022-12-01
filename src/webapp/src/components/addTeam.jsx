@@ -11,7 +11,7 @@ const AddTeam = ({
     teams }) => {
 
     return (
-        <div className="w-[50%]">
+        <div>
             <button className="modal-btn h-[40px]" onClick={openModal}>
                 Adicionar Time
             </button>

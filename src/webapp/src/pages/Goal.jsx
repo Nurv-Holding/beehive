@@ -16,6 +16,7 @@ import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import taskUsersApi from '../api/taskUsersApi';
 import teamsUsersApi from '../api/teamsUsersApi';
+import CloseGoal from '../components/CloseGoal';
 
 function Goal() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
@@ -34,12 +35,13 @@ function Goal() {
   const [teamUsers, setTeamUsers] = useState([])
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
-  const [itemGoal, setItemGoal] = useState({name:"",descriptions:""})
+  const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenTeam, setIsOpenTeam] = useState(false)
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
+  const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [tasksUser, setTasksUser] = useState([])
   const update = searchParams.get('update')
 
@@ -87,25 +89,33 @@ function Goal() {
     setIsOpenTeam(true)
   }
 
+  function openModalCloseGoal() {
+    setIsOpenCloseGoal(true)
+  }
+
+  function closeModalCloseGoal() {
+    setIsOpenCloseGoal(false)
+  }
+
   const handleTasksUser = async () => {
-    const {data} = await  taskUsersApi.getByUserAndKrs(idCompany, idGoal)
+    const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
     setTasksUser(data)
   }
 
   const handleTemaUsers = async () => {
-    const {data} = await  teamsUsersApi.getAllTeamsAndUsers(idCompany)
+    const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
     console.log("users", data)
     setTeamUsers(data)
   }
 
   const handleHistoryGoalTeamKrs = async () => {
-    const {data} = await historyGoalTeamKrApi.getByKrs()
+    const { data } = await historyGoalTeamKrApi.getByKrs()
     setHistoryGoalTeamKrs(data)
 
   }
 
   const handleHistoryGoalKrs = async () => {
-    const {data} = await historyGoalKrApi.getAll(idCompany)
+    const { data } = await historyGoalKrApi.getAll(idCompany)
 
     setHistoryGoalKrs(data)
   }
@@ -198,17 +208,17 @@ function Goal() {
     const newIdGoal = parseInt(idGoal)
 
     const newData = {
-      ...itemGoal, 
+      ...itemGoal,
       idGoal: newIdGoal
     }
 
     const { data } = await goalsTeamApi.create(idCompany, newData)
     const idGoalsTeam = data.id
-    
-    const goalsTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
-    console.log("goalsTeam",goalsTeam)
 
-    if(goalsTeam?.idGoalTeam){
+    const goalsTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
+    console.log("goalsTeam", goalsTeam)
+
+    if (goalsTeam?.idGoalTeam) {
       const data = {
         idGoalsTeam,
         idGoal: newIdGoal,
@@ -216,45 +226,45 @@ function Goal() {
       }
 
       goalsTeamApi.createProcess(idCompany, data)
-      .then(() => {
-        setMessage("Ojetivo criado com sucesso")
-        setQueryUpdate((x) => !x)
-        navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: `?update=${queryUpdate}`
+        .then(() => {
+          setMessage("Ojetivo criado com sucesso")
+          setQueryUpdate((x) => !x)
+          navigate({
+            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            search: `?update=${queryUpdate}`
+          })
+
+          closeModalGoalTeam()
+
+        })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado!")
         })
 
-        closeModalGoalTeam()
-
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado!")
-      })
-
-    }else{
+    } else {
       goalsTeamApi.updateProcess(goalsTeam.idProcessGoalsTeams, { idGoalsTeam })
-      .then(() => {
-        setMessage("Ojetivo criado com sucesso")
-        setQueryUpdate((x) => !x)
-        navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
-          search: `?update=${queryUpdate}`
-        })
+        .then(() => {
+          setMessage("Ojetivo criado com sucesso")
+          setQueryUpdate((x) => !x)
+          navigate({
+            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            search: `?update=${queryUpdate}`
+          })
 
-        closeModalTeam()
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado!")
-      })
+          closeModalTeam()
+        })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado!")
+        })
     }
 
   }
 
   const changeModel = ({ target }) => {
     setItemGoal((state) => {
-      return {...state,[target.name]: target.value}
+      return { ...state, [target.name]: target.value }
     })
   }
 
@@ -322,6 +332,15 @@ function Goal() {
                 item={item}
                 addTeamInGoal={addTeamInGoal}
               />
+
+              <CloseGoal
+                handleSubmit={handleSubmit}
+                nameGoal={goal.name}
+                isOpen={isOpenCloseGoal}
+                closeModal={closeModalCloseGoal}
+                openModal={openModalCloseGoal}
+              />
+
             </div>
           </div>
 
@@ -339,7 +358,7 @@ function Goal() {
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-xl mt-2 text-white'>Times</span>
             <TeamsGoal
-              goalTeamByGoalTeam={goalTeamByGoalTeam} 
+              goalTeamByGoalTeam={goalTeamByGoalTeam}
               goalTeamsByTeam={goalTeamsByTeam}
               goalTeamsKrs={goalTeamsKrs}
               createGoalsTeam={createGoalsTeam}

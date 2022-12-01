@@ -200,7 +200,7 @@ header nav span:hover{
 }
 
 .container-percentage-okr{
-    @apply w-[48.8%] h-full rounded-xl p-2
+    @apply w-[50%] h-full rounded-xl p-2
 }
 
 .percentage-my-progress{
@@ -350,7 +350,7 @@ header nav span:hover{
 }
 
 .modal-btn{
-    @apply w-[50%] rounded-md px-1 text-white text-sm text-center bg-[#5500C3]
+    @apply rounded-md px-2 text-white text-sm text-center bg-[#5500C3]
 }
 
 /*End Menu With Cards*/
