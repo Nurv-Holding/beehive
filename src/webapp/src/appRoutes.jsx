@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Routes, Route} from "react-router-dom";
 import Home from "./pages/home";
-import Companies from "./pages/Companies";
-import Objetivo from "./pages/objetivo";
+import Companies from "./pages/Company";
+import Goal from "./pages/Goal";
 import Users from "./components/Users";
 import Test from "./pages/test";
 
@@ -14,9 +14,9 @@ function AppRoutes() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/teste" element={<Test/>}/>
-        <Route path="/companies/:idCompany" element={<Users />}>
+        <Route path="/company/:idCompany" element={<Users />}>
           <Route index element={<Companies />} />
-          <Route path="objetivo/:idGoal" element={<Objetivo />} />
+          <Route path="goal/:idGoal" element={<Goal />} />
         </Route>
       </Routes>
   );

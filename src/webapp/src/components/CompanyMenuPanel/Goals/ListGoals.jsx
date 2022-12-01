@@ -21,7 +21,7 @@ function ListGoals({ goals }) {
               return (
                 <>
                   <tr>
-                    <Link to={`objetivo/${goal.id}`}>
+                    <Link to={`goal/${goal.id}`}>
                       <td>{goal.name}</td>
                     </Link>
                     <td>{goal.descriptions}</td>

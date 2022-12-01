@@ -4,8 +4,8 @@ import { useContext } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/header';
 import AddKr from '../components/addKr';
-import TeamObjectivesTable from '../components/teamObjectivesTable';
-import TeamObjectivesTeams from '../components/teamObjectivesTeams';
+import GoalKrs from '../components/GoalKrs';
+import TeamsGoal from '../components/TeamsGoal';
 import { ContextUser } from '../context/ContextUser';
 import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
@@ -17,7 +17,7 @@ import historyGoalKrApi from '../api/historyGoalKrApi';
 import taskUsersApi from '../api/taskUsersApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 
-function Objetivo() {
+function Goal() {
   const { idGoal, idCompany, teams } = useContext(ContextUser)
   const { modelChange, item } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
@@ -325,7 +325,7 @@ function Objetivo() {
             </div>
           </div>
 
-          <TeamObjectivesTable
+          <GoalKrs
             goalKrs={goalKrs}
             updateData={updateData}
             update={update}
@@ -338,7 +338,7 @@ function Objetivo() {
 
           <div className='border-t mt-6 pt-8 border-white'>
             <span className='text-bold text-xl mt-2 text-white'>Times</span>
-            <TeamObjectivesTeams
+            <TeamsGoal
               goalTeamByGoalTeam={goalTeamByGoalTeam} 
               goalTeamsByTeam={goalTeamsByTeam}
               goalTeamsKrs={goalTeamsKrs}
@@ -366,4 +366,4 @@ function Objetivo() {
   )
 }
 
-export default Objetivo;
+export default Goal;

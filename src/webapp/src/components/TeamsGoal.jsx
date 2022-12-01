@@ -14,7 +14,7 @@ import moment from 'moment';
 import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
 
-function TeamObjectivesTeams({
+function TeamsGoal({
   teams = null,
   goalTeamsByTeam,
   idCompany,
@@ -349,4 +349,4 @@ function TeamObjectivesTeams({
   );
 }
 
-export default TeamObjectivesTeams;
+export default TeamsGoal;

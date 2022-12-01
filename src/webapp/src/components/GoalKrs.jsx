@@ -11,7 +11,7 @@ import ChartGoalQuartely from "./ChartGoalQuartely";
 import ChartGoalYearly from "./ChartGoalYearly";
 import { useEffect } from "react";
 
-function TeamObjectivesTable({
+function GoalKrs({
   goalKrs,
   idCompany,
   setQueryUpdate,
@@ -188,4 +188,4 @@ function TeamObjectivesTable({
   )
 }
 
-export default TeamObjectivesTable;
+export default GoalKrs;
