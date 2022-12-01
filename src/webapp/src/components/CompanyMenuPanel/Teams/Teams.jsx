@@ -1,14 +1,13 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
-import FormTimes from './times/formTimes'
-import ListaTimes from './times/listaTimes'
+import FormTimes from './FormTeam'
+import ListTeams from './ListTeams'
 import { useContext } from 'react'
-import { ContextUser } from '../../context/ContextUser'
-import TimesCards from './times/TimesCards'
 import { useState } from 'react'
-import teamsApi from '../../api/teamsApi'
+import teamsApi from '../../../api/teamsApi'
+import { ContextUser } from '../../../context/ContextUser'
 
-function Times() {
+function Teams() {
     const { teams, modelChange, item, idCompany } = useContext(ContextUser)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const navigate = useNavigate()
@@ -74,7 +73,7 @@ function Times() {
 
                     <Tab.Panels>
                         <Tab.Panel className='container-empresas'>
-                            <ListaTimes teams={teams} />
+                            <ListTeams teams={teams} />
                         </Tab.Panel>
 
                         <Tab.Panel className='container-empresas'>
@@ -92,4 +91,4 @@ function Times() {
     )
 }
 
-export default Times
+export default Teams

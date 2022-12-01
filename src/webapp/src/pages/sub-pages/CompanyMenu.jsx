@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Usuarios from '../../components/CompanyMenuPanel/usuarios'
-import Times from '../../components/CompanyMenuPanel/times'
+import Times from '../../components/CompanyMenuPanel/Teams/Teams'
 import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
-import Tarefas from '../../components/CompanyMenuPanel/tarefas'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

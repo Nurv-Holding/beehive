@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
-function ListaTimes({ teams }) {
+function ListTeams({ teams }) {
   const { users, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -120,4 +120,4 @@ function ListaTimes({ teams }) {
   )
 }
 
-export default ListaTimes
+export default ListTeams

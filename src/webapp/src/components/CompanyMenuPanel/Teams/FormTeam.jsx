@@ -1,5 +1,5 @@
 
-function formTimes({ changeModel, message, handleSubmit, item }) {
+function FormTeam({ changeModel, message, handleSubmit, item }) {
     return (
         <div className='flex flex-col'>
             <form onSubmit={handleSubmit} className='form-container'>
@@ -20,4 +20,4 @@ function formTimes({ changeModel, message, handleSubmit, item }) {
     )
 }
 
-export default formTimes
+export default FormTeam
