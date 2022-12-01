@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
-import Usuarios from '../../components/CompanyMenuPanel/usuarios'
+import Users from '../../components/CompanyMenuPanel/Users/Users'
 import Times from '../../components/CompanyMenuPanel/Teams/Teams'
 import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
 
@@ -63,7 +63,7 @@ export default function CompanyMenu() {
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>
-            <Usuarios />
+            <Users />
           </Tab.Panel>
         </Tab.Panels>
       </div>

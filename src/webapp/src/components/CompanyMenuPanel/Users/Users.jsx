@@ -1,13 +1,13 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
-import FormUsuarios from './usuarios/formUsuarios'
-import ListaUsuarios from './usuarios/listaUsuarios'
+import FormUser from './FormUser'
+import ListaUsuarios from './ListUsers'
 import { useContext } from 'react'
-import { ContextUser } from '../../context/ContextUser'
+import { ContextUser } from '../../../context/ContextUser'
 import { useState } from 'react'
-import usersApi from '../../api/usersApi'
+import usersApi from '../../../api/usersApi'
 
-function Usuarios() {
+function Users() {
     const { users, item, modelChange } = useContext(ContextUser)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const { idCompany } = useParams()
@@ -86,7 +86,7 @@ function Usuarios() {
                         </Tab.Panel>
 
                         <Tab.Panel className='container-empresas'>
-                            <FormUsuarios
+                            <FormUser
                                 modelChange={modelChange}
                                 message={message}
                                 handleSubmit={handleSubmit}
@@ -99,4 +99,4 @@ function Usuarios() {
     )
 }
 
-export default Usuarios
+export default Users

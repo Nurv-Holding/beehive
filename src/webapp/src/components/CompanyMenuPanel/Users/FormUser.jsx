@@ -1,5 +1,5 @@
 
-function FormUsuarios({ modelChange, message, handleSubmit }) {
+function FormUser({ modelChange, message, handleSubmit }) {
     return (
         <div className='flex flex-col'>
             <form onSubmit={handleSubmit} className='form-container'>
@@ -34,4 +34,4 @@ function FormUsuarios({ modelChange, message, handleSubmit }) {
     )
 }
 
-export default FormUsuarios
+export default FormUser
