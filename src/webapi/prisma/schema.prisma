@@ -189,6 +189,7 @@ model HistoryGoalKr {
   idGoalKr      Int
   idGoal        Int
   idCompany     Int
+  user          String
   quaPercentage Float
   yeaPercentage Float
   createdAt     DateTime @default(now())
@@ -205,6 +206,7 @@ model HistoryGoalsTeamKr {
   idProcessGoalTeam Int
   idGoalsTeamKr     Int
   idCompany         Int
+  user              String
   quaPercentage     Float
   yeaPercentage     Float
   createdAt         DateTime         @default(now())

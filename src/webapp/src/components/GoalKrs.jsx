@@ -49,6 +49,7 @@ function GoalKrs({
     const newData = {
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr.idgoalsKr,
+      user: "usuário teste",
       quaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromQuarterlyGoalKrs),
       yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromYearlyGoalsKr)
     }
