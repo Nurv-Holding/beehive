@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -95,6 +95,7 @@ model Goal {
   name             String
   descriptions     String
   done             Int                @default(0)
+  status           Boolean            @default(false)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   company          Company            @relation(fields: [idCompany], references: [id], onDelete: Cascade)
@@ -111,6 +112,7 @@ model GoalsTeam {
   idCompany        Int
   idGoal           Int
   name             String
+  status           Boolean            @default(false)
   descriptions     String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
@@ -150,6 +152,7 @@ model GoalTeamKr {
   toYearly           Int
   fromYearly         Int
   done               Int                  @default(0)
+  status             Boolean              @default(false)
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   company            Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
@@ -171,6 +174,7 @@ model GoalKr {
   toYearly      Int
   fromYearly    Int
   done          Int             @default(0)
+  status        Boolean         @default(false)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   company       Company         @relation(fields: [idCompany], references: [id], onDelete: Cascade)
