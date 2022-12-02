@@ -16,8 +16,6 @@ const createEmployee = async (req, res) => {
 
     const users = await prismaClient.user.findUnique({ where: {email: req.body.email} })
 
-    console.log("users", users)
-
     if(!profiles || profiles.length === 0){
         throw Error("There is not profiles created")
 

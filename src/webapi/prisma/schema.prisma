@@ -93,6 +93,7 @@ model Goal {
   id               Int                @id @default(autoincrement())
   idCompany        Int
   name             String
+  author           Int
   descriptions     String
   done             Int                @default(0)
   status           Boolean            @default(false)
@@ -112,6 +113,7 @@ model GoalsTeam {
   idCompany        Int
   idGoal           Int
   name             String
+  author           Int
   status           Boolean            @default(false)
   descriptions     String
   createdAt        DateTime           @default(now())
@@ -146,6 +148,7 @@ model GoalTeamKr {
   idCompany          Int
   idGoalsTeam        Int
   name               String
+  author             Int
   descriptions       String
   toQuarterly        Int
   fromQuarterly      Int
@@ -168,6 +171,7 @@ model GoalKr {
   idCompany     Int
   idGoal        Int
   name          String
+  author        Int
   descriptions  String
   toQuarterly   Int
   fromQuarterly Int
@@ -223,6 +227,7 @@ model Task {
   idGoalsTeamKr Int
   idCompany     Int
   name          String
+  author        Int
   finalDate     DateTime
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt

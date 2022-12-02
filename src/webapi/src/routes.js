@@ -23,8 +23,12 @@ const projectionGoalsTeam = require("./controllers/projectionGoalsTeam")
 const historyGoalsTeamKrsController = require("./controllers/historyGoalsTeamKrsController")
 const historyGoalsKrsController = require("./controllers/historyGoalsKrsController")
 const taskUsersController = require("./controllers/taskUsersControler")
+const authenticateController = require("./controllers/autenticateController")
 
 const routes = (app) => {
+    //login
+    app.post("/login", authenticateController)
+
     //users
     app.get("/users/c/:idCompany",userController.getAll)
     app.get("/users/:id/c/:idCompany",userController.getById)
