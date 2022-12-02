@@ -12,9 +12,25 @@ const createEmployee = async (req, res) => {
     else
         newData = req.body
 
-    const data = await prismaClient.user.create({data:{...newData, idProfile:1}})
+    const profiles = await prismaClient.profile.findMany({ where: {name: "userCorporate"} })
 
-    return res.status(200).send(data)
+    const users = await prismaClient.user.findUnique({ where: {email: req.body.email} })
+
+    console.log("users", users)
+
+    if(!profiles || profiles.length === 0){
+        throw Error("There is not profiles created")
+
+    }else if(users && Object.keys(users).length !== 0){
+        throw Error("Email already exists")
+
+    }else{
+        const data = await prismaClient.user.create({data:{...newData, idProfile:profiles[0]?.id}})
+
+        return res.status(200).send(data)
+    }
+
+
 }
 
 const userController = {

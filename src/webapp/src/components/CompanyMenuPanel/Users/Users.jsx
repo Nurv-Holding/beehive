@@ -9,7 +9,7 @@ import usersApi from '../../../api/usersApi'
 
 function Users() {
     const { users, item, modelChange } = useContext(ContextUser)
-    const [message, setMessage] = useState("Aqui vai uma mensagem")
+    const [message, setMessage] = useState("")
     const { idCompany } = useParams()
     const [queryUpdate, setQueryUpdate] = useState(false)
     const navigate = useNavigate()
@@ -32,14 +32,16 @@ function Users() {
                 setMessage("Usuário criado com sucesso")
                 setQueryUpdate((x) => !x)
                 navigate({
-                  pathname: `/empresas/${idCompany}`,
+                  pathname: `/company/${idCompany}`,
                   search: `?update=${queryUpdate}`
                 })
+
               })
               .catch((error) => {
                 console.error(error)
                 setMessage("Algo deu errado!")
               })
+
         }
 
     }
@@ -50,8 +52,7 @@ function Users() {
                 <div className='w-11/12 flex flex-row gap-2'>
                     <Tab className='nav-btn'>
                         {({ selected }) => (
-                            /* Use the `selected` state to conditionally style the selected tab. */
-                            <button
+                            <button onClick={() => setMessage("")}
                                 className={
                                     selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                 }
@@ -64,8 +65,7 @@ function Users() {
 
                     <Tab className='nav-btn'>
                         {({ selected }) => (
-                            /* Use the `selected` state to conditionally style the selected tab. */
-                            <button
+                            <button onClick={() => setMessage("")}
                                 className={
                                     selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                 }

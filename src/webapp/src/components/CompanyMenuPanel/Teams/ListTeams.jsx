@@ -41,7 +41,7 @@ function ListTeams({ teams }) {
         setMessage("Usuário Adicionado!")
         setQueryUpdate((x) => !x)
         navigate({
-          pathname: `/empresas/${idCompany}`,
+          pathname: `/company/${idCompany}`,
           search: `?update=${queryUpdate}`
         })
         

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Users from '../../components/CompanyMenuPanel/Users/Users'
-import Times from '../../components/CompanyMenuPanel/Teams/Teams'
+import Teams from '../../components/CompanyMenuPanel/Teams/Teams'
 import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
 
 function classNames(...classes) {
@@ -59,7 +59,7 @@ export default function CompanyMenu() {
           </Tab.Panel>
 
           <Tab.Panel>
-            <Times />
+            <Teams />
           </Tab.Panel>
 
           <Tab.Panel className='w-full'>

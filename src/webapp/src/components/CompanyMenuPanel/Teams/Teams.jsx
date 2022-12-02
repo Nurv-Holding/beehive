@@ -9,7 +9,7 @@ import { ContextUser } from '../../../context/ContextUser'
 
 function Teams() {
     const { teams, modelChange, item, idCompany } = useContext(ContextUser)
-    const [message, setMessage] = useState("Aqui vai uma mensagem")
+    const [message, setMessage] = useState("")
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
 
@@ -24,7 +24,7 @@ function Teams() {
             .then(() => {
                 setMessage("Time criado com sucesso")
                 navigate({
-                  pathname: `/empresas/${idCompany}`,
+                  pathname: `/company/${idCompany}`,
                   search: '?update=true'
                 })
                 searchParams.delete("update")
@@ -43,7 +43,7 @@ function Teams() {
                     <Tab className='nav-btn'>
                         {({ selected }) => (
                             /* Use the `selected` state to conditionally style the selected tab. */
-                            <button
+                            <button onClick={() => setMessage("")}
                                 className={
                                     selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                 }
@@ -56,7 +56,7 @@ function Teams() {
                     <Tab className='nav-btn'>
                         {({ selected }) => (
                             /* Use the `selected` state to conditionally style the selected tab. */
-                            <button
+                            <button onClick={() => setMessage("")}
                                 className={
                                     selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                 }

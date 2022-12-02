@@ -13,7 +13,7 @@ function FormTeam({ changeModel, message, handleSubmit, item }) {
                     <input onChange={changeModel} className='input-style' name="descriptions" type="text" placeholder='Digite a descrição do time' />
                 </div>
 
-                <button className='submit-button' type="submit">Enviar</button>
+                <button className='submit-button' type="submit">Cadastrar</button>
                 <span> {message} </span>
             </form>
         </div>
