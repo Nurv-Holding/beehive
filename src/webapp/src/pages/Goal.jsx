@@ -17,6 +17,8 @@ import historyGoalKrApi from '../api/historyGoalKrApi';
 import taskUsersApi from '../api/taskUsersApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
+import jwtDecode from "jwt-decode"
+import usersApi from '../api/usersApi';
 
 function Goal() {
   const { idGoal, idCompany, teams, modelChange, item } = useContext(ContextUser)
@@ -42,7 +44,10 @@ function Goal() {
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [tasksUser, setTasksUser] = useState([])
+  const [users, setUsers] = useState([])
   const update = searchParams.get('update')
+  const token = localStorage.getItem("token")
+  const payload = token? jwtDecode(token): null
 
   useEffect(() => {
     handleGoal()
@@ -57,11 +62,17 @@ function Goal() {
     handleHistoryGoalKrs()
     handleTasksUser()
     handleTemaUsers()
+    handlerUser()
 
   }, [idGoal, idCompany, update])
 
   function updateData() {
     setIsOpen(false)
+  }
+
+  const handlerUser = async () => {
+    const {data} = await usersApi.getAll()
+    setUsers(data)
   }
 
   function closeModalGoalTeam() {
@@ -208,7 +219,8 @@ function Goal() {
 
     const newData = {
       ...itemGoal,
-      idGoal: newIdGoal
+      idGoal: newIdGoal,
+      author: payload?.id
     }
 
     const { data } = await goalsTeamApi.create(idCompany, newData)
@@ -304,8 +316,8 @@ function Goal() {
         <div className='w-11/12'>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
-              <span className='text-bold text-xl text-white uppercase'>{goal.name}</span>
-              <span className='text-bold text-lg mt-2 text-white'>Empresa 1</span>
+              <span className='text-bold text-xl text-white '>{goal.name}</span>
+              <span className='text-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id === goal.author)[0]?.name} </span>
             </div>
 
             <div className='container-percentage-okr flex flex-row justify-around'>

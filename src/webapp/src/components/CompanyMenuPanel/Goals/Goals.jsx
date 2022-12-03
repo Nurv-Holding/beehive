@@ -6,12 +6,15 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import { useState } from 'react'
 import goalsApi from '../../../api/goalsApi'
+import jwtDecode from "jwt-decode"
 
-function Objetivos() {
+function Goals() {
     const { goals, item, modelChange, idCompany } = useContext(ContextUser)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
+    const token = localStorage.getItem("token")
+    const payload = token? jwtDecode(token): null
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -19,11 +22,11 @@ function Objetivos() {
         if (Object.values(item).length === 0 || item.name === "" || item.descriptions === "")
             setMessage("Os campos precisam ser preenchidos")
         else {
-            goalsApi.create(idCompany, item)
+            goalsApi.create(idCompany, {...item, author: payload?.id})
                 .then(() => {
                     setMessage("Cadastro realizado")
                     navigate({
-                        pathname: `/empresas/${idCompany}`,
+                        pathname: `/company/${idCompany}`,
                         search: '?update=true'
                     })
 
@@ -91,4 +94,4 @@ function Objetivos() {
     )
 }
 
-export default Objetivos
+export default Goals
