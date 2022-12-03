@@ -31,8 +31,9 @@ const routes = (app) => {
 
     //users
     app.get("/users/c/:idCompany",userController.getAll)
+    app.get("/users",userController.getAll)
     app.get("/users/:id/c/:idCompany",userController.getById)
-    app.post("/users/c/:idCompany",userController.create)
+    app.post("/users",userController.create)
     app.put("/users/:id",userController.update)
     app.delete("/users/:id",userController.remove)
 

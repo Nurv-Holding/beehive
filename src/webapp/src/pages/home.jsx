@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import companiesApi from '../api/companiesApi';
 import CompaniesList from '../components/CompaniesList';
+import Authorize from '../components/Authorize';
 
 function Home() {
   const [companies, setCompanies] = useState([])
@@ -12,6 +13,7 @@ function Home() {
 
   useEffect(() => {
     handlerCompanies()
+    console.log("token", localStorage.getItem("token"))
 
   },[queryUpdate])
 
@@ -23,8 +25,8 @@ function Home() {
 
   return (
     <>
+      <Authorize>
       <Header />
-
       <main>
         <div className='grid-container'>
           <div className='grid-col'>
@@ -41,6 +43,7 @@ function Home() {
             </div>
           </div>
       </main>
+      </Authorize>
     </>
   );
 }

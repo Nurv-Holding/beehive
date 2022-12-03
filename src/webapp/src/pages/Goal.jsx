@@ -19,8 +19,7 @@ import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
 
 function Goal() {
-  const { idGoal, idCompany, teams } = useContext(ContextUser)
-  const { modelChange, item } = useContext(ContextUser)
+  const { idGoal, idCompany, teams, modelChange, item } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})

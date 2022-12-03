@@ -8,6 +8,7 @@ import goalsTeamApi from "../api/goalsTeamApi"
 import teamsApi from "../api/teamsApi"
 import teamsUsersApi from "../api/teamsUsersApi"
 import usersApi from "../api/usersApi"
+import jwtDecode from "jwt-decode"
 
 export const ContextUser = createContext()
 
@@ -20,6 +21,8 @@ export const ContextUserProvider = ({ children }) => {
     const { idGoal, idCompany } = useParams()
     const [teamUsers, setTeamUsers] = useState([])
     const update = searchParams.get('update')
+    const token = localStorage.getItem("token")
+    const payload = token? jwtDecode(token): null
 
     useEffect(() => {
         handlerUsers()
@@ -67,7 +70,9 @@ export const ContextUserProvider = ({ children }) => {
                     modelChange,
                     teamUsers,
                     item,
-                    idCompany
+                    idCompany,
+                    token,
+                    payload
                 }
             }
         >
