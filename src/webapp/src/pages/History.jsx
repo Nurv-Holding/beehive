@@ -10,13 +10,13 @@ import { ContextUser } from '../context/ContextUser';
 
 function History() {
     const {idgoalsKr, idGoal} = useParams()
-    const {idCompany} = useContext(ContextUser)
+    const {idCompany, users} = useContext(ContextUser)
     const [histories, setHistories] = useState([])
 
     useEffect(() => {
         handleHistory()
 
-    },[idgoalsKr])
+    },[idgoalsKr, users])
 
     const handleHistory = async () => {
         const {data} = await historyGoalKrApi.HistoryGoalKrByKr(idCompany, idGoal, idgoalsKr)
@@ -26,7 +26,7 @@ function History() {
     return (
         <>
             <Header />
-            <HistoriesList histories={histories} />
+            <HistoriesList histories={histories} users={users} />
         </>
     );
 }

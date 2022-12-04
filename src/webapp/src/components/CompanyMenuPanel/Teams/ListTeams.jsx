@@ -8,7 +8,7 @@ import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
 function ListTeams({ teams }) {
-  const { users, teamUsers, idCompany } = useContext(ContextUser)
+  const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
   const [queryUpdate, setQueryUpdate] = useState(false)
@@ -102,7 +102,7 @@ function ListTeams({ teams }) {
               <div className='input-and-label-container'>
                 <select onChange={({ target }) => setIdUser(parseInt(target.value))} name="user" id="users" className="input-style">
                   <option disabled selected>Selecionar Integrante</option>
-                  {(users || []).map((user) => {
+                  {(usersByCompany || []).map((user) => {
                     return (
                       <option key={user.id} value={user.id}> {user.name} </option>
                     )

@@ -14,6 +14,7 @@ export const ContextUser = createContext()
 
 export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
+    const [usersByCompany, setUsersByCompany] = useState([])
     const [users, setUsers] = useState([])
     const [teams, setTeams] = useState([])
     const [item, setItem] = useState({})
@@ -25,17 +26,23 @@ export const ContextUserProvider = ({ children }) => {
     const payload = token? jwtDecode(token): null
 
     useEffect(() => {
-        handlerUsers()
+        handlerUsersByCompany()
         handlerGoals()
         handlerTeams()
         handlerTeamUsers()
         setItem({})
+        handlerUsers()
         
     },[idCompany, update])
 
     const handlerTeamUsers = async () => {
         const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
         setTeamUsers(data)
+    }
+
+    const handlerUsersByCompany = async () => {
+        const {data} = await usersApi.getAllByCompany(idCompany)
+        setUsersByCompany(data)
     }
 
     const handlerUsers = async () => {
@@ -65,6 +72,7 @@ export const ContextUserProvider = ({ children }) => {
                 {
                     goals,
                     idGoal,
+                    usersByCompany,
                     users,
                     teams,
                     modelChange,

@@ -1,7 +1,7 @@
 import moment from "moment"
 
 
-const HistoriesList = ({ histories }) => {
+const HistoriesList = ({ histories, users }) => {
     return(
         <main className='flex flex-col items-center'>
             <span className='text-bold text-xl text-white uppercase m-2'>Nome do Kr</span>
@@ -13,9 +13,9 @@ const HistoriesList = ({ histories }) => {
                             <table class="table-auto w-full">
                                 <thead>
                                     <tr>
+                                        <th className='container-title-grid'>Atualizado em</th>
                                         <th className='container-title-grid'>Valor inicial</th>
                                         <th className='container-title-grid'>Valor atualizado</th>
-                                        <th className='container-title-grid'>Atualizado em</th>
                                         <th className='container-title-grid'>Atualizado por</th>
                                         <th className='container-title-grid'>Status</th>
                                     </tr>
@@ -25,10 +25,10 @@ const HistoriesList = ({ histories }) => {
                                     {(histories || []).map((history) => {
                                         return(
                                             <tr>
-                                                <td> {history.to} </td>
-                                                <td> {history.from} </td>
                                                 <td> {moment(history.updateHistory).format("DD/MM/YYYY")} </td>
-                                                <td> Atualizador </td>
+                                                <td> {history.to} </td>
+                                                <td> {history.from} </td>                      
+                                                <td> {(users || [])?.filter(e => e.id === history.author)[0]?.name} </td>
                                                 <td> {history.status? "concluído": "ativo"} </td>
                                             </tr>
                                         )

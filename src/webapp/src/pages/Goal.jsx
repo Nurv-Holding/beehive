@@ -21,7 +21,7 @@ import jwtDecode from "jwt-decode"
 import usersApi from '../api/usersApi';
 
 function Goal() {
-  const { idGoal, idCompany, teams, modelChange, item } = useContext(ContextUser)
+  const { idGoal, idCompany, teams, modelChange, item, users } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})
@@ -44,7 +44,6 @@ function Goal() {
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [tasksUser, setTasksUser] = useState([])
-  const [users, setUsers] = useState([])
   const update = searchParams.get('update')
   const token = localStorage.getItem("token")
   const payload = token? jwtDecode(token): null
@@ -62,17 +61,11 @@ function Goal() {
     handleHistoryGoalKrs()
     handleTasksUser()
     handleTemaUsers()
-    handlerUser()
 
   }, [idGoal, idCompany, update])
 
   function updateData() {
     setIsOpen(false)
-  }
-
-  const handlerUser = async () => {
-    const {data} = await usersApi.getAll()
-    setUsers(data)
   }
 
   function closeModalGoalTeam() {
