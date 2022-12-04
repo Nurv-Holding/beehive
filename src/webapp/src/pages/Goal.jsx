@@ -288,7 +288,8 @@ function Goal() {
       toQuarterly: parseInt(item.toQuarterly),
       toYearly: parseInt(item.toYearly),
       fromQuarterly: parseInt(item.fromQuarterly),
-      fromYearly: parseInt(item.fromYearly)
+      fromYearly: parseInt(item.fromYearly),
+      author: payload?.id
     }
 
     goalKrsApi.create(idCompany, data)
@@ -296,7 +297,7 @@ function Goal() {
         setMessage("KR criado com sucesso")
         setQueryUpdate((x) => !x)
         navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
 
@@ -364,6 +365,9 @@ function Goal() {
             setQueryUpdate={setQueryUpdate}
             queryUpdate={queryUpdate}
             historyGoalKrs={historyGoalKrs}
+            token={token}
+            payload={payload}
+            users={users}
           />
 
           <div className='border-t mt-6 pt-8 border-white'>

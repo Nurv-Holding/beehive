@@ -65,9 +65,9 @@ join goalsTeams as gt on pgt.idGoalsTeam=gt.id;
 
 /*Projeção de historico de krs(historyGoalsKrsController)*/
 select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,
-hgk.quaPercentage, hgk.yeaPerventage, gk.name as nameGoalKr
+hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, gk.status, gk.author
 from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
-join goalKrs as gk on hgk.idGoalKr=gk.id;
+join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=2;
 
 /*Projeção de times e integrantes(historyGoalsKrsController)*/
 select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, u.occupation as occupationUser,
@@ -84,6 +84,8 @@ gt.idGoal, t.id as idTeam, t.name as nameTeam from taskUsers as tku join tasks a
 join goalTeamKrs as gtk on tk.idGoalsTeamKr=gtk.id join goalsTeams as gt on gtk.idGoalsTeam=gt.id
 left join teamUsers as tu on tku.idTeamUser=tu.id left join users as u on tu.idUser=u.id
 left join profiles as p on u.idProfile=p.id left join teams as t on tu.idTeam=t.id 
-where tku.idCompany=1 and gt.idGoal=5;  
+where tku.idCompany=1 and gt.idGoal=5 ; 
 
-select * from goalTeamKrs;
+/*Projeção de histórico de kr (taskUsersController)*/ 
+
+select * from goals;

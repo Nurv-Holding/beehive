@@ -1,6 +1,7 @@
+import moment from "moment"
 
 
-const HistoriesList = () => {
+const HistoriesList = ({ histories }) => {
     return(
         <main className='flex flex-col items-center'>
             <span className='text-bold text-xl text-white uppercase m-2'>Nome do Kr</span>
@@ -21,13 +22,18 @@ const HistoriesList = () => {
                                 </thead>
 
                                 <tbody className='text-center'>
-                                    <tr>
-                                        <td> x </td>
-                                        <td> x2 </td>
-                                        <td> data atualização </td>
-                                        <td> Atualizador </td>
-                                        <td> Concluído </td>
-                                    </tr>
+                                    {(histories || []).map((history) => {
+                                        return(
+                                            <tr>
+                                                <td> {history.to} </td>
+                                                <td> {history.from} </td>
+                                                <td> {moment(history.updateHistory).format("DD/MM/YYYY")} </td>
+                                                <td> Atualizador </td>
+                                                <td> {history.status? "concluído": "ativo"} </td>
+                                            </tr>
+                                        )
+                                    })}
+
                                 </tbody>
                             </table>
                         </div>

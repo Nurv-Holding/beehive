@@ -18,7 +18,9 @@ function GoalKrs({
   idCompany,
   setQueryUpdate,
   queryUpdate,
-  historyGoalKrs }) {
+  historyGoalKrs,
+  payload,
+  token }) {
 
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
@@ -49,9 +51,11 @@ function GoalKrs({
     const newData = {
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr.idgoalsKr,
-      user: "usuário teste",
+      user: payload?.name,
       quaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromQuarterlyGoalKrs),
-      yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromYearlyGoalsKr)
+      yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromYearlyGoalsKr),
+      to: goalKr?.doneGoalsKr,
+      from: data.done
     }
 
     goalKrsApi.update(goalKr.idgoalsKr, data)
@@ -85,6 +89,10 @@ function GoalKrs({
 
   function closeModalCloseKr() {
     setIsOpenCloseKr(false)
+  }
+
+  const redirectHistory = (idgoalsKr) => {
+    navigate(`history/${idgoalsKr}`)
   }
 
   return (
@@ -177,11 +185,9 @@ function GoalKrs({
                       Atualizar valores
                     </button>
 
-                    <Link to={`/history`}>
-                      <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
+                    <button onClick={() => redirectHistory(goalKr?.idgoalsKr)} className="modal-btn h-[30px]">
                         Histórico
-                      </button>
-                    </Link>
+                    </button>
 
                     <CloseKr
                       nameKr={goalKr.nameGoalsKr}

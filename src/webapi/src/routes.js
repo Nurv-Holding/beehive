@@ -71,6 +71,7 @@ const routes = (app) => {
                   //historyGoalsKrs
                   app.post("/hGoalsKrs/history/:idCompany",historyGoalsKrsController.create)
                   app.get("/hGoalsKrs/history/:idCompany",historyGoalsKrsController.getAll)
+                  app.get("/hGoalsKrs/history/:idCompany/:idGoal/:idGoalsKr",historyGoalsKrsController.progectionHistoryGoalKrByKr)
                   app.delete("/hGoalsKrs/history/:id",historyGoalsKrsController.remove)
 
                 //projectionGoalsKrs
