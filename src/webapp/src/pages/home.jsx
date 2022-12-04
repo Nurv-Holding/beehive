@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../components/header';
 import Profile from '../components/profile';
 import AddCompanies from '../components/AddCompanies';
 import { useState } from 'react';

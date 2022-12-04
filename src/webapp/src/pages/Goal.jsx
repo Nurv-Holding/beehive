@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from '../components/header';
 import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
 import TeamsGoal from '../components/TeamsGoal';

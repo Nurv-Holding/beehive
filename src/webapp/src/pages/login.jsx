@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import usersApi from "../api/usersApi"
-import Header from "../components/Header"
+import Header from "../components/header"
 const Login = () => {
     const [user, setUse] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
