@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 function profile({ payload }) {
 
     return (
-        <div className='grid-row'>
+        <div className='grid-row w-full'>
           <div className='profile-photo'>
             <img src="https://thispersondoesnotexist.com/image"/>
           </div>
@@ -17,7 +17,7 @@ function profile({ payload }) {
 
             <div className='profile-nav mt-4'>
               <Link to="/alterarPerfil">
-                <span>Alterar Perfil</span>
+                <span className="text-sm">Alterar Perfil</span>
               </Link>
             </div>
           </div>

@@ -33,8 +33,7 @@ header nav{
 
 /*GRID CONTAINER and general attributes*/
 .grid-container{
-    @apply w-full grid justify-center my-8 gap-x-8
-    lg:grid-cols-[20%,70%]
+    @apply w-full grid justify-center my-8 gap-x-8 grid-cols-[20%,70%]
 }
 
 .grid-col{
