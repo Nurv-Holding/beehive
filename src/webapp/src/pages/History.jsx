@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import historyGoalKrApi from '../api/historyGoalKrApi';
-import Header from '../components/header';
+import Header from '../components/Header';
 import HistoriesList from '../components/HistoriesList';
 import { ContextUser } from '../context/ContextUser';
 

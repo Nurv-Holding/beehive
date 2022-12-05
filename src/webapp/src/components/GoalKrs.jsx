@@ -52,10 +52,11 @@ function GoalKrs({
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr.idgoalsKr,
       user: payload?.name,
-      quaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromQuarterlyGoalKrs),
-      yeaPercentage: calcPercentage((goalKr.doneGoalsKr + done), goalKr.fromYearlyGoalsKr),
+      quaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromQuarterlyGoalKrs),
+      yeaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromYearlyGoalsKr),
       to: goalKr?.doneGoalsKr,
-      from: data.done
+      from: data.done,
+      status: goalKr?.doneGoalsKr
     }
 
     goalKrsApi.update(goalKr.idgoalsKr, data)
