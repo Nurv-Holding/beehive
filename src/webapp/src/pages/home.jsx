@@ -31,12 +31,13 @@ function Home() {
         <div className='grid-container'>
           <div className='grid-col'>
             <Profile payload={payload} />
-            
+            {payload.nameProfile === "adminMaster" &&
             <AddCompanies
               setQueryUpdate={setQueryUpdate}
               queryUpdate={queryUpdate}
-              payload={payload}
             />
+            }
+
           </div>
 
             <div className='grid-col'>
