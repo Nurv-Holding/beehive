@@ -34,7 +34,8 @@ function TeamsGoal({
   setQueryUpdate,
   queryUpdate,
   searchParams,
-  navigate }) {
+  navigate,
+  payload }) {
 
   const [isOpen, setIsOpen] = useState(false)
   const [krs, setKrs] = useState({})
@@ -109,7 +110,8 @@ function TeamsGoal({
         toQuarterly: parseInt(item.toQuarterly),
         toYearly: parseInt(item.toYearly),
         fromQuarterly: parseInt(item.fromQuarterly),
-        fromYearly: parseInt(item.fromYearly)
+        fromYearly: parseInt(item.fromYearly),
+        author: payload?.id
       }
 
       goalTeamsKrsApi.create(idCompany, data)
@@ -117,7 +119,7 @@ function TeamsGoal({
           setMessage("KR criado com sucesso")
           setQueryUpdate((x) => !x)
           navigate({
-            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${queryUpdate}`
           })
 
@@ -140,7 +142,7 @@ function TeamsGoal({
     event.preventDefault()
 
     const idGoalsTeamKr = krs.idgoalTeamsKr
-    const { data } = await tasksApi.create(idCompany, { ...itemTask, idGoalsTeamKr })
+    const { data } = await tasksApi.create(idCompany, {...itemTask, author: payload?.id, idGoalsTeamKr})
     const idTaskCreated = data.id
 
     const newData = {
@@ -153,7 +155,7 @@ function TeamsGoal({
         setMessage("Tarefa criada com sucesso")
         setQueryUpdate((x) => !x)
         navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
 
@@ -175,7 +177,7 @@ function TeamsGoal({
         setMessage("Usuário adicionado com sucesso")
         setQueryUpdate((x) => !x)
         navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
 
@@ -203,7 +205,7 @@ function TeamsGoal({
         setMessage("Atualizado")
         setQueryUpdate((x) => !x)
         navigate({
-          pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
           search: `?update=${queryUpdate}`
         })
 

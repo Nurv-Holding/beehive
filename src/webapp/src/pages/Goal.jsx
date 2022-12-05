@@ -21,7 +21,7 @@ import jwtDecode from "jwt-decode"
 import usersApi from '../api/usersApi';
 
 function Goal() {
-  const { idGoal, idCompany, teams, modelChange, item, users } = useContext(ContextUser)
+  const { idGoal, idCompany, teams, modelChange, item, users, payload, token } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})
@@ -45,8 +45,6 @@ function Goal() {
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [tasksUser, setTasksUser] = useState([])
   const update = searchParams.get('update')
-  const token = localStorage.getItem("token")
-  const payload = token? jwtDecode(token): null
 
   useEffect(() => {
     handleGoal()
@@ -224,7 +222,7 @@ function Goal() {
           setMessage("Ojetivo criado com sucesso")
           setQueryUpdate((x) => !x)
           navigate({
-            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${queryUpdate}`
           })
 
@@ -242,7 +240,7 @@ function Goal() {
           setMessage("Ojetivo criado com sucesso")
           setQueryUpdate((x) => !x)
           navigate({
-            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${queryUpdate}`
           })
 
@@ -375,6 +373,7 @@ function Goal() {
               teamUsers={teamUsers}
               setQueryUpdate={setQueryUpdate}
               queryUpdate={queryUpdate}
+              payload={payload}
             />
           </div>
         </div>
