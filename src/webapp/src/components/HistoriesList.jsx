@@ -1,11 +1,10 @@
 import moment from "moment"
 
-
-const HistoriesList = ({ histories, users }) => {
+const HistoriesList = ({ histories, goalKr }) => {
     return(
         <main className='flex flex-col items-center'>
-            <span className='text-bold text-xl text-white uppercase m-2'>Nome do Kr</span>
-            <span className='text-bold text-lg m-2 text-white'>Criado em: {moment(histories[0]?.createdHistory).format("DD/MM/YYYY")} </span>
+            <span className='text-bold text-xl text-white uppercase m-2'> {goalKr.name} </span>
+            <span className='text-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
             <div className='w-11/12'>
                 <div className='container-empresas'>
                     <div className='flex flex-col items-center'>
@@ -16,6 +15,8 @@ const HistoriesList = ({ histories, users }) => {
                                         <th className='container-title-grid'>Data</th>
                                         <th className='container-title-grid'>Valor inicial</th>
                                         <th className='container-title-grid'>Valor atualizado</th>
+                                        <th className='container-title-grid'>Alvo trimestral: {goalKr.fromQuarterly} </th>
+                                        <th className='container-title-grid'>Alvo anual: {goalKr.fromYearly} </th>
                                         <th className='container-title-grid'>Atualizado por</th>
                                         <th className='container-title-grid'>Status</th>
                                     </tr>
@@ -27,7 +28,9 @@ const HistoriesList = ({ histories, users }) => {
                                             <tr>
                                                 <td> {moment(history?.updateHistory).format("DD/MM/YYYY")} </td>
                                                 <td> {history?.to} </td>
-                                                <td> {history?.from} </td>                      
+                                                <td> {history?.from} </td> 
+                                                <td> {history?.quaPercentage}% </td>
+                                                <td> {history?.yeaPercentage}% </td>                     
                                                 <td> {history?.user} </td>
                                                 <td> {history?.status? "encerrado": "ativo"} </td>
                                             </tr>
