@@ -56,7 +56,7 @@ function GoalKrs({
       yeaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromYearlyGoalsKr),
       to: goalKr?.doneGoalsKr,
       from: data.done,
-      status: goalKr?.doneGoalsKr
+      status: !!goalKr?.status
     }
 
     goalKrsApi.update(goalKr.idgoalsKr, data)

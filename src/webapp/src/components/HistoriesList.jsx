@@ -13,7 +13,7 @@ const HistoriesList = ({ histories, users }) => {
                             <table class="table-auto w-full">
                                 <thead>
                                     <tr>
-                                        <th className='container-title-grid'>Atualizado em</th>
+                                        <th className='container-title-grid'>Data</th>
                                         <th className='container-title-grid'>Valor inicial</th>
                                         <th className='container-title-grid'>Valor atualizado</th>
                                         <th className='container-title-grid'>Atualizado por</th>
@@ -25,11 +25,11 @@ const HistoriesList = ({ histories, users }) => {
                                     {(histories || []).map((history) => {
                                         return(
                                             <tr>
-                                                <td> {moment(history.updateHistory).format("DD/MM/YYYY")} </td>
-                                                <td> {history.to} </td>
-                                                <td> {history.from} </td>                      
-                                                <td> {(users || [])?.filter(e => e.id === history.author)[0]?.name} </td>
-                                                <td> {history.status? "concluído": "ativo"} </td>
+                                                <td> {moment(history?.updateHistory).format("DD/MM/YYYY")} </td>
+                                                <td> {history?.to} </td>
+                                                <td> {history?.from} </td>                      
+                                                <td> {history?.user} </td>
+                                                <td> {history?.status? "encerrado": "ativo"} </td>
                                             </tr>
                                         )
                                     })}
