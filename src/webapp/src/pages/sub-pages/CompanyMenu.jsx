@@ -14,7 +14,6 @@ export default function CompanyMenu() {
       <Tab.List className='container-nav-empresas'>
         <Tab>
           {({ selected }) => (
-            /* Use the `selected` state to conditionally style the selected tab. */
             <button
               className={
                 selected ? 'text-[#5500C3]' : ''
@@ -27,7 +26,6 @@ export default function CompanyMenu() {
 
         <Tab>
           {({ selected }) => (
-            /* Use the `selected` state to conditionally style the selected tab. */
             <button
               className={
                 selected ? 'text-[#5500C3]' : ''
@@ -40,7 +38,6 @@ export default function CompanyMenu() {
 
         <Tab>
           {({ selected }) => (
-            /* Use the `selected` state to conditionally style the selected tab. */
             <button
               className={
                 selected ? 'text-[#5500C3]' : ''

@@ -222,9 +222,9 @@ function TeamsGoal({
         return (
           <>
             <Disclosure key={i}>
-              <div className='flex flex-col w-full bg-white p-4 my-4 rounded-lg'>
+              <div className='flex flex-col w-full bg-white p-2 my-4 rounded-lg'>
                 <div className='flex flex-row w-full'>
-                  <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white rounded-lg cursor-pointer'>
+                  <Disclosure.Button className='flex flex-row items-center h-12 justify-around w-full bg-white rounded-lg cursor-pointer'>
                     <div className='flex items-center'>
                       <span> {goalTeams.nameTeam} </span>
                     </div>

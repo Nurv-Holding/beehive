@@ -10,11 +10,10 @@ function AddGoalTeam({ closeModal, openModal, isOpen, createGoalsTeam, modelChan
 
     return (
         <>
-            <div className="w-[20%]">
-                <button className="modal-btn h-[56px]" onClick={openModal}>
+            <div className="w-[20%] flex items-center justify-center">
+                <button className="modal-btn h-[60%]" onClick={openModal}>
                     Adicionar objetivo
                 </button>
-
             </div>
             <div>
                 <Modal isOpen={isOpen} closeModal={closeModal}>
