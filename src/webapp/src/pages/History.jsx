@@ -8,7 +8,7 @@ import HistoriesList from '../components/HistoriesList';
 import { ContextUser } from '../context/ContextUser';
 
 
-function History() {
+const History = () => {
     const {idgoalsKr, idGoal} = useParams()
     const {idCompany, users} = useContext(ContextUser)
     const [histories, setHistories] = useState([])

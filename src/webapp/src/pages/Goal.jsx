@@ -183,7 +183,7 @@ function Goal() {
           setMessage("Time adicionado sucesso")
           setQueryUpdate((x) => !x)
           navigate({
-            pathname: `/empresas/${idCompany}/objetivo/${idGoal}`,
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${queryUpdate}`
           })
 

@@ -29,7 +29,8 @@ function GoalKrs({
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const [isOpenCloseKr, setIsOpenCloseKr] = useState(false)
+  const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
+  const [finishKr, setFinishKr] = useState()
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -80,16 +81,49 @@ function GoalKrs({
       })
   }
 
+  function closeModalFinishKr() {
+    setIsOpenFinishKr(false)
+  }
+
+  const finishGoalKr = async (idGoalKr) => {
+    const {data} = await historyGoalKrApi.getAll(idCompany)
+    const history = data.length !== 0? data[data.length - 1]: null
+    const result = await goalKrsApi.update(idGoalKr, {status: true})
+    const goalKr = result.data
+
+    const newData = {
+      idGoal: parseInt(idGoal),
+      idGoalKr: goalKr?.id,
+      user: payload?.name,
+      quaPercentage: history?.quaPercentage,
+      yeaPercentage: history?.yeaPercentage,
+      to: history?.to,
+      from: history?.from,
+      status: !!goalKr?.status
+    }
+
+    historyGoalKrApi.create(idCompany, newData)
+    .then(() => {
+        setQueryUpdate((x) => !x)
+        navigate({
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          search: `?update=${queryUpdate}`
+        })
+
+        closeModalFinishKr()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
   }
 
   function openModalCloseKr() {
-    setIsOpenCloseKr(true)
-  }
-
-  function closeModalCloseKr() {
-    setIsOpenCloseKr(false)
+    setIsOpenFinishKr(true)
   }
 
   const redirectHistory = (idgoalsKr) => {
@@ -182,22 +216,26 @@ function GoalKrs({
                   </div>
 
                   <div className="flex gap-2 mt-2">
-                    <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
-                      Atualizar valores
-                    </button>
+                    {!(!!goalKr?.status) &&
+                      <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
+                        Atualizar valores
+                      </button>
+                    }
 
                     <button onClick={() => redirectHistory(goalKr?.idgoalsKr)} className="modal-btn h-[30px]">
                         Histórico
                     </button>
-
-                    <CloseKr
+                    {!(!!goalKr?.status) &&
+                      <CloseKr
                       nameKr={goalKr.nameGoalsKr}
                       idGoalKr={goalKr.idgoalsKr}
                       handleSubmit={handleSubmit}
-                      isOpen={isOpenCloseKr}
-                      closeModal={closeModalCloseKr}
+                      isOpen={isOpenFinishKr}
+                      closeModal={closeModalFinishKr}
                       openModal={openModalCloseKr}
+                      finishGoalKr={finishGoalKr}
                     />
+                    }
                   </div>
                 </div>
 
