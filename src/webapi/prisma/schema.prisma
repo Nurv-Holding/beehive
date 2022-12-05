@@ -194,6 +194,7 @@ model HistoryGoalKr {
   idGoal        Int
   idCompany     Int
   user          String
+  status        Boolean  @default(false)
   to            Float
   from          Float
   quaPercentage Float
@@ -213,6 +214,7 @@ model HistoryGoalsTeamKr {
   idGoalsTeamKr     Int
   idCompany         Int
   user              String
+  status            Boolean          @default(false)
   to                Float
   from              Float
   quaPercentage     Float

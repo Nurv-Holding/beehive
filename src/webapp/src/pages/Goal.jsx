@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import Header from '../components/header';
+import Header from '../components/Header';
 import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
 import TeamsGoal from '../components/TeamsGoal';
@@ -107,7 +107,6 @@ function Goal() {
 
   const handleTemaUsers = async () => {
     const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-    console.log("users", data)
     setTeamUsers(data)
   }
 
@@ -119,55 +118,46 @@ function Goal() {
 
   const handleHistoryGoalKrs = async () => {
     const { data } = await historyGoalKrApi.getAll(idCompany)
-
     setHistoryGoalKrs(data)
   }
 
   const handleGoalTeamByGoalTeam = async () => {
     const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
-
     setGoalTeamByGoalTeam(data)
   }
 
   const handleGoalTeamByKrs = async () => {
     const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
-
     setGoalTeamByKrs(data)
   }
 
   const handleGoal = async () => {
     const { data } = await goalsApi.getById(idGoal, idCompany)
-
     setGoal(data)
   }
 
   const handleGoalTeamsByTeam = async () => {
     const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
-
     setGoalTeamsByTeam(data)
   }
 
   const handleGoalTeamsKrs = async () => {
     const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
-
     setGoalTeamsKrs(data)
   }
 
   const handleGoalTeam = async () => {
     const { data } = await goalsTeamApi.getById(idCompany, idGoal)
-
     setGoalTeam(data)
   }
 
   const handleGoalTeams = async () => {
     const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)
-
     setGoalTeams(data)
   }
 
   const handleGoalKrs = async () => {
     const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
-
     setGoalKrs(data)
   }
 

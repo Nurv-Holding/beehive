@@ -64,10 +64,10 @@ join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
 join goalsTeams as gt on pgt.idGoalsTeam=gt.id;
 
 /*Projeção de historico de krs(historyGoalsKrsController)*/
-select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,
+select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,
 hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, gk.status, gk.author
 from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
-join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=2;
+join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=2 and hgk.idGoal=1 and hgk.idGoalKr=1;
 
 /*Projeção de times e integrantes(historyGoalsKrsController)*/
 select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, u.occupation as occupationUser,

@@ -5,7 +5,7 @@ const HistoriesList = ({ histories, users }) => {
     return(
         <main className='flex flex-col items-center'>
             <span className='text-bold text-xl text-white uppercase m-2'>Nome do Kr</span>
-            <span className='text-bold text-lg m-2 text-white'>Criado em</span>
+            <span className='text-bold text-lg m-2 text-white'>Criado em: {moment(histories[0]?.createdHistory).format("DD/MM/YYYY")} </span>
             <div className='w-11/12'>
                 <div className='container-empresas'>
                     <div className='flex flex-col items-center'>

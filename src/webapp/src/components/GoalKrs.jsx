@@ -191,6 +191,7 @@ function GoalKrs({
 
                     <CloseKr
                       nameKr={goalKr.nameGoalsKr}
+                      idGoalKr={goalKr.idgoalsKr}
                       handleSubmit={handleSubmit}
                       isOpen={isOpenCloseKr}
                       closeModal={closeModalCloseKr}

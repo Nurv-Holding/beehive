@@ -7,7 +7,8 @@ const progectionHistoryGoalKrByKr = async (req, res) => {
     const {idCompany, idGoal, idGoalsKr} = req.params
 
     try {
-        const historyGoalKrs = await prismaClient.$queryRaw`select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,
+        const historyGoalKrs = await prismaClient.$queryRaw`select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, 
+        hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,
         hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, gk.status, gk.author
         from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
         join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=${idCompany} 

@@ -1,3 +1,4 @@
+import goalKrsApi from "../api/goalKrsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
 const CloseGoal = ({
@@ -5,8 +6,13 @@ const CloseGoal = ({
     isOpen,
     closeModal,
     openModal,
-    handleSubmit
+    handleSubmit,
+    idGoalKr
 }) => {
+
+    const finishingGoalKr = () => {
+        goalKrsApi.update(idGoalKr, {status: true})
+    }
 
     return (
         <div>
