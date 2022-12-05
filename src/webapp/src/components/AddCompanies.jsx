@@ -3,7 +3,7 @@ import Modal from './CompanyMenuPanel/Goals/components/Modal'
 import { useState } from 'react'
 import companiesApi from '../api/companiesApi'
 
-function AddCompanies( { queryUpdate, setQueryUpdate } ) {  
+function AddCompanies( { queryUpdate, setQueryUpdate, payload } ) {  
   let [isOpen, setIsOpen] = useState(false)
   const [company, setCompany] = useState({
     name:"",
@@ -57,13 +57,15 @@ function AddCompanies( { queryUpdate, setQueryUpdate } ) {
                    
                 <label className='mt-3' for="tarefa">CNPJ:</label>
                 <input onChange={changeModel}  name='cnpj' type='text' className='input-style' placeholder="Digite o CNPJ da empresa"/>        
-
+                {payload.nameProfile === "adminMaster" &&
                 <div className="mt-4">
-                    <button className='submit-button' type="submit" >
-                        Adicionar
-                    </button>
-                    <span> Mensagem aqui </span>
+                  <button className='submit-button' type="submit" >
+                      Adicionar
+                  </button>
+                  <span> Mensagem aqui </span>
                 </div>
+                }
+
             </form>
          </Modal>
       </div>

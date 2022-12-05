@@ -35,6 +35,7 @@ function Home() {
             <AddCompanies
               setQueryUpdate={setQueryUpdate}
               queryUpdate={queryUpdate}
+              payload={payload}
             />
           </div>
 
