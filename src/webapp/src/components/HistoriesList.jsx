@@ -1,7 +1,7 @@
 import moment from "moment"
 
 const HistoriesList = ({ histories, goalKr }) => {
-    return(
+    return (
         <main className='flex flex-col items-center'>
             <span className='text-bold text-xl text-white uppercase m-2'> {goalKr.name} </span>
             <span className='text-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
@@ -24,15 +24,15 @@ const HistoriesList = ({ histories, goalKr }) => {
 
                                 <tbody className='text-center'>
                                     {(histories || []).map((history) => {
-                                        return(
+                                        return (
                                             <tr>
                                                 <td> {moment(history?.updateHistory).format("DD/MM/YYYY")} </td>
                                                 <td> {history?.to} </td>
-                                                <td> {history?.from} </td> 
+                                                <td> {history?.from} </td>
                                                 <td> {history?.quaPercentage}% </td>
-                                                <td> {history?.yeaPercentage}% </td>                     
+                                                <td> {history?.yeaPercentage}% </td>
                                                 <td> {history?.user} </td>
-                                                <td> {history?.status? "encerrado": "ativo"} </td>
+                                                <td> {history?.status ? "encerrado" : "ativo"} </td>
                                             </tr>
                                         )
                                     })}

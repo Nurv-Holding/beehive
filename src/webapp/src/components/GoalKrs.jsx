@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { calcPercentage } from '../utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { json, useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
@@ -134,7 +134,8 @@ function GoalKrs({
     <>
       {(goalKrs || []).map((goalKr, i) => {
         return (
-          <div key={i} className="bg-white rounded-md p-0.5 mt-4 flex flex-col">
+          <div key={i} className={`${!(!!goalKr.status)}`?'bg-red-500 rounded-md p-0.5 mt-4 flex flex-col':'bg-white rounded-md p-0.5 mt-4 flex flex-col'}>
+            {JSON.stringify(!!goalKr.status)}
             <Disclosure>
               <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white p-4 cursor-pointer'>
                 <div className='flex items-center'>
