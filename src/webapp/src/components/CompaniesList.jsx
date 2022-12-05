@@ -4,6 +4,7 @@ function CompaniesList({ companies }) {
 
     return (
         <div className='grid-row grid-general min-h-[475px]'>
+            {JSON.stringify(companies)}
             <h1 className='container-title'>Empresas</h1>
 
             <div>

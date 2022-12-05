@@ -6,13 +6,25 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import { useState } from 'react'
 import usersApi from '../../../api/usersApi'
+import { useEffect } from 'react'
 
 function Users() {
-    const { users, item, modelChange } = useContext(ContextUser)
+    const { item, modelChange } = useContext(ContextUser)
     const [message, setMessage] = useState("")
     const { idCompany } = useParams()
+    const [users, setUsers] = useState([])
     const [queryUpdate, setQueryUpdate] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        handlerUsers()
+        
+    },[idCompany])
+
+    const handlerUsers = async () => {
+        const {data} = await usersApi.getAllByCompany(idCompany)
+        setUsers(data)
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()

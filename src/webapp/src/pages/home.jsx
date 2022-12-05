@@ -6,31 +6,31 @@ import { useEffect } from 'react';
 import companiesApi from '../api/companiesApi';
 import CompaniesList from '../components/CompaniesList';
 import Authorize from '../components/Authorize';
+import jwtDecode from 'jwt-decode';
 
 function Home() {
   const [companies, setCompanies] = useState([])
   const [queryUpdate, setQueryUpdate] = useState(false)
+  const token = localStorage.getItem("token")
+  const payload = token? jwtDecode(token): null
 
   useEffect(() => {
     handlerCompanies()
-    console.log("token", localStorage.getItem("token"))
 
   },[queryUpdate])
 
   const handlerCompanies = async () => {
     const {data} = await companiesApi.getAll()
-    setCompanies(data)
+    setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
   }
-
 
   return (
     <>
-      <Authorize>
       <Header />
       <main>
         <div className='grid-container'>
           <div className='grid-col'>
-            <Profile />
+            <Profile payload={payload} />
             
             <AddCompanies
               setQueryUpdate={setQueryUpdate}
@@ -43,7 +43,6 @@ function Home() {
             </div>
           </div>
       </main>
-      </Authorize>
     </>
   );
 }

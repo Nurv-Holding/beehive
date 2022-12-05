@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom'
-import jwtDecode from 'jwt-decode'
 
-function profile() {
-  const token = localStorage.getItem("token")
-  const payload = token? jwtDecode(token): null
+function profile({ payload }) {
 
     return (
         <div className='grid-row'>
