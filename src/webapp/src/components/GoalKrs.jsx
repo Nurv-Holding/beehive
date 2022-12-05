@@ -134,8 +134,7 @@ function GoalKrs({
     <>
       {(goalKrs || []).map((goalKr, i) => {
         return (
-          <div key={i} className={`${!(!!goalKr.status)}`?'bg-red-500 rounded-md p-0.5 mt-4 flex flex-col':'bg-white rounded-md p-0.5 mt-4 flex flex-col'}>
-            {JSON.stringify(!!goalKr.status)}
+          <div key={i} className={`${!(!!goalKr.status)? "bg-white rounded-md p-0.5 mt-4 flex flex-col":"bg-red-500 rounded-md p-0.5 mt-4 flex flex-col"}`}>
             <Disclosure>
               <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white p-4 cursor-pointer'>
                 <div className='flex items-center'>
