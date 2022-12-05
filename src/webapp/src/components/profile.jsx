@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
+import jwtDecode from 'jwt-decode'
 
 function profile() {
+  const token = localStorage.getItem("token")
+  const payload = token? jwtDecode(token): null
+
     return (
         <div className='grid-row'>
           <div className='profile-photo'>
@@ -9,19 +13,12 @@ function profile() {
 
           <div className='flex flex-col self-center cursor-default'>
             <div>
-              <p className='profile-name'>Pedro Augusto</p>
-              <p className='text-desc mb-4'>Team Leader</p>
-              <p className='text-desc mb-0.5'>Administrator</p>
-              <p className='text-desc'>pedroaugusto@gmail.com</p>
+              <p className='profile-name'>{payload.name}</p>
+              <p className='text-desc mb-0.5'>{payload.occupation}</p>
+              <p className='text-desc'>{payload.email}</p>
             </div>
 
-            <div className='profile-nav mt-8'>
-              <Link to="/historico">
-                <span>Histórico</span>
-              </Link>
-            </div>
-
-            <div className='profile-nav mt-0.5'>
+            <div className='profile-nav mt-4'>
               <Link to="/alterarPerfil">
                 <span>Alterar Perfil</span>
               </Link>

@@ -24,7 +24,8 @@ const authenticateController = async (req, res) => {
                 occupation: user.occupation,
                 photo: user.photo,
                 idProfile: user.idProfile,
-                nameProfile: profile.name
+                nameProfile: profile.name,
+                email: user.email
             }
 
         else
@@ -35,7 +36,8 @@ const authenticateController = async (req, res) => {
                 photo: user.photo,
                 idProfile: user.idProfile,
                 nameProfile: profile.name,
-                idCompany: user.idCompany
+                idCompany: user.idCompany,
+                email: user.email
             }
 
         console.log("payload", payload)
