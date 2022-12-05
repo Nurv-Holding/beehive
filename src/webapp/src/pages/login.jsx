@@ -48,7 +48,7 @@ const Login = () => {
     return (
         <>
             <Header />
-            <main className="flex flex-col items-center justify-center w-full ">
+            <main className="flex flex-col items-center w-full ">
                 <div className="login-container">
                     <h1 className="login-title">Entre em sua conta</h1>
                     <form onSubmit={login} className="login-form-container">

@@ -371,7 +371,7 @@ header nav{
 
 /*login*/
 .login-container {
-    @apply bg-white w-[30%] mt-[5%] rounded-md overflow-hidden  py-8 
+    @apply bg-white w-[30%] mt-8 rounded-md overflow-hidden  py-8 
 }
 .login-title {
    @apply text-xl flex flex-col items-center mt-7

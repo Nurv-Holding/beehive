@@ -134,12 +134,12 @@ function GoalKrs({
     <>
       {(goalKrs || []).map((goalKr, i) => {
         return (
-          <div key={i} className={`${!(!!goalKr.status)? "bg-white rounded-md p-0.5 mt-4 flex flex-col":"bg-red-500 rounded-md p-0.5 mt-4 flex flex-col"}`}>
+          <div key={i} className={`${!(!!goalKr.status)? "bg-white rounded-md p-0.5 mt-4 flex flex-col":"bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
             <Disclosure>
-              <Disclosure.Button className='flex flex-row items-center justify-around w-full bg-white p-4 cursor-pointer'>
+              <Disclosure.Button className='flex flex-row items-center justify-around w-full p-4 cursor-pointer'>
                 <div className='flex items-center'>
                   <span> {goalKr.nameGoalsKr} </span>
-                  <div className='w-3 h-3 ml-2 rounded-full bg-yellow-400 border border-black'></div>
+                  <div className={`${!(!!goalKr.status)? "bg-green-500 rounded-full p-1.5 ml-2 border border-black":"bg-red-500 rounded-full p-1.5 ml-2 border border-black"}`}></div>
                 </div>
 
                 <div className='profile-photo-task'>
@@ -149,7 +149,7 @@ function GoalKrs({
                 <span className="text-gray-600 text-sm">Atualizado {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}</span>
               </Disclosure.Button>
 
-              <Disclosure.Panel className='w-full bg-white p-8 grid grid-cols-3 gap-4 justify-center items-center'>
+              <Disclosure.Panel className='w-full p-8 grid grid-cols-3 gap-4 justify-center items-center'>
                 <div className="flex flex-col">
                   <div className="w-full">
                     <div className="flex flex-col mt-4">
