@@ -22,7 +22,6 @@ const CloseKr = ({
             title={"Encerrar objetivo"}
             >
                 <div className="flex flex-col items-center">
-                    {JSON.stringify(idGoalKr)}
                     <h1>Encerrar o Kr: <span className="text-red-500 text-2xl">{nameKr}</span> ?</h1>
                     <form onSubmit={handleSubmit} className="mt-2 flex flex-row w-full justify-center">
                         <button onClick={() => finishGoalKr(idGoalKr)} className='submit-button' type="submit" >
