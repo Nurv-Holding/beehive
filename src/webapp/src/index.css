@@ -22,25 +22,12 @@ html{
 
 /*HEADER*/
 header{
-    @apply w-[100%] h-14 bg-[#FFFFFF] flex items-center justify-between font-bold
-    lg:h-14 lg:px-10
-}
-
-header span{
-    @apply 
-    lg:text-xs
+    @apply w-[100%] bg-[#FFFFFF] flex items-center justify-between font-bold 
+    lg:h-14 lg:px-10 text-sm
 }
 
 header nav{
-    @apply flex flex-row gap-20
-}
-
-header nav .current-page{
-    @apply text-[#5500C3]
-}
-
-header nav span:hover{
-    @apply text-[#5500C3]
+    @apply flex flex-row gap-2 items-center
 }
 /*END HEADER*/
 
