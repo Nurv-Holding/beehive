@@ -351,7 +351,7 @@ function Goal() {
             users={users}
           />
 
-          <div className='border-t mt-6 pt-8 border-white'>
+          <div className='border-t mt-6 pt-4 border-white'>
             <span className='text-bold text-xl mt-2 text-white'>Times</span>
             <TeamsGoal
               goalTeamByGoalTeam={goalTeamByGoalTeam}
