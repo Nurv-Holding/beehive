@@ -13,7 +13,7 @@ function FormGoal({ modelChange, handleSubmit, message }) {
                     <input className='input-style' onChange={modelChange} name="descriptions" type="text" placeholder='Digite a descrição do objetivo' />
                 </div>
 
-                <button className='submit-button' type="submit">Enviar</button>
+                <button className='submit-button' type="submit">Cadastrar</button>
                 <span> {message} </span>
             </form>
         </div>

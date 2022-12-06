@@ -65,7 +65,7 @@ function Goals() {
                                     selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                 }
                             >
-                                Cadrastamento
+                                Cadrastrar
                             </button>
                         )}
                     </Tab>

@@ -110,7 +110,7 @@ function ListTeams({ teams }) {
                 </select>
               </div>
 
-              <button className='submit-button mt-3' type="submit">Enviar</button>
+              <button className='submit-button mt-3' type="submit">Cadastrar</button>
               <span> {message} </span>
             </form>
           </div>

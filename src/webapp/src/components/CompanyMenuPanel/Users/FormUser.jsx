@@ -27,7 +27,7 @@ function FormUser({ modelChange, message, handleSubmit }) {
                     <label>Repetir Senha</label>
                     <input onChange={modelChange} className='input-style' name="repeatPassword" type="password" placeholder='Repita sua senha'/>
                 </div>
-                <button className='submit-button' type="submit">Enviar</button>
+                <button className='submit-button' type="submit">Cadastrar</button>
             </form>
         <span className="text-center"> {message} </span>
         </div>
