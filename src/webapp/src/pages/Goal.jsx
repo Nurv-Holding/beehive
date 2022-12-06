@@ -301,7 +301,7 @@ function Goal() {
               <span className='text-bold text-xl text-white '>{goal.name}</span>
               <span className='text-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id === goal.author)[0]?.name} </span>
             </div>
-
+            {!(!!goal.status)&&
             <div className='container-percentage-okr flex flex-row justify-around'>
               <AddKr
                 message={message}
@@ -332,9 +332,13 @@ function Goal() {
                 isOpen={isOpenCloseGoal}
                 closeModal={closeModalCloseGoal}
                 openModal={openModalCloseGoal}
+                idGoal={idGoal}
+                setQueryUpdate={setQueryUpdate}
+                queryUpdate={queryUpdate}
+                idCompany={idCompany}
               />
-
             </div>
+            }
           </div>
 
           <GoalKrs
@@ -349,6 +353,7 @@ function Goal() {
             token={token}
             payload={payload}
             users={users}
+            goal={goal}
           />
 
           <div className='border-t mt-6 pt-4 border-white'>
@@ -374,6 +379,7 @@ function Goal() {
               setQueryUpdate={setQueryUpdate}
               queryUpdate={queryUpdate}
               payload={payload}
+              goal={goal}
             />
           </div>
         </div>

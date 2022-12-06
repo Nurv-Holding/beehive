@@ -19,6 +19,7 @@ function GoalKrs({
   setQueryUpdate,
   queryUpdate,
   historyGoalKrs,
+  goal,
   payload,
   token }) {
 
@@ -134,7 +135,7 @@ function GoalKrs({
     <>
       {(goalKrs || []).map((goalKr, i) => {
         return (
-          <div key={i} className={`${!(!!goalKr.status)? "bg-white rounded-md p-0.5 mt-4 flex flex-col":"bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
+          <div key={i} className={`${!(!!goalKr.status) && !(!!goal.status)? "bg-white rounded-md p-0.5 mt-4 flex flex-col":"bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
             <Disclosure>
               <Disclosure.Button className='flex flex-row items-center justify-around w-full p-4 cursor-pointer'>
                 <div className='flex items-center'>
@@ -216,7 +217,7 @@ function GoalKrs({
                   </div>
 
                   <div className="flex gap-2 mt-2">
-                    {!(!!goalKr?.status) &&
+                    {(!(!!goalKr?.status) && !(!!goal?.status)) &&
                       <button className="modal-btn h-[30px]" onClick={() => openModal(goalKr)}>
                         Atualizar valores
                       </button>
@@ -225,11 +226,10 @@ function GoalKrs({
                     <button onClick={() => redirectHistory(goalKr?.idgoalsKr)} className="modal-btn h-[30px]">
                         Histórico
                     </button>
-                    {!(!!goalKr?.status) &&
+                    {(!(!!goalKr?.status) && !(!!goal?.status)) &&
                       <CloseKr
                       nameKr={goalKr.nameGoalsKr}
                       idGoalKr={goalKr.idgoalsKr}
-                      handleSubmit={handleSubmit}
                       isOpen={isOpenFinishKr}
                       closeModal={closeModalFinishKr}
                       openModal={openModalCloseKr}

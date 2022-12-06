@@ -33,6 +33,7 @@ function TeamsGoal({
   tasksUser,
   setQueryUpdate,
   queryUpdate,
+  goal,
   searchParams,
   navigate,
   payload }) {
@@ -240,16 +241,18 @@ function TeamsGoal({
 
 
                   </Disclosure.Button>
-
+                  {!(!!goal.status)&&
                   <AddGoalTeam
-                    closeModal={closeModalGoalTeam}
-                    openModal={openModalGoalTeam}
-                    isOpen={isOpenGoalTeam}
-                    createGoalsTeam={createGoalsTeam}
-                    modelChange={modelChange}
-                    idTeam={goalTeams.idTeam}
-                    item={item}
+                  closeModal={closeModalGoalTeam}
+                  openModal={openModalGoalTeam}
+                  isOpen={isOpenGoalTeam}
+                  createGoalsTeam={createGoalsTeam}
+                  modelChange={modelChange}
+                  idTeam={goalTeams.idTeam}
+                  item={item}
                   />
+                  }
+ 
                 </div>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
@@ -260,8 +263,7 @@ function TeamsGoal({
                           <span className=''> {x.nameGoalTeam}
                             <span className="text-gray-400 text-xs mx-2"> descrição </span>
                           </span>
-                          {x.idGoalTeam && <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>}
-
+                          {(x.idGoalTeam && !(!!goal.status)) && <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>}
                           <AddTeamKr
                             closeModal={closeModalTeamKr}
                             handleSubmit={handleSubmit}
@@ -271,6 +273,7 @@ function TeamsGoal({
                             message={message}
                             item={item}
                           />
+        
                         </div>
 
                         <div className='flex flex-col w-full justify-center rounded-b-md'>
@@ -288,11 +291,12 @@ function TeamsGoal({
                                         Metas
                                       </span>
                                     </div>
-
+                                    {(!!goal.status)&&
                                     <div>
                                       <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
                                         Adicionar tarefas
                                       </span>
+                                      
                                       <AddTask
                                         isOpen={addTaskModal}
                                         message={message}
@@ -302,6 +306,8 @@ function TeamsGoal({
                                         item={itemTask}
                                       />
                                     </div>
+                                    }
+     
 
                                     <TeamKrModal
                                       stateDone={stateDone}
@@ -313,6 +319,7 @@ function TeamsGoal({
                                       historyGoalTeamKrs={historyGoalTeamKrs}
                                       krs={krs}
                                       goalTeamKrsUpdate={goalTeamKrsUpdate}
+                                      goal={goal}
                                     />
                                   </div>
 
@@ -328,6 +335,7 @@ function TeamsGoal({
                                     idCompany={idCompany}
                                     setQueryUpdate={setQueryUpdate}
                                     queryUpdate={queryUpdate}
+                                    goal={goal}
                                   />
 
                                 </div>

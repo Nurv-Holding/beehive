@@ -9,6 +9,7 @@ const TeamKrModal = ({
     krs,
     isOpen,
     stateDone,
+    goal,
     goalTeamKrsUpdate,
     historyGoalTeamKrs,
     done
@@ -21,12 +22,15 @@ const TeamKrModal = ({
                 Atualizado em: {moment(krs.updateGoalsTeamKrs).format("DD/MM/YY")}
             </span>
             <div className="flex flex-col gap-[2%] mt-4">
+                {!(!!goal.status)&&
                 <div className="flex gap-2 items-center">
                     <div>
                         <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
                     </div>
                     <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
                 </div>
+                }
+
                 <div className="flex flex-col gap-[2%] mt-4">
                     <h5>Meta Trimestral:</h5>
                     <div className="flex flex-row">

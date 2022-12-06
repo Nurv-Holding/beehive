@@ -9,7 +9,8 @@ import SwitchToggle from "./switchToggle"
 const ListTasks = ({
     tasksUser,
     kr, 
-    teamUsers, 
+    teamUsers,
+    goal,
     setUser,
     navigate,
     idGoal,
@@ -61,30 +62,36 @@ const ListTasks = ({
                     <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
                         {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
                     </span>
+                    {!(!!goal.status)&&
                     <span>
-                        <SwitchToggle 
-                            setEnabled={setEnabled} 
-                            enabled={enabled} 
-                            taskDone={taskDone} 
-                            i={i} 
-                            index={index}
-                            idTask={task.idTask}
-                            done={task.done}
-                        />
+                    <SwitchToggle 
+                        setEnabled={setEnabled} 
+                        enabled={enabled} 
+                        taskDone={taskDone} 
+                        i={i} 
+                        index={index}
+                        idTask={task.idTask}
+                        done={task.done}
+                    />
                     </span>
+                    }
+         
                     </>
                     }
+                    {!(!!goal.status)&&
                     <div className="flex">
-                    <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
-                    <option selected disabled >Adicionar Usuário</option>
-                        {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
-                        return(
-                            <option value={user.idUser} > {user.emailUser} </option>
-                        )
-                        })}
-                    </select>
-                    <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 mt-1'> OK </button>
+                        <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
+                        <option selected disabled >Adicionar Usuário</option>
+                            {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
+                            return(
+                                <option value={user.idUser} > {user.emailUser} </option>
+                            )
+                            })}
+                        </select>
+                        <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 mt-1'> OK </button>
                     </div>
+                    }
+
                     <span> Data Final: {moment(task.finalDate).format('DD/MM/YY')} </span>
                 </div>
                 )
