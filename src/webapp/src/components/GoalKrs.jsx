@@ -96,10 +96,10 @@ function GoalKrs({
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr?.id,
       user: payload?.name,
-      quaPercentage: history?.quaPercentage,
-      yeaPercentage: history?.yeaPercentage,
-      to: history?.to,
-      from: history?.from,
+      quaPercentage: history?.quaPercentage || 0,
+      yeaPercentage: history?.yeaPercentage || 0,
+      to: history?.to || 0,
+      from: history?.from || 0,
       status: !!goalKr?.status
     }
 

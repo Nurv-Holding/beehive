@@ -291,7 +291,7 @@ function TeamsGoal({
                                         Metas
                                       </span>
                                     </div>
-                                    {(!!goal.status)&&
+                                    {!(!!goal.status)&&
                                     <div>
                                       <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
                                         Adicionar tarefas

@@ -244,7 +244,7 @@ function Goal() {
             search: `?update=${queryUpdate}`
           })
 
-          closeModalTeam()
+          closeModalGoalTeam()
         })
         .catch((error) => {
           console.error(error)
