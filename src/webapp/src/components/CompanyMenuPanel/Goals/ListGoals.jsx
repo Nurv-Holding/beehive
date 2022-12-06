@@ -28,7 +28,7 @@ function ListGoals({ goals }) {
                     <td>{goal.descriptions}</td>
                     <td>{moment(goal.createdAt).format('DD/MM/YY')}</td>
                     <td>{moment(goal.updatedAt).format('DD/MM/YY')}</td>
-                    <td>Ativo/encerrado</td>
+                    <td>{`${goal.status? "Encerrado": "Ativo"}`}</td>
                   </tr>
                 </>
               )
