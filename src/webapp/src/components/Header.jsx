@@ -18,8 +18,10 @@ const Header = () => {
                 <div className="w-[80px]">
                     <img src={logo} className="w-full" alt="logo" />
                 </div>
-
-                <span className="hover:cursor-default"> Olá, <span className="hover:text-[#5500C3]">{payload?.name}</span> </span>
+                {isLogin &&
+                    <span className="hover:cursor-default"> Olá, <span className="hover:text-[#5500C3]">{payload?.name}</span> </span>
+                }
+                
             </div>
 
             <nav>

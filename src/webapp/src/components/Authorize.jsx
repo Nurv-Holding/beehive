@@ -18,15 +18,11 @@ const Authorize = ({children}) => {
         if(!(!!token)){
             setLoading(false)
             navigate("/login")
+        }
 
-        }else if(!!token && payload?.nameProfile === "adminMaster"){
+        if(!!token && payload?.nameProfile === "adminMaster"){
             setLoading(false)
             navigate("/")
-
-        }else{
-            setLoading(false)
-            navigate(`/company/${payload?.idCompany}`)
-
         }
 
     },[token])

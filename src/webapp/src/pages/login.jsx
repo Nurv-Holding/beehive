@@ -5,7 +5,7 @@ import Header from "../components/Header"
 const Login = () => {
     const [user, setUse] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
-    const [message, setMessage] = useState("Aqui vai uma mensagem")
+    const [message, setMessage] = useState("")
     const [queryUpdate, setQueryUpdate] = useState(false)
     const navigate = useNavigate()
 

@@ -10,9 +10,9 @@ function profile({ payload }) {
 
           <div className='flex flex-col self-center cursor-default'>
             <div>
-              <p className='profile-name'>{payload.name}</p>
-              <p className='text-desc mb-0.5'>{payload.occupation}</p>
-              <p className='text-desc'>{payload.email}</p>
+              <p className='profile-name'>{payload?.name}</p>
+              <p className='text-desc mb-0.5'>{payload?.occupation}</p>
+              <p className='text-desc'>{payload?.email}</p>
             </div>
 
             <div className='profile-nav mt-4'>

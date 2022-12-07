@@ -3,7 +3,7 @@ import StockChart from "./chart"
 
 const ChartGoalQuartely = ({ items = [], title = "" }) => {
   const historyDate = items.map(x => moment(x.updatedAt).format('DD/MM'))
-  historyDate.unshift("start")
+  historyDate.unshift(moment(items[0]?.createdAt).format('DD/MM'))
 
   const historyPercentage = items.map(x => x.quaPercentage)
   historyPercentage.push(100)

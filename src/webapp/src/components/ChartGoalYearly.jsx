@@ -3,7 +3,7 @@ import StockChart from "./chart"
 
 const ChartGoalYearly = ({ items = [], title = "" }) => {
   const historyDate = items.map(x => moment(x.updatedAt).format('DD/MM'))
-  historyDate.unshift("start")
+  historyDate.unshift(moment(items[0]?.createdAt).format('DD/MM'))
 
   const historyPercentage = items.map(x => x.yeaPercentage)
   historyPercentage.push(100)

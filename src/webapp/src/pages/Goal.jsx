@@ -17,8 +17,7 @@ import historyGoalKrApi from '../api/historyGoalKrApi';
 import taskUsersApi from '../api/taskUsersApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
-import jwtDecode from "jwt-decode"
-import usersApi from '../api/usersApi';
+import { calcPercentage } from '../utilis';
 
 function Goal() {
   const { idGoal, idCompany, teams, modelChange, item, users, payload, token } = useContext(ContextUser)
@@ -260,34 +259,51 @@ function Goal() {
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const data = {
       ...item,
       idGoal: parseInt(idGoal),
       toQuarterly: parseInt(item.toQuarterly),
-      toYearly: parseInt(item.toYearly),
+      toYearly: parseInt(item.toQuarterly),
       fromQuarterly: parseInt(item.fromQuarterly),
       fromYearly: parseInt(item.fromYearly),
+      done:parseInt(item.toQuarterly),
       author: payload?.id
     }
 
-    goalKrsApi.create(idCompany, data)
-      .then(() => {
-        setMessage("KR criado com sucesso")
-        setQueryUpdate((x) => !x)
-        navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${queryUpdate}`
-        })
+    const result = await goalKrsApi.create(idCompany, data)
+    const goalKr = result.data
 
-        closeModal()
+    console.log("goalKr",goalKr)
+
+    const newData = {
+      idGoal: parseInt(idGoal),
+      idGoalKr: goalKr.id,
+      user: payload?.name,
+      quaPercentage: calcPercentage((goalKr?.done), goalKr?.fromQuarterly),
+      yeaPercentage: calcPercentage((goalKr?.done), goalKr?.fromYearly),
+      to: goalKr?.done,
+      from: data.done,
+      status: !!goalKr?.status
+    }
+
+    historyGoalKrApi.create(idCompany, newData)
+    .then(() => {
+      setMessage("KR criado com sucesso")
+      setQueryUpdate((x) => !x)
+      navigate({
+        pathname: `/company/${idCompany}/goal/${idGoal}`,
+        search: `?update=${queryUpdate}`
       })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado!")
-      })
+
+      closeModal()
+    })
+    .catch((error) => {
+      console.error(error)
+      setMessage("Algo deu errado!")
+    })
   }
 
   return (

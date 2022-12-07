@@ -26,12 +26,13 @@ function Home() {
 
   return (
     <>
+      <Authorize>
       <Header />
       <main>
         <div className='grid-container'>
           <div className='grid-col'>
             <Profile payload={payload} />
-            {payload.nameProfile === "adminMaster" &&
+            {payload?.nameProfile === "adminMaster" &&
             <AddCompanies
               setQueryUpdate={setQueryUpdate}
               queryUpdate={queryUpdate}
@@ -45,6 +46,7 @@ function Home() {
             </div>
           </div>
       </main>
+      </Authorize>
     </>
   );
 }

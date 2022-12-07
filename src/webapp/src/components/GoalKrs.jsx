@@ -140,7 +140,7 @@ function GoalKrs({
               <Disclosure.Button className='flex flex-row items-center justify-around w-full p-4 cursor-pointer'>
                 <div className='flex items-center'>
                   <span> {goalKr.nameGoalsKr} </span>
-                  <div className={`${!(!!goalKr.status)? "bg-green-500 rounded-full p-1.5 ml-2 border border-black":"bg-red-500 rounded-full p-1.5 ml-2 border border-black"}`}></div>
+                  <div className={`${!(!!goalKr.status) && !(!!goal.status)? "bg-green-500 rounded-full p-1.5 ml-2 border border-black":"bg-red-500 rounded-full p-1.5 ml-2 border border-black"}`}></div>
                 </div>
 
                 <div className='profile-photo-task'>
@@ -244,6 +244,7 @@ function GoalKrs({
                     items={
                       historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
                     }
+                    initialValue={goalKr}
                     title={"Trimestral"}
                   />
                 </div>
