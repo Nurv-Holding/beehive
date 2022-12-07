@@ -17,7 +17,6 @@ const ObjectiveKrHistoriesList = ({ histories, goalKr }) => {
                                         <th className='container-title-grid'>Valor atualizado</th>
                                         <th className='container-title-grid'>Alvo trimestral: {goalKr.fromQuarterly} </th>
                                         <th className='container-title-grid'>Alvo anual: {goalKr.fromYearly} </th>
-                                        <th className='container-title-grid'>time</th>
                                         <th className='container-title-grid'>Atualizado por</th>
                                         <th className='container-title-grid'>Status</th>
                                     </tr>
@@ -31,8 +30,7 @@ const ObjectiveKrHistoriesList = ({ histories, goalKr }) => {
                                                 <td> {history?.to} </td>
                                                 <td> {history?.from} </td>
                                                 <td> {history?.quaPercentage}% </td>
-                                                <td> {history?.yearlyPercentage}% </td>
-                                                <td> {history?.yearlyPercentage} </td>
+                                                <td> {history?.yeaPercentage}% </td>
                                                 <td> {history?.user} </td>
                                                 <td> {history?.status ? "encerrado" : "ativo"} </td>
                                             </tr>

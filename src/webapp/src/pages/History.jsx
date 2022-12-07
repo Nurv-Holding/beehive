@@ -10,7 +10,7 @@ import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextUser } from '../context/ContextUser';
 
 const History = () => {
-    /*
+
     const {idgoalsKr, idGoal} = useParams()
     const { idCompany } = useContext(ContextUser)
     const [histories, setHistories] = useState([])
@@ -46,13 +46,13 @@ const History = () => {
         const {data} = await historyGoalKrApi.HistoryGoalKrByKr(idCompany, idGoal, idgoalsKr)
         setHistories(data)
     }
-    */
+    
 
     return (
         <>
             <Header />
-            {/* <ObjectiveKrHistoriesList histories={histories} goalKr={goalKr} /> */}
-            <TeamHistoriesList/>
+            <ObjectiveKrHistoriesList histories={histories} goalKr={goalKr} />
+            {/* <TeamHistoriesList/> */}
         </>
     );
 }
