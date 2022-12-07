@@ -131,7 +131,7 @@ function TeamsGoal({
       }
 
       historyGoalTeamKrApi.create(idCompany, newData)
-      // goalTeamsKrsApi.create(idCompany, data)
+        // goalTeamsKrsApi.create(idCompany, data)
         .then(() => {
           setMessage("KR criado com sucesso")
           setQueryUpdate((x) => !x)
@@ -159,7 +159,7 @@ function TeamsGoal({
     event.preventDefault()
 
     const idGoalsTeamKr = krs.idgoalTeamsKr
-    const { data } = await tasksApi.create(idCompany, {...itemTask, author: payload?.id, idGoalsTeamKr})
+    const { data } = await tasksApi.create(idCompany, { ...itemTask, author: payload?.id, idGoalsTeamKr })
     const idTaskCreated = data.id
 
     const newData = {
@@ -260,18 +260,18 @@ function TeamsGoal({
 
 
                   </Disclosure.Button>
-                  {!(!!goal.status)&&
-                  <AddGoalTeam
-                  closeModal={closeModalGoalTeam}
-                  openModal={openModalGoalTeam}
-                  isOpen={isOpenGoalTeam}
-                  createGoalsTeam={createGoalsTeam}
-                  modelChange={modelChange}
-                  idTeam={goalTeams.idTeam}
-                  item={item}
-                  />
+                  {!(!!goal.status) &&
+                    <AddGoalTeam
+                      closeModal={closeModalGoalTeam}
+                      openModal={openModalGoalTeam}
+                      isOpen={isOpenGoalTeam}
+                      createGoalsTeam={createGoalsTeam}
+                      modelChange={modelChange}
+                      idTeam={goalTeams.idTeam}
+                      item={item}
+                    />
                   }
- 
+
                 </div>
 
                 <Disclosure.Panel className="mt-2 flex flex-col">
@@ -293,7 +293,7 @@ function TeamsGoal({
                             message={message}
                             item={item}
                           />
-        
+
                         </div>
 
                         <div className='flex flex-col w-full justify-center rounded-b-md'>
@@ -311,23 +311,24 @@ function TeamsGoal({
                                         Metas
                                       </span>
                                     </div>
-                                    {!(!!goal.status)&&
-                                    <div>
-                                      <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
-                                        Adicionar tarefas
-                                      </span>
-                                      
-                                      <AddTask
-                                        isOpen={addTaskModal}
-                                        message={message}
-                                        closeModal={closeAddTaskModal}
-                                        modelChange={changeModal}
-                                        createTask={createTask}
-                                        item={itemTask}
-                                      />
-                                    </div>
+                                    {!(!!goal.status) &&
+                                      <div>
+                                        <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
+                                          Adicionar tarefas
+                                        </span>
+
+                                        <AddTask
+                                          isOpen={addTaskModal}
+                                          message={message}
+                                          closeModal={closeAddTaskModal}
+                                          modelChange={changeModal}
+                                          createTask={createTask}
+                                          item={itemTask}
+                                        />
+                                      </div>
                                     }
-     
+
+                                    aqui botao de historico
 
                                     <TeamKrModal
                                       stateDone={stateDone}

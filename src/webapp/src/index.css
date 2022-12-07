@@ -258,11 +258,11 @@ header nav{
 
 /*EmpresasMenu*/
 .container-nav-empresas{
-    @apply w-[20%] h-full bg-[#FFFFFF] flex flex-col items-center
+    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center
 }
 
 .container-nav-empresas{
-    height: calc(100vh - 56px);
+    min-height: calc(100vh - 56px);
 }
 
 .container-nav-empresas button{

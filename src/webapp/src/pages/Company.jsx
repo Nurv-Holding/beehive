@@ -6,9 +6,9 @@ function Company() {
     <>
       <Header />
 
-      <main className='w-full flex flex-row'>
-          <CompanyMenu/>
-      </main>
+
+      <CompanyMenu />
+
     </>
   );
 }
