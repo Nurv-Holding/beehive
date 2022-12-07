@@ -17,6 +17,7 @@ function AppRoutes() {
         <Route path="goal/:idGoal" element={<Goal />} />
         <Route path="goal/:idGoal/history/:idgoalsKr" element={<History />} />
       </Route>
+      <Route path="/teste" element={<History />} />
     </Routes>
   );
 }
