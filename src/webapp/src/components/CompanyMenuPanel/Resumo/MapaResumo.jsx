@@ -23,16 +23,16 @@ const MapaResumo = () => {
                 <div className="w-full flex gap-2 flex-wrap text-sm justify-center">
                     <div className="flex flex-col items-center gap-1 bg-gray-300 p-1 rounded-md">
                         <span className="bg-[#5500C3] p-1 mb-2 rounded cursor-default">
-                            time 1
+                            nome do time
                         </span>
 
 
                         <Disclosure>
                             <Disclosure.Button className="bg-[#5500C3] p-1 rounded cursor-pointer">
-                                Objetivo
+                                nome do objetivo do time
                             </Disclosure.Button>
                             <Disclosure.Panel className="bg-pink-500 p-1 rounded cursor-default">
-                                faturamento
+                                nome do kr
                             </Disclosure.Panel>
                         </Disclosure>
                     </div>
