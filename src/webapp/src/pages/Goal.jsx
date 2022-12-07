@@ -276,8 +276,6 @@ function Goal() {
     const result = await goalKrsApi.create(idCompany, data)
     const goalKr = result.data
 
-    console.log("goalKr",goalKr)
-
     const newData = {
       idGoal: parseInt(idGoal),
       idGoalKr: goalKr.id,

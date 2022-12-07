@@ -5,6 +5,7 @@ const  AddTeamKr = ( {
     message,
     isOpen, 
     nameGoalTeam,
+    item,
     modelChange, 
     handleSubmit } ) => {
 
@@ -39,7 +40,7 @@ const  AddTeamKr = ( {
                         <div className="flex flex-row">
                             <div>
                                 <label >De:</label>
-                                <input onChange={modelChange} name='toYearly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
+                                <input value={item?.toQuarterly} name='toYearly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
                             </div>
                             <div className="mx-4">
                                 <label >Para:</label>

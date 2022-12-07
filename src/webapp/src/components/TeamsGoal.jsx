@@ -9,7 +9,7 @@ import tasksApi from '../api/tasksApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import taskUsersApi from '../api/taskUsersApi';
 import AddTask from './addTask';
-import { calcDate } from '../utilis';
+import { calcDate, calcPercentage } from '../utilis';
 import moment from 'moment';
 import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
@@ -51,6 +51,7 @@ function TeamsGoal({
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
   const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
+  const [idProcess, setIdProcess] = useState(null)
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -83,16 +84,17 @@ function TeamsGoal({
     setIsOpen(true)
   }
 
-  function openModalTeamKr(id) {
+  function openModalTeamKr(item) {
     setIsOpenTeamKr(true)
-    setIdGoalsTeam(id)
+    setIdGoalsTeam(item?.idGoalTeam)
+    setIdProcess(item?.idProcessGoalsTeams)
   }
 
   function closeModalTeamKr() {
     setIsOpenTeamKr(false)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     if (Object.keys(item).length === 0 ||
@@ -109,13 +111,29 @@ function TeamsGoal({
         ...item,
         idGoalsTeam,
         toQuarterly: parseInt(item.toQuarterly),
-        toYearly: parseInt(item.toYearly),
+        toYearly: parseInt(item.toQuarterly),
         fromQuarterly: parseInt(item.fromQuarterly),
         fromYearly: parseInt(item.fromYearly),
+        done: parseInt(item.toQuarterly),
         author: payload?.id
       }
 
-      goalTeamsKrsApi.create(idCompany, data)
+      const result = await goalTeamsKrsApi.create(idCompany, data)
+      const goalTeamKr = result.data
+
+      const newData = {
+        idProcessGoalTeam: idProcess,
+        idGoalsTeamKr: goalTeamKr.id,
+        user: payload?.name,
+        quaPercentage: calcPercentage((goalTeamKr?.done), goalTeamKr?.fromQuarterly),
+        yeaPercentage: calcPercentage((goalTeamKr?.done), goalTeamKr?.fromYearly),
+        to: goalTeamKr?.done,
+        from: data.done,
+        status: !!goalTeamKr?.status
+      }
+
+      historyGoalTeamKrApi.create(idCompany, newData)
+      // goalTeamsKrsApi.create(idCompany, data)
         .then(() => {
           setMessage("KR criado com sucesso")
           setQueryUpdate((x) => !x)
@@ -198,7 +216,10 @@ function TeamsGoal({
           idProcessGoalTeam: idProcessGoalsTeams,
           idGoalsTeamKr: idGoalTeamKrs,
           quaPercentage,
-          yeaPercentage
+          yeaPercentage,
+          user: payload?.name,
+          to: krs?.doneGoalsTeamKr,
+          from: data?.done
         }
 
         historyGoalTeamKrApi.create(idCompany, newData)
@@ -260,10 +281,11 @@ function TeamsGoal({
                     return (
                       <>
                         <div key={i} className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
+                          {JSON.stringify()}
                           <span className=''> {x.nameGoalTeam}
                             <span className="text-gray-400 text-xs mx-2"> descrição </span>
                           </span>
-                          {(x.idGoalTeam && !(!!goal.status)) && <span className='cursor-pointer' onClick={() => openModalTeamKr(x.idGoalTeam)}>Adicionar Krs</span>}
+                          {(x.idGoalTeam && !(!!goal.status)) && <span className='cursor-pointer' onClick={() => openModalTeamKr(x)}>Adicionar Krs</span>}
                           <AddTeamKr
                             closeModal={closeModalTeamKr}
                             handleSubmit={handleSubmit}
