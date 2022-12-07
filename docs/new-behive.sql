@@ -56,20 +56,23 @@ left join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id
 left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id  where pgt.idCompany=1 and t.id=1 group by pgt.idTeam;
 
 /*Projeção de historico de krs de objetivo de time(progectionHistoryGoalTeamKrByKr)*/
-select gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gtk.updatedAt as updateGoalTeamKr, 
-gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, hgtk.id as idHistoryGoalTeamsKr,
-hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory
+select gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gtk.updatedAt as updateGoalTeamKr,
+gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, 
+hgtk.id as idHistoryGoalTeamsKr, t.id as idTeam,t.name as nameTeam, 
+hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory, hgtk.user, gtk.status
 from historyGoalsTeamKrs as hgtk join goalTeamKrs as gtk on hgtk.idGoalsTeamKr=gtk.id
 join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
-join goalsTeams as gt on pgt.idGoalsTeam=gt.id;
+join teams as t on pgt.idTeam=t.id
+join goalsTeams as gt on pgt.idGoalsTeam=gt.id 
+where hgtk.idCompany=2 and gt.idGoal=12 and pgt.idTeam=6;
 
 /*Projeção de historico de krs(historyGoalsKrsController)*/
 select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,
-hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, gk.status, gk.author
+hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, hgk.status, hgk.user
 from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
-join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=2 and hgk.idGoal=1 and hgk.idGoalKr=1;
+join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=2 and hgk.idGoal=3 and hgk.idGoalKr=2;
 
-/*Projeção de times e integrantes(historyGoalsKrsController)*/
+/*Projeção de times e integrantes(progectionHistoryGoalKrByKr)*/
 select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, u.occupation as occupationUser,
 u.email as emailUser, u.photo as photoUser, p.name as profile, t.id as idTeam, t.name as nameTeam
 from teamUsers as tu join users as u on tu.idUser=u.id
@@ -88,4 +91,4 @@ where tku.idCompany=1 and gt.idGoal=5 ;
 
 /*Projeção de histórico de kr (taskUsersController)*/ 
 
-select * from goals;
+select * from historyGoalKrs;

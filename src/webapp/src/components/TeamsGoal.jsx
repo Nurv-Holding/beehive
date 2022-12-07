@@ -6,11 +6,9 @@ import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import TeamKrModal from './teamKrModal';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import tasksApi from '../api/tasksApi';
-import teamsUsersApi from '../api/teamsUsersApi';
 import taskUsersApi from '../api/taskUsersApi';
 import AddTask from './addTask';
-import { calcDate, calcPercentage } from '../utilis';
-import moment from 'moment';
+import { calcPercentage } from '../utilis';
 import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
 
