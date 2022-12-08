@@ -5,7 +5,8 @@ import Companies from "./pages/Company";
 import Goal from "./pages/Goal";
 import Users from "./components/Users";
 import Login from "./pages/login";
-import History from "./pages/History";
+import HistoryKr from "./pages/HistoryKr";
+import HistoryKrsTeam from "./pages/HistoryKrsTeam";
 
 function AppRoutes() {
   return (
@@ -15,9 +16,9 @@ function AppRoutes() {
       <Route path="/company/:idCompany" element={<Users />}>
         <Route index element={<Companies />} />
         <Route path="goal/:idGoal" element={<Goal />} />
-        <Route path="goal/:idGoal/history/:idgoalsKr" element={<History />} />
+        <Route path="goal/:idGoal/history-kr/:idgoalsKr" element={<HistoryKr />} />
+        <Route path="goal/:idGoal/history-krTeam/:idTeam" element={<HistoryKrsTeam />} />
       </Route>
-      <Route path="/teste" element={<History />} />
     </Routes>
   );
 }

@@ -1,20 +1,18 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-function AddGoalTeam({ closeModal, openModal, isOpen, createGoalsTeam, modelChange, idTeam, item }) {
+function AddGoalTeam({ closeModal, isOpen, createGoalsTeam, modelChange, idTeam }) {
 
     const goalTealSubmit = (event) => {
         event.preventDefault()
+
+        console.log("AddGoalTeam idTeam", idTeam)
 
         createGoalsTeam(idTeam)
     }
 
     return (
         <>
-            <div className="w-[20%] flex items-center justify-center">
-                <button className="modal-btn h-[60%]" onClick={openModal}>
-                    Adicionar objetivo
-                </button>
-            </div>
+
             <div>
                 <Modal isOpen={isOpen} closeModal={closeModal}>
                     <h5> Nome do time </h5>

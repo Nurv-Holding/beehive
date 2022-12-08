@@ -42,6 +42,7 @@ function Goal() {
   const [isOpenTeam, setIsOpenTeam] = useState(false)
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
+  const [idTeam, setIdTeam] = useState(null)
   const [tasksUser, setTasksUser] = useState([])
   const update = searchParams.get('update')
 
@@ -69,8 +70,9 @@ function Goal() {
     setIsOpenGoalTeam(false)
   }
 
-  function openModalGoalTeam() {
+  function openModalGoalTeam(id) {
     setIsOpenGoalTeam(true)
+    setIdTeam(id)
   }
 
   function closeModal() {
@@ -194,6 +196,7 @@ function Goal() {
   }
 
   const createGoalsTeam = async (idTeam) => {
+    console.log("idTeam", idTeam)
 
     const newIdGoal = parseInt(idGoal)
 
@@ -217,6 +220,8 @@ function Goal() {
         idGoal: newIdGoal,
         idTeam
       }
+
+      console.log("data", data)
 
       goalsTeamApi.createProcess(idCompany, data)
         .then(() => {
@@ -253,6 +258,10 @@ function Goal() {
         })
     }
 
+  }
+
+  const redirectHistory = (route) => {
+    navigate(route)
   }
 
   const changeModel = ({ target }) => {
@@ -370,6 +379,7 @@ function Goal() {
             payload={payload}
             users={users}
             goal={goal}
+            redirectHistory={redirectHistory}
           />
 
           <div className='border-t mt-6 pt-4 border-white'>
@@ -396,6 +406,8 @@ function Goal() {
               queryUpdate={queryUpdate}
               payload={payload}
               goal={goal}
+              redirectHistory={redirectHistory}
+              idTeam={idTeam}
             />
           </div>
         </div>

@@ -5,11 +5,11 @@ import { useParams } from 'react-router-dom';
 import goalKrsApi from '../api/goalKrsApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import Header from '../components/Header';
-import ObjectiveKrHistoriesList from '../components/ObjectiveKrHistoriesList';
+import HistoryKrsList from '../components/HistoryKrsList';
 import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextUser } from '../context/ContextUser';
 
-const History = () => {
+const HistoryKr = () => {
 
     const {idgoalsKr, idGoal} = useParams()
     const { idCompany } = useContext(ContextUser)
@@ -51,10 +51,10 @@ const History = () => {
     return (
         <>
             <Header />
-            <ObjectiveKrHistoriesList histories={histories} goalKr={goalKr} />
+            <HistoryKrsList histories={histories} goalKr={goalKr} />
             {/* <TeamHistoriesList/> */}
         </>
     );
 }
 
-export default History;
+export default HistoryKr;

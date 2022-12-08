@@ -17,6 +17,7 @@ function TeamsGoal({
   goalTeamsByTeam,
   idCompany,
   idGoal,
+  redirectHistory,
   createGoalsTeam,
   modelChange,
   item,
@@ -26,6 +27,7 @@ function TeamsGoal({
   historyGoalTeamKrs,
   openModalGoalTeam,
   isOpenGoalTeam,
+  idTeam,
   goalTeamByKrs,
   teamUsers,
   tasksUser,
@@ -261,15 +263,22 @@ function TeamsGoal({
 
                   </Disclosure.Button>
                   {!(!!goal.status) &&
+                  <>
+                    <div className="w-[20%] flex items-center justify-center">
+                      <button className="modal-btn h-[60%]" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
+                          Adicionar objetivo
+                      </button>
+                    </div>
                     <AddGoalTeam
                       closeModal={closeModalGoalTeam}
                       openModal={openModalGoalTeam}
                       isOpen={isOpenGoalTeam}
                       createGoalsTeam={createGoalsTeam}
                       modelChange={modelChange}
-                      idTeam={goalTeams.idTeam}
+                      idTeam={idTeam}
                       item={item}
                     />
+                    </>
                   }
 
                 </div>
@@ -328,7 +337,10 @@ function TeamsGoal({
                                       </div>
                                     }
 
-                                    aqui botao de historico
+                                    
+                                    <button onClick={() => redirectHistory(`history-krTeam/${kr.idTeam}`)} className="modal-btn h-[30px]">
+                                        Histórico
+                                    </button>
 
                                     <TeamKrModal
                                       stateDone={stateDone}

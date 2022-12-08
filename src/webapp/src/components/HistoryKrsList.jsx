@@ -1,6 +1,6 @@
 import moment from "moment"
 
-const ObjectiveKrHistoriesList = ({ histories, goalKr }) => {
+const HistoryKrsList = ({ histories, goalKr }) => {
     return (
         <main className='flex flex-col items-center'>
             <span className='text-bold text-2xl text-white uppercase mt-8'> {goalKr.name} </span>
@@ -47,4 +47,4 @@ const ObjectiveKrHistoriesList = ({ histories, goalKr }) => {
     )
 }
 
-export default ObjectiveKrHistoriesList
+export default HistoryKrsList

@@ -19,6 +19,7 @@ function GoalKrs({
   setQueryUpdate,
   queryUpdate,
   historyGoalKrs,
+  redirectHistory,
   goal,
   payload,
   token }) {
@@ -127,10 +128,6 @@ function GoalKrs({
     setIsOpenFinishKr(true)
   }
 
-  const redirectHistory = (idgoalsKr) => {
-    navigate(`history/${idgoalsKr}`)
-  }
-
   return (
     <>
       {(goalKrs || []).map((goalKr, i) => {
@@ -223,7 +220,7 @@ function GoalKrs({
                       </button>
                     }
 
-                    <button onClick={() => redirectHistory(goalKr?.idgoalsKr)} className="modal-btn h-[30px]">
+                    <button onClick={() => redirectHistory(`history-kr/${goalKr?.idgoalsKr}`)} className="modal-btn h-[30px]">
                         Histórico
                     </button>
                     {(!(!!goalKr?.status) && !(!!goal?.status)) &&
