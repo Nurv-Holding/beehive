@@ -210,6 +210,10 @@ function TeamsGoal({
   const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
     const data = { done: done + krs?.doneGoalsTeamKr }
 
+    console.log("krs",krs)
+    console.log("done",done)
+    console.log("data done",data.done)
+
     goalTeamsKrsApi.update(idGoalTeamKrs, data)
       .then(() => {
         const newData = {
@@ -221,6 +225,8 @@ function TeamsGoal({
           to: krs?.doneGoalsTeamKr,
           from: data?.done
         }
+
+        console.log("newData",newData)
 
         historyGoalTeamKrApi.create(idCompany, newData)
 
@@ -288,7 +294,6 @@ function TeamsGoal({
                     return (
                       <>
                         <div key={i} className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
-                          {JSON.stringify()}
                           <span className=''> {x.nameGoalTeam}
                             <span className="text-gray-400 text-xs mx-2"> descrição </span>
                           </span>

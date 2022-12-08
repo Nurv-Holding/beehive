@@ -196,7 +196,6 @@ function Goal() {
   }
 
   const createGoalsTeam = async (idTeam) => {
-    console.log("idTeam", idTeam)
 
     const newIdGoal = parseInt(idGoal)
 
@@ -206,13 +205,10 @@ function Goal() {
       author: payload?.id
     }
 
-    console.log("newData", newData)
-
     const { data } = await goalsTeamApi.create(idCompany, newData)
     const idGoalsTeam = data.id
 
     const goalsTeam = goalTeamsByTeam.filter(e => e.idTeam === idTeam)[0]
-    console.log("goalsTeam", goalsTeam)
 
     if (goalsTeam?.idGoalTeam) {
       const data = {
@@ -220,8 +216,6 @@ function Goal() {
         idGoal: newIdGoal,
         idTeam
       }
-
-      console.log("data", data)
 
       goalsTeamApi.createProcess(idCompany, data)
         .then(() => {

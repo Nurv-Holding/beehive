@@ -9,8 +9,9 @@ const progectionHistoryGoalTeamKrByKr = async (req, res) => {
 
     const results = await prismaClient.$queryRaw`select gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gtk.updatedAt as updateGoalTeamKr,
     gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, 
-    hgtk.id as idHistoryGoalTeamsKr, t.id as idTeam,t.name as nameTeam, 
-    hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory, hgtk.user, gtk.status
+    hgtk.id as idHistoryGoalTeamsKr, t.id as idTeam,t.name as nameTeam, hgtk.to, hgtk.from, 
+    hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory, hgtk.user, 
+    gtk.status, gtk.fromQuarterly, gtk.fromYearly
     from historyGoalsTeamKrs as hgtk join goalTeamKrs as gtk on hgtk.idGoalsTeamKr=gtk.id
     join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
     join teams as t on pgt.idTeam=t.id

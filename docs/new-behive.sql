@@ -55,16 +55,27 @@ from processGoalsTeams as pgt left join goalsTeams as gt on pgt.idGoalsTeam=gt.i
 left join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
 left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id  where pgt.idCompany=1 and t.id=1 group by pgt.idTeam;
 
+/*Projeção de um objetivo de time com um time (projectionGoalTeamKrsController)*/
+select pgt.id as idProcessGoalsTeams, gt.id as idGoalTeam, 
+gt.name as nameGoalTeam, gtk.id as idgoalTeamsKr, gtk.name as nameGoalsTeamKr,
+gtk.descriptions as descriptionsGoalsTeamKr, gtk.toQuarterly as toQuarterlyGoalsTeamKr,
+gtk.fromQuarterly as fromQuarterlyGoalsTeamKr, gtk.fromYearly as fromYearlyGoalsTeamKr, 
+gtk.toYearly as toYearlyGoalsTeamKr, gtk.done as doneGoalsTeamKr, t.id as idTeam, t.name as nameTeam
+from processGoalsTeams as pgt left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
+join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
+join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id  where pgt.idCompany=2 and t.id=5 group by pgt.idGoalsTeam;
+
 /*Projeção de historico de krs de objetivo de time(progectionHistoryGoalTeamKrByKr)*/
 select gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gtk.updatedAt as updateGoalTeamKr,
-gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, 
+gt.id as idGoalTeam, gt.name as nameGoalTeam, pgt.id as idProcessGoalsTeam, hgtk.to, hgtk.from, 
 hgtk.id as idHistoryGoalTeamsKr, t.id as idTeam,t.name as nameTeam, 
-hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory, hgtk.user, gtk.status
+hgtk.quaPercentage as quaPercentageHistory, hgtk.yeaPercentage as yeaPercentageHistory, 
+hgtk.user, gtk.status, gtk.fromQuarterly, gtk.fromYearly
 from historyGoalsTeamKrs as hgtk join goalTeamKrs as gtk on hgtk.idGoalsTeamKr=gtk.id
 join processGoalsTeams as pgt on hgtk.idProcessGoalTeam=pgt.id
 join teams as t on pgt.idTeam=t.id
 join goalsTeams as gt on pgt.idGoalsTeam=gt.id 
-where hgtk.idCompany=2 and gt.idGoal=12 and pgt.idTeam=6;
+where hgtk.idCompany=2 and gt.idGoal=12 and pgt.idTeam=5;
 
 /*Projeção de historico de krs(historyGoalsKrsController)*/
 select hgk.id as idHistoryGoalKrs, hgk.idGoal, hgk.idGoalKr, hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,
@@ -91,4 +102,4 @@ where tku.idCompany=1 and gt.idGoal=5 ;
 
 /*Projeção de histórico de kr (taskUsersController)*/ 
 
-select * from historyGoalKrs;
+select * from goalTeamKrs;

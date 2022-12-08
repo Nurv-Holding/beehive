@@ -117,7 +117,7 @@ const routes = (app) => {
 
     //teams
     app.post("/teams/c/:idCompany",teamsController.create)
-    app.get("/teams/:id",teamsController.getById)
+    app.get("/teams/:id/c/:idCompany",teamsController.getById)
     app.get("/teams/c/:idCompany",teamsController.getAll)
     app.put("/teams/:id",teamsController.update)
     app.delete("/teams/:id",teamsController.remove)
