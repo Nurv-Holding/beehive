@@ -98,6 +98,7 @@ const routes = (app) => {
             app.post("/hGoalsTeamKrs/history/:idCompany",historyGoalsTeamKrsController.create)
             app.get("/hGoalsTeamKrs/history/:idCompany",historyGoalsTeamKrsController.getAll)
             app.get("/hGoalsTeamKrs/c/:idCompany/g/:idGoal/t/:idTeam/history/krs",historyGoalsTeamKrsController.progectionHistoryGoalTeamKrByKr)
+            app.get("/hGoalsTeamKrs/p/history/krs",historyGoalsTeamKrsController.getAllHistoryGoalTeamKrByKr)
             app.delete("/hGoalsTeamKrs/history/:id",historyGoalsTeamKrsController.remove)
 
             //processGoalTeam

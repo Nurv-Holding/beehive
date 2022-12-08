@@ -210,10 +210,6 @@ function TeamsGoal({
   const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
     const data = { done: done + krs?.doneGoalsTeamKr }
 
-    console.log("krs",krs)
-    console.log("done",done)
-    console.log("data done",data.done)
-
     goalTeamsKrsApi.update(idGoalTeamKrs, data)
       .then(() => {
         const newData = {
@@ -225,8 +221,6 @@ function TeamsGoal({
           to: krs?.doneGoalsTeamKr,
           from: data?.done
         }
-
-        console.log("newData",newData)
 
         historyGoalTeamKrApi.create(idCompany, newData)
 
@@ -270,9 +264,12 @@ function TeamsGoal({
                   </Disclosure.Button>
                   {!(!!goal.status) &&
                   <>
-                    <div className="w-[20%] flex items-center justify-center">
+                    <div className="w-[20%] flex items-center justify-center gap-4">
                       <button className="modal-btn h-[60%]" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
                           Adicionar objetivo
+                      </button>
+                      <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn h-[30px]">
+                          Histórico
                       </button>
                     </div>
                     <AddGoalTeam
@@ -341,11 +338,6 @@ function TeamsGoal({
                                         />
                                       </div>
                                     }
-
-                                    
-                                    <button onClick={() => redirectHistory(`history-krTeam/${kr.idTeam}`)} className="modal-btn h-[30px]">
-                                        Histórico
-                                    </button>
 
                                     <TeamKrModal
                                       stateDone={stateDone}

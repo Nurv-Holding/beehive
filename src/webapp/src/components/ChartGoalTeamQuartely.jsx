@@ -5,6 +5,8 @@ const ChartGoalTeamQuartely = ({ items = [], title = "" }) => {
   const historyDate = items.map(x => moment(x.updateGoalsTeamKrs).format('DD/MM'))
   historyDate.unshift(moment(items[0]?.createdAt).format('DD/MM'))
 
+  console.log(items)
+
   const historyPercentage = items.map(x => x.quaPercentageHistory)
   historyPercentage.push(100)
   historyPercentage.unshift(0)

@@ -110,7 +110,7 @@ function Goal() {
   }
 
   const handleHistoryGoalTeamKrs = async () => {
-    const { data } = await historyGoalTeamKrApi.getByKrs()
+    const { data } = await historyGoalTeamKrApi.getAllByKrs()
     setHistoryGoalTeamKrs(data)
 
   }
