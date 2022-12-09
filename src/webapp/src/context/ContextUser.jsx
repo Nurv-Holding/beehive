@@ -20,6 +20,7 @@ export const ContextUserProvider = ({ children }) => {
     const [item, setItem] = useState({})
     const [searchParams] = useSearchParams()
     const { idGoal, idCompany } = useParams()
+    const [companyGoals, setCompanyGoals] = useState([])
     const [teamUsers, setTeamUsers] = useState([])
     const update = searchParams.get('update')
     const token = localStorage.getItem("token")
@@ -32,12 +33,18 @@ export const ContextUserProvider = ({ children }) => {
         handlerTeamUsers()
         setItem({})
         handlerUsers()
+        handlerCompanyGoals()
         
     },[idCompany, update])
 
     const handlerTeamUsers = async () => {
         const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
         setTeamUsers(data)
+    }
+
+    const handlerCompanyGoals = async () => {
+        const {data} = await companiesApi.getCompanyAndGoals(idCompany)
+        setCompanyGoals(data)
     }
 
     const handlerUsersByCompany = async () => {
@@ -75,6 +82,7 @@ export const ContextUserProvider = ({ children }) => {
                     usersByCompany,
                     users,
                     teams,
+                    companyGoals,
                     modelChange,
                     teamUsers,
                     item,

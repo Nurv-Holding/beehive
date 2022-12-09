@@ -3,11 +3,7 @@ import { Tab } from '@headlessui/react'
 import Users from '../../components/CompanyMenuPanel/Users/Users'
 import Teams from '../../components/CompanyMenuPanel/Teams/Teams'
 import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
-import Resumo from '../../components/CompanyMenuPanel/Resumo/Resumo'
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import Summary from '../../components/CompanyMenuPanel/Summary/Summary'
 
 export default function CompanyMenu() {
   return (
@@ -66,7 +62,7 @@ export default function CompanyMenu() {
         <div className='w-full'>
           <Tab.Panels className='text-white'>
             <Tab.Panel>
-              <Resumo />
+              <Summary />
             </Tab.Panel>
 
             <Tab.Panel>

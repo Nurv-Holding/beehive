@@ -1,8 +1,27 @@
 
 import { Tab } from '@headlessui/react'
-import MapaResumo from './MapaResumo'
+import { useState } from 'react'
+import { useContext, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import goalKrsApi from '../../../api/goalKrsApi'
+import { ContextUser } from '../../../context/ContextUser'
+import GoalsList from './GoalsList'
 
-function Resumo() {
+function Summary() {
+    const {companyGoals, idCompany} = useContext(ContextUser)
+    const {idGoal} = useParams()
+    const [goalKrs, setGoalKrs] = useState([])
+
+    useEffect(() => {
+        handlerGoalKrs()
+
+    },[idGoal])
+
+    const handlerGoalKrs = async () => {
+        const {data} = await goalKrsApi.getAll(idCompany)
+        setGoalKrs(data)
+    }
+
     return (
         <Tab.Group>
             <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
@@ -61,7 +80,7 @@ function Resumo() {
                 <div className='w-11/12'>
                     <Tab.Panels>
                         <Tab.Panel>
-                            <MapaResumo/>
+                            <GoalsList companyGoals={companyGoals} goalKrs={goalKrs} />
                         </Tab.Panel>
 
                         <Tab.Panel className='container-empresas'>
@@ -82,4 +101,4 @@ function Resumo() {
     )
 }
 
-export default Resumo
+export default Summary
