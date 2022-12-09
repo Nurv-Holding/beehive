@@ -100,6 +100,10 @@ left join teamUsers as tu on tku.idTeamUser=tu.id left join users as u on tu.idU
 left join profiles as p on u.idProfile=p.id left join teams as t on tu.idTeam=t.id 
 where tku.idCompany=1 and gt.idGoal=5 ; 
 
-/*Projeção de histórico de kr (taskUsersController)*/ 
+/*Projeção de company e objetivos(getCompanyAndGoals)*/
+select c.name as nameCompany, c.createdAt as createdAtCompany, c.cnpj, g.id as idGoal, 
+g.name as nameGoal, g.createdAt as createdAtGoal, g.updatedAt as updatedAtGoal
+from companies as c join goals as g on g.idCompany=c.id
+where c.id=2;
 
 select * from goalTeamKrs;
