@@ -9,6 +9,7 @@ const getByTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/p/${idGoal
 const getGroupByTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/g/t/${idGoal}/c/${idCompany}`)
 const getGroupByGoalTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/g/t/goal/${idGoal}/c/${idCompany}`)
 const getGroupByKrs = (idCompany, idGoal) => axios.get(`${host}/goalsTeamKrs/krs/g/goal/${idGoal}/c/${idCompany}`)
+const getAllGroupByKrs = (idCompany) => axios.get(`${host}/goals/g/p/process/c/krs/${idCompany}`)
 const update = (idGoal, data) => axios.put(`${host}/goalsTeamKrs/${idGoal}`,data)
 
 export default {
@@ -19,6 +20,7 @@ export default {
     getGroupByTeam,
     getGroupByGoalTeam,
     getGroupByKrs,
+    getAllGroupByKrs,
     update
     
 }

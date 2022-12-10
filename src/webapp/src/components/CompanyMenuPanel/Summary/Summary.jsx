@@ -4,22 +4,30 @@ import { useState } from 'react'
 import { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import goalKrsApi from '../../../api/goalKrsApi'
+import goalTeamsKrsApi from '../../../api/goalTeamsKrsApi'
 import { ContextUser } from '../../../context/ContextUser'
 import GoalsList from './GoalsList'
 
 function Summary() {
-    const {companyGoals, idCompany} = useContext(ContextUser)
+    const {companyGoals, idCompany, goalAndTeams} = useContext(ContextUser)
     const {idGoal} = useParams()
     const [goalKrs, setGoalKrs] = useState([])
+    const [krs, setKrs] = useState([])
 
     useEffect(() => {
         handlerGoalKrs()
+        handlerKrs()
 
     },[idGoal])
 
     const handlerGoalKrs = async () => {
         const {data} = await goalKrsApi.getAll(idCompany)
         setGoalKrs(data)
+    }
+
+    const handlerKrs = async () => {
+        const {data} = await goalTeamsKrsApi.getAllGroupByKrs(idCompany)
+        setKrs(data)
     }
 
     return (
@@ -80,7 +88,12 @@ function Summary() {
                 <div className='w-11/12'>
                     <Tab.Panels>
                         <Tab.Panel>
-                            <GoalsList companyGoals={companyGoals} goalKrs={goalKrs} />
+                            <GoalsList 
+                                companyGoals={companyGoals} 
+                                goalKrs={goalKrs} 
+                                goalAndTeams={goalAndTeams}
+                                krs={krs} 
+                            />
                         </Tab.Panel>
 
                         <Tab.Panel className='container-empresas'>

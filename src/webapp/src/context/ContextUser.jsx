@@ -18,6 +18,7 @@ export const ContextUserProvider = ({ children }) => {
     const [users, setUsers] = useState([])
     const [teams, setTeams] = useState([])
     const [item, setItem] = useState({})
+    const [goalAndTeams, setGoalAndTeams] = useState([])
     const [searchParams] = useSearchParams()
     const { idGoal, idCompany } = useParams()
     const [companyGoals, setCompanyGoals] = useState([])
@@ -34,12 +35,18 @@ export const ContextUserProvider = ({ children }) => {
         setItem({})
         handlerUsers()
         handlerCompanyGoals()
+        handlerGoalAndTeams()
         
     },[idCompany, update])
 
     const handlerTeamUsers = async () => {
         const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
         setTeamUsers(data)
+    }
+
+    const handlerGoalAndTeams = async () => {
+        const {data} = await goalsTeamApi.getAllGoalGroupByTeam(idCompany)
+        setGoalAndTeams(data)
     }
 
     const handlerCompanyGoals = async () => {
@@ -86,6 +93,7 @@ export const ContextUserProvider = ({ children }) => {
                     modelChange,
                     teamUsers,
                     item,
+                    goalAndTeams,
                     idCompany,
                     token,
                     payload

@@ -11,7 +11,7 @@ const createProcess = (idCompany,data) => axios.post(`${host}/goalsTeam/process/
 const updateProcess = (id,data) => axios.put(`${host}/goalsTeam/process/${id}`,data)
 const getByTeam = (idCompany, idTeam) => axios.get(`${host}/goalsTeam/t/${idTeam}/c/${idCompany}`)
 const getGroupByTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/${idGoal}/c/${idCompany}`)
-const getAllGoalGroupByTeam = (idCompany) => axios.get(`${host}//goals/g/p/process/c//${idCompany}`)
+const getAllGoalGroupByTeam = (idCompany) => axios.get(`${host}/goals/g/p/process/c/${idCompany}`)
 
 export default {
     getAll,

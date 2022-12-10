@@ -104,6 +104,15 @@ where tku.idCompany=1 and gt.idGoal=5 ;
 select c.name as nameCompany, c.createdAt as createdAtCompany, c.cnpj, g.id as idGoal, 
 g.name as nameGoal, g.createdAt as createdAtGoal, g.updatedAt as updatedAtGoal
 from companies as c join goals as g on g.idCompany=c.id
+join goalKrs as gk on gk.idGoal=g.id
 where c.id=2;
+
+select g.id as idGoal, g.name as nameGoal, gt.id as idGoalTeam, gt.name as nameGoalTeam,
+t.id as idTeam, t.name as nameTeam
+from processGoalsTeams as pgt join goals as g on pgt.idGoal=g.id
+join teams as t on pgt.idTeam=t.id
+join goalsTeams as gt on pgt.idGoalsTeam=gt.id
+join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id
+where pgt.idCompany=2 group by t.id;
 
 select * from goalTeamKrs;

@@ -1,6 +1,21 @@
 import { Disclosure } from '@headlessui/react'
 
-const GoalsList = ({ companyGoals, goalKrs }) => {
+const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
+
+    const teams = (idGoal) => {
+        let newItems = []
+    
+        goalAndTeams?.filter(e => e.idGoal === idGoal).forEach((x) => {
+            if(newItems.length === 0)
+                newItems.push(x)
+    
+            if(newItems.filter(d => d.idTeam === x.idTeam && d.idGoal === x.idGoal).length === 0)
+                newItems.push(x)
+    
+        })
+    
+        return newItems
+    }
 
     return (
         <div className="mx-auto flex flex-row gap-4 flex-wrap mb-2">
@@ -27,21 +42,38 @@ const GoalsList = ({ companyGoals, goalKrs }) => {
                     </span>
     
                     <div className="w-full flex gap-2 flex-wrap text-sm justify-center">
-                        <div className="flex flex-col items-center gap-1 bg-gray-300 p-1 rounded-md">
-                            <span className="bg-[#5500C3] p-1 mb-2 rounded cursor-default">
-                                nome do time
-                            </span>
-    
-    
-                            <Disclosure>
-                                <Disclosure.Button className="bg-[#5500C3] p-1 rounded cursor-pointer">
-                                    nome do objetivo do time
-                                </Disclosure.Button>
-                                <Disclosure.Panel className="bg-pink-500 p-1 rounded cursor-default">
-                                    nome do kr
-                                </Disclosure.Panel>
-                            </Disclosure>
-                        </div>
+                        {teams(goal.idGoal).map((team) => {
+                            return(
+                                <div className="flex flex-col items-center gap-1 bg-gray-300 p-1 rounded-md">
+                                    <span className="bg-[#5500C3] p-1 mb-2 rounded cursor-default">
+                                        {team.nameTeam}
+                                    </span>
+                                    {(goalAndTeams || []).filter(e => e.idTeam === team.idTeam && e.idGoal === team.idGoal).map((goalTeam) => {
+                                        return(
+                                            <Disclosure>
+                                                <Disclosure.Button className="bg-[#5500C3] p-1 rounded cursor-pointer">
+                                                    {goalTeam.nameGoalTeam}
+                                                </Disclosure.Button>
+                                                {goalTeam.idGoalTeam &&
+                                                <>
+                                                {(krs || []).filter(e => e.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
+                                                    return(
+                                                        <Disclosure.Panel className="bg-pink-500 p-1 rounded cursor-default">
+                                                            {kr.nameGoalTeamKrs}
+                                                        </Disclosure.Panel>
+                                                    )
+                                                })}
+                                                </>
+                                                }
+
+                                            </Disclosure>
+                                        )
+                                    })}
+                 
+                                </div>
+                            )
+                        })}
+      
                     </div>
                 </div>
                 )
