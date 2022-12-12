@@ -19,16 +19,16 @@ const crudControllerFactory = (model) => {
     const getById = async (req,res) => {
         let data;
         const id = parseInt(req.params.id)
+        let item;
 
         if(req.params.idCompany){
             const idCompany = parseInt(req?.params?.idCompany) 
             data = await model.findMany({where: {AND:[{id},{idCompany}]}})
+            item = data.length !== 0? data[0]: null
 
         }else{
-            data = await model.findUnique({ where: {id} })
+            item = data = await model.findUnique({ where: {id} })
         }
-
-        let item = data.length !== 0? data[0]: null
   
         return res.status(200).send(item)
 

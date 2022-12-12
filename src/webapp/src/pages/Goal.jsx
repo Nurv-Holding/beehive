@@ -18,9 +18,19 @@ import taskUsersApi from '../api/taskUsersApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
 import { calcPercentage } from '../utilis';
+import TitleCompany from '../components/TitleCompany';
 
 function Goal() {
-  const { idGoal, idCompany, teams, modelChange, item, users, payload, token } = useContext(ContextUser)
+  const { 
+    idGoal, 
+    idCompany, 
+    teams, 
+    modelChange, 
+    item, 
+    users,
+    company, 
+    payload, 
+    token } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})
@@ -314,11 +324,12 @@ function Goal() {
       <Header />
 
       <main className='flex flex-col items-center'>
+        <TitleCompany name={company?.name} />
         <div className='w-11/12'>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
-              <span className='text-bold text-xl text-white '>{goal.name}</span>
-              <span className='text-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id === goal.author)[0]?.name} </span>
+              <span className='text-bold text-xl text-white '>{goal?.name}</span>
+              <span className='text-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status)&&
             <div className='container-percentage-okr flex flex-row justify-around'>

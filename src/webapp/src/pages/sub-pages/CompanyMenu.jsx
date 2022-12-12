@@ -4,8 +4,9 @@ import Users from '../../components/CompanyMenuPanel/Users/Users'
 import Teams from '../../components/CompanyMenuPanel/Teams/Teams'
 import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
 import Summary from '../../components/CompanyMenuPanel/Summary/Summary'
+import TitleCompany from '../../components/TitleCompany'
 
-export default function CompanyMenu() {
+export default function CompanyMenu( { company } ) {
   return (
     <div className='flex h-full'>
       <Tab.Group>
@@ -60,6 +61,7 @@ export default function CompanyMenu() {
         </Tab.List>
 
         <div className='w-full'>
+          <TitleCompany name={company?.name} />
           <Tab.Panels className='text-white'>
             <Tab.Panel>
               <Summary />
