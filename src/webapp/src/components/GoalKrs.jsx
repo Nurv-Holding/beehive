@@ -16,8 +16,6 @@ import { Link } from "react-router-dom";
 function GoalKrs({
   goalKrs,
   idCompany,
-  setQueryUpdate,
-  queryUpdate,
   historyGoalKrs,
   redirectHistory,
   goal,
@@ -30,7 +28,7 @@ function GoalKrs({
   const [goalKr, setGoalKr] = useState({})
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
   const [finishKr, setFinishKr] = useState()
 
@@ -48,8 +46,10 @@ function GoalKrs({
   }
 
   const goalKrsUpdate = () => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const data = { done: done + goalKr?.doneGoalsKr }
-    setQueryUpdate((x) => !x)
 
     const newData = {
       idGoal: parseInt(idGoal),
@@ -68,11 +68,9 @@ function GoalKrs({
 
         historyGoalKrApi.create(idCompany, newData)
 
-        console.log("queryUpdate", queryUpdate)
-
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${queryUpdate}`
+          search: `?update=${true}`
         })
 
         closeModal()
@@ -88,6 +86,9 @@ function GoalKrs({
   }
 
   const finishGoalKr = async (idGoalKr) => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const {data} = await historyGoalKrApi.getAll(idCompany)
     const history = data.length !== 0? data[data.length - 1]: null
     const result = await goalKrsApi.update(idGoalKr, {status: true})
@@ -106,10 +107,9 @@ function GoalKrs({
 
     historyGoalKrApi.create(idCompany, newData)
     .then(() => {
-        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${queryUpdate}`
+          search: `?update=${true}`
         })
 
         closeModalFinishKr()
@@ -118,10 +118,6 @@ function GoalKrs({
         console.error(error)
         setMessage("Algo deu errado!")
       })
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
   }
 
   function openModalCloseKr() {

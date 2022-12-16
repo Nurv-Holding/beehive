@@ -7,17 +7,19 @@ import companiesApi from '../api/companiesApi';
 import CompaniesList from '../components/CompaniesList';
 import Authorize from '../components/Authorize';
 import jwtDecode from 'jwt-decode';
+import { useSearchParams } from 'react-router-dom';
 
 function Home() {
   const [companies, setCompanies] = useState([])
-  const [queryUpdate, setQueryUpdate] = useState(false)
   const token = localStorage.getItem("token")
   const payload = token? jwtDecode(token): null
+  const [searchParams] = useSearchParams()
+  const update = searchParams.get('update')
 
   useEffect(() => {
     handlerCompanies()
 
-  },[queryUpdate])
+  },[update])
 
   const handlerCompanies = async () => {
     const {data} = await companiesApi.getAll()
@@ -33,10 +35,7 @@ function Home() {
           <div className='grid-col'>
             <Profile payload={payload} />
             {payload?.nameProfile === "adminMaster" &&
-            <AddCompanies
-              setQueryUpdate={setQueryUpdate}
-              queryUpdate={queryUpdate}
-            />
+            <AddCompanies />
             }
 
           </div>

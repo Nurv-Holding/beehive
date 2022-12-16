@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import goalKrsApi from "../api/goalKrsApi"
 import goalsApi from "../api/goalsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
+import { useParams, useSearchParams } from 'react-router-dom';
 
 const CloseGoal = ({
     nameGoal,
@@ -9,23 +10,24 @@ const CloseGoal = ({
     closeModal,
     openModal,
     idGoal,
-    setQueryUpdate,
-    queryUpdate,
     idCompany,
     handleSubmit,
     idGoalKr
 }) => {
     const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const finishingGoal = (event) => {
         event.preventDefault()
 
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
         goalsApi.update(idGoal, {status: true})
         .then(() => {
-            setQueryUpdate((x) => !x)
             navigate({
               pathname: `/company/${idCompany}/goal/${idGoal}`,
-              search: `?update=${queryUpdate}`
+              search: `?update=${true}`
             })
     
             closeModal()

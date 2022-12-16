@@ -1,6 +1,7 @@
 import moment from "moment"
 import { useEffect } from "react"
 import { useState } from "react"
+import { useSearchParams } from "react-router-dom"
 import taskUsersApi from "../api/taskUsersApi"
 import { calcDate } from "../utilis"
 import SwitchToggle from "./switchToggle"
@@ -15,16 +16,18 @@ const ListTasks = ({
     navigate,
     idGoal,
     idCompany,
-    setQueryUpdate,
-    queryUpdate,
     updateTask, 
     user}) => {
     const [enabled, setEnabled] = useState(false)
     const [index, setIndex] = useState(null)
     const [message, setMessage] = useState("")
+    const [searchParams, setSearchParams] = useSearchParams()
     const [background, setBackground] = useState("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
 
     const taskDone = (i, idTask) => {
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
         setEnabled((x) => !x)
         setIndex(i)
 
@@ -36,10 +39,9 @@ const ListTasks = ({
             else
                 setBackground("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
             
-            setQueryUpdate((x) => !x)
             navigate({
               pathname: `/company/${idCompany}/goal/${idGoal}`,
-              search: `?update=${queryUpdate}`
+              search: `?update=${true}`
             })
             
           })

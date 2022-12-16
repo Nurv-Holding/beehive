@@ -1,15 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import Modal from './CompanyMenuPanel/Goals/components/Modal'
 import { useState } from 'react'
 import companiesApi from '../api/companiesApi'
 
-function AddCompanies( { queryUpdate, setQueryUpdate } ) {  
+function AddCompanies() {  
   let [isOpen, setIsOpen] = useState(false)
   const [company, setCompany] = useState({
     name:"",
     cnpj:""
   })
   const [message, setMessage] = useState("")
+  const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
   function closeModal() {
@@ -29,13 +30,15 @@ function AddCompanies( { queryUpdate, setQueryUpdate } ) {
   const createCompany = async (event) => {
     event.preventDefault()
 
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     companiesApi.create(company)
     .then(() => {
       setMessage("Empresa criado com sucesso")
-      setQueryUpdate((x) => !x)
       navigate({
         pathname: `/`,
-        search: `?update=${queryUpdate}`
+        search: `?update=${true}`
       })
 
       closeModal()

@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import usersApi from "../api/usersApi"
 import Header from "../components/Header"
 const Login = () => {
     const [user, setUse] = useState({email: "", password: ""})
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState("")
-    const [queryUpdate, setQueryUpdate] = useState(false)
+    const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
 
     const modelChange = ({ target }) => {
@@ -18,6 +18,9 @@ const Login = () => {
     const login = async (event) => {
         event.preventDefault()
 
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
         if(user.email === "" || user.password === "")
             setMessage("Precisa preencher os campos")
 
@@ -25,10 +28,9 @@ const Login = () => {
             usersApi.authenticate(user)
             .then(() => {
                 setMessage("Time adicionado sucesso")
-                setQueryUpdate((x) => !x)
                 navigate({
                   pathname: `/login`,
-                  search: `?update=${queryUpdate}`
+                  search: `?update=${true}`
                 })
 
                 navigate("/")

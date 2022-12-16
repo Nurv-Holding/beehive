@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import { useState } from 'react'
 import Modal from '../Goals/components/Modal'
@@ -11,9 +11,9 @@ function ListTeams({ teams }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
-  const [queryUpdate, setQueryUpdate] = useState(false)
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
  
   const [isOpen, setIsOpen] = useState(false)
   function closeModal() {
@@ -28,6 +28,9 @@ function ListTeams({ teams }) {
   const addUserInTeam = async (event) => {
     event.preventDefault()
 
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const teamUsers = await teamsUsersApi.getAll(idCompany)
 
     const hasUser = (teamUsers?.data || []).filter(e => e.idUser === idUser && e.idTeam === idTeam)
@@ -39,10 +42,9 @@ function ListTeams({ teams }) {
       teamsUsersApi.create(idCompany, {idUser, idTeam})
       .then(() => {
         setMessage("Usuário Adicionado!")
-        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/company/${idCompany}`,
-          search: `?update=${queryUpdate}`
+          search: `?update=${true}`
         })
         
       })

@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormUser from './FormUser'
 import ListaUsuarios from './ListUsers'
@@ -13,8 +13,8 @@ function Users() {
     const [message, setMessage] = useState("")
     const { idCompany } = useParams()
     const [users, setUsers] = useState([])
-    const [queryUpdate, setQueryUpdate] = useState(false)
     const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         handlerUsers()
@@ -29,6 +29,9 @@ function Users() {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
         if (Object.keys(item).length === 0 &&
             item.name === "" || item.email === "" ||
             item.occupation === "" || item.password === "" ||
@@ -42,10 +45,9 @@ function Users() {
             usersApi.createEmployee(idCompany, { ...item, repeatPassword: undefined })
             .then(() => {
                 setMessage("Usuário criado com sucesso")
-                setQueryUpdate((x) => !x)
                 navigate({
                   pathname: `/company/${idCompany}`,
-                  search: `?update=${queryUpdate}`
+                  search: `?update=${true}`
                 })
 
               })

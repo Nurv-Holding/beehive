@@ -12,23 +12,26 @@ function Goals() {
     const { goals, item, modelChange, idCompany } = useContext(ContextUser)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const token = localStorage.getItem("token")
     const payload = token? jwtDecode(token): null
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
         if (Object.values(item).length === 0 || item.name === "" || item.descriptions === "")
             setMessage("Os campos precisam ser preenchidos")
         else {
-            console.log("payload", payload)
+            
             goalsApi.create(idCompany, {...item, author: payload?.id})
                 .then(() => {
                     setMessage("Cadastro realizado")
                     navigate({
                         pathname: `/company/${idCompany}`,
-                        search: '?update=true'
+                        search: `?update=${true}`
                     })
 
                     searchParams.delete("update")

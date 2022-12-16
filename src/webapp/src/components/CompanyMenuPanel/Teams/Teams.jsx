@@ -11,10 +11,13 @@ function Teams() {
     const { teams, modelChange, item, idCompany } = useContext(ContextUser)
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        searchParams.delete('update')
+        setSearchParams(searchParams)
 
         if(Object.keys(item).length === 0 || item.name === "" || item.descriptions === ""){
             setMessage("Precisa preencher os campos vazios")
@@ -25,9 +28,9 @@ function Teams() {
                 setMessage("Time criado com sucesso")
                 navigate({
                   pathname: `/company/${idCompany}`,
-                  search: '?update=true'
+                  search: `?update=${true}`
                 })
-                searchParams.delete("update")
+                
             })
             .catch((error) => {
                 console.error(error)

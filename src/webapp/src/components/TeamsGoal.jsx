@@ -11,6 +11,7 @@ import AddTask from './addTask';
 import { calcPercentage } from '../utilis';
 import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
+import { useSearchParams } from 'react-router-dom';
 
 function TeamsGoal({
   teams = null,
@@ -31,10 +32,7 @@ function TeamsGoal({
   goalTeamByKrs,
   teamUsers,
   tasksUser,
-  setQueryUpdate,
-  queryUpdate,
   goal,
-  searchParams,
   navigate,
   payload }) {
 
@@ -52,6 +50,7 @@ function TeamsGoal({
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
   const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
   const [idProcess, setIdProcess] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -97,6 +96,9 @@ function TeamsGoal({
   const handleSubmit = async (event) => {
     event.preventDefault()
 
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     if (Object.keys(item).length === 0 ||
       item.name === "" ||
       item.descriptions === "" ||
@@ -136,10 +138,9 @@ function TeamsGoal({
         // goalTeamsKrsApi.create(idCompany, data)
         .then(() => {
           setMessage("KR criado com sucesso")
-          setQueryUpdate((x) => !x)
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
-            search: `?update=${queryUpdate}`
+            search: `?update=${true}`
           })
 
           closeModalTeamKr()
@@ -160,6 +161,9 @@ function TeamsGoal({
   const createTask = async (event) => {
     event.preventDefault()
 
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const idGoalsTeamKr = krs.idgoalTeamsKr
     const { data } = await tasksApi.create(idCompany, { ...itemTask, author: payload?.id, idGoalsTeamKr })
     const idTaskCreated = data.id
@@ -172,10 +176,9 @@ function TeamsGoal({
     taskUsersApi.create(idCompany, newData)
       .then(() => {
         setMessage("Tarefa criada com sucesso")
-        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${queryUpdate}`
+          search: `?update=${true}`
         })
 
         closeAddTaskModal()
@@ -188,16 +191,18 @@ function TeamsGoal({
   }
 
   const updateTask = (idTaskUser, idUser) => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const user = teamUsers?.filter(e => e.idUser === parseInt(idUser))[0]
     const idTeamUser = user.idTeamUser
 
     taskUsersApi.update(idTaskUser, { idTeamUser })
       .then(() => {
         setMessage("Usuário adicionado com sucesso")
-        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${queryUpdate}`
+          search: `?update=${true}`
         })
 
       })
@@ -208,6 +213,9 @@ function TeamsGoal({
   }
 
   const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const data = { done: done + krs?.doneGoalsTeamKr }
 
     goalTeamsKrsApi.update(idGoalTeamKrs, data)
@@ -225,10 +233,9 @@ function TeamsGoal({
         historyGoalTeamKrApi.create(idCompany, newData)
 
         setMessage("Atualizado")
-        setQueryUpdate((x) => !x)
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${queryUpdate}`
+          search: `?update=${true}`
         })
 
         closeTeamKrModal()
@@ -363,8 +370,6 @@ function TeamsGoal({
                                     navigate={navigate}
                                     idGoal={idGoal}
                                     idCompany={idCompany}
-                                    setQueryUpdate={setQueryUpdate}
-                                    queryUpdate={queryUpdate}
                                     goal={goal}
                                   />
 

@@ -41,13 +41,12 @@ function Goal() {
   const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [historyGoalKrs, setHistoryGoalKrs] = useState([])
-  const [queryUpdate, setQueryUpdate] = useState(false)
   const [teamUsers, setTeamUsers] = useState([])
   const [ooalTeam, setGoalTeam] = useState([])
   const [ooalTeams, setGoalTeams] = useState([])
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenTeam, setIsOpenTeam] = useState(false)
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
@@ -173,6 +172,9 @@ function Goal() {
   const addTeamInGoal = async (event) => {
     event.preventDefault()
 
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
     const idTeam = parseInt(item?.team)
     const newIdGoal = parseInt(idGoal)
 
@@ -190,10 +192,9 @@ function Goal() {
       goalsTeamApi.createProcess(idCompany, { idTeam, idGoal: newIdGoal })
         .then(() => {
           setMessage("Time adicionado sucesso")
-          setQueryUpdate((x) => !x)
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
-            search: `?update=${queryUpdate}`
+            search: `?update=${true}`
           })
 
           closeModalTeam()
@@ -206,6 +207,8 @@ function Goal() {
   }
 
   const createGoalsTeam = async (idTeam) => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
 
     const newIdGoal = parseInt(idGoal)
 
@@ -230,10 +233,9 @@ function Goal() {
       goalsTeamApi.createProcess(idCompany, data)
         .then(() => {
           setMessage("Ojetivo criado com sucesso")
-          setQueryUpdate((x) => !x)
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
-            search: `?update=${queryUpdate}`
+            search: `?update=${true}`
           })
 
           closeModalGoalTeam()
@@ -248,10 +250,9 @@ function Goal() {
       goalsTeamApi.updateProcess(goalsTeam.idProcessGoalsTeams, { idGoalsTeam })
         .then(() => {
           setMessage("Ojetivo criado com sucesso")
-          setQueryUpdate((x) => !x)
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
-            search: `?update=${queryUpdate}`
+            search: `?update=${true}`
           })
 
           closeModalGoalTeam()
@@ -276,6 +277,9 @@ function Goal() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    searchParams.delete('update')
+    setSearchParams(searchParams)
 
     const data = {
       ...item,
@@ -305,10 +309,9 @@ function Goal() {
     historyGoalKrApi.create(idCompany, newData)
     .then(() => {
       setMessage("KR criado com sucesso")
-      setQueryUpdate((x) => !x)
       navigate({
         pathname: `/company/${idCompany}/goal/${idGoal}`,
-        search: `?update=${queryUpdate}`
+        search: `?update=${true}`
       })
 
       closeModal()
@@ -363,8 +366,6 @@ function Goal() {
                 closeModal={closeModalCloseGoal}
                 openModal={openModalCloseGoal}
                 idGoal={idGoal}
-                setQueryUpdate={setQueryUpdate}
-                queryUpdate={queryUpdate}
                 idCompany={idCompany}
               />
             </div>
@@ -377,8 +378,6 @@ function Goal() {
             update={update}
             loading={loading}
             idCompany={idCompany}
-            setQueryUpdate={setQueryUpdate}
-            queryUpdate={queryUpdate}
             historyGoalKrs={historyGoalKrs}
             token={token}
             payload={payload}
@@ -407,8 +406,6 @@ function Goal() {
               historyGoalTeamKrs={historyGoalTeamKrs}
               tasksUser={tasksUser}
               teamUsers={teamUsers}
-              setQueryUpdate={setQueryUpdate}
-              queryUpdate={queryUpdate}
               payload={payload}
               goal={goal}
               redirectHistory={redirectHistory}
