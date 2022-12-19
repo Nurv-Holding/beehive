@@ -23,7 +23,6 @@ const Header = () => {
                 }
                 
             </div>
-
             <nav>
                 <NavLink to="/">
                     <span className="hover:text-[#5500C3]">Home</span>

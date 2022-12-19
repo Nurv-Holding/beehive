@@ -24,6 +24,7 @@ const historyGoalsTeamKrsController = require("./controllers/historyGoalsTeamKrs
 const historyGoalsKrsController = require("./controllers/historyGoalsKrsController")
 const taskUsersController = require("./controllers/taskUsersControler")
 const authenticateController = require("./controllers/autenticateController")
+const futureVisionsController = require("./controllers/futureVisionsController")
 
 const routes = (app) => {
     //login
@@ -54,6 +55,13 @@ const routes = (app) => {
     app.get("/companies",companiesController.getAll)
     app.put("/companies/:id",companiesController.update)
     app.delete("/companies/:id",companiesController.remove)
+
+    //futureVisions
+    app.post("/furureVisions/c/:idCompany",futureVisionsController.create)
+    app.get("/furureVisions/:id/c/:idCompany",futureVisionsController.getById)
+    app.get("/furureVisions/c/:idCompany",futureVisionsController.getAll)
+    app.put("/furureVisions/:id",futureVisionsController.update)
+    app.delete("/furureVisions/:id",futureVisionsController.remove)
 
     //goals
     app.post("/goals/c/:idCompany",goalsController.create)
