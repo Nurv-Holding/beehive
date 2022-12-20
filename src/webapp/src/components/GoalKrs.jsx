@@ -49,11 +49,7 @@ function GoalKrs({
   }
 
   const goalKrsUpdate = (event) => {
-<<<<<<< HEAD
     event.preventDefault()
-=======
-    event.preventDefault();
->>>>>>> 43377d1666085686998154ee747b0a32f555f73b
 
     searchParams.delete('update')
     setSearchParams(searchParams)
