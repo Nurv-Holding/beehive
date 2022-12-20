@@ -25,6 +25,7 @@ function GoalKrs({
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
   const [done, setDone] = useState(0)
+  const [itemUpdated, setItemUpdated] = useState({ done:null, note:"" })
   const [goalKr, setGoalKr] = useState({})
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
@@ -33,10 +34,6 @@ function GoalKrs({
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
   const [finishKr, setFinishKr] = useState()
   const [note, setNote] = useState("")
-
-  function stateDone({ target }) {
-    setDone(parseInt(target.value))
-  }
 
   function closeModal() {
     setIsOpen(false)
@@ -47,14 +44,21 @@ function GoalKrs({
     setIsOpen(true)
   }
 
+  const changeModel = ({ target }) => {
+    setItemUpdated((state) => {
+      return {...state, [target.name]: target.value}
+    })
+  }
+
   const goalKrsUpdate = () => {
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    if(!done || description === ""){
+    if(!itemUpdated.done || itemUpdated.note === ""){
       setMessage("Primeiro precisa preencher os campos")
 
     }else{
+      const done = parseInt(itemUpdated.done)
       const data = { done: done + goalKr?.doneGoalsKr }
 
       const newData = {
@@ -66,7 +70,7 @@ function GoalKrs({
         to: goalKr?.doneGoalsKr,
         from: data.done,
         status: !!goalKr?.status,
-        note: description
+        note: itemUpdated.note
       }
   
       goalKrsApi.update(goalKr.idgoalsKr, data)
@@ -214,13 +218,12 @@ function GoalKrs({
                         </span>
                         <div className="flex flex-col gap-[2%] mt-4">
                           <div className="flex gap-2 items-center">
-                            <div className="flex flex-col gap-5">
-                              <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
-                              <h4> Lições aprendidas </h4>
-                              <textarea className="p-2" name="description" onChange={({ target }) => setDescription(target.value)} cols="60" rows="3"></textarea>
-                              <button type="button" onClick={() => goalKrsUpdate()} className="submit-button">OK</button>
+                            <form onSubmit={goalKrsUpdate} className="flex flex-col gap-5">
+                              <input type="text" onChange={changeModel} className="input-style" name="done" placeholder="Atualizar os dados" />
+                              <textarea className="p-2" name="note" onChange={changeModel} cols="60" rows="3"></textarea>
+                              <button type="submit" className="submit-button">OK</button>
                               {message}
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </Modal>

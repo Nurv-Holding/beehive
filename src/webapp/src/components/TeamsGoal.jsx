@@ -131,11 +131,11 @@ function TeamsGoal({
         yeaPercentage: calcPercentage((goalTeamKr?.done), goalTeamKr?.fromYearly),
         to: goalTeamKr?.done,
         from: data.done,
-        status: !!goalTeamKr?.status
+        status: !!goalTeamKr?.status,
+        note: "Iniciando Kr"
       }
 
       historyGoalTeamKrApi.create(idCompany, newData)
-        // goalTeamsKrsApi.create(idCompany, data)
         .then(() => {
           setMessage("KR criado com sucesso")
           navigate({
