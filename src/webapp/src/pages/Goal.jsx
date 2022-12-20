@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
@@ -303,7 +303,8 @@ function Goal() {
       yeaPercentage: calcPercentage((goalKr?.done), goalKr?.fromYearly),
       to: goalKr?.done,
       from: data.done,
-      status: !!goalKr?.status
+      status: !!goalKr?.status,
+      note: "Iniciando Kr"
     }
 
     historyGoalKrApi.create(idCompany, newData)

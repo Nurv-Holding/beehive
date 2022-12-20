@@ -93,18 +93,16 @@ model User {
 }
 
 model FutureVision {
-  id               Int                @id @default(autoincrement())
-  idCompany        Int
-  title            String
-  description      String             @db.Text
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  company          Company?           @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  Principle        Principle[]
-  Proposal         Proposal[]
-  Goal             Goal[]
-  ProcessGoalsTeam ProcessGoalsTeam[]
-  HistoryGoalKr    HistoryGoalKr[]
+  id          Int         @id @default(autoincrement())
+  idCompany   Int
+  title       String
+  description String      @db.Text
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  company     Company?    @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  Principle   Principle[]
+  Proposal    Proposal[]
+  Goal        Goal[]
 
   @@map("futureVisions")
 }
@@ -181,7 +179,6 @@ model ProcessGoalsTeam {
   idGoalsTeam        Int?
   idTeam             Int?
   idGoal             Int?
-  idFutureVision     Int?
   idCompany          Int
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
@@ -189,7 +186,6 @@ model ProcessGoalsTeam {
   team               Team?                @relation(fields: [idTeam], references: [id], onDelete: Cascade)
   goal               Goal?                @relation(fields: [idGoal], references: [id], onDelete: Cascade)
   comapany           Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  futureVision       FutureVision?        @relation(fields: [idFutureVision], references: [id], onDelete: Cascade)
   HistoryGoalsTeamKr HistoryGoalsTeamKr[]
 
   @@map("processGoalsTeams")
@@ -241,23 +237,22 @@ model GoalKr {
 }
 
 model HistoryGoalKr {
-  id             Int          @id @default(autoincrement())
-  idGoalKr       Int
-  idGoal         Int
-  idCompany      Int
-  idFutureVision Int
-  user           String
-  status         Boolean      @default(false)
-  to             Float
-  from           Float
-  quaPercentage  Float
-  yeaPercentage  Float
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  goalKr         GoalKr       @relation(fields: [idGoalKr], references: [id], onDelete: Cascade)
-  goal           Goal         @relation(fields: [idGoal], references: [id], onDelete: Cascade)
-  company        Company      @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  futureVision   FutureVision @relation(fields: [idFutureVision], references: [id], onDelete: Cascade)
+  id            Int      @id @default(autoincrement())
+  idGoalKr      Int
+  idGoal        Int
+  idCompany     Int
+  user          String
+  note          String   @db.Text
+  status        Boolean  @default(false)
+  to            Float
+  from          Float
+  quaPercentage Float
+  yeaPercentage Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  goalKr        GoalKr   @relation(fields: [idGoalKr], references: [id], onDelete: Cascade)
+  goal          Goal     @relation(fields: [idGoal], references: [id], onDelete: Cascade)
+  company       Company  @relation(fields: [idCompany], references: [id], onDelete: Cascade)
 
   @@map("historyGoalKrs")
 }
@@ -267,6 +262,7 @@ model HistoryGoalsTeamKr {
   idProcessGoalTeam Int
   idGoalsTeamKr     Int
   idCompany         Int
+  note              String           @db.Text
   user              String
   status            Boolean          @default(false)
   to                Float
