@@ -48,7 +48,9 @@ function GoalKrs({
     })
   }
 
-  const goalKrsUpdate = () => {
+  const goalKrsUpdate = (event) => {
+    event.preventDefault()
+
     searchParams.delete('update')
     setSearchParams(searchParams)
 
