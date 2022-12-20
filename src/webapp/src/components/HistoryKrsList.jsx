@@ -4,7 +4,6 @@ const HistoryKrsList = ({ histories, goalKr }) => {
     return (
         <main className='flex flex-col items-center'>
             <span className='text-bold text-2xl text-white uppercase mt-8'> {goalKr.name} </span>
-            {JSON.stringify(histories)}
             <span className='text-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
             <div className='w-11/12'>
                 <div className='container-empresas'>
@@ -35,7 +34,7 @@ const HistoryKrsList = ({ histories, goalKr }) => {
                                                 <td> {history?.yeaPercentage}% </td>
                                                 <td> {history?.user} </td>
                                                 <td> {history?.status ? "encerrado" : "ativo"} </td>
-                                                <td> {history?.note} </td>
+                                                <td className="truncate ... max-w-[10px]"> {history?.note} </td>
                                             </tr>
                                         )
                                     })}

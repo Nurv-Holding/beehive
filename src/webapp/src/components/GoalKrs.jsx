@@ -28,9 +28,11 @@ function GoalKrs({
   const [goalKr, setGoalKr] = useState({})
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
+  const [description, setDescription] = useState("")
   const [searchParams, setSearchParams] = useSearchParams()
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
   const [finishKr, setFinishKr] = useState()
+  const [note, setNote] = useState("")
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -49,36 +51,43 @@ function GoalKrs({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    const data = { done: done + goalKr?.doneGoalsKr }
+    if(!done || description === ""){
+      setMessage("Primeiro precisa preencher os campos")
 
-    const newData = {
-      idGoal: parseInt(idGoal),
-      idGoalKr: goalKr.idgoalsKr,
-      user: payload?.name,
-      quaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromQuarterlyGoalKrs),
-      yeaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromYearlyGoalsKr),
-      to: goalKr?.doneGoalsKr,
-      from: data.done,
-      status: !!goalKr?.status
-    }
+    }else{
+      const data = { done: done + goalKr?.doneGoalsKr }
 
-    goalKrsApi.update(goalKr.idgoalsKr, data)
-      .then(() => {
-        setMessage("Atualizado")
-
-        historyGoalKrApi.create(idCompany, newData)
-
-        navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${true}`
+      const newData = {
+        idGoal: parseInt(idGoal),
+        idGoalKr: goalKr.idgoalsKr,
+        user: payload?.name,
+        quaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromQuarterlyGoalKrs),
+        yeaPercentage: calcPercentage((goalKr?.doneGoalsKr + done), goalKr?.fromYearlyGoalsKr),
+        to: goalKr?.doneGoalsKr,
+        from: data.done,
+        status: !!goalKr?.status,
+        note: description
+      }
+  
+      goalKrsApi.update(goalKr.idgoalsKr, data)
+        .then(() => {
+          setMessage("Atualizado")
+  
+          historyGoalKrApi.create(idCompany, newData)
+  
+          navigate({
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            search: `?update=${true}`
+          })
+  
+          closeModal()
         })
-
-        closeModal()
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado")
-      })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado")
+        })
+    }
+      
   }
 
   function closeModalFinishKr() {
@@ -89,35 +98,42 @@ function GoalKrs({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    const {data} = await historyGoalKrApi.getAll(idCompany)
-    const history = data.length !== 0? data[data.length - 1]: null
-    const result = await goalKrsApi.update(idGoalKr, {status: true})
-    const goalKr = result.data
+    if(note === ""){
+      setMessage("Primeiro precisa preencher os campos")
 
-    const newData = {
-      idGoal: parseInt(idGoal),
-      idGoalKr: goalKr?.id,
-      user: payload?.name,
-      quaPercentage: history?.quaPercentage || 0,
-      yeaPercentage: history?.yeaPercentage || 0,
-      to: history?.to || 0,
-      from: history?.from || 0,
-      status: !!goalKr?.status
+    }else{
+      const {data} = await historyGoalKrApi.getAll(idCompany)
+      const history = data.length !== 0? data[data.length - 1]: null
+      const result = await goalKrsApi.update(idGoalKr, {status: true})
+      const goalKr = result.data
+  
+      const newData = {
+        idGoal: parseInt(idGoal),
+        idGoalKr: goalKr?.id,
+        user: payload?.name,
+        quaPercentage: history?.quaPercentage || 0,
+        yeaPercentage: history?.yeaPercentage || 0,
+        to: history?.to || 0,
+        from: history?.from || 0,
+        status: !!goalKr?.status,
+        note
+      }
+  
+      historyGoalKrApi.create(idCompany, newData)
+      .then(() => {
+          navigate({
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            search: `?update=${true}`
+          })
+  
+          closeModalFinishKr()
+        })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado!")
+        })
     }
 
-    historyGoalKrApi.create(idCompany, newData)
-    .then(() => {
-        navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${true}`
-        })
-
-        closeModalFinishKr()
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado!")
-      })
   }
 
   function openModalCloseKr() {
@@ -198,10 +214,13 @@ function GoalKrs({
                         </span>
                         <div className="flex flex-col gap-[2%] mt-4">
                           <div className="flex gap-2 items-center">
-                            <div>
+                            <div className="flex flex-col gap-5">
                               <input type="text" onChange={stateDone} className="input-style" name="done" placeholder="Atualizar os dados" />
+                              <h4> Lições aprendidas </h4>
+                              <textarea className="p-2" name="description" onChange={({ target }) => setDescription(target.value)} cols="60" rows="3"></textarea>
+                              <button type="button" onClick={() => goalKrsUpdate()} className="submit-button">OK</button>
+                              {message}
                             </div>
-                            <button type="button" onClick={() => { goalKrsUpdate() }} className="submit-button">OK</button>
                           </div>
                         </div>
                       </Modal>
@@ -227,6 +246,8 @@ function GoalKrs({
                       closeModal={closeModalFinishKr}
                       openModal={openModalCloseKr}
                       finishGoalKr={finishGoalKr}
+                      setNote={setNote}
+                      message={message}
                     />
                     }
                   </div>
