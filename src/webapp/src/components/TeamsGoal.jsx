@@ -51,6 +51,7 @@ function TeamsGoal({
   const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
   const [idProcess, setIdProcess] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams()
+  const [note, setNote] = useState("")
 
   function stateDone({ target }) {
     setDone(parseInt(target.value))
@@ -216,35 +217,43 @@ function TeamsGoal({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    const data = { done: done + krs?.doneGoalsTeamKr }
+    if(!done || note === ""){
+      setMessage("Primeiro precisa preencher os campos")
 
-    goalTeamsKrsApi.update(idGoalTeamKrs, data)
-      .then(() => {
-        const newData = {
-          idProcessGoalTeam: idProcessGoalsTeams,
-          idGoalsTeamKr: idGoalTeamKrs,
-          quaPercentage,
-          yeaPercentage,
-          user: payload?.name,
-          to: krs?.doneGoalsTeamKr,
-          from: data?.done
-        }
+    }else{
 
-        historyGoalTeamKrApi.create(idCompany, newData)
+      const data = { done: done + krs?.doneGoalsTeamKr }
 
-        setMessage("Atualizado")
-        navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
-          search: `?update=${true}`
+      goalTeamsKrsApi.update(idGoalTeamKrs, data)
+        .then(() => {
+          const newData = {
+            idProcessGoalTeam: idProcessGoalsTeams,
+            idGoalsTeamKr: idGoalTeamKrs,
+            quaPercentage,
+            yeaPercentage,
+            user: payload?.name,
+            to: krs?.doneGoalsTeamKr,
+            from: data?.done,
+            note
+          }
+  
+          historyGoalTeamKrApi.create(idCompany, newData)
+  
+          setMessage("Atualizado")
+          navigate({
+            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            search: `?update=${true}`
+          })
+  
+          closeTeamKrModal()
+  
         })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado")
+        })
+    }
 
-        closeTeamKrModal()
-
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado")
-      })
   }
 
   return (
@@ -347,8 +356,10 @@ function TeamsGoal({
                                     }
 
                                     <TeamKrModal
+                                      setNote={setNote}
                                       stateDone={stateDone}
                                       done={done}
+                                      message={message}
                                       nameGoalTeam={kr.nameGoalsTeamKr}
                                       closeModal={closeTeamKrModal}
                                       openModal={openTeamKrModal}

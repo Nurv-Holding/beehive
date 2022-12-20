@@ -9,6 +9,8 @@ const TeamKrModal = ({
     krs,
     isOpen,
     stateDone,
+    setNote,
+    message,
     goal,
     goalTeamKrsUpdate,
     historyGoalTeamKrs,
@@ -24,10 +26,12 @@ const TeamKrModal = ({
             <div className="flex flex-col gap-[2%] mt-4">
                 {!(!!goal.status)&&
                 <div className="flex gap-2 items-center">
-                    <div>
+                    <div className="flex flex-col gap-2">
                         <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
+                        <textarea className="p-2" onChange={({ target }) => setNote(target.value)} name="note" cols="55" rows="10"></textarea>
+                        <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
+                        {message}
                     </div>
-                    <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
                 </div>
                 }
 

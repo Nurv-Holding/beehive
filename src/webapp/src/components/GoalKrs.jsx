@@ -9,9 +9,7 @@ import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
 import ChartGoalQuartely from "./ChartGoalQuartely";
 import ChartGoalYearly from "./ChartGoalYearly";
-import { useEffect } from "react";
 import CloseKr from "./CloseKr";
-import { Link } from "react-router-dom";
 
 function GoalKrs({
   goalKrs,

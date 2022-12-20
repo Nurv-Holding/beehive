@@ -25,6 +25,7 @@ const HistoryKrsTeamList = ({ histories, team, goalTeams, goaloalTeamByKrs }) =>
                                                     <th className='container-title-grid'>Alvo anual: {} </th>
                                                     <th className='container-title-grid'>Atualizado por</th>
                                                     <th className='container-title-grid'>Status</th>
+                                                    <th className='container-title-grid'>Observação</th>
                                                 </tr>
                                             </thead>
             
@@ -39,6 +40,7 @@ const HistoryKrsTeamList = ({ histories, team, goalTeams, goaloalTeamByKrs }) =>
                                                             <td> {history?.yeaPercentageHistory} </td>
                                                             <td> {history?.user} </td>
                                                             <td> {`${!!history?.status? "Encerrado": "Ativo"}`} </td>
+                                                            <td className="truncate ... max-w-[10px]"> {history?.note} </td>
                                                         </tr>
                                                     )
                                                 })}
