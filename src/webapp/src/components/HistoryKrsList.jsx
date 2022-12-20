@@ -8,15 +8,15 @@ const HistoryKrsList = ({ histories, goalKr }) => {
             <div className='w-11/12'>
                 <div className='container-empresas'>
                     <div className='flex flex-col items-center'>
-                        <div className='container-table-grid-team'>
+                        <div className='container-table-grid-team px-4'>
                             <table class="table-auto w-full">
                                 <thead>
                                     <tr>
                                         <th className='container-title-grid'>Data</th>
                                         <th className='container-title-grid'>Valor inicial</th>
                                         <th className='container-title-grid'>Valor atualizado</th>
-                                        <th className='container-title-grid'>Alvo trimestral: {goalKr.fromQuarterly} </th>
-                                        <th className='container-title-grid'>Alvo anual: {goalKr.fromYearly} </th>
+                                        <th className='container-title-grid'>Trimestral: {goalKr.fromQuarterly} </th>
+                                        <th className='container-title-grid'>Anual: {goalKr.fromYearly} </th>
                                         <th className='container-title-grid'>Atualizado por</th>
                                         <th className='container-title-grid'>Status</th>
                                         <th className='container-title-grid'>Observação</th>
