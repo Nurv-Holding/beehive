@@ -19,7 +19,7 @@ const CloseKr = ({
     return (
         <div>
             <button className="modal-btn h-[30px]" onClick={openModal}>
-                Encerrar Kr
+                Encerrar KR
             </button>
 
             <Modal 
@@ -27,10 +27,10 @@ const CloseKr = ({
             closeModal={closeModal} 
             title={"Encerrar objetivo"}
             >
-                <div className="flex flex-col items-center">
-                    <h1>Encerrar o Kr: <span className="text-red-500 text-2xl">{nameKr}</span> ?</h1>
-                    <form onSubmit={handleSubmit} className="mt-2 w-full justify-center">
-                        <textarea className="p-2" onChange={({ target }) => setNote(target.value)} name="description" cols="60" rows="3"></textarea>
+                <div className="flex flex-col gap-4">
+                    <h1 className="text-xl">Encerrar o KR: <span className="text-red-500">{nameKr}</span>?</h1>
+                    <form onSubmit={handleSubmit} className="mt-2 w-full flex flex-col gap-3">
+                        <textarea className="p-2 input-style text-black" onChange={({ target }) => setNote(target.value)} name="description" cols="60" rows="3"></textarea>
                         <div>
                             <button className='submit-button' type="submit" >
                                 Encerrar
@@ -39,9 +39,11 @@ const CloseKr = ({
                             <button className='submit-button ml-4' type="button" onClick={closeModal}>
                                 Cancelar
                             </button>
-                            {message}
+                            
                         </div>
-
+                        <span className="text-red-600">
+                            {message}
+                        </span>
                     </form>
                 </div>
             </Modal>

@@ -49,7 +49,11 @@ function GoalKrs({
   }
 
   const goalKrsUpdate = (event) => {
+<<<<<<< HEAD
     event.preventDefault()
+=======
+    event.preventDefault();
+>>>>>>> 43377d1666085686998154ee747b0a32f555f73b
 
     searchParams.delete('update')
     setSearchParams(searchParams)
@@ -220,9 +224,12 @@ function GoalKrs({
                           <div className="flex gap-2 items-center">
                             <form onSubmit={goalKrsUpdate} className="flex flex-col gap-5">
                               <input type="text" onChange={changeModel} className="input-style" name="done" placeholder="Atualizar os dados" />
-                              <textarea className="p-2" name="note" onChange={changeModel} cols="60" rows="3"></textarea>
+                              <span>Descrição</span>
+                              <textarea className="p-2 input-style" name="note" onChange={changeModel} cols="60" rows="3"></textarea>
                               <button type="submit" className="submit-button">OK</button>
-                              {message}
+                              <span className="text-red-600">
+                                {message}
+                              </span>
                             </form>
                           </div>
                         </div>
