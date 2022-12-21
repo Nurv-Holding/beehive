@@ -21,15 +21,15 @@ import { calcPercentage } from '../utilis';
 import TitleCompany from '../components/TitleCompany';
 
 function Goal() {
-  const { 
-    idGoal, 
-    idCompany, 
-    teams, 
-    modelChange, 
-    item, 
+  const {
+    idGoal,
+    idCompany,
+    teams,
+    modelChange,
+    item,
     users,
-    company, 
-    payload, 
+    company,
+    payload,
     token } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
@@ -206,6 +206,8 @@ function Goal() {
     }
   }
 
+
+
   const createGoalsTeam = async (idTeam) => {
     searchParams.delete('update')
     setSearchParams(searchParams)
@@ -265,6 +267,10 @@ function Goal() {
 
   }
 
+  const routerBack = () => {
+    navigate(`/company/${idCompany}`)
+}
+
   const redirectHistory = (route) => {
     navigate(route)
   }
@@ -288,7 +294,7 @@ function Goal() {
       toYearly: parseInt(item.toQuarterly),
       fromQuarterly: parseInt(item.fromQuarterly),
       fromYearly: parseInt(item.fromYearly),
-      done:parseInt(item.toQuarterly),
+      done: parseInt(item.toQuarterly),
       author: payload?.id
     }
 
@@ -308,19 +314,19 @@ function Goal() {
     }
 
     historyGoalKrApi.create(idCompany, newData)
-    .then(() => {
-      setMessage("KR criado com sucesso")
-      navigate({
-        pathname: `/company/${idCompany}/goal/${idGoal}`,
-        search: `?update=${true}`
-      })
+      .then(() => {
+        setMessage("KR criado com sucesso")
+        navigate({
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          search: `?update=${true}`
+        })
 
-      closeModal()
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado!")
-    })
+        closeModal()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
   }
 
   return (
@@ -328,48 +334,54 @@ function Goal() {
       <Header />
 
       <main className='flex flex-col items-center'>
-        <TitleCompany name={company?.name} />
+        <div className='flex flex-row w-full justify-center items-center'>
+          <butto onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</butto>
+
+          <TitleCompany className="" name={company?.name} />
+        </div>
+
+
         <div className='w-11/12'>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
-              <span className='text-bold text-xl text-white '>{goal?.name}</span>
-              <span className='text-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
+              <span className='font-bold text-xl text-white '>{goal?.name}</span>
+              <span className='font-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
             </div>
-            {!(!!goal.status)&&
-            <div className='container-percentage-okr flex flex-row justify-around'>
-              <AddKr
-                message={message}
-                nameGoal={goal.name}
-                handleSubmit={handleSubmit}
-                modelChange={modelChange}
-                isOpen={isOpen}
-                closeModal={closeModal}
-                openModal={openModal}
-                item={item}
-              />
+            {!(!!goal.status) &&
+              <div className='container-percentage-okr flex flex-row justify-around'>
+                <AddKr
+                  message={message}
+                  nameGoal={goal.name}
+                  handleSubmit={handleSubmit}
+                  modelChange={modelChange}
+                  isOpen={isOpen}
+                  closeModal={closeModal}
+                  openModal={openModal}
+                  item={item}
+                />
 
-              <AddTeam
-                message={message}
-                handleSubmit={handleSubmit}
-                modelChange={modelChange}
-                isOpen={isOpenTeam}
-                closeModal={closeModalTeam}
-                openModal={openModalTeam}
-                teams={teams}
-                item={item}
-                addTeamInGoal={addTeamInGoal}
-              />
+                <AddTeam
+                  message={message}
+                  handleSubmit={handleSubmit}
+                  modelChange={modelChange}
+                  isOpen={isOpenTeam}
+                  closeModal={closeModalTeam}
+                  openModal={openModalTeam}
+                  teams={teams}
+                  item={item}
+                  addTeamInGoal={addTeamInGoal}
+                />
 
-              <CloseGoal
-                handleSubmit={handleSubmit}
-                nameGoal={goal.name}
-                isOpen={isOpenCloseGoal}
-                closeModal={closeModalCloseGoal}
-                openModal={openModalCloseGoal}
-                idGoal={idGoal}
-                idCompany={idCompany}
-              />
-            </div>
+                <CloseGoal
+                  handleSubmit={handleSubmit}
+                  nameGoal={goal.name}
+                  isOpen={isOpenCloseGoal}
+                  closeModal={closeModalCloseGoal}
+                  openModal={openModalCloseGoal}
+                  idGoal={idGoal}
+                  idCompany={idCompany}
+                />
+              </div>
             }
           </div>
 
@@ -388,7 +400,7 @@ function Goal() {
           />
 
           <div className='border-t mt-6 pt-4 border-white'>
-            <span className='text-bold text-xl mt-2 text-white'>Times</span>
+            <span className='font-bold text-xl mt-2 text-white'>Times</span>
             <TeamsGoal
               goalTeamByGoalTeam={goalTeamByGoalTeam}
               goalTeamsByTeam={goalTeamsByTeam}

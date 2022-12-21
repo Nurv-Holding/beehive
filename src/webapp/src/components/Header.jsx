@@ -21,15 +21,16 @@ const Header = () => {
                 {isLogin &&
                     <span className="hover:cursor-default"> Olá, <span className="hover:text-[#5500C3]">{payload?.name}</span> </span>
                 }
-                
+
             </div>
-            <nav>
+            <nav className="flex gap-2">
                 <NavLink to="/">
                     <span className="hover:text-[#5500C3]">Home</span>
                 </NavLink>
+
                 {isLogin &&
                     <div className="">
-                        <button type="button" onClick={logout} className="ml-2 text-sm hover:text-red-500"> <span>Sair</span> </button>
+                        <button type="button" onClick={logout} className="text-sm hover:text-red-500"> <span>Sair</span> </button>
                     </div>
                 }
 

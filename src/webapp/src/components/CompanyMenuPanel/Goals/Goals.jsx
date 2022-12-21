@@ -7,17 +7,15 @@ import { useState } from 'react'
 import goalsApi from '../../../api/goalsApi'
 import jwtDecode from "jwt-decode"
 import GoalsList from './GoalsList'
+import goalKrsApi from '../../../api/goalKrsApi'
 
 function Goals() {
-    const {companyGoals, idCompany, goalAndTeams} = useContext(ContextUser)
-    const { goals, item, modelChange} = useContext(ContextUser)
-    const [goalKrs, setGoalKrs] = useState([])
-    const [krs, setKrs] = useState([])
+    const { companyGoals, idCompany, goalAndTeams, krs, goalKrs, item, modelChange } = useContext(ContextUser)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
     const token = localStorage.getItem("token")
-    const payload = token? jwtDecode(token): null
+    const payload = token ? jwtDecode(token) : null
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -28,8 +26,8 @@ function Goals() {
         if (Object.values(item).length === 0 || item.name === "" || item.descriptions === "")
             setMessage("Os campos precisam ser preenchidos")
         else {
-            
-            goalsApi.create(idCompany, {...item, author: payload?.id})
+
+            goalsApi.create(idCompany, { ...item, author: payload?.id })
                 .then(() => {
                     setMessage("Cadastro realizado")
                     navigate({
@@ -50,58 +48,14 @@ function Goals() {
     }
 
     return (
-        <Tab.Group>
-            <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
-                <div className='w-11/12 flex flex-row gap-2'>
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            <button
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Objetivos
-                            </button>
-                        )}
-                    </Tab>
-
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            <button
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Cadrastrar
-                            </button>
-                        )}
-                    </Tab>
-                </div>
-            </Tab.List>
-
-            <div className='w-full h-full flex flex-col items-center mt-8'>
-                <div className='w-11/12'>
-                    <Tab.Panels>
-                        <Tab.Panel>
-                            <GoalsList
-                            companyGoals={companyGoals} 
-                            goalKrs={goalKrs} 
-                            goalAndTeams={goalAndTeams}
-                            krs={krs} 
-                            />
-                        </Tab.Panel>
-
-                        <Tab.Panel className='container-empresas'>
-                            <FormGoal
-                                modelChange={modelChange}
-                                handleSubmit={handleSubmit}
-                                message={message}
-                            />
-                        </Tab.Panel>
-                    </Tab.Panels>
-                </div>
-            </div>
-        </Tab.Group>
+        <div className='w-full h-full flex flex-col items-center mt-8'>
+            <GoalsList
+                companyGoals={companyGoals}
+                goalKrs={goalKrs}
+                goalAndTeams={goalAndTeams}
+                krs={krs}
+            />
+        </div>
     )
 }
 

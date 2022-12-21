@@ -9,6 +9,7 @@ import teamsApi from "../api/teamsApi"
 import teamsUsersApi from "../api/teamsUsersApi"
 import usersApi from "../api/usersApi"
 import jwtDecode from "jwt-decode"
+import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
 
 export const ContextUser = createContext()
 
@@ -27,6 +28,9 @@ export const ContextUserProvider = ({ children }) => {
     const update = searchParams.get('update')
     const token = localStorage.getItem("token")
     const payload = token? jwtDecode(token): null
+    const [goalKrs, setGoalKrs] = useState([])
+    const [krs, setKrs] = useState([])
+    
 
     useEffect(() => {
         handlerUsersByCompany()
@@ -38,8 +42,20 @@ export const ContextUserProvider = ({ children }) => {
         handlerCompanyGoals()
         handlerGoalAndTeams()
         handleCompany()
+        handlerGoalKrs()
+        handlerKrs()
         
     },[idCompany, update])
+
+    const handlerGoalKrs = async () => {
+        const {data} = await goalKrsApi.getAll(idCompany)
+        setGoalKrs(data)
+    }
+    
+    const handlerKrs = async () => {
+        const {data} = await goalTeamsKrsApi.getAllGroupByKrs(idCompany)
+        setKrs(data)
+    }
 
     const handlerTeamUsers = async () => {
         const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
@@ -104,7 +120,9 @@ export const ContextUserProvider = ({ children }) => {
                     goalAndTeams,
                     idCompany,
                     token,
-                    payload
+                    payload,
+                    goalKrs,
+                    krs
                 }
             }
         >

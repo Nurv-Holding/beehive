@@ -15,27 +15,17 @@ import Proposals from '../../proposals'
 import GoalsList from '../Goals/GoalsList'
 
 function WayOfBeing() {
-    const {companyGoals, idCompany, goalAndTeams} = useContext(ContextUser)
-    const {idGoal} = useParams()
-    const [goalKrs, setGoalKrs] = useState([])
-    const [krs, setKrs] = useState([])
+    const {idCompany} = useContext(ContextUser)
     const [futureVisions, setFutureVisions] = useState([])
     const [principles, setPrinciples] = useState([])
     const [proposals, setProposals] = useState([])
 
     useEffect(() => {
-        handlerGoalKrs()
-        handlerKrs()
         handleFutureVision()
         handlePrinciples()
         handleProposals()
 
     },[idCompany])
-
-    const handlerGoalKrs = async () => {
-        const {data} = await goalKrsApi.getAll(idCompany)
-        setGoalKrs(data)
-    }
 
     const handleFutureVision = async () => {
         const {data} = await futureVisionApi.getAll(idCompany)
@@ -50,11 +40,6 @@ function WayOfBeing() {
     const handleProposals = async () => {
         const {data} = await proposalsApi.getAll(idCompany)
         setProposals(data)
-    }
-
-    const handlerKrs = async () => {
-        const {data} = await goalTeamsKrsApi.getAllGroupByKrs(idCompany)
-        setKrs(data)
     }
 
     return (
