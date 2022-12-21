@@ -19,10 +19,10 @@ function Users() {
     useEffect(() => {
         handlerUsers()
 
-    },[idCompany])
+    }, [idCompany])
 
     const handlerUsers = async () => {
-        const {data} = await usersApi.getAllByCompany(idCompany)
+        const { data } = await usersApi.getAllByCompany(idCompany)
         setUsers(data)
     }
 
@@ -43,73 +43,42 @@ function Users() {
 
         } else {
             usersApi.createEmployee(idCompany, { ...item, repeatPassword: undefined })
-            .then(() => {
-                setMessage("Usuário criado com sucesso")
-                navigate({
-                  pathname: `/company/${idCompany}`,
-                  search: `?update=${true}`
-                })
+                .then(() => {
+                    setMessage("Usuário criado com sucesso")
+                    navigate({
+                        pathname: `/company/${idCompany}`,
+                        search: `?update=${true}`
+                    })
 
-              })
-              .catch((error) => {
-                console.error(error)
-                setMessage("Algo deu errado!")
-              })
+                })
+                .catch((error) => {
+                    console.error(error)
+                    setMessage("Algo deu errado!")
+                })
 
         }
 
     }
 
     return (
-        <Tab.Group>
-            <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
-                <div className='w-11/12 flex flex-row gap-2'>
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            <button onClick={() => setMessage("")}
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Usuários
-                            </button>
-                        )}
-                    </Tab>
-
-
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            <button onClick={() => setMessage("")}
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Cadrastrar
-                            </button>
-                        )}
-                    </Tab>
-                </div>
-            </Tab.List>
-
-            <div className='w-full h-full flex flex-col items-center mt-8'>
-                <div className='w-11/12'>
-
-                    <Tab.Panels>
-                        <Tab.Panel className='container-empresas'>
-                            <ListaUsuarios users={users} />
-                        </Tab.Panel>
-
-                        <Tab.Panel className='container-empresas'>
-                            <FormUser
-                                modelChange={modelChange}
-                                message={message}
-                                handleSubmit={handleSubmit}
-                            />
-                        </Tab.Panel>
-                    </Tab.Panels>
-                </div>
+        <div className='flex flex-row justify-between'>
+            <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 gap-2'>
+                <button
+                    className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
+                >
+                    +
+                </button>
             </div>
-        </Tab.Group>
+
+            <ListaUsuarios users={users} />
+
+            {/* <FormUser
+            modelChange={modelChange}
+            message={message}
+            handleSubmit={handleSubmit}
+                /> */}
+
+        </div>
     )
 }
 

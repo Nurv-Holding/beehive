@@ -57,7 +57,7 @@ function ListTeams({ teams }) {
 
   return (
     <div className='flex flex-row justify-between'>
-      <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 gap-2'>
+      <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4'>
         <button
           className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
         >
@@ -69,7 +69,7 @@ function ListTeams({ teams }) {
         {(teams || []).map((team) => {
           return (
             <>
-              <div onClick={() => openModal(team.id)} className="cursor-pointer bg-slate-100 w-full h-full overflow-y-scroll rounded-3xl shadow-lg flex flex-col items-center justify-center">
+              <div onClick={() => openModal(team.id)} className="cursor-pointer bg-slate-100 max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg flex flex-col items-center justify-center">
                 <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
                   {team.name}
                 </span>
