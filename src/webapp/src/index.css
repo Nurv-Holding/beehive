@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 html {
-    background-color: rgb(148 163 184);
+    background-color: #94a3b8;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -258,7 +258,7 @@ header nav{
 
 /*EmpresasMenu*/
 .container-nav-empresas{
-    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center
+    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center gap-2
 }
 
 .container-nav-empresas{
@@ -266,7 +266,7 @@ header nav{
 }
 
 .container-nav-empresas button{
-    @apply p-2 rounded-lg focus:outline-none hover:text-[#5500C3]
+    @apply rounded-lg focus:outline-none hover:text-[#5500C3] hover:bg-gray-200 p-2
 }
 
 .task-doer{

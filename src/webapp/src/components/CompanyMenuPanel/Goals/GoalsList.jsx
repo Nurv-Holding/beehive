@@ -34,7 +34,7 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                             {(goalKrs || []).filter(e => e.idGoal === goal.idGoal).map((krs) => {
                                 return(
                                     <div className="w-full">
-                                        <div className="bg-white w-full p-6 rounded-xl shadow-lg cursor-default">
+                                        <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
                                             <h1 className='text-black uppercase text-center font-bold text-[12px]'>
                                                 {krs.name}
                                             </h1>

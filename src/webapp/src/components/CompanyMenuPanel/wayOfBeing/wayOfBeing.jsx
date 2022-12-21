@@ -12,9 +12,9 @@ import { ContextUser } from '../../../context/ContextUser'
 import FutureVision from '../../fututeVision'
 import Principles from '../../principles'
 import Proposals from '../../proposals'
-import GoalsList from './GoalsList'
+import GoalsList from '../Goals/GoalsList'
 
-function Summary() {
+function WayOfBeing() {
     const {companyGoals, idCompany, goalAndTeams} = useContext(ContextUser)
     const {idGoal} = useParams()
     const [goalKrs, setGoalKrs] = useState([])
@@ -68,18 +68,6 @@ function Summary() {
                                     selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                 }
                             >
-                                Resumo
-                            </button>
-                        )}
-                    </Tab>
-
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            <button
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
                                 Visão de Futuro
                             </button>
                         )}
@@ -114,15 +102,6 @@ function Summary() {
             <div className='w-full h-full flex flex-col items-center mt-8'>
                 <div className='w-11/12'>
                     <Tab.Panels>
-                        <Tab.Panel>
-                            <GoalsList 
-                                companyGoals={companyGoals} 
-                                goalKrs={goalKrs} 
-                                goalAndTeams={goalAndTeams}
-                                krs={krs} 
-                            />
-                        </Tab.Panel>
-
                         <Tab.Panel className='container-empresas'>
                             <FutureVision futureVisions={futureVisions} />
                         </Tab.Panel>
@@ -141,4 +120,4 @@ function Summary() {
     )
 }
 
-export default Summary
+export default WayOfBeing

@@ -1,15 +1,18 @@
 import { json, Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 import FormGoal from './FormGoal'
-import ListGoals from './ListGoals'
 import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import { useState } from 'react'
 import goalsApi from '../../../api/goalsApi'
 import jwtDecode from "jwt-decode"
+import GoalsList from './GoalsList'
 
 function Goals() {
-    const { goals, item, modelChange, idCompany } = useContext(ContextUser)
+    const {companyGoals, idCompany, goalAndTeams} = useContext(ContextUser)
+    const { goals, item, modelChange} = useContext(ContextUser)
+    const [goalKrs, setGoalKrs] = useState([])
+    const [krs, setKrs] = useState([])
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
@@ -78,10 +81,14 @@ function Goals() {
 
             <div className='w-full h-full flex flex-col items-center mt-8'>
                 <div className='w-11/12'>
-
                     <Tab.Panels>
-                        <Tab.Panel className='container-empresas'>
-                            <ListGoals goals={goals} />
+                        <Tab.Panel>
+                            <GoalsList
+                            companyGoals={companyGoals} 
+                            goalKrs={goalKrs} 
+                            goalAndTeams={goalAndTeams}
+                            krs={krs} 
+                            />
                         </Tab.Panel>
 
                         <Tab.Panel className='container-empresas'>
