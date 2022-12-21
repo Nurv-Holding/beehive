@@ -335,7 +335,7 @@ function Goal() {
 
       <main className='flex flex-col items-center'>
         <div className='flex flex-row w-full justify-center items-center'>
-          <butto onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</butto>
+          <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
 
           <TitleCompany className="" name={company?.name} />
         </div>
