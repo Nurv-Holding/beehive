@@ -1,12 +1,12 @@
 function TeamHistoriesList() {
     return (
         <main className='flex flex-col items-center'>
-            <span className='text-bold text-2xl text-white uppercase mt-8'> Nome do time </span>
+            <span className='font-bold text-2xl text-white uppercase mt-8'> Nome do time </span>
             
 
 
             <div className='w-11/12'> {/*Time */}
-            <span className='text-bold text-xl text-white uppercase m-2'> Nome do Objetivo </span>{/*objetivo time */}
+            <span className='font-bold text-xl text-white uppercase m-2'> Nome do Objetivo </span>{/*objetivo time */}
                 <div className='container-history'>{/*Krs de objetivo time */}
                     <div className='flex flex-col items-center'>
                         <span className="text-xl font-bold mb-2 ml-4 self-start text-[#5500C3] bold cursor-default">Nome do Kr</span>

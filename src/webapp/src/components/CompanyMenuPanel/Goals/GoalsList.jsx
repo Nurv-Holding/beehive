@@ -19,10 +19,10 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
     }
 
     return (
-        <div className="mx-auto flex flex-row gap-4 flex-wrap mb-2">
+        <div className="mx-auto flex flex-row items-center justify-center gap-4 flex-wrap mb-2">
             {(companyGoals || []).map((goal) => {
                 return(
-                    <div className="bg-slate-100 w-[500px] min-h-[300px] rounded-3xl shadow-lg py-4 px-6 flex flex-col items-center">
+                    <div className="bg-slate-100 w-[500px] h-[400px] overflow-y-scroll rounded-3xl shadow-lg py-4 px-6 flex flex-col items-center">
                         <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
                             <Link to={`goal/${goal.idGoal}`}>
                                 {goal.nameGoal}
@@ -34,7 +34,7 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                             {(goalKrs || []).filter(e => e.idGoal === goal.idGoal).map((krs) => {
                                 return(
                                     <div className="w-full">
-                                        <div className="bg-white w-full p-6 rounded-xl shadow-lg cursor-default">
+                                        <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
                                             <h1 className='text-black uppercase text-center font-bold text-[12px]'>
                                                 {krs.name}
                                             </h1>

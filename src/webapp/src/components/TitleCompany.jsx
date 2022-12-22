@@ -1,8 +1,9 @@
 
 
 const TitleCompany = ({ name="" }) => {
+
     return(
-        <div className='text-center text-white font-bold m-5 text-4xl'>
+        <div className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
             <span> {name} </span>
         </div>
     )
