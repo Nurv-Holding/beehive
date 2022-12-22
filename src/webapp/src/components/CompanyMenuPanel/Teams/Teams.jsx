@@ -19,78 +19,82 @@ function Teams() {
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        if(Object.keys(item).length === 0 || item.name === "" || item.descriptions === ""){
+        if (Object.keys(item).length === 0 || item.name === "" || item.descriptions === "") {
             setMessage("Precisa preencher os campos vazios")
 
-        }else{
+        } else {
             teamsApi.create(idCompany, item)
-            .then(() => {
-                setMessage("Time criado com sucesso")
-                navigate({
-                  pathname: `/company/${idCompany}`,
-                  search: `?update=${true}`
+                .then(() => {
+                    setMessage("Time criado com sucesso")
+                    navigate({
+                        pathname: `/company/${idCompany}`,
+                        search: `?update=${true}`
+                    })
+
                 })
-                
-            })
-            .catch((error) => {
-                console.error(error)
-                setMessage("Algo deu errado!")
-            })
+                .catch((error) => {
+                    console.error(error)
+                    setMessage("Algo deu errado!")
+                })
         }
     }
 
     return (
-        <Tab.Group>
-            <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
-                <div className='w-11/12 flex flex-row gap-2'>
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            /* Use the `selected` state to conditionally style the selected tab. */
-                            <button onClick={() => setMessage("")}
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Times
-                            </button>
-                        )}
-                    </Tab>
+        <div className='w-full flex flex-col h-full'>
+            <ListTeams teams={teams} />
 
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            /* Use the `selected` state to conditionally style the selected tab. */
-                            <button onClick={() => setMessage("")}
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Cadrastrar
-                            </button>
-                        )}
-                    </Tab>
-                </div>
-            </Tab.List>
+            <div className='hidden'>
+                <Tab.Group>
+                    <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
+                        <div className='w-11/12 flex flex-row gap-2'>
+                            <Tab className='nav-btn'>
+                                {({ selected }) => (
+                                    <button onClick={() => setMessage("")}
+                                        className={
+                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
+                                        }
+                                    >
+                                        Times
+                                    </button>
+                                )}
+                            </Tab>
 
-            <div className='w-full h-full flex flex-col items-center mt-8'>
-                <div className='w-11/12'>
+                            <Tab className='nav-btn'>
+                                {({ selected }) => (
+                                    <button onClick={() => setMessage("")}
+                                        className={
+                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
+                                        }
+                                    >
+                                        Cadrastrar
+                                    </button>
+                                )}
+                            </Tab>
+                        </div>
+                    </Tab.List>
 
-                    <Tab.Panels>
-                        <Tab.Panel className='container-empresas'>
-                            <ListTeams teams={teams} />
-                        </Tab.Panel>
+                    <div className='w-full h-full flex flex-col items-center mt-8'>
+                        <div className='w-11/12'>
 
-                        <Tab.Panel className='container-empresas'>
-                            <FormTimes 
-                                changeModel={modelChange}
-                                handleSubmit={handleSubmit}
-                                message={message}
-                                item={item}
-                            />
-                        </Tab.Panel>
-                    </Tab.Panels>
-                </div>
+                            <Tab.Panels>
+                                <Tab.Panel className='container-empresas'>
+                                    <ListTeams teams={teams} />
+                                </Tab.Panel>
+
+                                <Tab.Panel className='container-empresas'>
+                                    <FormTimes
+                                        changeModel={modelChange}
+                                        handleSubmit={handleSubmit}
+                                        message={message}
+                                        item={item}
+                                    />
+                                </Tab.Panel>
+                            </Tab.Panels>
+                        </div>
+                    </div>
+                </Tab.Group>
             </div>
-        </Tab.Group>
+        </div>
     )
 }
 

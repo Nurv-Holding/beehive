@@ -12,30 +12,20 @@ import { ContextUser } from '../../../context/ContextUser'
 import FutureVision from '../../fututeVision'
 import Principles from '../../principles'
 import Proposals from '../../proposals'
-import GoalsList from './GoalsList'
+import GoalsList from '../Goals/GoalsList'
 
-function Summary() {
-    const {companyGoals, idCompany, goalAndTeams} = useContext(ContextUser)
-    const {idGoal} = useParams()
-    const [goalKrs, setGoalKrs] = useState([])
-    const [krs, setKrs] = useState([])
+function WayOfBeing() {
+    const {idCompany} = useContext(ContextUser)
     const [futureVisions, setFutureVisions] = useState([])
     const [principles, setPrinciples] = useState([])
     const [proposals, setProposals] = useState([])
 
     useEffect(() => {
-        handlerGoalKrs()
-        handlerKrs()
         handleFutureVision()
         handlePrinciples()
         handleProposals()
 
     },[idCompany])
-
-    const handlerGoalKrs = async () => {
-        const {data} = await goalKrsApi.getAll(idCompany)
-        setGoalKrs(data)
-    }
 
     const handleFutureVision = async () => {
         const {data} = await futureVisionApi.getAll(idCompany)
@@ -52,27 +42,10 @@ function Summary() {
         setProposals(data)
     }
 
-    const handlerKrs = async () => {
-        const {data} = await goalTeamsKrsApi.getAllGroupByKrs(idCompany)
-        setKrs(data)
-    }
-
     return (
         <Tab.Group>
             <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
                 <div className='w-11/12 flex flex-row gap-2'>
-                    <Tab className='nav-btn'>
-                        {({ selected }) => (
-                            <button
-                                className={
-                                    selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                }
-                            >
-                                Resumo
-                            </button>
-                        )}
-                    </Tab>
-
                     <Tab className='nav-btn'>
                         {({ selected }) => (
                             <button
@@ -114,15 +87,6 @@ function Summary() {
             <div className='w-full h-full flex flex-col items-center mt-8'>
                 <div className='w-11/12'>
                     <Tab.Panels>
-                        <Tab.Panel>
-                            <GoalsList 
-                                companyGoals={companyGoals} 
-                                goalKrs={goalKrs} 
-                                goalAndTeams={goalAndTeams}
-                                krs={krs} 
-                            />
-                        </Tab.Panel>
-
                         <Tab.Panel className='container-empresas'>
                             <FutureVision futureVisions={futureVisions} />
                         </Tab.Panel>
@@ -141,4 +105,4 @@ function Summary() {
     )
 }
 
-export default Summary
+export default WayOfBeing

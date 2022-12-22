@@ -3,11 +3,11 @@ import moment from "moment"
 const HistoryKrsTeamList = ({ histories, team, goalTeams, goaloalTeamByKrs }) => {
     return (
         <main className='flex flex-col items-center'>
-            <span className='text-bold text-2xl text-white uppercase mt-8'> {team.name} </span>
+            <span className='font-bold text-2xl text-white uppercase mt-8'> {team.name} </span>
             {(goalTeams || []).filter(e => e.idTeam === team.id)?.map((goalTeam) => {
                 return(
                     <div className='w-11/12'>
-                    <span className='text-bold text-xl text-white uppercase m-2'> {goalTeam.nameGoalTeam} </span>
+                    <span className='font-bold text-xl text-white uppercase m-2'> {goalTeam.nameGoalTeam} </span>
                     {(goaloalTeamByKrs || []).filter(e => e.idGoalTeam === goalTeam.idGoalTeam).map((krs) => {
                         return(
                             <div className='container-history'>

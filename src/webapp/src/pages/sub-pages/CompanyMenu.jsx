@@ -3,22 +3,25 @@ import { Tab } from '@headlessui/react'
 import Users from '../../components/CompanyMenuPanel/Users/Users'
 import Teams from '../../components/CompanyMenuPanel/Teams/Teams'
 import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
-import Summary from '../../components/CompanyMenuPanel/Summary/Summary'
 import TitleCompany from '../../components/TitleCompany'
+import WayOfBeing from '../../components/CompanyMenuPanel/wayOfBeing/wayOfBeing'
 
 export default function CompanyMenu( { company } ) {
   return (
     <div className='flex h-full'>
       <Tab.Group>
         <Tab.List className='container-nav-empresas'>
+
+        <TitleCompany name={company?.name} />
+
           <Tab>
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3]' : ''
+                  selected ? 'text-[#5500C3] bg-gray-200' : ''
                 }
               >
-                Resumo
+                Jeito de ser
               </button>
             )}
           </Tab>
@@ -27,7 +30,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3]' : ''
+                  selected ? 'text-[#5500C3] bg-gray-200' : ''
                 }
               >
                 Objetivos
@@ -39,7 +42,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3]' : ''
+                  selected ? 'text-[#5500C3] bg-gray-200' : ''
                 }
               >
                 Times
@@ -51,7 +54,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3]' : ''
+                  selected ? 'text-[#5500C3] bg-gray-200' : ''
                 }
               >
                 Usuários
@@ -61,10 +64,9 @@ export default function CompanyMenu( { company } ) {
         </Tab.List>
 
         <div className='w-full'>
-          <TitleCompany name={company?.name} />
           <Tab.Panels className='text-white'>
             <Tab.Panel>
-              <Summary />
+              <WayOfBeing />
             </Tab.Panel>
 
             <Tab.Panel>
@@ -75,7 +77,7 @@ export default function CompanyMenu( { company } ) {
               <Teams />
             </Tab.Panel>
 
-            <Tab.Panel className='w-full'>
+            <Tab.Panel>
               <Users />
             </Tab.Panel>
           </Tab.Panels>

@@ -3,8 +3,8 @@ import moment from "moment"
 const HistoryKrsList = ({ histories, goalKr }) => {
     return (
         <main className='flex flex-col items-center'>
-            <span className='text-bold text-2xl text-white uppercase mt-8'> {goalKr.name} </span>
-            <span className='text-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
+            <span className='font-bold text-2xl text-white uppercase mt-8'> {goalKr.name} </span>
+            <span className='font-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
             <div className='w-11/12'>
                 <div className='container-empresas'>
                     <div className='flex flex-col items-center'>

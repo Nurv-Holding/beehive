@@ -2,36 +2,31 @@ import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
 
 function ListUsers({ users }) {
-    return (
-        <div className='flex flex-col items-center'>
-    <div className='container-table-grid-team'>
-            <table class="table-auto w-full">
-              
-              <thead>
-                <tr>
-                  <th className='container-title-grid'>Nome</th>
-                  <th className='container-title-grid'>Email</th>
-                  <th className='container-title-grid'>Cargo</th>
-                </tr>
-              </thead>
+  return (
+    <div className='grid grid-cols-2 gap-3 w-3/4 p-4'>
+      {(users || []).map((user) => {
+        return (
+          <>
+            <div className="bg-slate-100 max-w-[250px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg flex flex-col items-center justify-center">
+              <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
+                {user.name}
+              </span>
 
-              <tbody className='text-center'>
-                {(users || []).map((user) => {
-                    return (
-                    <>
-                      <tr>
-                        <td> {user.name} </td>
-                        <td> {user.email} </td>
-                        <td> {user.occupation} </td>
-                      </tr>
-                    </>
-                     )
-                    })}
-              </tbody>
-            </table>
-          </div>
+              <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
+              <div className='w-full text-base font-bold text-black text-center'>
+                {user.email}
+              </div>
+
+              <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
+              <div className='w-full text-base font-bold text-black text-center'>
+                {user.occupation}
+              </div>
+            </div>
+          </>
+        )
+      })}
     </div>
-    )
+  )
 }
 
 export default ListUsers
