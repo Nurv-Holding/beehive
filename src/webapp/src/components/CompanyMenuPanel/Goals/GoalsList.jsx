@@ -52,7 +52,7 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                             {teams(goal.idGoal).map((team) => {
                                 return(
                                     <div className="flex flex-col w-full items-center gap-1 bg-white shadow-lg p-3 rounded-xl">
-                                        <div className="bg-white p-6 rounded-xl shadow-lg cursor-default">
+                                        <div className="cursor-default">
                                             <h1 className='text-black font-bold uppercase text-[12px]'>
                                                 {team.nameTeam}
                                             </h1>
