@@ -12,6 +12,7 @@ import { calcPercentage } from '../utilis';
 import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
 import { useSearchParams } from 'react-router-dom';
+import moment from 'moment';
 
 function TeamsGoal({
   teams = null,
@@ -44,8 +45,6 @@ function TeamsGoal({
   const [user, setUser] = useState(null)
   const [goalKr, setGoalKr] = useState({})
   const [addTaskModal, setAddTaskModal] = useState(false)
-  const [isOpenTeam, setIsOpenTeam] = useState(false)
-  const [krsByTeam, setKrsByTeam] = useState([])
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
   const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
@@ -171,7 +170,8 @@ function TeamsGoal({
 
     const newData = {
       idTeamUser: null,
-      idTask: idTaskCreated
+      idTask: idTaskCreated,
+      description: `Tarefa adicionada - ${moment(data?.createdAt).format("DD/MM/YYYY")}`
     }
 
     taskUsersApi.create(idCompany, newData)
@@ -198,7 +198,12 @@ function TeamsGoal({
     const user = teamUsers?.filter(e => e.idUser === parseInt(idUser))[0]
     const idTeamUser = user.idTeamUser
 
-    taskUsersApi.update(idTaskUser, { idTeamUser })
+    const newData = {
+      idTeamUser,
+      description: `Tarefa Iniciada - ${moment(new Date()).format("DD/MM/YYYY")}`
+    }
+
+    taskUsersApi.update(idTaskUser, newData)
       .then(() => {
         setMessage("Usuário adicionado com sucesso")
         navigate({
@@ -370,7 +375,6 @@ function TeamsGoal({
                                       goal={goal}
                                     />
                                   </div>
-
                                   <ListTasks
                                     tasksUser={tasksUser}
                                     kr={kr}

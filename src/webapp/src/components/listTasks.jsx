@@ -4,8 +4,9 @@ import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import taskUsersApi from "../api/taskUsersApi"
 import { calcDate } from "../utilis"
+import TaskDone from "./taskDone"
 import SwitchToggle from "./switchToggle"
-
+import DescriptionTask from "./descriptionTask"
 
 const ListTasks = ({
     tasksUser,
@@ -23,15 +24,28 @@ const ListTasks = ({
     const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [background, setBackground] = useState("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
+    const [openModalTaskDone, setOpenModalTaskDone] = useState(false)
+    const [openDescriptionModal, setOpenDescriptionModal] = useState(false)
+    const [description, setDescription] = useState("")
 
-    const taskDone = (i, idTask) => {
+    const closeModal = () => {
+        setOpenModalTaskDone(false)
+    }
+
+    const closeDescriptionModal = () => {
+        setOpenDescriptionModal(false)
+    }
+
+    const taskDone = (idTaskUser) => {
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        setEnabled((x) => !x)
-        setIndex(i)
+        const newData = {
+            description,
+            done: true
+        }
 
-        taskUsersApi.update(idTask, {done:!enabled})
+        taskUsersApi.update(idTaskUser, newData)
         .then(() => {
             setMessage("Tarefa concluída")
             if(!enabled)
@@ -43,6 +57,8 @@ const ListTasks = ({
               pathname: `/company/${idCompany}/goal/${idGoal}`,
               search: `?update=${true}`
             })
+
+            closeModal()
             
           })
           .catch((error) => {
@@ -64,18 +80,28 @@ const ListTasks = ({
                     <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
                         {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
                     </span>
-                    {!(!!goal.status)&&
-                    <span>
-                    <SwitchToggle 
-                        setEnabled={setEnabled} 
-                        enabled={enabled} 
-                        taskDone={taskDone} 
-                        i={i} 
-                        index={index}
-                        idTask={task.idTask}
-                        done={task.done}
-                    />
-                    </span>
+                    {!(!!goal.status) && !task.done?
+                    <div>
+                        <TaskDone 
+                            setOpenModalTaskDone={setOpenModalTaskDone}
+                            openModalTaskDone={openModalTaskDone}
+                            closeModal={closeModal}
+                            idTaskUser={task.idTaskUser}
+                            done={task.done}
+                            taskDone={taskDone}
+                            setDescription={setDescription}
+                        />
+                    </div>
+                    :
+                    <div>
+                        <DescriptionTask 
+                            openDescriptionModal={openDescriptionModal}
+                            closeDescriptionModal={closeDescriptionModal}
+                            setOpenDescriptionModal={setOpenDescriptionModal}
+                            description={task.description}
+                            task={task}
+                        />
+                    </div>
                     }
          
                     </>

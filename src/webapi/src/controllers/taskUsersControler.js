@@ -9,7 +9,7 @@ const getByUserAndKrs = async (req, res) => {
     try {
         const taskUsers = await prismaClient.$queryRaw`select u.id as idUser, u.name as nameUser, u.email as emailUser, p.name as profile,
         tk.id as idTask, tk.name as nameTask, tk.finalDate, tku.id as idTaskUser, tku.done, tu.id as idTeamUser,
-        gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gt.id as idGoalTeam, gt.name as nameGoalsTeam,
+        gtk.id as idGoalsTeamKr, gtk.name as nameGoalsTeamKr, gt.id as idGoalTeam, gt.name as nameGoalsTeam, tku.description,
         t.id as idTeam, t.name as nameTeam from taskUsers as tku join tasks as tk on tku.idTask=tk.id
         join goalTeamKrs as gtk on tk.idGoalsTeamKr=gtk.id join goalsTeams as gt on gtk.idGoalsTeam=gt.id
         left join teamUsers as tu on tku.idTeamUser=tu.id left join users as u on tu.idUser=u.id
