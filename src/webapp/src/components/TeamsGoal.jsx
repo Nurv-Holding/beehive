@@ -280,19 +280,21 @@ function TeamsGoal({
 
                     <TaskPercentage
                     />
-
-
+                    
                   </Disclosure.Button>
-                  {!(!!goal.status) &&
                   <>
-                    <div className="w-[20%] flex items-center justify-center gap-4">
-                      <button className="modal-btn h-[60%]" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
-                          Adicionar objetivo
-                      </button>
-                      <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn h-[30px]">
-                          Histórico
-                      </button>
-                    </div>
+                  <div className="w-[20%] flex items-center justify-center gap-4">
+                    {!(!!goal.status) &&
+                    <button className="modal-btn h-[60%]" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
+                      Adicionar objetivo
+                    </button>
+                    }
+                    <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn h-[30px]">
+                        Histórico
+                    </button>
+                  </div>
+                  {!(!!goal.status) &&
+                  
                     <AddGoalTeam
                       closeModal={closeModalGoalTeam}
                       openModal={openModalGoalTeam}
@@ -302,8 +304,9 @@ function TeamsGoal({
                       idTeam={idTeam}
                       item={item}
                     />
-                    </>
+                    
                   }
+                  </>
 
                 </div>
 

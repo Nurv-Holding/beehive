@@ -23,10 +23,10 @@ const ListTasks = ({
     const [index, setIndex] = useState(null)
     const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
-    const [background, setBackground] = useState("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
     const [openModalTaskDone, setOpenModalTaskDone] = useState(false)
     const [openDescriptionModal, setOpenDescriptionModal] = useState(false)
     const [description, setDescription] = useState("")
+    const [taskState, setTaskState] = useState(null)
 
     const closeModal = () => {
         setOpenModalTaskDone(false)
@@ -34,6 +34,16 @@ const ListTasks = ({
 
     const closeDescriptionModal = () => {
         setOpenDescriptionModal(false)
+    }
+
+    const openDescription = (item) => {
+        setOpenDescriptionModal(true)
+        setTaskState(item)
+    }
+
+    const openTaskDone = (item) => {
+        setOpenModalTaskDone(true)
+        setTaskState(item)
     }
 
     const taskDone = (idTaskUser) => {
@@ -46,12 +56,9 @@ const ListTasks = ({
         }
 
         taskUsersApi.update(idTaskUser, newData)
-        .then(() => {
+        .then((x) => {
+            console.log(x)
             setMessage("Tarefa concluída")
-            if(!enabled)
-                setBackground("flex justify-between items-center rounded-lg bg-blue-300 mx-2 p-2 my-2")
-            else
-                setBackground("flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2")
             
             navigate({
               pathname: `/company/${idCompany}/goal/${idGoal}`,
@@ -72,7 +79,7 @@ const ListTasks = ({
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
-                <div className={`${background}`}>
+                <div className={`${task.done? "flex justify-between items-center rounded-lg bg-blue-300 mx-2 p-2 my-2": "flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2"}`}>
                     <span> {task.nameTask} </span>
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
@@ -82,31 +89,36 @@ const ListTasks = ({
                     </span>
                     {!(!!goal.status) && !task.done?
                     <div>
-                        <TaskDone 
+                        {!task?.done &&
+                        <button className="bg-[#5500c3] text-white p-1 rounded-lg" onClick={() => openTaskDone(task)}> Concluir </button>
+                        }
+                        <TaskDone
                             setOpenModalTaskDone={setOpenModalTaskDone}
                             openModalTaskDone={openModalTaskDone}
                             closeModal={closeModal}
-                            idTaskUser={task.idTaskUser}
-                            done={task.done}
+                            idTaskUser={taskState?.idTaskUser}
+                            done={taskState?.done}
+                            name={taskState?.nameUser}
                             taskDone={taskDone}
                             setDescription={setDescription}
                         />
                     </div>
                     :
                     <div>
-                        <DescriptionTask 
+                        <button onClick={() => openDescription(task)} > Lições Aprendidas </button>
+                        <DescriptionTask
                             openDescriptionModal={openDescriptionModal}
                             closeDescriptionModal={closeDescriptionModal}
                             setOpenDescriptionModal={setOpenDescriptionModal}
                             description={task.description}
-                            task={task}
+                            task={taskState}
                         />
                     </div>
                     }
          
                     </>
                     }
-                    {!(!!goal.status)&&
+                    {!(!!task.nameUser) &&
                     <div className="flex">
                         <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
                         <option selected disabled >Adicionar Usuário</option>

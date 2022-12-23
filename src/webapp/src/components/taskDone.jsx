@@ -1,6 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const TaskDone = ({ openModalTaskDone, setOpenModalTaskDone, closeModal, setDescription, taskDone, idTaskUser, done }) => {
+const TaskDone = ({ openModalTaskDone, name, closeModal, setDescription, taskDone, idTaskUser, done }) => {
     const doneTrue = (event) => {
         event.preventDefault()
         taskDone(idTaskUser)
@@ -8,10 +8,8 @@ const TaskDone = ({ openModalTaskDone, setOpenModalTaskDone, closeModal, setDesc
 
     return(
         <div>
-            {!done &&
-                <button onClick={() => setOpenModalTaskDone(true)}> Concluir </button>
-            }
             <Modal isOpen={openModalTaskDone} closeModal={closeModal}>
+                <h4> Colaborador: {name} </h4>
                 <form onSubmit={doneTrue} className="flex flex-col gap-3">
                     <textarea onChange={({target}) => setDescription(target.value)} className="input-style" name="" id="" cols="30" rows="10"></textarea>
                     <div>
