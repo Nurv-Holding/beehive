@@ -1,7 +1,9 @@
 const { prismaClient } = require("../database/prismaClient");
-const jwt = require("jsonwebtoken") 
+const jwt = require("jsonwebtoken"); 
+const handlerBuilder = require("../common/handlerBuilder");
+const BusinessError = require("../common/erros/BusineErros");
 
-const authenticateController = async (req, res) => {
+const authenticateController = handlerBuilder(async (req, res) => {
     const idCompany = req.body.idCompany
     const email = req.body.email
     const password = req.body.password
@@ -12,7 +14,7 @@ const authenticateController = async (req, res) => {
     const profile = await prismaClient.profile.findUnique({ where: {id: user.idProfile} })
 
     if(!user || Object.keys(user).length === 0 || user.password !== password){
-        res.status(500).send("Invalid username or passwords")
+        throw new BusinessError('Invalid username or passwords')
 
     }else{
         let payload = {}
@@ -46,6 +48,6 @@ const authenticateController = async (req, res) => {
 
         res.status(200).send(token)
     }
-}
+})
 
 module.exports = authenticateController
