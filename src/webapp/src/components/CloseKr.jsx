@@ -6,6 +6,7 @@ const CloseKr = ({
     closeModal,
     openModal,
     message,
+    note,
     setNote,
     finishGoalKr,
     idGoalKr
@@ -13,7 +14,7 @@ const CloseKr = ({
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        finishGoalKr(idGoalKr)
+        finishGoalKr(idGoalKr, note)
     }
 
     return (

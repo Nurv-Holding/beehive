@@ -3,13 +3,16 @@ import goalKrsApi from "../api/goalKrsApi"
 import goalsApi from "../api/goalsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import { useParams, useSearchParams } from 'react-router-dom';
+import historyGoalKrApi from "../api/historyGoalKrApi";
 
 const CloseGoal = ({
     nameGoal,
     isOpen,
     closeModal,
     openModal,
+    payload,
     idGoal,
+    goalKrs,
     idCompany,
     handleSubmit,
     idGoalKr
@@ -17,11 +20,35 @@ const CloseGoal = ({
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const finishingGoal = (event) => {
+    const finishingGoal = async (event) => {
         event.preventDefault()
 
         searchParams.delete('update')
         setSearchParams(searchParams)
+
+        await goalKrs.forEach(async (kr) => {
+            if(!kr.status){
+                const {data} = await historyGoalKrApi.getAll(idCompany)
+                const history = data.length !== 0? data[data.length - 1]: null
+                const result = await goalKrsApi.update(kr.idgoalsKr, {status: true})
+                const goalKr = result.data
+        
+                const newData = {
+                    idGoal: parseInt(idGoal),
+                    idGoalKr: goalKr?.id,
+                    user: payload?.name,
+                    quaPercentage: history?.quaPercentage || 0,
+                    yeaPercentage: history?.yeaPercentage || 0,
+                    to: history?.to || 0,
+                    from: history?.from || 0,
+                    status: !!goalKr?.status,
+                    note: `Objetivo encerrado por: ${payload?.name}` 
+                  }
+        
+                await historyGoalKrApi.create(idCompany, newData)
+            }
+
+        })
 
         goalsApi.update(idGoal, {status: true})
         .then(() => {

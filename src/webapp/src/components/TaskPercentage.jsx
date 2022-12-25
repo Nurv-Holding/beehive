@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import { calcPercentage } from "../utilis"
+import { calcPercentage } from "../utils/utilis"
 
 const TaskPercentage = () => {
 

@@ -8,7 +8,7 @@ import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import tasksApi from '../api/tasksApi';
 import taskUsersApi from '../api/taskUsersApi';
 import AddTask from './addTask';
-import { calcPercentage } from '../utilis';
+import { calcPercentage } from '../utils/utilis';
 import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
 import { useSearchParams } from 'react-router-dom';

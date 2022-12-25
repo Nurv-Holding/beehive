@@ -17,7 +17,7 @@ import historyGoalKrApi from '../api/historyGoalKrApi';
 import taskUsersApi from '../api/taskUsersApi';
 import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
-import { calcPercentage } from '../utilis';
+import { calcPercentage } from '../utils/utilis';
 import TitleCompany from '../components/TitleCompany';
 
 function Goal() {
@@ -380,6 +380,8 @@ function Goal() {
                   openModal={openModalCloseGoal}
                   idGoal={idGoal}
                   idCompany={idCompany}
+                  payload={payload}
+                  goalKrs={goalKrs}
                 />
               </div>
             }

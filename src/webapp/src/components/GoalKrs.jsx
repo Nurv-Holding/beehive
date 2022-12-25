@@ -1,6 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import { useContext, useState } from 'react'
-import { calcPercentage } from '../utilis';
+import { calcPercentage } from '../utils/utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
 import { json, useNavigate, useSearchParams } from "react-router-dom";
@@ -98,7 +98,7 @@ function GoalKrs({
     setIsOpenFinishKr(false)
   }
 
-  const finishGoalKr = async (idGoalKr) => {
+  const finishGoalKr = async (idGoalKr, note) => {
     searchParams.delete('update')
     setSearchParams(searchParams)
 
@@ -253,6 +253,7 @@ function GoalKrs({
                       openModal={openModalCloseKr}
                       finishGoalKr={finishGoalKr}
                       setNote={setNote}
+                      note={note}
                       message={message}
                     />
                     }
