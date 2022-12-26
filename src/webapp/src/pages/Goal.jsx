@@ -53,6 +53,8 @@ function Goal() {
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [idTeam, setIdTeam] = useState(null)
   const [tasksUser, setTasksUser] = useState([])
+  const [noteTeamKr, setNoteTeamKr] = useState("")
+  const [openModalFinishKr, setOpenModalFinishKr] = useState(false)
   const update = searchParams.get('update')
 
   useEffect(() => {
@@ -73,6 +75,10 @@ function Goal() {
 
   function updateData() {
     setIsOpen(false)
+  }
+
+  const closeModalFinishTeamKr = () => {
+    setOpenModalFinishKr(false)
   }
 
   function closeModalGoalTeam() {
@@ -281,6 +287,51 @@ function Goal() {
     })
   }
 
+  const finishGoalTeamKr = async (idGoalsTeamKr, idTeam, idProcessGoalTeam) => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
+    const {data} = await goalTeamsKrsApi.update(idGoalsTeamKr, {status: true})
+    const result = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
+    const history = (result?.data || []).filter(e => e.idGoalsTeamKr === idGoalsTeamKr)
+    const lastHistory = history[history.length - 1]
+
+    console.log("lastHistory", lastHistory)
+
+    const newData = {
+      idProcessGoalTeam,
+      idGoalsTeamKr,
+      quaPercentage: lastHistory?.quaPercentageHistory,
+      yeaPercentage: lastHistory?.yeaPercentageHistory,
+      user: payload?.name,
+      to: lastHistory?.to,
+      from: lastHistory?.from,
+      note: noteTeamKr,
+      status: data?.status
+    }
+
+    if(noteTeamKr === ""){
+      setMessage("Precisa preencher o campo vazio")
+
+    }else{
+      historyGoalTeamKrApi.create(idCompany, newData)
+      .then(() => {
+        setMessage("Kr encerrado")
+        navigate({
+          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          search: `?update=${true}`
+        })
+  
+        closeModalFinishTeamKr()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+      })
+    }
+
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -382,6 +433,7 @@ function Goal() {
                   idCompany={idCompany}
                   payload={payload}
                   goalKrs={goalKrs}
+                  finishGoalTeamKr={finishGoalTeamKr}
                 />
               </div>
             }
@@ -399,6 +451,7 @@ function Goal() {
             users={users}
             goal={goal}
             redirectHistory={redirectHistory}
+            
           />
 
           <div className='border-t mt-6 pt-4 border-white'>
@@ -423,8 +476,14 @@ function Goal() {
               teamUsers={teamUsers}
               payload={payload}
               goal={goal}
+              closeModalFinishTeamKr={closeModalFinishTeamKr}
+              openModalFinishKr={openModalFinishKr}
+              setOpenModalFinishKr={setOpenModalFinishKr}
+              finishGoalTeamKr={finishGoalTeamKr}
               redirectHistory={redirectHistory}
+              setNoteTeamKr={setNoteTeamKr}
               idTeam={idTeam}
+              messageFinish={message}
             />
           </div>
         </div>

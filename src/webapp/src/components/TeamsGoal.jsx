@@ -13,6 +13,7 @@ import ListTasks from './listTasks';
 import AddTeamKr from './addTeamKr';
 import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
+import FinishTeamKr from './FinishTeamKr';
 
 function TeamsGoal({
   teams = null,
@@ -21,15 +22,21 @@ function TeamsGoal({
   idGoal,
   redirectHistory,
   createGoalsTeam,
+  setNoteTeamKr,
   modelChange,
   item,
   goalTeamByGoalTeam,
   closeModalGoalTeam,
   goalTeamsKrs,
+  closeModalFinishTeamKr,
+  setOpenModalFinishKr,
+  openModalFinishKr,
+  finishGoalTeamKr,
   historyGoalTeamKrs,
   openModalGoalTeam,
   isOpenGoalTeam,
   idTeam,
+  messageFinish,
   goalTeamByKrs,
   teamUsers,
   tasksUser,
@@ -81,6 +88,11 @@ function TeamsGoal({
   function openModal(goalKr) {
     setGoalKr(goalKr)
     setIsOpen(true)
+  }
+
+  const openModalFinishTeamKr = (item) => {
+    setKrs(item)
+    setOpenModalFinishKr(true)
   }
 
   function openModalTeamKr(item) {
@@ -218,7 +230,7 @@ function TeamsGoal({
       })
   }
 
-  const goalTeamKrsUpdate = (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
+  const goalTeamKrsUpdate = async (idGoalTeamKrs, idProcessGoalsTeams, yeaPercentage, quaPercentage) => {
     searchParams.delete('update')
     setSearchParams(searchParams)
 
@@ -340,6 +352,22 @@ function TeamsGoal({
                                     <div>
                                       <p> {kr.nameGoalsTeamKr} </p>
                                     </div>
+
+                                    <div>
+                                      <button onClick={() => openModalFinishTeamKr(kr)} 
+                                        className='bg-[#5500c3] text-white p-1 rounded-lg'
+                                      >
+                                        Encerrar KR
+                                      </button>
+                                    </div>
+                                    <FinishTeamKr
+                                      message={messageFinish}
+                                      closeModal={closeModalFinishTeamKr}
+                                      isOpen={openModalFinishKr}
+                                      setNoteTeamKr={setNoteTeamKr}
+                                      finishGoalTeamKr={finishGoalTeamKr}
+                                      krs={krs}
+                                    />
 
                                     <div>
                                       <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>

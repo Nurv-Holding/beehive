@@ -4,12 +4,15 @@ import goalsApi from "../api/goalsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import { useParams, useSearchParams } from 'react-router-dom';
 import historyGoalKrApi from "../api/historyGoalKrApi";
+import goalTeamsKrsApi from "../api/goalTeamsKrsApi";
+import goalsTeamApi from "../api/goalsTeamApi";
 
 const CloseGoal = ({
     nameGoal,
     isOpen,
     closeModal,
     openModal,
+    finishGoalTeamKr,
     payload,
     idGoal,
     goalKrs,
@@ -50,8 +53,20 @@ const CloseGoal = ({
 
         })
 
+        const result = await goalTeamsKrsApi.getAll(idCompany)
+        const krs = result.data
+
         goalsApi.update(idGoal, {status: true})
         .then(() => {
+            krs.forEach(async (kr, i) => {
+                const {data} = await goalsTeamApi.getByGoal(idCompany, idGoal)
+                console.log("kr",kr)
+                // console.log("findProcess",findProcess)
+                const findProcess = await data.filter(e => e.idGoalTeam === 4 && e.idgoalTeamsKr === 8)
+                console.log("findProcess",i,findProcess)
+                // finishGoalTeamKr(kr.id,findProcess.idTeam, findProcess.id )
+            })
+            
             navigate({
               pathname: `/company/${idCompany}/goal/${idGoal}`,
               search: `?update=${true}`

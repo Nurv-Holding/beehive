@@ -3,6 +3,7 @@ import axios from "axios"
 const host = 'http://localhost:3002'
 
 const getByGoal = (idCompany,idGoal) => axios.get(`${host}/goalsTeam/${idGoal}/krs/c/${idCompany}`)
+const getAll = (idCompany) => axios.get(`${host}/goalsTeamKrs/c/${idCompany}`)
 const create = (idCompany, data) => axios.post(`${host}/goalsTeamKrs/c/${idCompany}`, data)
 const getByTeamAndKrs = (idCompany, idTeam) => axios.get(`${host}/goalsTeam/t/krs/${idTeam}/c/${idCompany}`)
 const getByTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/p/${idGoal}/c/${idCompany}`)
@@ -15,6 +16,7 @@ const update = (idGoal, data) => axios.put(`${host}/goalsTeamKrs/${idGoal}`,data
 export default {
     getByGoal,
     create,
+    getAll,
     getByTeamAndKrs,
     getByTeam,
     getGroupByTeam,
