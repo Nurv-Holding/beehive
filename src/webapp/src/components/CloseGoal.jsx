@@ -55,16 +55,16 @@ const CloseGoal = ({
 
         const result = await goalTeamsKrsApi.getAll(idCompany)
         const krs = result.data
+        const {data} = await goalsTeamApi.getKrsByGoal(idCompany, idGoal)
 
         goalsApi.update(idGoal, {status: true})
         .then(() => {
             krs.forEach(async (kr, i) => {
-                const {data} = await goalsTeamApi.getByGoal(idCompany, idGoal)
-                console.log("kr",kr)
-                // console.log("findProcess",findProcess)
-                const findProcess = await data.filter(e => e.idGoalTeam === 4 && e.idgoalTeamsKr === 8)
-                console.log("findProcess",i,findProcess)
-                // finishGoalTeamKr(kr.id,findProcess.idTeam, findProcess.id )
+                const findProcess = data.find(e => e.idGoalTeam === kr.idGoalsTeam && e.idgoalTeamsKr === kr.id)
+                if(findProcess){
+                    await finishGoalTeamKr(kr.id,findProcess.idTeam, findProcess.idProcessGoalsTeams, `Objetivo encerrado por: ${payload.name}`)
+                }
+                
             })
             
             navigate({

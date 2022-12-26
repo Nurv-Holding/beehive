@@ -287,7 +287,7 @@ function Goal() {
     })
   }
 
-  const finishGoalTeamKr = async (idGoalsTeamKr, idTeam, idProcessGoalTeam) => {
+  const finishGoalTeamKr = async (idGoalsTeamKr, idTeam, idProcessGoalTeam, note=null) => {
     searchParams.delete('update')
     setSearchParams(searchParams)
 
@@ -295,8 +295,6 @@ function Goal() {
     const result = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
     const history = (result?.data || []).filter(e => e.idGoalsTeamKr === idGoalsTeamKr)
     const lastHistory = history[history.length - 1]
-
-    console.log("lastHistory", lastHistory)
 
     const newData = {
       idProcessGoalTeam,
@@ -306,16 +304,17 @@ function Goal() {
       user: payload?.name,
       to: lastHistory?.to,
       from: lastHistory?.from,
-      note: noteTeamKr,
+      note: !note? noteTeamKr: note,
       status: data?.status
     }
 
-    if(noteTeamKr === ""){
+    if(noteTeamKr === "" && !note){
       setMessage("Precisa preencher o campo vazio")
 
     }else{
       historyGoalTeamKrApi.create(idCompany, newData)
-      .then(() => {
+      .then((x) => {
+        console.log("History", x)
         setMessage("Kr encerrado")
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,
