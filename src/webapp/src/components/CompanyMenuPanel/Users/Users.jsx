@@ -63,11 +63,11 @@ function Users() {
     return (
         <div className='flex flex-row justify-between'>
             <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 gap-2'>
-                <button
-                    className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
+                <Link
+                   to="/formuser" className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
                 >
                     +
-                </button>
+                </Link>
             </div>
 
             <ListaUsuarios users={users} />

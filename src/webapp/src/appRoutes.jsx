@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import HistoryKr from "./pages/HistoryKr";
 import HistoryKrsTeam from "./pages/HistoryKrsTeam";
 import FormUser from "./components/CompanyMenuPanel/Users/FormUser";
+import FormTeam from "./components/CompanyMenuPanel/Teams/FormTeam";
 
 function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ function AppRoutes() {
         <Route path="goal/:idGoal/history-krTeam/:idTeam" element={<HistoryKrsTeam />} />
       </Route>
       <Route path="/formuser" element={<FormUser />} />
+      <Route path="/formteam" element={<FormTeam />} />
     </Routes>
   );
 }
