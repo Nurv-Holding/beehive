@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
-function ListTeams({ teams }) {
+function ListTeams({ teams, goals, goalTeams }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -57,7 +57,7 @@ function ListTeams({ teams }) {
 
   return (
     <div className='flex flex-row justify-between'>
-      <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4'>
+      <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 '>
         <button
           className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
         >
@@ -66,29 +66,39 @@ function ListTeams({ teams }) {
       </div>
 
       <div className='grid grid-cols-2 gap-3 w-3/4 p-4'>
-        {(teams || []).map((team) => {
+        {(goals || []).map((goal) => {
           return (
             <>
-              <div onClick={() => openModal(team.id)} className="cursor-pointer bg-slate-100 max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg flex flex-col items-center justify-center">
-                <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
-                  {team.name}
-                </span>
+            <div className=' text-center bg-slate-100 max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
+              {(goalTeams || []).filter(f => f.idGoal === goal.id).map((goalTeam) => {
+                return(
+                  <div onClick={() => openModal(goalTeam.idTeam)} className="cursor-pointer flex flex-col items-center justify-center">
+                  <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
+                    {goalTeam.nameTeam}
+                  </span>
 
-                <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
-                <div className='w-full text-base font-bold text-black text-center'>
-                  {team.descriptions}
-                </div>
+                  <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo: {goalTeam.nameGoal} </span>
 
-                <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
-                <div className='w-full text-base font-bold text-black text-center'>
-                 nome do lider aqui jefferson
+  
+                  <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
+                  <div className='w-full text-base font-bold text-black text-center'>
+                    {""}
+                  </div>
+  
+                  <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
+                  <div className='w-full text-base font-bold text-black text-center'>
+                   nome do lider aqui jefferson
+                  </div>
+  
+                  <span className="text-[#5500C3] text-xs mt-2 font-bold">Criado em</span>
+                  <div className='w-full text-base font-bold text-black text-center'>
+                    {goalTeam.createdAt}
+                  </div>
                 </div>
+                )
+              })}
 
-                <span className="text-[#5500C3] text-xs mt-2 font-bold">Criado em</span>
-                <div className='w-full text-base font-bold text-black text-center'>
-                  {team.createdAt}
-                </div>
-              </div>
+            </div>
             </>
           )
         })}

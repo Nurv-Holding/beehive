@@ -6,12 +6,26 @@ import { useContext } from 'react'
 import { useState } from 'react'
 import teamsApi from '../../../api/teamsApi'
 import { ContextUser } from '../../../context/ContextUser'
+import { useEffect } from 'react'
+import goalTeamsKrsApi from '../../../api/goalTeamsKrsApi'
+import goalsTeamApi from '../../../api/goalsTeamApi'
 
 function Teams() {
-    const { teams, modelChange, item, idCompany } = useContext(ContextUser)
+    const { teams, modelChange, item, idCompany, goals } = useContext(ContextUser)
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
+    const [goalTeams, setGoalTeams] = useState([])
+
+    useEffect(() => {
+        handleGoalTeamsByTeam()
+
+    },[idCompany])
+
+    const handleGoalTeamsByTeam = async () => {
+        const { data } = await goalsTeamApi.getAllGoalGroupByTeam(idCompany)
+        setGoalTeams(data)
+      }
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -41,7 +55,7 @@ function Teams() {
 
     return (
         <div className='w-full flex flex-col h-full'>
-            <ListTeams teams={teams} />
+            <ListTeams teams={teams} goals={goals} goalTeams={goalTeams} />
 
             <div className='hidden'>
                 <Tab.Group>
