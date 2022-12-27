@@ -19,6 +19,7 @@ import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
 import { calcPercentage } from '../utils/utilis';
 import TitleCompany from '../components/TitleCompany';
+import tasksApi from '../api/tasksApi';
 
 function Goal() {
   const {
@@ -312,9 +313,21 @@ function Goal() {
       setMessage("Precisa preencher o campo vazio")
 
     }else{
+      const {data} = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
+      const tasks = data.filter(e => e.idGoalsTeamKr === idGoalsTeamKr)
+      tasks.forEach(async (task) => {
+        if(!task.done){
+          await taskUsersApi.update(task.idTaskUser, {done: true, description: newData.note})
+
+          if(!task.idUser){
+            await tasksApi.remove(task.idTask)
+          }
+        }
+
+      })
+
       historyGoalTeamKrApi.create(idCompany, newData)
-      .then((x) => {
-        console.log("History", x)
+      .then(() => {
         setMessage("Kr encerrado")
         navigate({
           pathname: `/company/${idCompany}/goal/${idGoal}`,

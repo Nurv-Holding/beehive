@@ -354,11 +354,16 @@ function TeamsGoal({
                                     </div>
 
                                     <div>
+                                      {!kr.statusKr?
                                       <button onClick={() => openModalFinishTeamKr(kr)} 
                                         className='bg-[#5500c3] text-white p-1 rounded-lg'
                                       >
                                         Encerrar KR
                                       </button>
+                                      :
+                                      "KR encerrado"
+                                      }
+                  
                                     </div>
                                     <FinishTeamKr
                                       message={messageFinish}

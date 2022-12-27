@@ -79,7 +79,7 @@ const projectionGoalTeamKrsController = () => {
             gt.name as nameGoalTeam, gtk.id as idgoalTeamsKr, gtk.name as nameGoalsTeamKr,
             gtk.descriptions as descriptionsGoalsTeamKr, gtk.toQuarterly as toQuarterlyGoalsTeamKr,
             gtk.fromQuarterly as fromQuarterlyGoalsTeamKr, gtk.fromYearly as fromYearlyGoalsTeamKr, 
-            gtk.toYearly as toYearlyGoalsTeamKr, gtk.done as doneGoalsTeamKr, t.id as idTeam, 
+            gtk.toYearly as toYearlyGoalsTeamKr, gtk.done as doneGoalsTeamKr, t.id as idTeam, gtk.status as statusKr, 
             t.name as nameTeam, gtk.updatedAt as updateGoalsTeamKrs
             from processGoalsTeams as pgt join goalsTeams as gt on pgt.idGoalsTeam=gt.id
             join goals as g on pgt.idGoal=g.id join teams as t on pgt.idTeam=t.id 
