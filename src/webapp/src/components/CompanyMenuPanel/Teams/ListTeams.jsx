@@ -58,47 +58,47 @@ function ListTeams({ teams, goals, goalTeams }) {
   return (
     <div className='flex flex-row justify-between'>
       <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 '>
-        <button
-          className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
+        <Link
+          to="/formteam" className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
         >
           +
-        </button>
+        </Link>
       </div>
 
       <div className='grid grid-cols-2 gap-3 w-3/4 p-4'>
         {(goals || []).map((goal) => {
           return (
             <>
-            <div className=' text-center bg-slate-100 max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
-              {(goalTeams || []).filter(f => f.idGoal === goal.id).map((goalTeam) => {
-                return(
-                  <div onClick={() => openModal(goalTeam.idTeam)} className="cursor-pointer flex flex-col items-center justify-center">
-                  <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
-                    {goalTeam.nameTeam}
-                  </span>
+              <div className=' text-center bg-slate-100 max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
+                {(goalTeams || []).filter(f => f.idGoal === goal.id).map((goalTeam) => {
+                  return (
+                    <div onClick={() => openModal(goalTeam.idTeam)} className="cursor-pointer flex flex-col items-center justify-center">
+                      <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
+                        {goalTeam.nameTeam}
+                      </span>
 
-                  <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo: {goalTeam.nameGoal} </span>
+                      <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo: {goalTeam.nameGoal} </span>
 
-  
-                  <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
-                  <div className='w-full text-base font-bold text-black text-center'>
-                    {""}
-                  </div>
-  
-                  <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
-                  <div className='w-full text-base font-bold text-black text-center'>
-                   nome do lider aqui jefferson
-                  </div>
-  
-                  <span className="text-[#5500C3] text-xs mt-2 font-bold">Criado em</span>
-                  <div className='w-full text-base font-bold text-black text-center'>
-                    {goalTeam.createdAt}
-                  </div>
-                </div>
-                )
-              })}
 
-            </div>
+                      <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
+                      <div className='w-full text-base font-bold text-black text-center'>
+                        {""}
+                      </div>
+
+                      <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
+                      <div className='w-full text-base font-bold text-black text-center'>
+                        nome do lider aqui jefferson
+                      </div>
+
+                      <span className="text-[#5500C3] text-xs mt-2 font-bold">Criado em</span>
+                      <div className='w-full text-base font-bold text-black text-center'>
+                        {goalTeam.createdAt}
+                      </div>
+                    </div>
+                  )
+                })}
+
+              </div>
             </>
           )
         })}
