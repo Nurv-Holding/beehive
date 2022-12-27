@@ -31,7 +31,7 @@ const CloseKr = ({
                 <div className="flex flex-col gap-4">
                     <h1 className="text-xl">Encerrar o KR: <span className="text-red-500">{nameKr}</span>?</h1>
                     <form onSubmit={handleSubmit} className="mt-2 w-full flex flex-col gap-3">
-                        <textarea className="p-2 input-style text-black" onChange={({ target }) => setNote(target.value)} name="description" cols="60" rows="3"></textarea>
+                        <textarea className="p-2 input-style min-h-[50px] text-black" onChange={({ target }) => setNote(target.value)} name="description" cols="60" rows="3"></textarea>
                         <div>
                             <button className='submit-button' type="submit" >
                                 Encerrar

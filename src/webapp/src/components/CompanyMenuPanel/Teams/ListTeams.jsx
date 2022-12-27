@@ -69,7 +69,7 @@ function ListTeams({ teams, goals, goalTeams }) {
         {(goals || []).map((goal) => {
           return (
             <>
-              <div className=' text-center bg-slate-100 max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
+              <div className=' text-center bg-slate-100 flex flex-col items-center justify-center max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
                 {(goalTeams || []).filter(f => f.idGoal === goal.id).map((goalTeam) => {
                   return (
                     <div onClick={() => openModal(goalTeam.idTeam)} className="cursor-pointer flex flex-col items-center justify-center">
@@ -77,12 +77,14 @@ function ListTeams({ teams, goals, goalTeams }) {
                         {goalTeam.nameTeam}
                       </span>
 
-                      <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo: {goalTeam.nameGoal} </span>
-
+                      <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
+                      <div className='w-full text-base font-bold text-black text-center'>
+                        {goalTeam.nameGoal}
+                      </div>
 
                       <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
                       <div className='w-full text-base font-bold text-black text-center'>
-                        {""}
+                        descrição aqui jefferson
                       </div>
 
                       <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
