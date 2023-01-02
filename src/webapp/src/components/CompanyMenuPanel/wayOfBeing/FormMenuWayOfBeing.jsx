@@ -121,15 +121,9 @@ function FormMenuWayOfBeing({ modelChange, message, handleSubmit }) {
                                     <div className='flex flex-col w-2/4 items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
                                         <form onSubmit={handleSubmit} className='w-full min-h-[300px] justify-center flex flex-col items-center'>
                                             <div className='w-full gap-2 flex flex-wrap items-center justify-center'>
-                                                <input type="text" required className="input-style" placeholder='Nome' onChange={modelChange} />
+                                                <input type="text" required className="input-style text-center" placeholder='Título' onChange={modelChange} />
 
-                                                <input type="text" required className="input-style" placeholder='Cargo' onChange={modelChange} />
-
-                                                <input type="text" required className="input-style" placeholder='Email' onChange={modelChange} />
-
-                                                <input type="password" required className="input-style" placeholder='Senha' onChange={modelChange} />
-
-                                                <input type="password" required className="input-style" placeholder='Repita a senha' onChange={modelChange} />
+                                                <textarea className="p-2 input-style min-h-[50px] text-center" placeholder='Descrição' name="note" onChange={modelChange} cols="60" rows="3"></textarea>
                                             </div>
 
                                             <button className='submit-button mt-4' type="submit">Cadastrar</button>
