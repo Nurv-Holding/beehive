@@ -56,12 +56,12 @@ const Login = () => {
                     <form onSubmit={login} className="login-form-container">
                         <div className="w-[65%]">
                         <label htmlFor="">Email</label>
-                        <input onChange={modelChange} className="input-style" type="email" name="email" placeholder="Digite o email"/>
+                        <input onChange={modelChange} className="input-style ml-2" type="email" name="email" placeholder="Digite o email"/>
                         </div>
               
                         <div className="w-[65%]">
                         <label htmlFor="">Senha</label>
-                        <input onChange={modelChange} className="input-style" type="password" name="password" placeholder="Digite sua senha" />    
+                        <input onChange={modelChange} className="input-style ml-2" type="password" name="password" placeholder="Digite sua senha" />    
                         </div>
                         {loading?
                             <span> Aguarde... </span>
