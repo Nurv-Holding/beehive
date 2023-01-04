@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { json, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Disclosure, Tab } from '@headlessui/react'
 import { useState } from 'react'
 import Modal from '../Goals/components/Modal'
@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
-function ListTeams({ teams, goals, goalTeams, teamsByGoals, users }) {
+function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -98,7 +98,7 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users }) {
                                             </h1>
                                         </div>
                                       </Disclosure.Button>
-                                      {(teamsByGoals || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
+                                      {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
                                         return(
                                           <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
                                           {kr.nameKr}

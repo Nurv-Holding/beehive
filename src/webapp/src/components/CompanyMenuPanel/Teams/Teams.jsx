@@ -18,11 +18,13 @@ function Teams() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [goalTeams, setGoalTeams] = useState([])
     const [teamsByGoals, setTeamsByGoals] = useState([])
+    const [teamsByKrs, setTeamsByKrs] = useState([])
     const [users, setUsers] = useState([])
 
     useEffect(() => {
         handleGoalTeamsByTeam()
         handleTeamsByGoals()
+        handleTeamsByKrs()
         handleUsers()
 
     },[idCompany])
@@ -40,6 +42,11 @@ function Teams() {
     const handleTeamsByGoals = async () => {
         const { data } = await teamsApi.getAllTeamsByGoals(idCompany)
         setTeamsByGoals(data)
+    }
+
+    const handleTeamsByKrs = async () => {
+        const { data } = await teamsApi.getAllTeamsByKrs(idCompany)
+        setTeamsByKrs(data)
     }
 
     const handleSubmit = (event) => {
@@ -76,6 +83,7 @@ function Teams() {
             goalTeams={goalTeams}
             teamsByGoals={teamsByGoals}
             users={users}
+            teamsByKrs={teamsByKrs}
             />
         </div>
     )
