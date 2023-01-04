@@ -1,12 +1,62 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import teamsApi from '../../../api/teamsApi';
+import usersApi from '../../../api/usersApi';
 import Header from '../../Header';
 
-function FormTeam({ modelChange, message, handleSubmit }) {
+function FormTeam() {
     const navigate = useNavigate()
+    const [team, setTeam] = useState({name:"", descriptions:""})
+    const [message, setMessage] = useState("")
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [users, setUsers] = useState([])
+    const {idCompany} = useParams()
+
+    const modelChange = ({target}) => {
+        setTeam((state) => {
+            return {...state,[target.name]: target.value}
+        })
+    }
+
+    useEffect(() => {
+        handleUsers()
+
+    },[idCompany])
+
+    const handleUsers = async () => {
+        const {data} = await usersApi.getAllByCompany(idCompany)
+        setUsers(data)
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
+        if(team.name === "" || team.descriptions === "")
+            setMessage("Os campos precisam ser preeenchidos")
+
+        else{
+            teamsApi.create(idCompany,{...team, leader:parseInt(team.leader)})
+            .then(() => {
+                setMessage("Cadastro realizado com sucesso")
+                navigate({
+                  pathname: `/formteam/${idCompany}`,
+                  search: `?update=${true}`
+                })
+              })
+              .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+              })
+        }
+    }
 
     const routerBack = () => {
-        navigate(-1)
+        navigate(`/company/${idCompany}`)
     }
+
     return (
         <>
             <Header />
@@ -25,14 +75,17 @@ function FormTeam({ modelChange, message, handleSubmit }) {
                 <div className='flex flex-col w-2/4 items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
                     <form onSubmit={handleSubmit} className='w-full flex flex-col items-center p-4'>
                         <div className='w-[70%] gap-2 flex flex-wrap items-center justify-center'>
-                            <input type="text" required className="input-style" placeholder='Nome' onChange={modelChange} />
+                            <input type="text" required className="input-style" placeholder='Nome' name='name' onChange={modelChange} />
 
-                            <input type="text" required className="input-style" placeholder='Descrição' onChange={modelChange} />
+                            <input type="text" required className="input-style" placeholder='Descrição' name='descriptions' onChange={modelChange} />
 
-                            <select name="user" id="users" className="input-style">
+                            <select onChange={modelChange} name="leader" id="users" className="input-style">
                                 <option disabled selected>Líder do time</option>
-                                <option> Jefferson Dias </option>
-                                <option> Jefferson Noites </option>
+                                {(users || []).map((user) => {
+                                    return(
+                                        <option value={user.id}> {user.name} </option>
+                                    )
+                                })}
                             </select>
                         </div>
 

@@ -22,6 +22,21 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
     setIsOpen(false)
   }
 
+  const newTeamsByGoals = () => {
+    return teamsByGoals?.filter((f) => {
+      // return f.idGoal !== 9 && f.idTeam !== 1
+      const verifyItem = teamsByGoals?.filter(e => e.idGoal === f.idGoal && e.idTeam === f.idTeam)
+
+      console.log("verifyItem", verifyItem)
+
+      // if(verifyItem.length > 1)
+      //   return f.idGoal !== 9
+
+      return f.idGoal !== 9
+
+    })
+  }
+
   function openModal(idTeam) {
     setIsOpen(true)
     setIdTeam(idTeam)
@@ -61,9 +76,15 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
     <div className='flex flex-row justify-between w-full'>
       <div className='h-full-side-bar-calc w-14 bg-gray-200 flex flex-col items-center py-2'>
         <Link
-          to="/formteam" className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
+          to={`/formteam/${idCompany}`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
         >
           +
+        </Link>
+
+        <Link
+          to={`/company/${idCompany}/teamlist`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-sm px-2"
+        >
+          Lista
         </Link>
       </div>
 

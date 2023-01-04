@@ -42,7 +42,7 @@ const getAllTeamsByGoals = handlerBuilder(async (req, res) => {
     join teams as t on pgt.idTeam=t.id
     left join goalsteams as gt on pgt.idGoalsTeam=gt.id
     left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id
-    where pgt.idCompany=${idCompany} group by gt.id;`
+    where pgt.idCompany=${idCompany};`
 
     res.status(200).send(results)
 })
