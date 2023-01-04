@@ -1,5 +1,5 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
+import { Disclosure, Tab } from '@headlessui/react'
 import { useState } from 'react'
 import Modal from '../Goals/components/Modal'
 
@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
-function ListTeams({ teams, goals, goalTeams }) {
+function ListTeams({ teams, goals, goalTeams, teamsByGoals, users }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -66,39 +66,52 @@ function ListTeams({ teams, goals, goalTeams }) {
       </div>
 
       <div className='grid grid-cols-2 gap-3 w-3/4 p-4'>
-        {(goals || []).map((goal) => {
+        {(teamsByGoals || []).map((team) => {
           return (
             <>
               <div className=' text-center bg-slate-100 flex flex-col items-center justify-center max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
-                {(goalTeams || []).filter(f => f.idGoal === goal.id).map((goalTeam) => {
-                  return (
-                    <div onClick={() => openModal(goalTeam.idTeam)} className="cursor-pointer flex flex-col items-center justify-center">
+              <div  className="cursor-pointer flex flex-col items-center justify-center">
                       <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
-                        {goalTeam.nameTeam}
+                        {team.nameTeam}
                       </span>
 
                       <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
                       <div className='w-full text-base font-bold text-black text-center'>
-                        {goalTeam.nameGoal}
-                      </div>
-
-                      <span className="text-[#5500C3] text-xs mt-2 font-bold">Descrição</span>
-                      <div className='w-full text-base font-bold text-black text-center'>
-                        descrição aqui jefferson
+                        {team.nameGoal}
                       </div>
 
                       <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
                       <div className='w-full text-base font-bold text-black text-center'>
-                        nome do lider aqui jefferson
+                        {(users || []).filter(user => user.id === team.leader)[0]?.name}
                       </div>
+                      <span className="text-[#5500C3] text-xs mt-2 font-bold">Lista de Objetivos</span>
+                      <div className='grid grid-cols-2 gap-3 w-full'>
+                            {(teamsByGoals || []).filter(e => e.idTeam === team.idTeam && e.idGoalTeam === team.idGoalTeam).map((goalTeam) => {
+                                return(
+                                  <Disclosure>
+                                    
+                                    <div className="w-full">
+                                      <Disclosure.Button>
+                                        <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
+                                            <h1 className='text-black uppercase text-center font-bold text-[12px]'>
+                                                {goalTeam.nameGoalTeam}
+                                            </h1>
+                                        </div>
+                                      </Disclosure.Button>
+                                      {(teamsByGoals || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
+                                        return(
+                                          <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                                          {kr.nameKr}
+                                        </Disclosure.Panel>
+                                        )
+                                      })}
 
-                      <span className="text-[#5500C3] text-xs mt-2 font-bold">Criado em</span>
-                      <div className='w-full text-base font-bold text-black text-center'>
-                        {goalTeam.createdAt}
-                      </div>
+                                    </div>
+                                  </Disclosure>
+                                )
+                            })}
+                        </div>
                     </div>
-                  )
-                })}
 
               </div>
             </>
