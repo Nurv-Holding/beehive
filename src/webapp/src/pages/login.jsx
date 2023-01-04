@@ -49,18 +49,17 @@ const Login = () => {
 
     return (
         <>
-            <Header />
-            <main className="flex flex-col items-center w-full ">
+            <main className="main-login">
                 <div className="login-container">
-                    <h1 className="login-title">Entre em sua conta</h1>
                     <form onSubmit={login} className="login-form-container">
-                        <div className="w-[65%]">
-                        <label htmlFor="">Email</label>
+                        <h1 className="login-title">Entre em sua conta</h1>
+                        <div className="w-[65%] flex flex-col">
+                        <label className="font-medium" htmlFor="">Email</label>
                         <input onChange={modelChange} className="input-style" type="email" name="email" placeholder="Digite o email"/>
                         </div>
               
-                        <div className="w-[65%]">
-                        <label htmlFor="">Senha</label>
+                        <div className="w-[65%] flex flex-col">
+                        <label className="font-medium" htmlFor="">Senha</label>
                         <input onChange={modelChange} className="input-style" type="password" name="password" placeholder="Digite sua senha" />    
                         </div>
                         {loading?
