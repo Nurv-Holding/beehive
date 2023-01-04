@@ -396,19 +396,19 @@ function Goal() {
     <>
       <Header />
 
-      <main className='flex flex-col items-center'>
+      <main className='flex flex-col items-center pt-8'>
         <div className='flex flex-row w-full justify-center items-center'>
-          <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
+          <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
 
-          <TitleCompany name={company?.name} />
+          <TitleCompany className='text-bee' name={company?.name} />
         </div>
 
 
         <div className='w-11/12'>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
-              <span className='font-bold text-xl text-white '>{goal?.name}</span>
-              <span className='font-bold text-lg mt-2 text-white'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
+              <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
+              <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status) &&
               <div className='container-percentage-okr flex flex-row justify-around'>
@@ -467,7 +467,7 @@ function Goal() {
           />
 
           <div className='border-t mt-6 pt-4 border-white'>
-            <span className='font-bold text-xl mt-2 text-white'>Times</span>
+            <span className='font-bold text-xl mt-2 text-bee-strong-1'>Times</span>
             <TeamsGoal
               goalTeamByGoalTeam={goalTeamByGoalTeam}
               goalTeamsByTeam={goalTeamsByTeam}

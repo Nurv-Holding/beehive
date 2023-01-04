@@ -12,9 +12,9 @@ const FutureVision = ({ futureVisions, idCompany }) => {
                                 <h1 className="text-center font-bold text-2xl"> {f.title} </h1>
 
                                 <Link
-                                    to={`/formfuturevisionchildren/${f.id}/${idCompany}`} className="rounded-lg bg-[#5500C3] text-white text-center self-end text-lg p-1"
+                                    to={`/formfuturevisionchildren/${f.id}/${idCompany}`} className="rounded-lg bg-bee text-white text-center self-end text-lg px-2"
                                 >
-                                    Cadastros
+                                    +
                                 </Link>
                             </div>
                             <p> {f.description} </p>

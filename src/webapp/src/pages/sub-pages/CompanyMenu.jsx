@@ -12,7 +12,7 @@ export default function CompanyMenu( { company } ) {
       <Tab.Group>
         <Tab.List className='container-nav-empresas'>
 
-        <TitleCompany name={company?.name} />
+        <TitleCompany className="text-bee-blue-clean" name={company?.name} />
 
           <Tab>
             {({ selected }) => (
