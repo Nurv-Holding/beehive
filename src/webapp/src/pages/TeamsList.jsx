@@ -15,6 +15,7 @@ const TeamList = () => {
     const [teams, setTeams] = useState([])
     const [users, setUsers] = useState([])
     const [usersAndTeams, setUsersAndTeams] = useState([])
+    const [idTeam, setIdTeam] = useState(null)
     const { idCompany } = useParams()
     useEffect(() => {
         handleTeams()
@@ -27,22 +28,32 @@ const TeamList = () => {
         setTeams(data)
     }
 
-    const handleUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
+    const handleUsersAndTeams = async () => {
+        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+        setUsersAndTeams(data)
     }
 
-    const handleUsersAndTeams = async () => {
-        const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setUsersAndTeams(data)
+    const handleUsers = async () => {
+        const { data } = await usersApi.getAllByCompany(idCompany)
+        const result = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+        const teams = result.data
+        setUsers(()=>{
+            data?.filter((a)=>{
+                const verifyItem = teams?.find(b=>b?.idUser===a?.id)
+                console.log("teams",teams)
+                console.log("verify", verifyItem)
+                return a?.id!==verifyItem?.idUser
+            })
+        })
     }
 
     const routerBack = () => {
         navigate(-1)
     }
 
-    function openModal() {
+    function openModal(id) {
         setIsOpen(true)
+        setIdTeam(id)
     }
 
     function closeModal() {
@@ -75,15 +86,15 @@ const TeamList = () => {
                                             return (
                                                 <>
                                                     <tr>
-                                                        <td onClick={openModal} className="cursor-pointer">{team.name}</td>
-                                                        <td>{(users||[]).filter(a=>a.id===team.leader)[0]?.name}</td>
+                                                        <td onClick={()=>openModal(team?.id)} className="cursor-pointer">{team?.name}</td>
+                                                        <td>{(users || []).filter(a => a?.id === team?.leader)[0]?.name}</td>
                                                     </tr>
                                                 </>
                                             )
                                         })}
                                     </tbody>
                                 </table>
-                                <AddMembers isOpen={isOpen} closeModal={closeModal} usersAndTeams={usersAndTeams} users={users} />
+                                <AddMembers isOpen={isOpen} closeModal={closeModal} usersAndTeams={usersAndTeams} users={users} idTeam={idTeam} idCompany={idCompany} />
                             </div>
                         </div>
                     </div>

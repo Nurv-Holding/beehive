@@ -1,6 +1,20 @@
+import { useState } from "react"
+import teamsUsersApi from "../api/teamsUsersApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const AddMembers = ({ isOpen, closeModal, usersAndTeams, users }) => {
+const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompany }) => {
+    const [idUser, setIdUser] = useState(null)
+    const [message, setMessage] = useState("")
+
+    const addMember = (event) => {
+        event.preventDefault()
+        teamsUsersApi.create(idCompany, { idUser:parseInt(idUser), idTeam })
+            .then(() => {
+                setMessage("Cadrasto realizado")
+            }).catch(() => {
+                setMessage("algo deu errado")
+            })
+    }
 
     return (
         <>
@@ -9,7 +23,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users }) => {
                     <div className='w-2/4'>
                         <span className='text-gray-500'>Lista de Integrantes</span>
                         <div className='w-[80%] flex flex-col bg-gray-300 p-1 rounded-md'>
-                            {(usersAndTeams || []).map((user) => {
+                            {(usersAndTeams || []).filter(a=>a.idTeam===idTeam).map((user) => {
                                 return (
                                     <>
                                         <span className='my-0.5 overflow-hidden'>
@@ -21,10 +35,10 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users }) => {
                         </div>
                     </div>
 
-                    <form className='w-2/4 flex flex-col'>
+                    <form onSubmit={addMember} className='w-2/4 flex flex-col'>
                         <span className='text-gray-500'>Adicionar Integrante</span>
                         <div className='input-and-label-container'>
-                            <select name="user" id="users" className="input-style">
+                            <select onChange={({ target }) => { setIdUser(target.value) }} name="user" id="users" className="input-style">
                                 <option disabled selected>Selecionar Integrante</option>
                                 {(users || []).map((user) => {
                                     return (
@@ -39,7 +53,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users }) => {
                         </div>
 
                         <button className='submit-button mt-3' type="submit">Adicionar</button>
-                        <span> mensagem do jefferson </span>
+                        <span> {message} </span>
                     </form>
                 </div>
             </Modal>
