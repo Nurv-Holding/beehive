@@ -84,7 +84,7 @@ function WayOfBeing() {
                                             selected ? 'bg-[#5500C3]' : 'bg-white text-black'
                                         }
                                     >
-                                        Propópsito
+                                        Propópsitos
                                     </button>
                                 )}
                             </Tab>
