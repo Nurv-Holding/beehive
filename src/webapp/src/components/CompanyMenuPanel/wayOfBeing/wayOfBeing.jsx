@@ -43,7 +43,7 @@ function WayOfBeing() {
         <div className='flex flex-row'>
             <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 '>
                 <Link
-                    to={`/registerfuturevision/${idCompany}`}className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
+                    to={`/registerfuturevision/${idCompany}`} className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
                 >
                     +
                 </Link>
@@ -95,7 +95,10 @@ function WayOfBeing() {
                         <div className='w-11/12'>
                             <Tab.Panels>
                                 <Tab.Panel className='container-empresas'>
-                                    <FutureVision futureVisions={futureVisions} />
+                                    <FutureVision 
+                                    idCompany={idCompany} 
+                                    futureVisions={futureVisions} 
+                                    />
                                 </Tab.Panel>
 
                                 <Tab.Panel className='container-empresas'>

@@ -1,13 +1,111 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../../Header';
 import { Tab } from '@headlessui/react'
-import TitleCompany from '../../TitleCompany';
+import RegisterPrinciples from '../../RegisterPrinciples';
+import { useState } from 'react';
+import principlesApi from '../../../api/principlesApi';
+import RegisterProposals from '../../RegisterProposals';
+import proposalsApi from '../../../api/proposalsApi';
+import RegisterGoals from '../../RegisterGoals';
+import goalsApi from '../../../api/goalsApi';
+import jwtDecode from 'jwt-decode';
 
-function FormMenuWayOfBeing({ modelChange, message, handleSubmit }) {
+function FormMenuWayOfBeing() {
     const navigate = useNavigate()
+    const [item, setItem] = useState({title:"", description:""})
+    const [goal, setGoal] = useState({name:"", descriptions:""})
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [message, setMessage] = useState("")
+    const {idCompany, idFutureVision} = useParams()
+    const token = localStorage.getItem("token")
+    const payload = token? jwtDecode(token): null
+
+    const modelChange = ({ target }) => {
+        setItem((state) => {
+            return {...state,[target.name]: target.value}
+        })
+    }
+
+    const modelChangeGoal = ({ target }) => {
+        setGoal((state) => {
+            return {...state,[target.name]: target.value}
+        })
+    }
+
+    const registerGoals = (event) => {
+        event.preventDefault()
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
+        if(item.name === "" || item.descriptions === "")
+            setMessage("Os campos precisam ser preeenchidos")
+
+        else{
+            goalsApi.create(idCompany,{...goal, author:payload.id, idFutureVision:parseInt(idFutureVision)})
+            .then(() => {
+                setMessage("Cadastro realizado com sucesso")
+                navigate({
+                  pathname: `/formfuturevisionchildren/${idFutureVision}/${idCompany}`,
+                  search: `?update=${true}`
+                })
+              })
+              .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+              })
+        }
+    }
+
+    const registerProposals = (event) => {
+        event.preventDefault()
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
+        if(item.title === "" || item.description === "")
+            setMessage("Os campos precisam ser preeenchidos")
+
+        else{
+            proposalsApi.create(idCompany,{...item, idFutureVision:parseInt(idFutureVision)})
+            .then(() => {
+                setMessage("Cadastro realizado com sucesso")
+                navigate({
+                  pathname: `/formfuturevisionchildren/${idFutureVision}/${idCompany}`,
+                  search: `?update=${true}`
+                })
+              })
+              .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+              })
+        }
+    }
+
+    const registerPrinciples = (event) => {
+        event.preventDefault()
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
+        if(item.title === "" || item.description === "")
+            setMessage("Os campos precisam ser preeenchidos")
+
+        else{
+            principlesApi.create(idCompany,{...item, idFutureVision:parseInt(idFutureVision)})
+            .then(() => {
+                setMessage("Cadastro realizado com sucesso")
+                navigate({
+                  pathname: `/formfuturevisionchildren/${idFutureVision}/${idCompany}`,
+                  search: `?update=${true}`
+                })
+              })
+              .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+              })
+        }
+    }
 
     const routerBack = () => {
-        navigate(-1)
+        navigate(`/company/${idCompany}`)
     }
 
     return (
@@ -71,66 +169,28 @@ function FormMenuWayOfBeing({ modelChange, message, handleSubmit }) {
                         <div className='w-full'>
                             <Tab.Panels>
                                 <Tab.Panel className='w-full flex flex-col items-center'>
-                                    <div>
-                                        <span className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
-                                            Cadastrar Princípio
-                                        </span>
-                                    </div>
-
-                                    <div className='flex flex-col w-2/4 min-h-[300px] justify-center items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
-                                        <form onSubmit={handleSubmit} className='w-full flex flex-col items-center p-4 gap-4'>
-                                            <div className='w-[70%] flex flex-col items-center justify-center gap-4'>
-                                                <input type="text" required className="input-style text-center" placeholder='Título' onChange={modelChange} />
-
-                                                <textarea className="p-2 input-style min-h-[25px] text-center" placeholder='Descrição' name="note" onChange={modelChange} cols="50" rows="3"></textarea>
-                                            </div>
-
-                                            <button className='submit-button mt-4' type="submit">Cadastrar</button>
-                                        </form>
-                                        <span className="text-center"> {message} </span>
-                                    </div>
+                                    <RegisterPrinciples 
+                                    handleSubmit={registerPrinciples} 
+                                    message={message} 
+                                    modelChange={modelChange}
+                                    item={item} 
+                                    />
                                 </Tab.Panel>
 
                                 <Tab.Panel className='w-full flex flex-col items-center'>
-                                    <div>
-                                        <span className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
-                                            Cadastrar Proposito
-                                        </span>
-                                    </div>
-
-                                    <div className='flex flex-col w-2/4 min-h-[300px] justify-center items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
-                                        <form onSubmit={handleSubmit} className='w-full flex flex-col items-center p-4 gap-4'>
-                                            <div className='w-[70%] flex flex-col items-center justify-center gap-4'>
-                                                <input type="text" required className="input-style text-center" placeholder='Título' onChange={modelChange} />
-
-                                                <textarea className="p-2 input-style min-h-[25px] text-center" placeholder='Descrição' name="note" onChange={modelChange} cols="50" rows="3"></textarea>
-                                            </div>
-
-                                            <button className='submit-button mt-4' type="submit">Cadastrar</button>
-                                        </form>
-                                        <span className="text-center"> {message} </span>
-                                    </div>
+                                    <RegisterProposals
+                                    handleSubmit={registerProposals} 
+                                    message={message} 
+                                    modelChange={modelChange}
+                                    />
                                 </Tab.Panel>
 
                                 <Tab.Panel className='w-full flex flex-col items-center'>
-                                    <div>
-                                        <span className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
-                                            Cadastrar Objetivo
-                                        </span>
-                                    </div>
-
-                                    <div className='flex flex-col w-2/4 min-h-[300px] justify-center items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
-                                        <form onSubmit={handleSubmit} className='w-full flex flex-col items-center p-4 gap-4'>
-                                            <div className='w-[70%] flex flex-col items-center justify-center gap-4'>
-                                                <input type="text" required className="input-style text-center" placeholder='Título' onChange={modelChange} />
-
-                                                <textarea className="p-2 input-style min-h-[25px] text-center" placeholder='Descrição' name="note" onChange={modelChange} cols="50" rows="3"></textarea>
-                                            </div>
-
-                                            <button className='submit-button mt-4' type="submit">Cadastrar</button>
-                                        </form>
-                                        <span className="text-center"> {message} </span>
-                                    </div>
+                                    <RegisterGoals
+                                    handleSubmit={registerGoals} 
+                                    message={message} 
+                                    modelChange={modelChangeGoal}
+                                    />
                                 </Tab.Panel>
                             </Tab.Panels>
                         </div>
