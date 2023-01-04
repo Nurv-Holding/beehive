@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "c7ed5856-b5bb-4843-a245-c6561199ea02",
+		"name": "teams",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15353671"
+	},
+	"item": [
+		{
+			"name": "get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/teams/c/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"teams",
+						"c",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/teams/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"teams",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/teams/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"teams",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"squad victor\",\r\n    \"descriptions\": \"frgtyhnjum\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/teams/c/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"teams",
+						"c",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCompany\": 1,\r\n    \"name\": \"João\",\r\n    \"email\": \"João@gmail.com\",\r\n    \"occupation\": \"Desenvolvedor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/teams/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"teams",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

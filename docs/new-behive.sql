@@ -115,4 +115,11 @@ join goalsTeams as gt on pgt.idGoalsTeam=gt.id
 join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id
 where pgt.idCompany=2 group by t.id;
 
+/*Projeção de times com o objetivos*/
+select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal
+from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+join teams as t on pgt.idTeam=t.id
+left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
+
 select * from goalTeamKrs;

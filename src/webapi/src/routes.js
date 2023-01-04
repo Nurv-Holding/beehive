@@ -134,6 +134,7 @@ const routes = (app) => {
             app.delete("/goalsTeam/process/:id",processGoalTeamController.remove)
             app.get("/goals/g/p/process/c/:idCompany",processGoalTeamController.getAllGoalGroupByTeam)
             app.get("/goals/g/p/process/c/krs/:idCompany",processGoalTeamController.getAllGoalGroupByKrs)
+            app.get("/processGoalsTeams/all/teams/goals/:idCompany",processGoalTeamController.getAllTeamsByGoals)
 
             //goalsTeam
             app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)
