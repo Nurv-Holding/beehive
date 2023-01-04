@@ -1,9 +1,22 @@
 import moment from "moment"
+import { useState } from "react"
+import ObservationModal from "./ObservationModal"
 
 const HistoryKrsList = ({ histories, goalKr }) => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    function openModal() {
+        setIsOpen(true)
+    }
+
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+
     return (
         <main className='flex flex-col items-center'>
-            <span className='font-bold text-2xl text-white uppercase mt-8'> {goalKr.name} </span>
+            <span className='font-bold text-2xl text-white uppercase mt-2'> {goalKr.name} </span>
             <span className='font-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
             <div className='w-11/12'>
                 <div className='container-empresas'>
@@ -34,7 +47,14 @@ const HistoryKrsList = ({ histories, goalKr }) => {
                                                 <td> {history?.yeaPercentage}% </td>
                                                 <td> {history?.user} </td>
                                                 <td> {history?.status ? "encerrado" : "ativo"} </td>
-                                                <td className="truncate ... max-w-[10px]"> {history?.note} </td>
+                                                <td>
+                                                    <ObservationModal
+                                                        history={history?.note}
+                                                        isOpen={isOpen}
+                                                        closeModal={closeModal}
+                                                        openModal={openModal}
+                                                    />
+                                                </td>
                                             </tr>
                                         )
                                     })}

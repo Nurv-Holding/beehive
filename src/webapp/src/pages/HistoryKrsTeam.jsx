@@ -1,17 +1,12 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import goalKrsApi from '../api/goalKrsApi';
-import goalsTeamApi from '../api/goalsTeamApi';
+import { useNavigate, useParams } from 'react-router-dom';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
-import historyGoalKrApi from '../api/historyGoalKrApi';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import teamsApi from '../api/teamsApi';
 import Header from '../components/Header';
-import HistoryKrsList from '../components/HistoryKrsList';
 import HistoryKrsTeamList from '../components/HistoryKrsTeamList';
-import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextUser } from '../context/ContextUser';
 
 const HistoryKrsTeam = () => {
@@ -20,6 +15,7 @@ const HistoryKrsTeam = () => {
     const { idCompany } = useContext(ContextUser)
     const [histories, setHistories] = useState([])
     const [goalTeams, setGoalTeams] = useState([])
+    const navigate = useNavigate()
     const [goaloalTeamByKrs, setGoalTeamByKrs] = useState([])
     const [team, setTeam] = useState(
         {
@@ -59,10 +55,18 @@ const HistoryKrsTeam = () => {
         const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
         setGoalTeamByKrs(data)
       }
+
+      const routerBack = () => {
+        navigate(-1)
+    }
     
     return (
         <>
             <Header />
+
+            <div className='flex flex-row w-full justify-center items-center mt-6'>
+                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
+            </div>
             
             <HistoryKrsTeamList histories={histories} team={team} goalTeams={goalTeams} goaloalTeamByKrs={goaloalTeamByKrs} />
         </>
