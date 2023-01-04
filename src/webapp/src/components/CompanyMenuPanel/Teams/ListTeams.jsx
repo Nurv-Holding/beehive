@@ -57,9 +57,9 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
 
   return (
     <div className='flex flex-row justify-between'>
-      <div className='h-full-side-bar-calc w-24 bg-gray-200 flex flex-col items-center p-4 '>
+      <div className='h-full-side-bar-calc w-14 bg-gray-200 flex flex-col items-center py-2'>
         <Link
-          to="/formteam" className="w-full aspect-square rounded-lg bg-white text-[#5500C3] hover:bg-[#5500C3] hover:text-white flex justify-center text-center items-center text-4xl p-2"
+          to="/formteam" className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
         >
           +
         </Link>

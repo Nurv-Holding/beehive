@@ -51,7 +51,7 @@ function AddCompanies() {
 
     return (
       <div className='grid-row grid-general min-h-[100px]'>
-        <button onClick={openModal} className='w-full bg-[#5500C3] p-2 rounded-md text-white text-sm font-medium'>Adicionar novas empresas</button>
+        <button onClick={openModal} className='w-full bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>Adicionar novas empresas</button>
         <Modal isOpen={isOpen} closeModal={closeModal}>
             <h5> Adicionar empresa </h5>  
             <form onSubmit={createCompany} className="mt-6 flex flex-col">
