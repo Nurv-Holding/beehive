@@ -18,7 +18,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3] bg-gray-200' : ''
+                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
                 }
               >
                 Jeito de ser
@@ -30,7 +30,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3] bg-gray-200' : ''
+                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
                 }
               >
                 Objetivos
@@ -42,7 +42,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3] bg-gray-200' : ''
+                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
                 }
               >
                 Times
@@ -54,7 +54,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button
                 className={
-                  selected ? 'text-[#5500C3] bg-gray-200' : ''
+                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
                 }
               >
                 Usuários

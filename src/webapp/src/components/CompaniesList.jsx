@@ -10,7 +10,7 @@ function CompaniesList({ companies }) {
                 <ul className='flex flex-col gap-2'>
                     {(companies || []).map((company) => {
                         return (
-                            <Link className='w-full text-left bg-[#5500C3] p-2 rounded-md text-white text-sm font-medium' to={`/company/${company.id}`}>
+                            <Link className='w-full text-left bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium' to={`/company/${company.id}`}>
                                 {company.name}
                             </Link>
                         )

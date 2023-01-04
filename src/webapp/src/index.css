@@ -6,7 +6,7 @@
 
 html {
     font-family: 'Montserrat', sans-serif;
-    @apply bg-slate-200
+    @apply bg-slate-100
 }
 
 *{
@@ -46,7 +46,7 @@ header nav{
 }
 
 .container-title{
-    @apply text-sm text-[#5500C3] mb-2 cursor-default
+    @apply text-sm text-bee-blue-clean mb-2 cursor-default
 }
 
 .text-desc{
@@ -89,7 +89,7 @@ header nav{
 }
 
 .container-title-grid{
-        @apply text-base text-[#5500C3] mb-2 cursor-default
+        @apply text-base text-bee-blue-clean mb-2 cursor-default
 }
 
 .text-desc-grid{
@@ -137,7 +137,7 @@ header nav{
 }
 
 .container-title-pdi{
-    @apply text-base text-[#5500C3] cursor-default font-bold
+    @apply text-base text-bee-blue-clean cursor-default font-bold
 }
 
 .percentage-bar{
@@ -271,7 +271,7 @@ header nav{
 }
 
 .container-nav-empresas button{
-    @apply focus:outline-none hover:text-[#5500C3] py-2 hover:bg-gray-200 w-full
+    @apply focus:outline-none hover:text-bee-blue-strong py-2 hover:bg-gray-200 w-full
 }
 
 .task-doer{
