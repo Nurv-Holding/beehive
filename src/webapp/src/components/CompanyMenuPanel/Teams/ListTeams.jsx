@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
-function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs }) {
+function ListTeams({ teamsByGoals, users, teamsByKrs }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -23,19 +23,19 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
   const newTeamsByGoals = () => {
     return teamsByGoals?.filter((f) => {
       // return f.idGoal !== 9 && f.idTeam !== 1
-      const verifyItem = teamsByGoals?.filter(e => e.idGoal === f.idGoal && e.idTeam === f.idTeam)
+      const verifyItem = teamsByGoals?.find(e => e.idGoal === f.idGoal && e.idTeam === f.idTeam)
 
       console.log("verifyItem", verifyItem)
 
       // if(verifyItem.length > 1)
       //   return f.idGoal !== 9
 
-      return f.idGoal !== 9
+      return f.idGoal !== verifyItem?.idGoal && f.idTeam === verifyItem.idTeam
 
     })
   }
 
-  function openModal(idTeam) {
+  const openModal = (idTeam) => {
     setIsOpen(true)
     setIdTeam(idTeam)
   }
@@ -85,15 +85,15 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
           return (
             <>
               <div className=' text-center bg-slate-100 p-2 flex flex-col items-center justify-center max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
-              <div  className="cursor-pointer flex flex-col items-center justify-center">
+              <div className="cursor-pointer flex flex-col items-center justify-center">
                       <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
                         {team?.nameTeam}
                       </span>
 
                       <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
-                      <div className='w-full text-base font-bold text-black text-center max-w-[80%]'>
+                      <Link to={`/company/${idCompany}/goal/${team.idGoal}`} className='w-full text-base font-bold text-black text-center max-w-[80%]'>
                         {team?.nameGoal}
-                      </div>
+                      </Link>
 
                       <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
                       <div className='w-full text-base font-bold text-black text-center'>
