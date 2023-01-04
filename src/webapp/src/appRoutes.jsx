@@ -25,7 +25,7 @@ function AppRoutes() {
       </Route>
       <Route path="/formuser" element={<FormUser />} />
       <Route path="/formteam" element={<FormTeam />} />
-      <Route path="/registerfuturevision" element={<FormWayOfBeing />} />
+      <Route path="/registerfuturevision/:idCompany" element={<FormWayOfBeing />} />
       <Route path="/formfuturevisionchildren" element={<FormMenuWayOfBeing />} />
     </Routes>
   );

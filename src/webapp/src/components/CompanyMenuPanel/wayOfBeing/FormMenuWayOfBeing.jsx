@@ -9,6 +9,7 @@ function FormMenuWayOfBeing({ modelChange, message, handleSubmit }) {
     const routerBack = () => {
         navigate(-1)
     }
+
     return (
         <>
             <Header />
