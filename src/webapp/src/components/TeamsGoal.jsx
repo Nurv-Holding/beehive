@@ -295,13 +295,13 @@ function TeamsGoal({
                     
                   </Disclosure.Button>
                   <>
-                  <div className="w-[20%] flex items-center justify-center gap-4">
+                  <div className="w-[25%] flex items-center justify-center gap-2">
                     {!(!!goal.status) &&
-                    <button className="modal-btn h-[60%]" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
+                    <button className="modal-btn p-1" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
                       Adicionar objetivo
                     </button>
                     }
-                    <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn h-[30px]">
+                    <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn p-1">
                         Histórico
                     </button>
                   </div>

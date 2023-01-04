@@ -12,7 +12,7 @@ const FinishTeamKr = ({ message, closeModal, isOpen, krs, setNoteTeamKr, finishG
                 <div className="flex flex-col gap-4">
                     <h1 className="text-xl">Encerrar o KR: <span className="text-red-500"> {krs?.nameGoalsTeamKr} </span>?</h1>
                     <form onSubmit={finish} className="mt-2 w-full flex flex-col gap-3">
-                        <textarea onChange={({ target }) => setNoteTeamKr(target.value)} className="p-2 input-style text-black" name="note" cols="60" rows="3"></textarea>
+                        <textarea onChange={({ target }) => setNoteTeamKr(target.value)} className="p-2 input-style text-black min-h-[50px]" name="note" cols="60" rows="3"></textarea>
                         <div>
                             <button className='submit-button' type="submit" >
                                 Encerrar

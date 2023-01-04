@@ -11,7 +11,7 @@ const TaskDone = ({ openModalTaskDone, name, closeModal, setDescription, taskDon
             <Modal isOpen={openModalTaskDone} closeModal={closeModal}>
                 <h4> Colaborador: {name} </h4>
                 <form onSubmit={doneTrue} className="flex flex-col gap-3">
-                    <textarea onChange={({target}) => setDescription(target.value)} className="input-style" name="" id="" cols="30" rows="10"></textarea>
+                    <textarea onChange={({target}) => setDescription(target.value)} className="input-style min-h-[50px]" name="" id="" cols="30" rows="10"></textarea>
                     <div>
                         <button className='submit-button' type="submit" >
                             OK

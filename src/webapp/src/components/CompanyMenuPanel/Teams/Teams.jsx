@@ -56,58 +56,6 @@ function Teams() {
     return (
         <div className='w-full flex flex-col h-full'>
             <ListTeams teams={teams} goals={goals} goalTeams={goalTeams} />
-
-            <div className='hidden'>
-                <Tab.Group>
-                    <Tab.List className='w-full h-full flex flex-col items-center mt-8'>
-                        <div className='w-11/12 flex flex-row gap-2'>
-                            <Tab className='nav-btn'>
-                                {({ selected }) => (
-                                    <button onClick={() => setMessage("")}
-                                        className={
-                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                        }
-                                    >
-                                        Times
-                                    </button>
-                                )}
-                            </Tab>
-
-                            <Tab className='nav-btn'>
-                                {({ selected }) => (
-                                    <button onClick={() => setMessage("")}
-                                        className={
-                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
-                                        }
-                                    >
-                                        Cadrastrar
-                                    </button>
-                                )}
-                            </Tab>
-                        </div>
-                    </Tab.List>
-
-                    <div className='w-full h-full flex flex-col items-center mt-8'>
-                        <div className='w-11/12'>
-
-                            <Tab.Panels>
-                                <Tab.Panel className='container-empresas'>
-                                    <ListTeams teams={teams} />
-                                </Tab.Panel>
-
-                                <Tab.Panel className='container-empresas'>
-                                    <FormTimes
-                                        changeModel={modelChange}
-                                        handleSubmit={handleSubmit}
-                                        message={message}
-                                        item={item}
-                                    />
-                                </Tab.Panel>
-                            </Tab.Panels>
-                        </div>
-                    </div>
-                </Tab.Group>
-            </div>
         </div>
     )
 }

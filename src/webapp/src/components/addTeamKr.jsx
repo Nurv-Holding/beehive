@@ -21,30 +21,30 @@ const  AddTeamKr = ( {
                 <input onChange={modelChange} name='descriptions' type='text' className='input-style' placeholder="Digite a descrição do KR"/>
 
                 <div className="flex flex-row justify-between">
-                    <div className="flex flex-col w-[48%]">
+                    <div className="flex flex-col w-[48%] mt-2">
                         <label for="tarefa">Meta Trimestral:</label>
-                        <div className="flex flex-row">
+                        <div className="flex flex-col gap-2 w-2/4">
                             <div>
                                 <label >De:</label>
-                                <input onChange={modelChange} name='toQuarterly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
+                                <input onChange={modelChange} name='toQuarterly' type='text' className='input-style' placeholder="Digite a meta trimestral"/>
                             </div>
-                            <div className="mx-4">
+                            <div>
                                 <label >Para:</label>
-                                <input onChange={modelChange} name='fromQuarterly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
+                                <input onChange={modelChange} name='fromQuarterly' type='text' className='input-style' placeholder="Digite a meta trimestral"/>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex flex-col w-[48%]">
+                    <div className="flex flex-col w-[48%] mt-2">
                         <label for="tarefa">Meta Anual:</label>
-                        <div className="flex flex-row">
+                        <div className="flex flex-col gap-2 w-2/4">
                             <div>
                                 <label >De:</label>
-                                <input value={item?.toQuarterly} name='toYearly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
+                                <input value={item?.toQuarterly} name='toYearly' type='text' className='input-style' placeholder="Digite a meta trimestral"/>
                             </div>
-                            <div className="mx-4">
+                            <div>
                                 <label >Para:</label>
-                                <input onChange={modelChange} name='fromYearly' type='text' className='input-style' placeholder="Digite a meta trimestral do KR"/>
+                                <input onChange={modelChange} name='fromYearly' type='text' className='input-style' placeholder="Digite a meta trimestral"/>
                             </div>
                         </div>
                     </div>

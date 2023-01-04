@@ -221,7 +221,7 @@ function GoalKrs({
                             <form onSubmit={goalKrsUpdate} className="flex flex-col gap-5">
                               <input type="text" onChange={changeModel} className="input-style" name="done" placeholder="Atualizar os dados" />
                               <span>Descrição</span>
-                              <textarea className="p-2 input-style" name="note" onChange={changeModel} cols="60" rows="3"></textarea>
+                              <textarea className="p-2 input-style min-h-[50px]" name="note" onChange={changeModel} cols="60" rows="3"></textarea>
                               <button type="submit" className="submit-button">OK</button>
                               <span className="text-red-600">
                                 {message}
