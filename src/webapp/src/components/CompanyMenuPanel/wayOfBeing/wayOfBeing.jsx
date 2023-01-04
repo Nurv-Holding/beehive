@@ -57,7 +57,7 @@ function WayOfBeing() {
                                 {({ selected }) => (
                                     <button
                                         className={
-                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
+                                            selected ? 'bg-bee-blue-clean' : 'bg-white text-black'
                                         }
                                     >
                                         Visão de Futuro
@@ -69,7 +69,7 @@ function WayOfBeing() {
                                 {({ selected }) => (
                                     <button
                                         className={
-                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
+                                            selected ? 'bg-bee-blue-clean' : 'bg-white text-black'
                                         }
                                     >
                                         Princípios
@@ -81,7 +81,7 @@ function WayOfBeing() {
                                 {({ selected }) => (
                                     <button
                                         className={
-                                            selected ? 'bg-[#5500C3]' : 'bg-white text-black'
+                                            selected ? 'bg-bee-blue-clean' : 'bg-white text-black'
                                         }
                                     >
                                         Propópsitos
