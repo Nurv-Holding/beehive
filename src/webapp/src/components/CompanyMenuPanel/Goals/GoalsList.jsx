@@ -19,17 +19,17 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
     }
 
     return (
-        <div className="mx-auto flex flex-row items-center justify-center gap-4 flex-wrap mb-2">
+        <div className="mx-auto grid grid-cols-2 items-center justify-center gap-4 mb-2">
             {(companyGoals || []).map((goal) => {
                 return(
-                    <div className="bg-slate-100 w-[500px] h-[400px] overflow-y-scroll rounded-3xl shadow-lg py-4 px-6 flex flex-col items-center">
-                        <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
+                    <div className="bg-white w-[500px] h-[400px] overflow-y-scroll rounded-3xl shadow-lg py-4 px-6 flex flex-col items-center">
+                        <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">
                             <Link to={`goal/${goal.idGoal}`}>
                                 {goal.nameGoal}
                             </Link>
                         </span>
     
-                        <span className="text-[#5500C3] text-xs mt-2 font-bold">Lista de Krs</span>
+                        <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de KRs</span>
                         <div className='grid grid-cols-2 gap-3 w-full'>
                             {(goalKrs || []).filter(e => e.idGoal === goal.idGoal).map((krs) => {
                                 return(
@@ -44,7 +44,7 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                             })}
                         </div>
 
-                        <span className="text-[#5500C3] text-xs mt-5 font-bold">
+                        <span className="text-bee-blue-clean text-xs mt-5 font-bold">
                             Times
                         </span>
     
@@ -60,14 +60,14 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                                         {(goalAndTeams || []).filter(e => e.idTeam === team.idTeam && e.idGoal === team.idGoal).map((goalTeam) => {
                                             return(
                                                 <Disclosure>
-                                                    <Disclosure.Button className="bg-[#5500C3] py-2 px-3  uppercase rounded-xl text-[10px] text-white shadow-lg font-bold cursor-pointer">
+                                                    <Disclosure.Button className="text-bee-blue-clean py-2 px-3  uppercase rounded-xl text-[10px] text-white shadow-lg font-bold cursor-pointer">
                                                         {goalTeam.nameGoalTeam}
                                                     </Disclosure.Button>
                                                     {goalTeam.idGoalTeam &&
                                                     <>
                                                     {(krs || []).filter(e => e.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
                                                         return(
-                                                            <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                                                            <Disclosure.Panel className="bg-bee-clean-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
                                                                 {kr.nameGoalTeamKrs}
                                                             </Disclosure.Panel>
                                                         )

@@ -4,7 +4,7 @@ function CompaniesList({ companies }) {
 
     return (
         <div className='grid-row grid-general min-h-[475px]'>
-            <h1 className='container-title'>Empresas</h1>
+            <h1 className='container-title font-medium'>Empresas</h1>
 
             <div>
                 <ul className='flex flex-col gap-2'>

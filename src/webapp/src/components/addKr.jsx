@@ -12,7 +12,7 @@ function AddKr({
 
     return (
         <div>
-            <button className="modal-btn h-[40px]" onClick={openModal}>
+            <button className="modal-btn" onClick={openModal}>
                 Adicionar KR
             </button>
 
