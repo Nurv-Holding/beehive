@@ -1,8 +1,6 @@
-import { useContext } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import futureVisionApi from '../../../api/futureVisionApi';
-import { ContextUser } from '../../../context/ContextUser';
 import Header from '../../Header';
 
 function FormWayOfBeing() {

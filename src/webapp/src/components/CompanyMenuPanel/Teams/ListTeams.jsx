@@ -69,14 +69,14 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
         {(teamsByGoals || []).map((team) => {
           return (
             <>
-              <div className=' text-center bg-slate-100 flex flex-col items-center justify-center max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
+              <div className=' text-center bg-slate-100 p-2 flex flex-col items-center justify-center max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
               <div  className="cursor-pointer flex flex-col items-center justify-center">
                       <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
                         {team.nameTeam}
                       </span>
 
                       <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
-                      <div className='w-full text-base font-bold text-black text-center'>
+                      <div className='w-full text-base font-bold text-black text-center max-w-[80%]'>
                         {team.nameGoal}
                       </div>
 
