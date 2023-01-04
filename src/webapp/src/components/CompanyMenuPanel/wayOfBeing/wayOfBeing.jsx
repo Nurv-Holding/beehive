@@ -95,7 +95,10 @@ function WayOfBeing() {
                         <div className='w-11/12'>
                             <Tab.Panels>
                                 <Tab.Panel className='container-empresas'>
-                                    <FutureVision futureVisions={futureVisions} />
+                                    <FutureVision 
+                                    idCompany={idCompany} 
+                                    futureVisions={futureVisions} 
+                                    />
                                 </Tab.Panel>
 
                                 <Tab.Panel className='container-empresas'>
