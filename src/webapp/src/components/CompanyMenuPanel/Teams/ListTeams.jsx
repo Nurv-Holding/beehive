@@ -20,6 +20,21 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
     setIsOpen(false)
   }
 
+  const newTeamsByGoals = () => {
+    return teamsByGoals?.filter((f) => {
+      // return f.idGoal !== 9 && f.idTeam !== 1
+      const verifyItem = teamsByGoals?.filter(e => e.idGoal === f.idGoal && e.idTeam === f.idTeam)
+
+      console.log("verifyItem", verifyItem)
+
+      // if(verifyItem.length > 1)
+      //   return f.idGoal !== 9
+
+      return f.idGoal !== 9
+
+    })
+  }
+
   function openModal(idTeam) {
     setIsOpen(true)
     setIdTeam(idTeam)
@@ -72,17 +87,17 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
               <div className=' text-center bg-slate-100 p-2 flex flex-col items-center justify-center max-w-[300px] w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
               <div  className="cursor-pointer flex flex-col items-center justify-center">
                       <span className="text-[#5500C3] text-xl font-bold text-center uppercase">
-                        {team.nameTeam}
+                        {team?.nameTeam}
                       </span>
 
                       <span className="text-[#5500C3] text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
                       <div className='w-full text-base font-bold text-black text-center max-w-[80%]'>
-                        {team.nameGoal}
+                        {team?.nameGoal}
                       </div>
 
                       <span className="text-[#5500C3] text-xs mt-2 font-bold">líder</span>
                       <div className='w-full text-base font-bold text-black text-center'>
-                        {(users || []).filter(user => user.id === team.leader)[0]?.name}
+                        {(users || []).filter(user => user.id === team?.leader)[0]?.name}
                       </div>
                       <span className="text-[#5500C3] text-xs mt-2 font-bold">Lista de Objetivos</span>
                       <div className='grid grid-cols-2 gap-3 w-full'>
@@ -94,14 +109,14 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
                                       <Disclosure.Button>
                                         <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
                                             <h1 className='text-black uppercase text-center font-bold text-[12px]'>
-                                                {goalTeam.nameGoalTeam}
+                                                {goalTeam?.nameGoalTeam}
                                             </h1>
                                         </div>
                                       </Disclosure.Button>
                                       {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
                                         return(
                                           <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
-                                          {kr.nameKr}
+                                          {kr?.nameKr}
                                         </Disclosure.Panel>
                                         )
                                       })}
