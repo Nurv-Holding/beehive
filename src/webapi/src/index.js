@@ -35,4 +35,8 @@ process.on('SIGINT',() => {
     console.log('server finished')
 })
 
-
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/webapp/build')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/webapp/build/index.html'))
+);
