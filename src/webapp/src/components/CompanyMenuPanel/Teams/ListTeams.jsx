@@ -2,14 +2,11 @@ import { json, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Disclosure, Tab } from '@headlessui/react'
 import { useState } from 'react'
 import Modal from '../Goals/components/Modal'
-
-import team from "../../../media/photos/shelby-cohron-UQwbKtu-2Ek-unsplash.jpg"
-
 import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
-function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs }) {
+function ListTeams({ allTeams, users, teamsByKrs, teamByTeam }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -22,22 +19,7 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
     setIsOpen(false)
   }
 
-  const newTeamsByGoals = () => {
-    return teamsByGoals?.filter((f) => {
-      // return f.idGoal !== 9 && f.idTeam !== 1
-      const verifyItem = teamsByGoals?.filter(e => e.idGoal === f.idGoal && e.idTeam === f.idTeam)
-
-      console.log("verifyItem", verifyItem)
-
-      // if(verifyItem.length > 1)
-      //   return f.idGoal !== 9
-
-      return f.idGoal !== 9
-
-    })
-  }
-
-  function openModal(idTeam) {
+  const openModal = (idTeam) => {
     setIsOpen(true)
     setIdTeam(idTeam)
   }
@@ -99,7 +81,7 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
           /> */}
         </div>
         <div className='grid grid-cols-3 gap-3 w-[90%] mx-auto p-3'>
-          {(teamsByGoals || []).map((team) => {
+          {(teamByTeam || []).map((team) => {
             return (
               <>
                 <div className=' text-center bg-white p-2 flex flex-col items-center justify-center w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
@@ -108,18 +90,13 @@ function ListTeams({ teams, goals, goalTeams, teamsByGoals, users, teamsByKrs })
                           {team.nameTeam}
                         </span>
 
-                        <span className="text-bee-blue-clean text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
-                        <div className='w-full text-base font-bold text-black text-center max-w-[80%]'>
-                          {team.nameGoal}
-                        </div>
-
                         <span className="text-bee-blue-clean text-xs mt-2 font-bold">líder</span>
                         <div className='w-full text-base font-bold text-black text-center'>
                           {(users || []).filter(user => user.id === team.leader)[0]?.name}
                         </div>
                         <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Objetivos</span>
                         <div className='grid grid-cols-2 gap-3 w-full'>
-                              {(teamsByGoals || []).filter(e => e.idTeam === team.idTeam && e.idGoalTeam === team.idGoalTeam).map((goalTeam) => {
+                              {(allTeams || []).filter(e => e.idTeam === team.idTeam).map((goalTeam) => {
                                   return(
                                     <Disclosure>
                                       

@@ -33,7 +33,7 @@ const getAllGoalGroupByKrs = handlerBuilder(async (req, res) => {
     res.status(200).send(results)
 })
 
-const getAllTeamsByGoals = handlerBuilder(async (req, res) => {
+const getAllTeams = handlerBuilder(async (req, res) => {
     const {idCompany} = req.params
 
     const results = await prismaClient.$queryRaw`select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
@@ -43,6 +43,20 @@ const getAllTeamsByGoals = handlerBuilder(async (req, res) => {
     left join goalsteams as gt on pgt.idGoalsTeam=gt.id
     left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id
     where pgt.idCompany=${idCompany};`
+
+    res.status(200).send(results)
+})
+
+const getByTeams = handlerBuilder(async (req, res) => {
+    const {idCompany} = req.params
+
+    const results = await prismaClient.$queryRaw`select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
+    gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
+    from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+    join teams as t on pgt.idTeam=t.id
+    left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+    left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id 
+    where pgt.idCompany=${idCompany} group by t.id;`
 
     res.status(200).send(results)
 })
@@ -65,8 +79,9 @@ const processGoalTeamController = {
     ...crudFunctions,
     getAllGoalGroupByTeam,
     getAllGoalGroupByKrs,
-    getAllTeamsByGoals,
-    getAllTeamsByKrs
+    getAllTeams,
+    getAllTeamsByKrs,
+    getByTeams
 }
 
 module.exports = processGoalTeamController

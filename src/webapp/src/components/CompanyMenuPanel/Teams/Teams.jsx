@@ -17,8 +17,9 @@ function Teams() {
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
     const [goalTeams, setGoalTeams] = useState([])
-    const [teamsByGoals, setTeamsByGoals] = useState([])
+    const [allTeams, setAllTeams] = useState([])
     const [teamsByKrs, setTeamsByKrs] = useState([])
+    const [teamByTeam, setTeamByTeam] = useState([])
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -26,6 +27,7 @@ function Teams() {
         handleTeamsByGoals()
         handleTeamsByKrs()
         handleUsers()
+        handleTeamsByTeams()
 
     },[idCompany])
 
@@ -34,14 +36,19 @@ function Teams() {
         setGoalTeams(data)
     }
 
+    const handleTeamsByTeams = async () => {
+        const { data } = await teamsApi.getByTeams(idCompany)
+        setTeamByTeam(data)
+    }
+
     const handleUsers = async () => {
         const { data } = await usersApi.getAllByCompany(idCompany)
         setUsers(data)
     }
 
     const handleTeamsByGoals = async () => {
-        const { data } = await teamsApi.getAllTeamsByGoals(idCompany)
-        setTeamsByGoals(data)
+        const { data } = await teamsApi.getAllTeams(idCompany)
+        setAllTeams(data)
     }
 
     const handleTeamsByKrs = async () => {
@@ -81,9 +88,10 @@ function Teams() {
             teams={teams} 
             goals={goals} 
             goalTeams={goalTeams}
-            teamsByGoals={teamsByGoals}
+            allTeams={allTeams}
             users={users}
             teamsByKrs={teamsByKrs}
+            teamByTeam={teamByTeam}
             />
         </div>
     )
