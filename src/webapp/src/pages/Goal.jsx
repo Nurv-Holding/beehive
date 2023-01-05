@@ -198,7 +198,7 @@ function Goal() {
     } else {
       goalsTeamApi.createProcess(idCompany, { idTeam, idGoal: newIdGoal })
         .then(() => {
-          setMessage("Time adicionado sucesso")
+          setMessage("Time adicionado")
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${true}`
