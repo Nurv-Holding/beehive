@@ -1,19 +1,50 @@
+import { useEffect } from "react"
 import { useState } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import teamsUsersApi from "../api/teamsUsersApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompany }) => {
+const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompany, update, idLeader }) => {
     const [idUser, setIdUser] = useState(null)
     const [message, setMessage] = useState("")
+    const [newUsers, setNewUsers] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        handleNewUsers()
+
+    },[idTeam, update])
+
+    const handleNewUsers = async () => {
+        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+        setNewUsers(() => {
+            return users?.filter((item) => {
+                const verifyItem = data.find(f => f.idUser === item.id && f.idTeam === idTeam)
+
+                return item.id !== verifyItem?.idUser && item.id !== idLeader
+            })
+        })
+    }
+
 
     const addMember = (event) => {
         event.preventDefault()
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
         teamsUsersApi.create(idCompany, { idUser:parseInt(idUser), idTeam })
-            .then(() => {
-                setMessage("Cadrasto realizado")
-            }).catch(() => {
-                setMessage("algo deu errado")
+        .then(() => {
+            setMessage("Cadastro realizado com sucesso")
+            navigate({
+              pathname: `/company/${idCompany}/teamlist`,
+              search: `?update=${true}`
             })
+          })
+          .catch((error) => {
+            console.error(error)
+            setMessage("Algo deu errado!")
+          })
     }
 
     return (
@@ -21,6 +52,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
             <Modal isOpen={isOpen} closeModal={closeModal}>
                 <div className='flex flex-row justify-between'>
                     <div className='w-2/4'>
+                        <h4 className='text-gray-500'>Lider: {(users || []).filter(a => a?.id === idLeader)[0]?.name}</h4>
                         <span className='text-gray-500'>Lista de Integrantes</span>
                         <div className='w-[80%] flex flex-col bg-gray-300 p-1 rounded-md'>
                             {(usersAndTeams || []).filter(a=>a.idTeam===idTeam).map((user) => {
@@ -40,7 +72,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                         <div className='input-and-label-container'>
                             <select onChange={({ target }) => { setIdUser(target.value) }} name="user" id="users" className="input-style">
                                 <option disabled selected>Selecionar Integrante</option>
-                                {(users || []).map((user) => {
+                                {(newUsers || []).map((user) => {
                                     return (
                                         <>
                                             <option value={user.id} className='my-0.5 overflow-hidden'>

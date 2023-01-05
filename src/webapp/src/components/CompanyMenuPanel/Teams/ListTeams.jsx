@@ -109,9 +109,9 @@ function ListTeams({ teamsByGoals, users, teamsByKrs }) {
                         </span>
 
                         <span className="text-bee-blue-clean text-center text-xs mt-2 font-bold"> Objetivo Corporativo</span>
-                        <div className='w-full text-base font-bold text-black text-center max-w-[80%]'>
+                        <Link to={`/company/${idCompany}/goal/${team.idGoal}`} className='w-full text-base font-bold text-black text-center max-w-[80%]'>
                           {team.nameGoal}
-                        </div>
+                        </Link>
 
                         <span className="text-bee-blue-clean text-xs mt-2 font-bold">líder</span>
                         <div className='w-full text-base font-bold text-black text-center'>

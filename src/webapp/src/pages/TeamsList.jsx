@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import teamsApi from '../api/teamsApi'
 import usersApi from '../api/usersApi'
@@ -16,12 +16,17 @@ const TeamList = () => {
     const [users, setUsers] = useState([])
     const [usersAndTeams, setUsersAndTeams] = useState([])
     const [idTeam, setIdTeam] = useState(null)
+    const [idLeader, setIdLeader] = useState(null)
     const { idCompany } = useParams()
+    const [searchParams] = useSearchParams()
+    const update = searchParams.get('update')
+
     useEffect(() => {
         handleTeams()
         handleUsers()
         handleUsersAndTeams()
-    }, [idCompany])
+
+    }, [idCompany, update])
 
     const handleTeams = async () => {
         const { data } = await teamsApi.getAll(idCompany)
@@ -35,25 +40,18 @@ const TeamList = () => {
 
     const handleUsers = async () => {
         const { data } = await usersApi.getAllByCompany(idCompany)
-        const result = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        const teams = result.data
-        setUsers(()=>{
-            data?.filter((a)=>{
-                const verifyItem = teams?.find(b=>b?.idUser===a?.id)
-                console.log("teams",teams)
-                console.log("verify", verifyItem)
-                return a?.id!==verifyItem?.idUser
-            })
-        })
+
+        setUsers(data)
     }
 
     const routerBack = () => {
-        navigate(-1)
+        navigate(`/company/${idCompany}`)
     }
 
-    function openModal(id) {
+    function openModal(id, idLeader) {
         setIsOpen(true)
         setIdTeam(id)
+        setIdLeader(idLeader)
     }
 
     function closeModal() {
@@ -68,7 +66,8 @@ const TeamList = () => {
             </div>
 
             <main className='flex flex-col items-center'>
-                <span className='font-bold text-2xl text-white uppercase mt-2'> Lista de times </span>
+                <span className='font-bold text-2xl text-black uppercase mt-2'> Lista de Integrantes </span>
+                
                 <div className='w-11/12'>
                     <div className='container-empresas'>
                         <div className='flex flex-col items-center'>
@@ -86,7 +85,7 @@ const TeamList = () => {
                                             return (
                                                 <>
                                                     <tr>
-                                                        <td onClick={()=>openModal(team?.id)} className="cursor-pointer">{team?.name}</td>
+                                                        <td onClick={()=>openModal(team?.id, team?.leader)} className="cursor-pointer">{team?.name}</td>
                                                         <td>{(users || []).filter(a => a?.id === team?.leader)[0]?.name}</td>
                                                     </tr>
                                                 </>
@@ -94,7 +93,15 @@ const TeamList = () => {
                                         })}
                                     </tbody>
                                 </table>
-                                <AddMembers isOpen={isOpen} closeModal={closeModal} usersAndTeams={usersAndTeams} users={users} idTeam={idTeam} idCompany={idCompany} />
+                                <AddMembers 
+                                isOpen={isOpen} 
+                                closeModal={closeModal} 
+                                usersAndTeams={usersAndTeams} 
+                                users={users} idTeam={idTeam} 
+                                idCompany={idCompany}
+                                update={update}
+                                idLeader={idLeader}
+                                />
                             </div>
                         </div>
                     </div>
