@@ -38,7 +38,7 @@ process.on('SIGINT',() => {
 })
 
 const webapp = path.resolve();
-app.use(express.static(path.join(webapp, '/webapp/build')));
+app.use(express.static(path.join(webapp, '/src/webapp/build')));
 app.get('*', (req, res) =>
-  res.sendFile(path.join(webapp, '/webapp/build/index.html'))
+  res.sendFile(path.join(webapp, '/src/webapp/build/index.html'))
 );
