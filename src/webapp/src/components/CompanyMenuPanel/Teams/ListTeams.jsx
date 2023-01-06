@@ -88,12 +88,8 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
               <ModalMembersTeam idRef={"members"} idTeam={idTeam} users={users} />
                 <div className=' text-center bg-white p-2 flex flex-col items-center justify-center w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
                   <div  className="cursor-pointer flex flex-col items-center justify-center">
-                    <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">
+                    <button onClick={() => setIdTeam(team?.idTeam)} className="text-bee-strong-1 text-xl font-bold text-center uppercase" data-bs-toggle="modal" data-bs-target="#members">
                       {team.nameTeam}
-                    </span>
-
-                    <button onClick={() => setIdTeam(team?.idTeam)} className="text-bee-blue-clean text-xs mt-2 font-bold" data-bs-toggle="modal" data-bs-target="#members">
-                      Membros
                     </button>
 
                     <span className="text-bee-blue-clean text-xs mt-2 font-bold">líder</span>
