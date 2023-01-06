@@ -213,8 +213,6 @@ function Goal() {
     }
   }
 
-
-
   const createGoalsTeam = async (idTeam) => {
     searchParams.delete('update')
     setSearchParams(searchParams)
@@ -276,7 +274,7 @@ function Goal() {
 
   const routerBack = () => {
     navigate(`/company/${idCompany}`)
-}
+  }
 
   const redirectHistory = (route) => {
     navigate(route)
