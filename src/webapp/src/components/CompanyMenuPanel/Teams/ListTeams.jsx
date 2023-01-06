@@ -85,7 +85,7 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
           {(teamByTeam || []).map((team) => {
             return (
               <>
-              <ModalMembersTeam idRef={"members"} idTeam={idTeam} />
+              <ModalMembersTeam idRef={"members"} idTeam={idTeam} users={users} />
                 <div className=' text-center bg-white p-2 flex flex-col items-center justify-center w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
                   <div  className="cursor-pointer flex flex-col items-center justify-center">
                     <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">

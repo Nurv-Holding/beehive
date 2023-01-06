@@ -13,7 +13,7 @@ import usersApi from '../../../api/usersApi'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
 function Teams() {
-    const { teams, modelChange, item, idCompany, goals } = useContext(ContextUser)
+    const { teams, modelChange, item, idCompany, goals, usersByCompany } = useContext(ContextUser)
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
@@ -21,13 +21,11 @@ function Teams() {
     const [allTeams, setAllTeams] = useState([])
     const [teamsByKrs, setTeamsByKrs] = useState([])
     const [teamByTeam, setTeamByTeam] = useState([])
-    const [users, setUsers] = useState([])
 
     useEffect(() => {
         handleGoalTeamsByTeam()
         handleTeamsByGoals()
         handleTeamsByKrs()
-        handleUsers()
         handleTeamsByTeams()
 
     },[idCompany])
@@ -40,11 +38,6 @@ function Teams() {
     const handleTeamsByTeams = async () => {
         const { data } = await teamsApi.getByTeams(idCompany)
         setTeamByTeam(data)
-    }
-
-    const handleUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
     }
 
     const handleTeamsByGoals = async () => {
@@ -90,7 +83,7 @@ function Teams() {
             goals={goals} 
             goalTeams={goalTeams}
             allTeams={allTeams}
-            users={users}
+            users={usersByCompany}
             teamsByKrs={teamsByKrs}
             teamByTeam={teamByTeam}
             />
