@@ -13,7 +13,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd src && cd webapi && npm install  && cd ../webapp && npm install && npm run build",
-    "start": "node src/webapi/src/index.js"
+    "start": "node src/webapi/src/index.js && node src/webapp/server.js"
   },
   "keywords": [],
   "author": "",
