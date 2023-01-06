@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import goalTeamsKrsApi from '../../../api/goalTeamsKrsApi'
 import goalsTeamApi from '../../../api/goalsTeamApi'
 import usersApi from '../../../api/usersApi'
+import teamsUsersApi from '../../../api/teamsUsersApi'
 
 function Teams() {
     const { teams, modelChange, item, idCompany, goals } = useContext(ContextUser)

@@ -5,8 +5,9 @@ import Modal from '../Goals/components/Modal'
 import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import teamsUsersApi from '../../../api/teamsUsersApi'
+import ModalMembersTeam from '../../ModalMembersTeam'
 
-function ListTeams({ allTeams, users, teamsByKrs, teamByTeam }) {
+function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -84,45 +85,49 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam }) {
           {(teamByTeam || []).map((team) => {
             return (
               <>
+              <ModalMembersTeam idRef={"members"} idTeam={idTeam} />
                 <div className=' text-center bg-white p-2 flex flex-col items-center justify-center w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
-                <div  className="cursor-pointer flex flex-col items-center justify-center">
-                        <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">
-                          {team.nameTeam}
-                        </span>
+                  <div  className="cursor-pointer flex flex-col items-center justify-center">
+                    <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">
+                      {team.nameTeam}
+                    </span>
 
-                        <span className="text-bee-blue-clean text-xs mt-2 font-bold">líder</span>
-                        <div className='w-full text-base font-bold text-black text-center'>
-                          {(users || []).filter(user => user.id === team.leader)[0]?.name}
-                        </div>
-                        <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Objetivos</span>
-                        <div className='grid grid-cols-2 gap-3 w-full'>
-                              {(allTeams || []).filter(e => e.idTeam === team.idTeam).map((goalTeam) => {
-                                  return(
-                                    <Disclosure>
-                                      
-                                      <div className="w-full">
-                                        <Disclosure.Button>
-                                          <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
-                                              <h1 className='text-black uppercase text-center font-bold text-[12px]'>
-                                                  {goalTeam.nameGoalTeam}
-                                              </h1>
-                                          </div>
-                                        </Disclosure.Button>
-                                        {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
-                                          return(
-                                            <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
-                                            {kr.nameKr}
-                                          </Disclosure.Panel>
-                                          )
-                                        })}
+                    <button onClick={() => setIdTeam(team?.idTeam)} className="text-bee-blue-clean text-xs mt-2 font-bold" data-bs-toggle="modal" data-bs-target="#members">
+                      Membros
+                    </button>
 
+                    <span className="text-bee-blue-clean text-xs mt-2 font-bold">líder</span>
+                    <div className='w-full text-base font-bold text-black text-center'>
+                      {(users || []).filter(user => user.id === team.leader)[0]?.name}
+                    </div>
+                    <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Objetivos</span>
+                    <div className='grid grid-cols-2 gap-3 w-full'>
+                          {(allTeams || []).filter(e => e.idTeam === team.idTeam).map((goalTeam) => {
+                              return(
+                                <Disclosure>
+                                  
+                                  <div className="w-full">
+                                    <Disclosure.Button>
+                                      <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
+                                          <h1 className='text-black uppercase text-center font-bold text-[12px]'>
+                                              {goalTeam.nameGoalTeam}
+                                          </h1>
                                       </div>
-                                    </Disclosure>
-                                  )
-                              })}
-                          </div>
-                      </div>
+                                    </Disclosure.Button>
+                                    {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
+                                      return(
+                                        <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                                        {kr.nameKr}
+                                      </Disclosure.Panel>
+                                      )
+                                    })}
 
+                                  </div>
+                                </Disclosure>
+                              )
+                          })}
+                      </div>
+                    </div>
                 </div>
               </>
             )

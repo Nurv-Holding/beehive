@@ -198,7 +198,7 @@ function Goal() {
     } else {
       goalsTeamApi.createProcess(idCompany, { idTeam, idGoal: newIdGoal })
         .then(() => {
-          setMessage("Time adicionado sucesso")
+          setMessage("Time adicionado")
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${true}`
@@ -212,8 +212,6 @@ function Goal() {
         })
     }
   }
-
-
 
   const createGoalsTeam = async (idTeam) => {
     searchParams.delete('update')
@@ -276,7 +274,7 @@ function Goal() {
 
   const routerBack = () => {
     navigate(`/company/${idCompany}`)
-}
+  }
 
   const redirectHistory = (route) => {
     navigate(route)
