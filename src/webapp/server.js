@@ -1,14 +1,9 @@
 const express = require('express')
 const path = require('path');
 
-const app = express();
+const app = express()
+const port = 4005
 
-const webapp = path.resolve();
-app.use(express.static(path.join(webapp, '/build')));
-app.get('*', (req, res) =>
-  res.sendFile(path.join(webapp, '/build/index.html'))
-);
+app.use(express.static(path.join(__dirname, 'build')));
 
-// app.listen(4005, () => {
-//   console.log('listening on port 4005');
-// });
+app.listen(port, () => console.log(`App is live on port ${port}!`))
