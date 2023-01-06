@@ -26,12 +26,12 @@ const ModalMembersTeam = ({idRef, idTeam, users}) => {
 
     return(
         <NewModal idRef={idRef}>
-            <div className="m-4 text-black">
-                <h4 className="text-center"> Time: {team?.name} </h4>
-                <span>Líder: {(users || []).filter(f => f.id === team?.leader)[0]?.name} </span>
+            <div className="p-8 flex flex-col justify-center items-center gap-4">
+                <h4 className="text-center uppercase text-bee-strong-1 font-medium"> Time: {team?.name} </h4>
+                <span className="text-bee-blue-clean font-medium">Líder: {(users || []).filter(f => f.id === team?.leader)[0]?.name} </span>
 
                 <div className="gap-4">
-                    <ul className="text-black">
+                    <ul className="text-black font-medium">
                         {(allTeamsAndUsers || []).length === 0?
                         "Ainda não existe integrantes"
                         :allTeamsAndUsers.map((member) => {
