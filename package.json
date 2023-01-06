@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm start -w project-behider-webapi"
+    "build": "cd src && cd webapi && npm install  && cd ../webapp && npm install && npm run build",
+    "start": "node src/webapi/src/index.js"
   },
   "keywords": [],
   "author": "",

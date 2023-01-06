@@ -3,6 +3,8 @@ const express = require('express')
 const AuthorizationError = require('./common/erros/AuthorizeErros')
 const BusinessError = require('./common/erros/BusineErros')
 
+const path = require('path');
+
 const app = express()
 
 const port = process.env.PORT || 3002
@@ -35,4 +37,8 @@ process.on('SIGINT',() => {
     console.log('server finished')
 })
 
-
+const webapp = path.resolve();
+app.use(express.static(path.join(webapp, '/src/webapp/build')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(webapp, '/src/webapp/build/index.html'))
+);

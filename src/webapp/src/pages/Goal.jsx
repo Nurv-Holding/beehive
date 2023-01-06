@@ -396,7 +396,9 @@ function Goal() {
 
       <main className='flex flex-col items-center pt-8'>
         <div className='flex flex-row w-full justify-center items-center'>
-          <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
+          <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </button>
 
           <TitleCompany className='text-bee' name={company?.name} />
         </div>
