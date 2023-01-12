@@ -1,6 +1,6 @@
-import Modal from "./CompanyMenuPanel/Goals/components/Modal"
+import NewModal from "./CompanyMenuPanel/Goals/components/NewModal"
 
-function AddGoalTeam({ closeModal, isOpen, createGoalsTeam, modelChange, idTeam }) {
+function AddGoalTeam({ idRef, createGoalsTeam, modelChange, idTeam }) {
 
     const goalTealSubmit = (event) => {
         event.preventDefault()
@@ -12,14 +12,15 @@ function AddGoalTeam({ closeModal, isOpen, createGoalsTeam, modelChange, idTeam 
 
     return (
         <>
+            <NewModal idRef={idRef}>
+                <div className="p-8 flex flex-col justify-center items-center gap-4">
+                    <h1 className="text-center uppercase text-bee-strong-1 font-bold text-3xl"> Nome do Time </h1>
+                    <span className="text-bee-blue-clean font-medium">Adicionar Objetivo</span>
 
-            <div>
-                <Modal isOpen={isOpen} closeModal={closeModal}>
-                    <h5> Nome do time </h5>
-                    <form onSubmit={goalTealSubmit} className="mt-2 flex flex-col">
+                    <form onSubmit={goalTealSubmit} className="mt-2 flex flex-col w-full">
 
-                        <label for="tarefa">Objetivo do Time:</label>
-                        <input onChange={modelChange} name='name' type='text' className='input-style' placeholder="Digite o nome do objetivo" />
+                        <label for="tarefa">Objetivo:</label>
+                        <input onChange={modelChange} name='name' type='text' className='input-style w-full' placeholder="Digite o nome do objetivo" />
 
                         <label for="tarefa">Descrição:</label>
                         <input onChange={modelChange} name='descriptions' type='text' className='input-style' placeholder="Digite a descrição do objetivo" />
@@ -30,8 +31,8 @@ function AddGoalTeam({ closeModal, isOpen, createGoalsTeam, modelChange, idTeam 
                             </button>
                         </div>
                     </form>
-                </Modal>
-            </div>
+                </div>
+            </NewModal>
         </>
     )
 }

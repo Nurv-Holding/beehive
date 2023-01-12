@@ -26,7 +26,7 @@ const ModalMembersTeam = ({idRef, idTeam, users}) => {
 
     return(
         <NewModal idRef={idRef}>
-            <div className="p-8 flex flex-col justify-center items-center gap-4">
+            <div className="p-8 flex flex-col justify-center items-center gap-4 w-full">
                 <h4 className="text-center uppercase text-bee-strong-1 font-medium"> Time: {team?.name} </h4>
                 <span className="text-bee-blue-clean font-medium">Líder: {(users || []).filter(f => f.id === team?.leader)[0]?.name} </span>
 
