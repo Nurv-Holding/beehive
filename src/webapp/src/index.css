@@ -328,7 +328,7 @@ header nav{
 }
 
 .container-table-objectives-list-times{
-    @apply w-full grid grid-cols-4 gap-2 items-center
+    @apply w-full grid grid-cols-4 items-center
 }
 
 .container-table-objectives-list-empresas{
