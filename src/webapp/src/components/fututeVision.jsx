@@ -17,7 +17,7 @@ const FutureVision = ({ futureVisions, idCompany }) => {
                                     +
                                 </Link>
                             </div>
-                            <p> {f.description} </p>
+                            <p className="w-full"> {f.description} </p>
                         </div>
                     )
                 })}

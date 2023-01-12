@@ -13,8 +13,9 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
 
     useEffect(() => {
         handleNewUsers()
+        setIdUser(null)
 
-    },[idTeam, update])
+    }, [idTeam, update])
 
     const handleNewUsers = async () => {
         const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
@@ -33,18 +34,22 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        teamsUsersApi.create(idCompany, { idUser:parseInt(idUser), idTeam })
-        .then(() => {
-            setMessage("Cadastro realizado com sucesso")
-            navigate({
-              pathname: `/company/${idCompany}/teamlist`,
-              search: `?update=${true}`
-            })
-          })
-          .catch((error) => {
-            console.error(error)
-            setMessage("Algo deu errado!")
-          })
+        if (!idUser) {
+            setMessage('Primeiro deve selecionar um usuário')
+        } else {
+            teamsUsersApi.create(idCompany, { idUser: parseInt(idUser), idTeam })
+                .then(() => {
+                    setMessage("Cadastro realizado com sucesso")
+                    navigate({
+                        pathname: `/company/${idCompany}/teamlist`,
+                        search: `?update=${true}`
+                    })
+                })
+                .catch((error) => {
+                    console.error(error)
+                    setMessage("Algo deu errado!")
+                })
+        }
     }
 
     return (
@@ -55,7 +60,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                         <h4 className='text-gray-500'>Lider: {(users || []).filter(a => a?.id === idLeader)[0]?.name}</h4>
                         <span className='text-gray-500'>Lista de Integrantes</span>
                         <div className='w-[80%] flex flex-col bg-gray-300 p-1 rounded-md'>
-                            {(usersAndTeams || []).filter(a=>a.idTeam===idTeam).map((user) => {
+                            {(usersAndTeams || []).filter(a => a.idTeam === idTeam).map((user) => {
                                 return (
                                     <>
                                         <span className='my-0.5 overflow-hidden'>
@@ -68,6 +73,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                     </div>
 
                     <form onSubmit={addMember} className='w-2/4 flex flex-col'>
+                        {JSON.stringify(idUser)}
                         <span className='text-gray-500'>Adicionar Integrante</span>
                         <div className='input-and-label-container'>
                             <select onChange={({ target }) => { setIdUser(target.value) }} name="user" id="users" className="input-style">

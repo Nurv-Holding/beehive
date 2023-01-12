@@ -1,4 +1,4 @@
-import "tw-elements"
+import 'tw-elements'
 
 const NewModal = ({children, idRef}) => {
     return(
