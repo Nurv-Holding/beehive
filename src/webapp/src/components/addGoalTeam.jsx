@@ -15,7 +15,7 @@ function AddGoalTeam({ idRef, createGoalsTeam, modelChange, idTeam }) {
             <NewModal idRef={idRef}>
                 <div className="p-8 flex flex-col justify-center items-center gap-4">
                     <h1 className="text-center uppercase text-bee-strong-1 font-bold text-3xl"> Nome do Time </h1>
-                    <span className="text-bee-blue-clean font-medium">Adicionar Objetivo</span>
+                    <span className="text-bee-blue-clean text-lg font-bold">Adicionar Objetivo</span>
 
                     <form onSubmit={goalTealSubmit} className="mt-2 flex flex-col w-full">
 

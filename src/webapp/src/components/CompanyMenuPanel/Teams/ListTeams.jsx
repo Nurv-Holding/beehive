@@ -79,7 +79,7 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
 
         <h1 className='text-3xl text-bee-blue-clean font-bold text-center p-4'>OKRs</h1>
 
-        <div className='grid grid-cols-3 gap-3 w-[90%] mx-auto px-3'>
+        <div className='grid grid-cols-3 gap-3 w-[90%] mx-auto px-3 mb-4'>
           {(teamByTeam || []).map((team) => {
             return (
               <>
