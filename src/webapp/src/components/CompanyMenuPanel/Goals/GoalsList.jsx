@@ -60,14 +60,14 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                                         {(goalAndTeams || []).filter(e => e.idTeam === team.idTeam && e.idGoal === team.idGoal).map((goalTeam) => {
                                             return(
                                                 <Disclosure>
-                                                    <Disclosure.Button className="text-bee-blue-clean py-2 px-3  uppercase rounded-xl text-[10px] text-white shadow-lg font-bold cursor-pointer">
+                                                    <Disclosure.Button className="text-bee-blue-clean py-2 px-3  uppercase rounded-xl text-[10px] text-white font-bold cursor-pointer">
                                                         {goalTeam.nameGoalTeam}
                                                     </Disclosure.Button>
                                                     {goalTeam.idGoalTeam &&
                                                     <>
                                                     {(krs || []).filter(e => e.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
                                                         return(
-                                                            <Disclosure.Panel className="bg-bee-clean-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                                                            <Disclosure.Panel className="bg-bee-strong-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
                                                                 {kr.nameGoalTeamKrs}
                                                             </Disclosure.Panel>
                                                         )

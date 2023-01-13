@@ -95,13 +95,13 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
                       {(users || []).filter(user => user.id === team.leader)[0]?.name}
                     </div>
                     <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Objetivos</span>
-                    <div className='flex flex-row flex-wrap gap-3 w-full'>
+                    <div className='grid grid-cols-2 gap-4 w-full'>
                       {(allTeams || []).filter(e => e.idTeam === team.idTeam).map((goalTeam) => {
                         return (
                           <Disclosure>
-                            <div className="w-full">
+                            <div className="w-full py-2">
                               <Disclosure.Button>
-                                <div className="bg-white cursor-pointer p-4 rounded-xl">
+                                <div className="bg-white cursor-pointer rounded-xl">
                                   <h1 className='text-black uppercase text-center font-bold text-[12px]'>
                                     {goalTeam.nameGoalTeam}
                                   </h1>
@@ -109,7 +109,7 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
                               </Disclosure.Button>
                               {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
                                 return (
-                                  <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                                  <Disclosure.Panel className="bg-bee-strong-1 my-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
                                     {kr.nameKr}
                                   </Disclosure.Panel>
                                 )
