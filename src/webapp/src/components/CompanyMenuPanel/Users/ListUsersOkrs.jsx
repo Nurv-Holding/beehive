@@ -41,7 +41,7 @@ function ListUsers({ users }) {
                           </h1>
                         </div>
                       </Disclosure.Button>
-                      <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                      <Disclosure.Panel className="bg-bee-strong-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
                         KR
                       </Disclosure.Panel>
                     </div>
