@@ -351,7 +351,7 @@ function TeamsGoal({
                                     <div>
                                       {!kr.statusKr ?
                                         <button onClick={() => openModalFinishTeamKr(kr)}
-                                          className='bg-bee-blue-clean text-white p-1 rounded-lg'
+                                          className='bg-bee-blue-clean text-white p-1 rounded-lg text-sm'
                                         >
                                           Encerrar KR
                                         </button>

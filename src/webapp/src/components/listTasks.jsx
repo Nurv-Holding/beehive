@@ -90,7 +90,7 @@ const ListTasks = ({
                     {!(!!goal.status) && !task.done?
                     <div>
                         {!task?.done &&
-                        <button className="bg-bee-blue-clean text-white p-1 rounded-lg" onClick={() => openTaskDone(task)}> Concluir </button>
+                        <button className="bg-bee-blue-clean text-white p-1 rounded-lg text-sm" onClick={() => openTaskDone(task)}> Concluir </button>
                         }
                         <TaskDone
                             setOpenModalTaskDone={setOpenModalTaskDone}
@@ -119,7 +119,7 @@ const ListTasks = ({
                     </>
                     }
                     {!(!!task.nameUser) &&
-                    <div className="flex">
+                    <div className="flex items-center">
                         <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
                         <option selected disabled >Adicionar Usuário</option>
                             {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
@@ -128,7 +128,7 @@ const ListTasks = ({
                             )
                             })}
                         </select>
-                        <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 mt-1'> OK </button>
+                        <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 p-1 text-sm'> OK </button>
                     </div>
                     }
 
