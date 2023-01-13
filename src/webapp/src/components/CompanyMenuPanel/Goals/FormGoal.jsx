@@ -14,7 +14,7 @@ function FormGoal({ modelChange, handleSubmit, message }) {
                 </div>
 
                 <button className='submit-button' type="submit">Cadastrar</button>
-                <span> {message} </span>
+                <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
             </form>
         </div>
     )

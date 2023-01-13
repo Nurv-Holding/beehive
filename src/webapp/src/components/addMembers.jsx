@@ -73,7 +73,6 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                     </div>
 
                     <form onSubmit={addMember} className='w-2/4 flex flex-col'>
-                        {JSON.stringify(idUser)}
                         <span className='text-gray-500'>Adicionar Integrante</span>
                         <div className='input-and-label-container'>
                             <select onChange={({ target }) => { setIdUser(target.value) }} name="user" id="users" className="input-style">
@@ -91,7 +90,8 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                         </div>
 
                         <button className='submit-button mt-3' type="submit">Adicionar</button>
-                        <span> {message} </span>
+                        
+                        <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
                     </form>
                 </div>
             </Modal>
