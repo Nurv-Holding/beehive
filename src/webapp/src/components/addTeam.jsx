@@ -31,7 +31,7 @@ const AddTeam = ({
                         <button className='submit-button' type="submit" >
                             Adicionar
                         </button>
-                        <span> {message} </span>
+                        <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
                     </div>
                 </form>
             </Modal>

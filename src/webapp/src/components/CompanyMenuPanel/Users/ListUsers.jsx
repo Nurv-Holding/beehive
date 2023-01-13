@@ -28,12 +28,14 @@ const ListUsers = () => {
         <>
             <Header />
 
-            <div className='flex flex-row w-full justify-center items-center mt-6'>
-                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-clean hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
-            </div>
+            <main className='flex flex-col items-center gap-8'>
+            <div className='flex items-center mt-8'>
+                    <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
 
-            <main className='flex flex-col items-center'>
-                <span className='font-bold text-2xl text-black uppercase mt-2'> Lista de Usuários </span>
+                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'>Lista de usuários</span>
+                </div>
 
                 <div className='w-11/12'>
                     <div className='container-empresas'>

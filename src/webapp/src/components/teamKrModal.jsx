@@ -30,7 +30,7 @@ const TeamKrModal = ({
                         <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
                         <textarea className="input-style" placeholder="Nota" onChange={({ target }) => setNote(target.value)} name="note" cols="55" rows="10"></textarea>
                         <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
-                        {message}
+                        <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
                     </div>
                 </div>
                 }

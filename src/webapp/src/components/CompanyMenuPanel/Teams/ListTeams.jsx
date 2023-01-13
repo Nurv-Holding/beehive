@@ -156,7 +156,7 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
             </div>
 
             <button className='submit-button mt-3' type="submit">Adicionar</button>
-            <span> {message} </span>
+            <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
           </form>
         </div>
       </Modal>

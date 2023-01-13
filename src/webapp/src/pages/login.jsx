@@ -70,7 +70,7 @@ const Login = () => {
                         <button className="form-submit-button" type= "submit">Entrar no portal</button>
                         }
                         
-                        <span> {message} </span>
+                        <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block text-center'}`}> {message} </span>
                     </form>
                 </div>
             </main>

@@ -5,7 +5,7 @@ const RegisterProposals = ({handleSubmit, message, modelChange}) => {
         <>
         <div>
             <span className='m-2 text-center justify-self-center text-bee-blue-clean font-bold text-2xl hover:cursor-default'>
-                Cadastrar Proposito
+                Cadastrar Propósito
             </span>
         </div>
 
@@ -14,12 +14,12 @@ const RegisterProposals = ({handleSubmit, message, modelChange}) => {
                 <div className='w-[70%] flex flex-col items-center justify-center gap-4'>
                     <input type="text" required className="input-style text-center" placeholder='Título' name="title" onChange={modelChange} />
 
-                    <textarea className="p-2 input-style min-h-[25px] text-center" placeholder='Descrição' name="description" onChange={modelChange} cols="50" rows="3"></textarea>
+                    <textarea className="p-2 input-style min-h-[50px] text-center" placeholder='Descrição' name="description" onChange={modelChange} cols="50" rows="3"></textarea>
                 </div>
 
                 <button className='submit-button mt-4' type="submit">Cadastrar</button>
             </form>
-        <span className="text-center"> {message} </span>
+            <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block text-center'}`}> {message} </span>
         </div>
         </>
     )

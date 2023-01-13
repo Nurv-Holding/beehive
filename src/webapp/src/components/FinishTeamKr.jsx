@@ -6,7 +6,7 @@ const FinishTeamKr = ({ message, closeModal, isOpen, krs, setNoteTeamKr, finishG
         finishGoalTeamKr(krs.idgoalTeamsKr, krs.idTeam, krs.idProcessGoalsTeams, null)
     }
 
-    return(
+    return (
         <div>
             <Modal isOpen={isOpen} closeModal={closeModal}>
                 <div className="flex flex-col gap-4">
@@ -21,10 +21,10 @@ const FinishTeamKr = ({ message, closeModal, isOpen, krs, setNoteTeamKr, finishG
                             <button className='submit-button ml-4' type="button" onClick={closeModal}>
                                 Cancelar
                             </button>
-                            
+
                         </div>
                         <span className="text-red-600">
-                            {message}
+                            <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block'}`}> {message} </span>
                         </span>
                     </form>
                 </div>

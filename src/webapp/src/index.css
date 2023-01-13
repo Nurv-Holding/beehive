@@ -258,7 +258,7 @@ header nav{
 
 /*EmpresasMenu*/
 .container-nav-empresas{
-    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center gap-y-4
+    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center gap-y-8
 }
 
 .container-nav-empresas{
@@ -271,7 +271,7 @@ header nav{
 }
 
 .container-nav-empresas button{
-    @apply focus:outline-none font-medium hover:text-bee-blue-clean py-2 hover:bg-gray-100 w-full
+    @apply focus:outline-none font-medium hover:text-bee-blue-clean hover:bg-gray-100 w-full py-2
 }
 
 .task-doer{
@@ -312,7 +312,7 @@ header nav{
 }
 
 .submit-button{
-    @apply w-[30%] h-8 bg-bee-blue-clean rounded-md text-white 
+    @apply w-[30%] h-8 bg-bee-blue-clean rounded-md text-white hover:bg-bee-blue-strong 
 }
 
 .form-container label{
