@@ -90,7 +90,7 @@ const ListTasks = ({
                     {!(!!goal.status) && !task.done?
                     <div>
                         {!task?.done &&
-                        <button className="bg-[#5500c3] text-white p-1 rounded-lg" onClick={() => openTaskDone(task)}> Concluir </button>
+                        <button className="bg-bee-blue-clean text-white p-1 rounded-lg" onClick={() => openTaskDone(task)}> Concluir </button>
                         }
                         <TaskDone
                             setOpenModalTaskDone={setOpenModalTaskDone}

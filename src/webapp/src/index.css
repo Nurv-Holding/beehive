@@ -62,7 +62,7 @@ header nav{
 }
 
 .general:hover{
-    @apply text-[#5500C3]
+    @apply text-bee-blue-clean
 }
 
 /*PROFILE*/
@@ -79,7 +79,7 @@ header nav{
 }
 
 .profile-nav span:hover{
-    @apply text-[#5500C3]
+    @apply text-bee-blue-clean
 }
 /*END PROFILE*/
 
@@ -102,7 +102,7 @@ header nav{
 }
 
 .container-table-grid-team thead{
-    @apply border-b border-[#5500C3]
+    @apply border-b border-bee-blue-clean
 }
 /*END GRID CONTAINER*/
 
@@ -149,15 +149,15 @@ header nav{
 }
 
 .percentage-first{
-    @apply bg-[#5500C3] w-[75%] h-full rounded
+    @apply bg-bee-blue-clean w-[75%] h-full rounded
 }
 
 .percentage-second{
-    @apply bg-[#5500C3] w-[100%] h-full rounded
+    @apply bg-bee-blue-clean w-[100%] h-full rounded
 }
 
 .percentage-third{
-    @apply bg-[#5500C3] w-[50%] h-full rounded
+    @apply bg-bee-blue-clean w-[50%] h-full rounded
 }
 
 /*END PERCENTAGE CONTAINER*/
@@ -190,15 +190,15 @@ header nav{
 }
 
 .percentage-my-progress{
-    @apply bg-[#5500C3] h-full rounded
+    @apply bg-bee-blue-clean h-full rounded
 }
 
 .percentage-team-progress{
-    @apply bg-[#5500C3] w-[40%] h-full rounded
+    @apply bg-bee-blue-clean w-[40%] h-full rounded
 }
 
 .percentage-monthly-income{
-    @apply bg-[#5500C3] w-[69%] h-full rounded
+    @apply bg-bee-blue-clean w-[69%] h-full rounded
 }
 
 /*ScrollBar*/
@@ -219,7 +219,7 @@ header nav{
 
 .container-team-management::-webkit-scrollbar-thumb,
 .container-empresas::-webkit-scrollbar-thumb{
-    background-color: #5500C3;
+    background-color: #1F62DE;
     border-radius: 8px;
 }
 /*End ScrollBar*/
@@ -252,7 +252,7 @@ header nav{
 }
 
 .percentage-bar-disclosure{
-    @apply bg-[#5500C3] h-4 rounded
+    @apply bg-bee-blue-clean h-4 rounded
 }
 /*End Disclosure*/
 
@@ -271,7 +271,7 @@ header nav{
 }
 
 .container-nav-empresas button{
-    @apply focus:outline-none font-medium hover:text-bee-blue-strong py-2 hover:bg-gray-200 w-full
+    @apply focus:outline-none font-medium hover:text-bee-blue-clean py-2 hover:bg-gray-100 w-full
 }
 
 .task-doer{
@@ -312,7 +312,7 @@ header nav{
 }
 
 .submit-button{
-    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white 
+    @apply w-[30%] h-8 bg-bee-blue-clean rounded-md text-white 
 }
 
 .form-container label{
@@ -341,7 +341,7 @@ header nav{
 /*Menu With Cards*/
 
 .container-card-empresas{
-    @apply min-w-[15%] w-auto border border-black rounded-lg p-4 flex flex-col items-center justify-center hover:text-[#5500C3]
+    @apply min-w-[15%] w-auto border border-black rounded-lg p-4 flex flex-col items-center justify-center hover:text-bee-blue-clean
 }
 
 .modal-btn{
@@ -356,7 +356,7 @@ header nav{
 }
 
 .container-bar-checklist{
-    @apply h-4 rounded bg-[#5500C3]
+    @apply h-4 rounded bg-bee-blue-clean
 }
 
 .checkbox-container{

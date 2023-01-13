@@ -29,7 +29,7 @@ const ListUsers = () => {
             <Header />
 
             <div className='flex flex-row w-full justify-center items-center mt-6'>
-                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
+                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-clean hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
             </div>
 
             <main className='flex flex-col items-center'>

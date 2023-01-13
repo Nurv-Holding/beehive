@@ -49,11 +49,11 @@ function FormWayOfBeing() {
             <Header />
             <main className='flex flex-col items-center'>
                 <div className='flex flex-row w-full justify-center items-center mt-8'>
-                    <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
+                    <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-clean hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
                 </div>
 
                 <div>
-                    <span className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
+                    <span className='m-2 text-center justify-self-center text-bee-blue-clean font-bold text-2xl hover:cursor-default'>
                         Cadastrar Visão de futuro
                     </span>
                 </div>

@@ -4,7 +4,7 @@ const RegisterPrinciples = ({handleSubmit, message, modelChange, item}) => {
     return(
         <>
         <div>
-        <span className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
+        <span className='m-2 text-center justify-self-center text-bee-blue-clean font-bold text-2xl hover:cursor-default'>
             Cadastrar Princípio
         </span>
     </div>

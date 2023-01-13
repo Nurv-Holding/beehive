@@ -120,7 +120,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button
                                     className={
-                                        selected ? 'text-[#5500C3] bg-gray-200' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
                                     }
                                 >
                                     Princípio
@@ -132,7 +132,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button
                                     className={
-                                        selected ? 'text-[#5500C3] bg-gray-200' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
                                     }
                                 >
                                     Proposito
@@ -144,7 +144,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button
                                     className={
-                                        selected ? 'text-[#5500C3] bg-gray-200' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
                                     }
                                 >
                                     Objetivo
@@ -156,7 +156,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button onClick={routerBack}
                                     className={
-                                        selected ? 'text-[#5500C3] bg-gray-200' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
                                     }
                                 >
                                     Voltar

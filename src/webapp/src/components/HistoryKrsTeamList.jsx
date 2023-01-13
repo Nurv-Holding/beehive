@@ -26,7 +26,7 @@ const HistoryKrsTeamList = ({ histories, team, goalTeams, goaloalTeamByKrs }) =>
                                 <div className='container-history'>
                                     <span className="text-center text-xl font-bold"> {krs.nameGoalsTeamKr} </span>
                                     <div className='flex flex-col items-center'>
-                                        <span className="text-xl font-bold mb-2 ml-4 self-start text-[#5500C3] bold cursor-default"> {""} </span>
+                                        <span className="text-xl font-bold mb-2 ml-4 self-start text-bee-blue-clean bold cursor-default"> {""} </span>
                                         <div className='container-table-grid-team'>
                                             <table class="table-auto w-full">
                                                 <thead>
