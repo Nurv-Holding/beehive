@@ -11,15 +11,13 @@ function FormUser({ modelChange, message, handleSubmit }) {
         <>
             <Header />
 
-            <main className='flex flex-col items-center'>
-                <div className='flex flex-row w-full justify-center items-center mt-8'>
-                    <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-clean hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
-                </div>
+            <main className='flex flex-col items-center gap-8'>
+            <div className='flex items-center mt-8'>
+                    <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
 
-                <div>
-                    <span className='m-2 text-center justify-self-center text-bee-blue-clean font-bold text-2xl hover:cursor-default'>
-                        Cadastrar usuário
-                    </span>
+                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'> Cadastrar Usuário </span>
                 </div>
 
                 <div className='flex flex-col w-2/4 items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>

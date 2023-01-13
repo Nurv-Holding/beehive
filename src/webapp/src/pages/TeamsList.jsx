@@ -69,7 +69,7 @@ const TeamList = () => {
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </button>
 
-                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'> Lista de Integrantes </span>
+                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'> Lista de Times </span>
                 </div>
 
                 <div className='w-11/12'>
