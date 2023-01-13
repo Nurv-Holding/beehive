@@ -411,7 +411,7 @@ function Goal() {
               <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status) &&
-              <div className='container-percentage-okr flex flex-row justify-around'>
+              <div className='container-percentage-okr flex flex-row justify-end gap-4'>
                 <AddKr
                   message={message}
                   nameGoal={goal.name}
