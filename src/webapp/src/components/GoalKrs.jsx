@@ -181,7 +181,7 @@ function GoalKrs({
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
-                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  background-color: rgb(31 98 222/ var(--tw-bg-opacity));
                                   width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromQuarterlyGoalKrs)}%;
                                 }
                             `}</style>
@@ -203,7 +203,7 @@ function GoalKrs({
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
-                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  background-color: rgb(31 98 222/ var(--tw-bg-opacity));
                                   width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromYearlyGoalsKr)}%;
                                 }
                             `}</style>
