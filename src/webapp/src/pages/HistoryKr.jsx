@@ -56,11 +56,7 @@ const HistoryKr = () => {
         <>
             <Header />
 
-            <div className='flex flex-row w-full justify-center items-center mt-6'>
-                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-bee-blue-clean hover:text-white hover:cursor-pointer absolute m-2 left-12">voltar</button>
-            </div>
-
-            <HistoryKrsList histories={histories} goalKr={goalKr} />
+            <HistoryKrsList histories={histories} goalKr={goalKr} routerBack={routerBack}/>
             {/* <TeamHistoriesList/> */}
         </>
     );
