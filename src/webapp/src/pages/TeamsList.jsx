@@ -57,6 +57,7 @@ const TeamList = () => {
     function closeModal() {
         setIsOpen(false)
     }
+
     return (
         <>
             <Header />
@@ -97,7 +98,8 @@ const TeamList = () => {
                                 isOpen={isOpen} 
                                 closeModal={closeModal} 
                                 usersAndTeams={usersAndTeams} 
-                                users={users} idTeam={idTeam} 
+                                users={users} 
+                                idTeam={idTeam} 
                                 idCompany={idCompany}
                                 update={update}
                                 idLeader={idLeader}
