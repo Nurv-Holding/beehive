@@ -57,6 +57,7 @@ const TeamList = () => {
     function closeModal() {
         setIsOpen(false)
     }
+
     return (
         <>
             <Header />
