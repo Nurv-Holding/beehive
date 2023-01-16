@@ -12,6 +12,7 @@ import FormTeam from "./components/CompanyMenuPanel/Teams/FormTeam";
 import FormWayOfBeing from "./components/CompanyMenuPanel/wayOfBeing/FormWayOfBeing";
 import FormMenuWayOfBeing from "./components/CompanyMenuPanel/wayOfBeing/FormMenuWayOfBeing";
 import TeamList from "./pages/TeamsList";
+import ListUsers from "./components/CompanyMenuPanel/Users/ListUsers";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="goal/:idGoal/history-kr/:idgoalsKr" element={<HistoryKr />} />
         <Route path="goal/:idGoal/history-krTeam/:idTeam" element={<HistoryKrsTeam />} />
         <Route path="teamlist" element={<TeamList />} />
+        <Route path="userslist" element={<ListUsers />} />
       </Route>
       <Route path="/formuser" element={<FormUser />} />
       <Route path="/formteam/:idCompany" element={<FormTeam />} />

@@ -2,7 +2,7 @@ import moment from "moment"
 import { useState } from "react"
 import ObservationModal from "./ObservationModal"
 
-const HistoryKrsList = ({ histories, goalKr }) => {
+const HistoryKrsList = ({ histories, goalKr, routerBack }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     function openModal() {
@@ -16,9 +16,21 @@ const HistoryKrsList = ({ histories, goalKr }) => {
 
     return (
         <main className='flex flex-col items-center'>
-            <span className='font-bold text-2xl text-white uppercase mt-2'> {goalKr.name} </span>
-            <span className='font-bold text-lg m-2 text-white'>Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")} </span>
             <div className='w-11/12'>
+                <div className="w-full my-8">
+                    <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
+
+                    <div className="flex flex-col items-center">
+                        <span className=' text-center justify-self-center text-bee-blue-clean font-bold text-2xl hover:cursor-default'>
+                            {goalKr.name}
+                        </span><span className=' text-center justify-self-center text-bee-blue-clean font-bold text-lg hover:cursor-default'>
+                            Criado em: {moment(goalKr?.createdHistory).format("DD/MM/YYYY")}
+                        </span>
+                    </div>
+                </div>
+
                 <div className='container-empresas'>
                     <div className='flex flex-col items-center'>
                         <div className='container-table-grid-team px-4'>

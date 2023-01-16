@@ -1,7 +1,5 @@
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { Tab } from '@headlessui/react'
-import FormUser from './FormUser'
-import ListaUsuarios from './ListUsers'
+import ListUsersOkrs from './ListUsersOkrs'
 import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
 import { useState } from 'react'
@@ -62,22 +60,21 @@ function Users() {
 
     return (
         <div className='flex flex-row justify-between'>
-            <div className='h-full-side-bar-calc w-14 bg-gray-200 flex flex-col items-center py-2'>
+            <div className='h-full-side-bar-calc w-14 bg-gray-200 gap-2 flex flex-col items-center py-2'>
                 <Link
-                   to="/formuser" className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
+                    to="/formuser" className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
                 >
                     +
                 </Link>
+
+                <Link
+                    to={`/company/${idCompany}/userslist`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-sm px-2"
+                >
+                    Lista
+                </Link>
             </div>
 
-            <ListaUsuarios users={users} />
-
-            {/* <FormUser
-            modelChange={modelChange}
-            message={message}
-            handleSubmit={handleSubmit}
-                /> */}
-
+            <ListUsersOkrs users={users} />
         </div>
     )
 }

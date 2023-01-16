@@ -62,13 +62,17 @@ const TeamList = () => {
         <>
             <Header />
 
-            <div className='flex flex-row w-full justify-center items-center mt-6'>
-                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
-            </div>
 
-            <main className='flex flex-col items-center'>
-                <span className='font-bold text-2xl text-black uppercase mt-2'> Lista de Integrantes </span>
-                
+
+            <main className='flex flex-col items-center gap-8'>
+                <div className='flex items-center mt-8'>
+                    <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
+
+                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'> Lista de Times </span>
+                </div>
+
                 <div className='w-11/12'>
                     <div className='container-empresas'>
                         <div className='flex flex-col items-center'>
@@ -86,7 +90,7 @@ const TeamList = () => {
                                             return (
                                                 <>
                                                     <tr>
-                                                        <td onClick={()=>openModal(team?.id, team?.leader)} className="cursor-pointer">{team?.name}</td>
+                                                        <td onClick={() => openModal(team?.id, team?.leader)} className="cursor-pointer">{team?.name}</td>
                                                         <td>{(users || []).filter(a => a?.id === team?.leader)[0]?.name}</td>
                                                     </tr>
                                                 </>
@@ -94,15 +98,15 @@ const TeamList = () => {
                                         })}
                                     </tbody>
                                 </table>
-                                <AddMembers 
-                                isOpen={isOpen} 
-                                closeModal={closeModal} 
-                                usersAndTeams={usersAndTeams} 
-                                users={users} 
-                                idTeam={idTeam} 
-                                idCompany={idCompany}
-                                update={update}
-                                idLeader={idLeader}
+                                <AddMembers
+                                    isOpen={isOpen}
+                                    closeModal={closeModal}
+                                    usersAndTeams={usersAndTeams}
+                                    users={users}
+                                    idTeam={idTeam}
+                                    idCompany={idCompany}
+                                    update={update}
+                                    idLeader={idLeader}
                                 />
                             </div>
                         </div>

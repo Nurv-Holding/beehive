@@ -12,12 +12,12 @@ const FutureVision = ({ futureVisions, idCompany }) => {
                                 <h1 className="text-center font-bold text-2xl"> {f.title} </h1>
 
                                 <Link
-                                    to={`/formfuturevisionchildren/${f.id}/${idCompany}`} className="rounded-lg bg-bee text-white text-center self-end text-lg px-2"
+                                    to={`/formfuturevisionchildren/${f.id}/${idCompany}`} className="rounded-lg bg-bee hover:bg-bee-strong-1 text-white text-center self-end text-lg px-2"
                                 >
                                     +
                                 </Link>
                             </div>
-                            <p> {f.description} </p>
+                            <p className="w-full"> {f.description} </p>
                         </div>
                     )
                 })}

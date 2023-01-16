@@ -28,9 +28,9 @@ const TeamKrModal = ({
                 <div className="flex gap-2 items-center">
                     <div className="flex flex-col gap-2">
                         <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
-                        <textarea className="p-2" onChange={({ target }) => setNote(target.value)} name="note" cols="55" rows="10"></textarea>
+                        <textarea className="input-style" placeholder="Nota" onChange={({ target }) => setNote(target.value)} name="note" cols="55" rows="10"></textarea>
                         <button onClick={() => goalTeamKrsUpdate(krs.idgoalTeamsKr, krs.idProcessGoalsTeams, calcPercentage((krs.doneGoalsTeamKr + done), krs.fromYearlyGoalsTeamKr), calcPercentage((krs.doneGoalsTeamKr + done), krs.fromQuarterlyGoalsTeamKr))} type="button" className="submit-button">OK</button>
-                        {message}
+                        <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
                     </div>
                 </div>
                 }
@@ -49,7 +49,7 @@ const TeamKrModal = ({
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
-                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  background-color: rgb(31 98 222/ var(--tw-bg-opacity));
                                   width: ${calcPercentage(krs.doneGoalsTeamKr, krs.fromQuarterlyGoalsTeamKr)}%;
                                 }
                             `}</style>
@@ -71,7 +71,7 @@ const TeamKrModal = ({
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
-                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  background-color: rgb(31 98 222/ var(--tw-bg-opacity));
                                   width: ${calcPercentage(krs.doneGoalsTeamKr, krs.fromYearlyGoalsTeamKr)}%;
                                 }
                             `}</style>

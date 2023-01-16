@@ -234,10 +234,10 @@ function TeamsGoal({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    if(!done || note === ""){
+    if (!done || note === "") {
       setMessage("Primeiro precisa preencher os campos")
 
-    }else{
+    } else {
 
       const data = { done: done + krs?.doneGoalsTeamKr }
 
@@ -253,17 +253,17 @@ function TeamsGoal({
             from: data?.done,
             note
           }
-  
+
           historyGoalTeamKrApi.create(idCompany, newData)
-  
+
           setMessage("Atualizado")
           navigate({
             pathname: `/company/${idCompany}/goal/${idGoal}`,
             search: `?update=${true}`
           })
-  
+
           closeTeamKrModal()
-  
+
         })
         .catch((error) => {
           console.error(error)
@@ -292,32 +292,27 @@ function TeamsGoal({
 
                     <TaskPercentage
                     />
-                    
+
                   </Disclosure.Button>
                   <>
-                  <div className="w-[25%] flex items-center justify-center gap-2">
-                    {!(!!goal.status) &&
-                    <button className="modal-btn p-1" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
-                      Adicionar objetivo
-                    </button>
-                    }
-                    <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn p-1">
+                    <div className="w-[25%] flex items-center justify-center gap-2">
+                      <button className="modal-btn p-1" data-bs-toggle="modal" data-bs-target="#teamDisclosure">
+                        Adicionar Objetivo
+                      </button>
+
+                      <AddGoalTeam
+                        idRef={"teamDisclosure"}
+                        createGoalsTeam={createGoalsTeam}
+                        modelChange={modelChange}
+                        idTeam={idTeam}
+                      >
+
+                      </AddGoalTeam>
+
+                      <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn p-1">
                         Histórico
-                    </button>
-                  </div>
-                  {!(!!goal.status) &&
-                  
-                    <AddGoalTeam
-                      closeModal={closeModalGoalTeam}
-                      openModal={openModalGoalTeam}
-                      isOpen={isOpenGoalTeam}
-                      createGoalsTeam={createGoalsTeam}
-                      modelChange={modelChange}
-                      idTeam={idTeam}
-                      item={item}
-                    />
-                    
-                  }
+                      </button>
+                    </div>
                   </>
 
                 </div>
@@ -354,16 +349,16 @@ function TeamsGoal({
                                     </div>
 
                                     <div>
-                                      {!kr.statusKr?
-                                      <button onClick={() => openModalFinishTeamKr(kr)} 
-                                        className='bg-[#5500c3] text-white p-1 rounded-lg'
-                                      >
-                                        Encerrar KR
-                                      </button>
-                                      :
-                                      "KR encerrado"
+                                      {!kr.statusKr ?
+                                        <button onClick={() => openModalFinishTeamKr(kr)}
+                                          className='bg-bee-blue-clean text-white p-1 rounded-lg text-sm'
+                                        >
+                                          Encerrar KR
+                                        </button>
+                                        :
+                                        "KR encerrado"
                                       }
-                  
+
                                     </div>
                                     <FinishTeamKr
                                       message={messageFinish}

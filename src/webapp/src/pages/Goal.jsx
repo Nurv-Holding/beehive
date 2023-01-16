@@ -396,7 +396,7 @@ function Goal() {
 
       <main className='flex flex-col items-center pt-8'>
         <div className='flex flex-row w-full justify-center items-center'>
-          <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">
+          <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
             <ion-icon name="arrow-back-outline"></ion-icon>
           </button>
 
@@ -411,7 +411,7 @@ function Goal() {
               <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status) &&
-              <div className='container-percentage-okr flex flex-row justify-around'>
+              <div className='container-percentage-okr flex flex-row justify-end gap-4'>
                 <AddKr
                   message={message}
                   nameGoal={goal.name}

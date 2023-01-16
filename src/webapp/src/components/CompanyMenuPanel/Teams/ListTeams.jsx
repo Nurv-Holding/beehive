@@ -56,7 +56,7 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
   }
 
   return (
-    <div className='flex flex-row justify-between w-full'>
+    <div className='flex flex-row w-full'>
       <div className='h-full-side-bar-calc w-14 bg-gray-200 flex gap-2 flex-col items-center py-2'>
         <Link
           to={`/formteam/${idCompany}`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
@@ -75,19 +75,17 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
         <div
           className='login-bg h-44 w-full'
         >
-          {/* <img 
-            src={team} 
-            alt="" 
-            className='h-40 w-full object-cover object-center'
-          /> */}
         </div>
-        <div className='grid grid-cols-3 gap-3 w-[90%] mx-auto p-3'>
+
+        <h1 className='text-3xl text-bee-blue-clean font-bold text-center p-4'>OKRs</h1>
+
+        <div className='grid grid-cols-3 gap-3 w-[90%] mx-auto px-3 mb-4'>
           {(teamByTeam || []).map((team) => {
             return (
               <>
-              <ModalMembersTeam idRef={"members"} idTeam={idTeam} users={users} />
+                <ModalMembersTeam idRef={"members"} idTeam={idTeam} users={users} />
                 <div className='text-center bg-white p-4 flex flex-col items-center w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg'>
-                  <div  className="cursor-pointer flex flex-col items-center justify-center">
+                  <div className="cursor-pointer flex flex-col items-center justify-center">
                     <button onClick={() => setIdTeam(team?.idTeam)} className="text-bee-strong-1 text-xl font-bold text-center uppercase" data-bs-toggle="modal" data-bs-target="#members">
                       {team.nameTeam}
                     </button>
@@ -97,33 +95,31 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
                       {(users || []).filter(user => user.id === team.leader)[0]?.name}
                     </div>
                     <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Objetivos</span>
-                    <div className='grid grid-cols-2 gap-3 w-full'>
-                          {(allTeams || []).filter(e => e.idTeam === team.idTeam).map((goalTeam) => {
-                              return(
-                                <Disclosure>
-                                  
-                                  <div className="w-full">
-                                    <Disclosure.Button>
-                                      <div className="bg-white w-full p-4 rounded-xl shadow-lg cursor-default">
-                                          <h1 className='text-black uppercase text-center font-bold text-[12px]'>
-                                              {goalTeam.nameGoalTeam}
-                                          </h1>
-                                      </div>
-                                    </Disclosure.Button>
-                                    {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
-                                      return(
-                                        <Disclosure.Panel className="bg-pink-500 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
-                                        {kr.nameKr}
-                                      </Disclosure.Panel>
-                                      )
-                                    })}
-
-                                  </div>
-                                </Disclosure>
-                              )
-                          })}
-                      </div>
+                    <div className='grid grid-cols-2 gap-4 w-full'>
+                      {(allTeams || []).filter(e => e.idTeam === team.idTeam).map((goalTeam) => {
+                        return (
+                          <Disclosure>
+                            <div className="w-full py-2">
+                              <Disclosure.Button>
+                                <div className="bg-white cursor-pointer rounded-xl">
+                                  <h1 className='text-black uppercase text-center font-bold text-[12px]'>
+                                    {goalTeam.nameGoalTeam}
+                                  </h1>
+                                </div>
+                              </Disclosure.Button>
+                              {(teamsByKrs || []).filter(f => f.idGoalTeam === goalTeam.idGoalTeam).map((kr) => {
+                                return (
+                                  <Disclosure.Panel className="bg-bee-strong-1 my-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                                    {kr.nameKr}
+                                  </Disclosure.Panel>
+                                )
+                              })}
+                            </div>
+                          </Disclosure>
+                        )
+                      })}
                     </div>
+                  </div>
                 </div>
               </>
             )
@@ -160,7 +156,7 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
             </div>
 
             <button className='submit-button mt-3' type="submit">Adicionar</button>
-            <span> {message} </span>
+            <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
           </form>
         </div>
       </Modal>

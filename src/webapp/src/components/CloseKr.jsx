@@ -23,10 +23,10 @@ const CloseKr = ({
                 Encerrar KR
             </button>
 
-            <Modal 
-            isOpen={isOpen} 
-            closeModal={closeModal} 
-            title={"Encerrar objetivo"}
+            <Modal
+                isOpen={isOpen}
+                closeModal={closeModal}
+                title={"Encerrar objetivo"}
             >
                 <div className="flex flex-col gap-4">
                     <h1 className="text-xl">Encerrar o KR: <span className="text-red-500">{nameKr}</span>?</h1>
@@ -40,10 +40,10 @@ const CloseKr = ({
                             <button className='submit-button ml-4' type="button" onClick={closeModal}>
                                 Cancelar
                             </button>
-                            
+
                         </div>
                         <span className="text-red-600">
-                            {message}
+                            <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block'}`}> {message} </span>
                         </span>
                     </form>
                 </div>

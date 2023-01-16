@@ -19,13 +19,13 @@ const Header = () => {
                     <img src={logo} className="w-full" alt="logo" />
                 </div>
                 {isLogin &&
-                    <span className="hover:cursor-default"> Olá, <span className="hover:text-bee-blue-strong">{payload?.name}</span> </span>
+                    <span className="hover:cursor-default"> Olá, <span className="hover:text-bee-blue-clean">{payload?.name}</span> </span>
                 }
 
             </div>
             <nav className="flex gap-2">
                 <NavLink to="/">
-                    <span className="hover:text-bee-blue-strong">Home</span>
+                    <span className="hover:text-bee-blue-clean">Home</span>
                 </NavLink>
 
                 {isLogin &&

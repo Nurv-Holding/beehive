@@ -7,25 +7,25 @@ import Header from '../../Header';
 
 function FormTeam() {
     const navigate = useNavigate()
-    const [team, setTeam] = useState({name:"", descriptions:""})
+    const [team, setTeam] = useState({ name: "", descriptions: "" })
     const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [users, setUsers] = useState([])
-    const {idCompany} = useParams()
+    const { idCompany } = useParams()
 
-    const modelChange = ({target}) => {
+    const modelChange = ({ target }) => {
         setTeam((state) => {
-            return {...state,[target.name]: target.value}
+            return { ...state, [target.name]: target.value }
         })
     }
 
     useEffect(() => {
         handleUsers()
 
-    },[idCompany])
+    }, [idCompany])
 
     const handleUsers = async () => {
-        const {data} = await usersApi.getAllByCompany(idCompany)
+        const { data } = await usersApi.getAllByCompany(idCompany)
         setUsers(data)
     }
 
@@ -34,22 +34,22 @@ function FormTeam() {
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        if(team.name === "" || team.descriptions === "")
+        if (team.name === "" || team.descriptions === "")
             setMessage("Os campos precisam ser preeenchidos")
 
-        else{
-            teamsApi.create(idCompany,{...team, leader:parseInt(team.leader)})
-            .then(() => {
-                setMessage("Cadastro realizado com sucesso")
-                navigate({
-                  pathname: `/formteam/${idCompany}`,
-                  search: `?update=${true}`
+        else {
+            teamsApi.create(idCompany, { ...team, leader: parseInt(team.leader) })
+                .then(() => {
+                    setMessage("Cadastro realizado com sucesso")
+                    navigate({
+                        pathname: `/formteam/${idCompany}`,
+                        search: `?update=${true}`
+                    })
                 })
-              })
-              .catch((error) => {
-                console.error(error)
-                setMessage("Algo deu errado!")
-              })
+                .catch((error) => {
+                    console.error(error)
+                    setMessage("Algo deu errado!")
+                })
         }
     }
 
@@ -61,18 +61,16 @@ function FormTeam() {
         <>
             <Header />
 
-            <main className='flex flex-col items-center'>
-                <div className='flex flex-row w-full justify-center items-center mt-8'>
-                    <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
+            <main className='flex flex-col items-center gap-8'>
+                <div className='flex items-center mt-8'>
+                    <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
+
+                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'> Cadastrar Time</span>
                 </div>
 
-                <div>
-                    <span className='m-2 text-center justify-self-center text-[#5500C3] font-bold text-2xl hover:cursor-default'>
-                        Cadastrar time
-                    </span>
-                </div>
-
-                <div className='flex flex-col w-2/4 items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
+                <div className='flex flex-col w-2/4 items-center bg-white p-2 rounded-lg shadow-xl'>
                     <form onSubmit={handleSubmit} className='w-full flex flex-col items-center p-4'>
                         <div className='w-[70%] gap-2 flex flex-wrap items-center justify-center'>
                             <input type="text" required className="input-style" placeholder='Nome' name='name' onChange={modelChange} />
@@ -82,7 +80,7 @@ function FormTeam() {
                             <select onChange={modelChange} name="leader" id="users" className="input-style">
                                 <option disabled selected>Líder do time</option>
                                 {(users || []).map((user) => {
-                                    return(
+                                    return (
                                         <option value={user.id}> {user.name} </option>
                                     )
                                 })}
@@ -91,7 +89,7 @@ function FormTeam() {
 
                         <button className='submit-button mt-4' type="submit">Cadastrar</button>
                     </form>
-                    <span className="text-center"> {message} </span>
+                    <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block text-center'}`}> {message} </span>
                 </div>
             </main>
         </>
