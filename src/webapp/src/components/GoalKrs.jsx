@@ -150,14 +150,10 @@ function GoalKrs({
         return (
           <div key={i} className={`${!(!!goalKr.status) && !(!!goal.status) ? "bg-white rounded-md p-0.5 mt-4 flex flex-col" : "bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
             <Disclosure>
-              <Disclosure.Button className='flex flex-row items-center justify-around w-full p-4 cursor-pointer'>
+              <Disclosure.Button className='grid grid-cols-2 content-center justify-items-center w-full p-4 cursor-pointer'>
                 <div className='flex items-center'>
-                  <span> {goalKr.nameGoalsKr} </span>
-                  <div className={`${!(!!goalKr.status) && !(!!goal.status) ? "bg-green-500 rounded-full p-1.5 ml-2 border border-black" : "bg-red-500 rounded-full p-1.5 ml-2 border border-black"}`}></div>
-                </div>
-
-                <div className='profile-photo-task'>
-                  <img src="https://thispersondoesnotexist.com/image" />
+                  <span className="capitalize font-semibold"> {goalKr.nameGoalsKr} </span>
+                  <div className={`${!(!!goalKr.status) && !(!!goal.status) ? "bg-green-500 rounded-full p-1.5 ml-2 border" : "bg-red-500 rounded-full p-1.5 ml-2 border"}`}></div>
                 </div>
 
                 <span className="text-gray-600 text-sm">Atualizado {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}</span>
