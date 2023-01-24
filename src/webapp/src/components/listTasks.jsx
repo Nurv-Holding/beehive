@@ -79,8 +79,8 @@ const ListTasks = ({
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
-                <div className={`${task.done? "flex justify-between items-center rounded-lg bg-blue-300 mx-2 p-2 my-2": "flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2"}`}>
-                    <span> {task.nameTask} </span>
+                <div className={`${task.done? "grid grid-cols-5 content-center justify-items-center rounded-lg bg-green-300 mx-2 p-2 my-2": "grid grid-cols-5 content-center justify-items-center rounded-lg bg-white mx-2 p-2 my-2"}`}>
+                    <span className="capitalize"> {task.nameTask} </span>
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
                     <>
@@ -90,7 +90,7 @@ const ListTasks = ({
                     {!(!!goal.status) && !task.done?
                     <div>
                         {!task?.done &&
-                        <button className="bg-bee-blue-clean text-white p-1 rounded-lg text-sm" onClick={() => openTaskDone(task)}> Concluir </button>
+                        <button className="bg-bee-blue-clean text-white py-1 px-3 rounded-lg text-sm" onClick={() => openTaskDone(task)}> Concluir </button>
                         }
                         <TaskDone
                             setOpenModalTaskDone={setOpenModalTaskDone}
@@ -105,7 +105,7 @@ const ListTasks = ({
                     </div>
                     :
                     <div>
-                        <button onClick={() => openDescription(task)} > Lições Aprendidas </button>
+                        <button onClick={() => openDescription(task)} className='text-bee-blue-clean font-semibold'> Lições Aprendidas </button>
                         <DescriptionTask
                             openDescriptionModal={openDescriptionModal}
                             closeDescriptionModal={closeDescriptionModal}
