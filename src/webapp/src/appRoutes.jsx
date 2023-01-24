@@ -26,8 +26,8 @@ function AppRoutes() {
         <Route path="goal/:idGoal/history-krTeam/:idTeam" element={<HistoryKrsTeam />} />
         <Route path="teamlist" element={<TeamList />} />
         <Route path="userslist" element={<ListUsers />} />
+        <Route path="formuser" element={<FormUser />} />
       </Route>
-      <Route path="/formuser" element={<FormUser />} />
       <Route path="/formteam/:idCompany" element={<FormTeam />} />
       <Route path="/registerfuturevision/:idCompany" element={<FormWayOfBeing />} />
       <Route path="/formfuturevisionchildren/:idFutureVision/:idCompany" element={<FormMenuWayOfBeing />} />

@@ -7,9 +7,8 @@ import usersApi from '../../../api/usersApi'
 import { useEffect } from 'react'
 
 function Users() {
-    const { item, modelChange } = useContext(ContextUser)
+    const { item, modelChange, idCompany, idGoal } = useContext(ContextUser)
     const [message, setMessage] = useState("")
-    const { idCompany } = useParams()
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
@@ -62,7 +61,7 @@ function Users() {
         <div className='flex flex-row justify-between'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 gap-2 flex flex-col items-center py-2'>
                 <Link
-                    to="/formuser" className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
+                    to={`/company/${idCompany}/formuser`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
                 >
                     +
                 </Link>
