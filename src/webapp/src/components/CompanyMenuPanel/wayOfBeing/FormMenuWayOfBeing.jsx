@@ -10,16 +10,17 @@ import RegisterGoals from '../../RegisterGoals';
 import goalsApi from '../../../api/goalsApi';
 import jwtDecode from 'jwt-decode';
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import { ContextCompany } from '../../../context/ContextCompany';
 
 function FormMenuWayOfBeing() {
+    const {payload} = useContext(ContextCompany)
     const navigate = useNavigate()
     const [item, setItem] = useState({title:"", description:""})
     const [goal, setGoal] = useState({name:"", descriptions:""})
     const [searchParams, setSearchParams] = useSearchParams()
     const [message, setMessage] = useState("")
     const {idCompany, idFutureVision} = useParams()
-    const token = localStorage.getItem("token")
-    const payload = token? jwtDecode(token): null
 
     const modelChange = ({ target }) => {
         setItem((state) => {

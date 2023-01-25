@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import futureVisionApi from '../../../api/futureVisionApi';
+import Autorize from '../../Autorize';
 import Header from '../../Header';
 
 function FormWayOfBeing() {
@@ -51,6 +52,7 @@ function FormWayOfBeing() {
 
     return (
         <>
+        <Autorize userAutorized={["adminMaster", "adminCorporate"]}>
             <Header />
             <main className='flex flex-col items-center gap-8 pt-8'>
                 <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
@@ -75,7 +77,7 @@ function FormWayOfBeing() {
                 </div>
 
             </main>
-
+        </Autorize>
         </>
     )
 

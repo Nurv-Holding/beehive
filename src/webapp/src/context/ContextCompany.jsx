@@ -30,7 +30,6 @@ export const ContextUserProvider = ({ children }) => {
     const payload = token? jwtDecode(token): null
     const [goalKrs, setGoalKrs] = useState([])
     const [krs, setKrs] = useState([])
-    
 
     useEffect(() => {
         handlerUsersByCompany()
