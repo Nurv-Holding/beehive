@@ -28,6 +28,7 @@ function TeamsGoal({
   goalTeamByGoalTeam,
   closeModalGoalTeam,
   goalTeamsKrs,
+  setIdTeam,
   closeModalFinishTeamKr,
   setOpenModalFinishKr,
   openModalFinishKr,
@@ -52,7 +53,7 @@ function TeamsGoal({
   const [user, setUser] = useState(null)
   const [goalKr, setGoalKr] = useState({})
   const [addTaskModal, setAddTaskModal] = useState(false)
-  const [message, setMessage] = useState("Aqui vai uma mensagem")
+  const [message, setMessage] = useState("")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
   const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
   const [idProcess, setIdProcess] = useState(null)
@@ -296,7 +297,7 @@ function TeamsGoal({
                   </Disclosure.Button>
                   <>
                     <div className="w-[25%] flex items-center justify-center gap-2">
-                      <button className="modal-btn p-1" data-bs-toggle="modal" data-bs-target="#teamDisclosure">
+                      <button onClick={() => setIdTeam(goalTeams.idTeam)} className="modal-btn p-1" data-bs-toggle="modal" data-bs-target="#teamDisclosure">
                         Adicionar Objetivo
                       </button>
 

@@ -486,6 +486,7 @@ function Goal() {
               historyGoalTeamKrs={historyGoalTeamKrs}
               tasksUser={tasksUser}
               teamUsers={teamUsers}
+              setIdTeam={setIdTeam}
               payload={payload}
               goal={goal}
               closeModalFinishTeamKr={closeModalFinishTeamKr}

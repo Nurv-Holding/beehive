@@ -18,7 +18,7 @@ const AddTask = ({ isOpen, closeModal, modelChange, message, createTask, item })
                             <button className='submit-button' type="submit" >
                                 Adicionar
                             </button>
-                            <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
+                            <span className={`block`}> {message} </span>
                         </div>
                     </form>
                 </div>
