@@ -7,12 +7,12 @@ import historyGoalKrApi from '../api/historyGoalKrApi';
 import Header from '../components/Header';
 import HistoryKrsList from '../components/HistoryKrsList';
 import TeamHistoriesList from '../components/TeamHistoriesList';
-import { ContextUser } from '../context/ContextUser';
+import { ContextCompany } from '../context/ContextCompany';
 
 const HistoryKr = () => {
 
     const { idgoalsKr, idGoal } = useParams()
-    const { idCompany } = useContext(ContextUser)
+    const { idCompany } = useContext(ContextCompany)
     const [histories, setHistories] = useState([])
     const navigate = useNavigate()
     const [goalKr, setGoalKr] = useState(

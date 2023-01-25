@@ -1,13 +1,13 @@
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import ListUsersOkrs from './ListUsersOkrs'
 import { useContext } from 'react'
-import { ContextUser } from '../../../context/ContextUser'
+import { ContextCompany } from '../../../context/ContextCompany'
 import { useState } from 'react'
 import usersApi from '../../../api/usersApi'
 import { useEffect } from 'react'
 
 function Users() {
-    const { item, modelChange, idCompany, idGoal } = useContext(ContextUser)
+    const { item, modelChange, idCompany, idGoal } = useContext(ContextCompany)
     const [message, setMessage] = useState("")
     const [users, setUsers] = useState([])
     const navigate = useNavigate()

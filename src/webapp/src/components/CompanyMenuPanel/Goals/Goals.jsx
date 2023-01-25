@@ -2,7 +2,7 @@ import { json, Link, useNavigate, useParams, useSearchParams } from 'react-route
 import { Tab } from '@headlessui/react'
 import FormGoal from './FormGoal'
 import { useContext } from 'react'
-import { ContextUser } from '../../../context/ContextUser'
+import { ContextCompany } from '../../../context/ContextCompany'
 import { useState } from 'react'
 import goalsApi from '../../../api/goalsApi'
 import jwtDecode from "jwt-decode"
@@ -10,7 +10,7 @@ import GoalsList from './GoalsList'
 import goalKrsApi from '../../../api/goalKrsApi'
 
 function Goals() {
-    const { companyGoals, idCompany, goalAndTeams, krs, goalKrs, item, modelChange } = useContext(ContextUser)
+    const { companyGoals, idCompany, goalAndTeams, krs, goalKrs, item, modelChange } = useContext(ContextCompany)
     const [message, setMessage] = useState("Aqui vai uma mensagem")
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()

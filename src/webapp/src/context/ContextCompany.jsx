@@ -11,7 +11,7 @@ import usersApi from "../api/usersApi"
 import jwtDecode from "jwt-decode"
 import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
 
-export const ContextUser = createContext()
+export const ContextCompany = createContext()
 
 export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
@@ -104,7 +104,7 @@ export const ContextUserProvider = ({ children }) => {
     }
 
     return(
-        <ContextUser.Provider 
+        <ContextCompany.Provider 
             value={
                 {
                     goals,
@@ -127,6 +127,6 @@ export const ContextUserProvider = ({ children }) => {
             }
         >
             {children}
-        </ContextUser.Provider> 
+        </ContextCompany.Provider> 
     )
 }

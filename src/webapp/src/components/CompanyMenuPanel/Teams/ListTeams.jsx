@@ -3,12 +3,12 @@ import { Disclosure, Tab } from '@headlessui/react'
 import { useState } from 'react'
 import Modal from '../Goals/components/Modal'
 import { useContext } from 'react'
-import { ContextUser } from '../../../context/ContextUser'
+import { ContextCompany } from '../../../context/ContextCompany'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 import ModalMembersTeam from '../../ModalMembersTeam'
 
 function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }) {
-  const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
+  const { usersByCompany, teamUsers, idCompany } = useContext(ContextCompany)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
   const [message, setMessage] = useState("")

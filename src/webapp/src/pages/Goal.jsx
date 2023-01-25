@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
 import TeamsGoal from '../components/TeamsGoal';
-import { ContextUser } from '../context/ContextUser';
+import { ContextCompany } from '../context/ContextCompany';
 import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
 import goalsTeamApi from '../api/goalsTeamApi';
@@ -31,7 +31,7 @@ function Goal() {
     users,
     company,
     payload,
-    token } = useContext(ContextUser)
+    token } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})

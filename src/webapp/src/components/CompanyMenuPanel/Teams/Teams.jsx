@@ -5,7 +5,7 @@ import ListTeams from './ListTeams'
 import { useContext } from 'react'
 import { useState } from 'react'
 import teamsApi from '../../../api/teamsApi'
-import { ContextUser } from '../../../context/ContextUser'
+import { ContextCompany } from '../../../context/ContextCompany'
 import { useEffect } from 'react'
 import goalTeamsKrsApi from '../../../api/goalTeamsKrsApi'
 import goalsTeamApi from '../../../api/goalsTeamApi'
@@ -13,7 +13,7 @@ import usersApi from '../../../api/usersApi'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 
 function Teams() {
-    const { teams, modelChange, item, idCompany, goals, usersByCompany } = useContext(ContextUser)
+    const { teams, modelChange, item, idCompany, goals, usersByCompany } = useContext(ContextCompany)
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()

@@ -76,8 +76,7 @@ function FormUser() {
             <Header />
 
             <main className='flex flex-col items-center gap-8'>
-                {JSON.stringify(employee)}
-            <div className='flex items-center mt-8'>
+                <div className='flex items-center mt-8'>
                     <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </button>

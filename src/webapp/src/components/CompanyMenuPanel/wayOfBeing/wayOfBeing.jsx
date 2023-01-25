@@ -5,14 +5,14 @@ import { useContext, useEffect } from 'react'
 import futureVisionApi from '../../../api/futureVisionApi'
 import principlesApi from '../../../api/principlesApi'
 import proposalsApi from '../../../api/proposalsApi'
-import { ContextUser } from '../../../context/ContextUser'
+import { ContextCompany } from '../../../context/ContextCompany'
 import FutureVision from '../../fututeVision'
 import Principles from '../../principles'
 import Proposals from '../../proposals'
 import { Link } from 'react-router-dom'
 
 function WayOfBeing() {
-    const { idCompany } = useContext(ContextUser)
+    const { idCompany } = useContext(ContextCompany)
     const [futureVisions, setFutureVisions] = useState([])
     const [principles, setPrinciples] = useState([])
     const [proposals, setProposals] = useState([])

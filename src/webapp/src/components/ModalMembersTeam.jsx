@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import teamsUsersApi from "../api/teamsUsersApi"
-import { ContextUser } from "../context/ContextUser"
+import { ContextCompany } from "../context/ContextCompany"
 import NewModal from "./CompanyMenuPanel/Goals/components/NewModal"
 
 const ModalMembersTeam = ({idRef, idTeam, users}) => {
-    const { idCompany, teams } = useContext(ContextUser)
+    const { idCompany, teams } = useContext(ContextCompany)
     const [allTeamsAndUsers, setAllTeamsAndUsers] = useState([])
     const [team, setTeam] = useState({})
 
