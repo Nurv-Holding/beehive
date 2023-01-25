@@ -43,7 +43,7 @@ function WayOfBeing() {
         <div className='flex flex-row'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 flex flex-col items-center py-2'>
                 <Link
-                    to={`/registerfuturevision/${idCompany}`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
+                    to={`/company/${idCompany}/registerfuturevision`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
                 >
                     +
                 </Link>

@@ -9,6 +9,7 @@ import proposalsApi from '../../../api/proposalsApi';
 import RegisterGoals from '../../RegisterGoals';
 import goalsApi from '../../../api/goalsApi';
 import jwtDecode from 'jwt-decode';
+import { useEffect } from 'react';
 
 function FormMenuWayOfBeing() {
     const navigate = useNavigate()

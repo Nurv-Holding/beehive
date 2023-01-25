@@ -27,10 +27,12 @@ function AppRoutes() {
         <Route path="teamlist" element={<TeamList />} />
         <Route path="userslist" element={<ListUsers />} />
         <Route path="formuser" element={<FormUser />} />
+        <Route path="registerfuturevision" element={<FormWayOfBeing />} />
+        <Route path="formteam" element={<FormTeam />} />
+        <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />} />
       </Route>
-      <Route path="/formteam/:idCompany" element={<FormTeam />} />
-      <Route path="/registerfuturevision/:idCompany" element={<FormWayOfBeing />} />
-      <Route path="/formfuturevisionchildren/:idFutureVision/:idCompany" element={<FormMenuWayOfBeing />} />
+      
+
     </Routes>
   );
 }

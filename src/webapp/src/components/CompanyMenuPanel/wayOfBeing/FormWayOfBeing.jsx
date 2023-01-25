@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import futureVisionApi from '../../../api/futureVisionApi';
 import Header from '../../Header';
@@ -11,7 +11,7 @@ function FormWayOfBeing() {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const routerBack = () => {
-        navigate(-1)
+        navigate(`/company/${idCompany}`)
     }
 
     const modelChange = ({ target }) => {
@@ -20,13 +20,18 @@ function FormWayOfBeing() {
         })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        if (item.title === "" || item.description === "")
+        const hasFutureVision = await futureVisionApi.getAll(idCompany)
+
+        if(item.title === "" || item.description === "")
             setMessage("Os campos precisam ser preeenchidos")
+
+        else if(hasFutureVision.length !== 0)
+            setMessage("Visão de futuro já cadastrado")
 
         else {
             futureVisionApi.create(idCompany, item)
@@ -59,14 +64,14 @@ function FormWayOfBeing() {
                 <div className='flex flex-col w-2/4 min-h-[300px]  justify-center items-center bg-white p-2 rounded-lg shadow-xl'>
                     <form onSubmit={handleSubmit} className='w-full flex flex-col items-center p-4 gap-4'>
                         <div className='w-[70%] flex flex-col items-center justify-center gap-4'>
-                            <input type="text" required className="input-style text-center" placeholder='Título' name='title' onChange={modelChange} />
+                            <input type="text" className="input-style text-center" placeholder='Título' name='title' onChange={modelChange} />
 
                             <textarea className="p-2 input-style min-h-[50px] text-center" placeholder='Descrição' name="description" onChange={modelChange} cols="60" rows="3"></textarea>
                         </div>
 
                         <button className='submit-button mt-4' type="submit">Cadastrar</button>
                     </form>
-                    <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block text-center'}`}> {message} </span>
+                    <span className={`block text-center`}> {message} </span>
                 </div>
 
             </main>

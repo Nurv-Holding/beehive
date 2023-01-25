@@ -89,7 +89,7 @@ function FormTeam() {
 
                         <button className='submit-button mt-4' type="submit">Cadastrar</button>
                     </form>
-                    <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block text-center'}`}> {message} </span>
+                    <span className={'block text-center'}> {message} </span>
                 </div>
             </main>
         </>
