@@ -7,7 +7,7 @@ import Loading from "./Loading"
 import jwtDecode from "jwt-decode"
 
 
-const Authorize = ({children}) => {
+const AuthorizeLogin = ({children}) => {
     const token = localStorage.getItem("token")
     const payload = token? jwtDecode(token): null
     const [loading, setLoading] = useState(false)
@@ -34,4 +34,4 @@ const Authorize = ({children}) => {
     )
 }
 
-export default Authorize
+export default AuthorizeLogin

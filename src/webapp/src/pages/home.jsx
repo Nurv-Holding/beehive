@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import companiesApi from '../api/companiesApi';
 import CompaniesList from '../components/CompaniesList';
-import Authorize from '../components/Authorize';
+import AuthorizeLogin from '../components/AuthorizeLogin';
 import jwtDecode from 'jwt-decode';
 import { useSearchParams } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ function Home() {
 
   return (
     <>
-      <Authorize>
+      <AuthorizeLogin>
       <Header />
       <main>
         <div className='grid-container'>
@@ -45,7 +45,7 @@ function Home() {
             </div>
           </div>
       </main>
-      </Authorize>
+      </AuthorizeLogin>
     </>
   );
 }

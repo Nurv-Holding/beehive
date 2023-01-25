@@ -1,19 +1,20 @@
 import { useContext } from "react"
 import { useState } from "react"
 import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import profilesApi from "../api/profilesApi"
 import { ContextCompany } from "../context/ContextCompany"
+import Loading from "./Loading"
 
 
-const Autorize = ({ children, userAutorized }) => {
+const AuthorizeAccess = ({ children, userAutorized }) => {
     const {idCompany, payload} = useContext(ContextCompany)
-    const [profile, setProfile] = useState({})
+    const [profile, setProfile] = useState(null)
+    const {pathname} = useLocation()
 
     useEffect(() => {
-        console.log("payload", payload)
-        console.log("userAutorized", userAutorized)
-        console.log("profile", profile)
         getOneProfile()
+        console.log("profile", profile)
         
     }, [idCompany])
 
@@ -24,9 +25,15 @@ const Autorize = ({ children, userAutorized }) => {
 
     return(
         <>
-            { userAutorized.some((x) => x === profile?.name)? children: "Não autorizado"}
+            {   
+            
+                !profile? <Loading />:
+                userAutorized.some((x) => x?.toLowerCase() === profile?.name?.toLowerCase())? 
+                children: "Não autorizado"
+            }
+
         </>
     )
 }
 
-export default Autorize
+export default AuthorizeAccess

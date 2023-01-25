@@ -12,6 +12,7 @@ import jwtDecode from 'jwt-decode';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { ContextCompany } from '../../../context/ContextCompany';
+import AuthorizeAccess from '../../AuthorizeAccess';
 
 function FormMenuWayOfBeing() {
     const {payload} = useContext(ContextCompany)
@@ -113,6 +114,7 @@ function FormMenuWayOfBeing() {
     return (
         <>
             <Header />
+            <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
 
             <main className='flex h-full'>
                 <Tab.Group>
@@ -199,6 +201,7 @@ function FormMenuWayOfBeing() {
                     </div>
                 </Tab.Group>
             </main>
+            </AuthorizeAccess>
         </>
     )
 
