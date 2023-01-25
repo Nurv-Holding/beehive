@@ -46,9 +46,10 @@ function FormMenuWayOfBeing() {
         else{
             goalsApi.create(idCompany,{...goal, author:payload.id, idFutureVision:parseInt(idFutureVision)})
             .then(() => {
+                setMessage({name:"", descriptions:""})
                 setMessage("Cadastro realizado com sucesso")
                 navigate({
-                  pathname: `/formfuturevisionchildren/${idFutureVision}/${idCompany}`,
+                  pathname: `/company/${idCompany}/formfuturevisionchildren/${idFutureVision}`,
                   search: `?update=${true}`
                 })
               })
@@ -194,6 +195,7 @@ function FormMenuWayOfBeing() {
                                     handleSubmit={registerGoals} 
                                     message={message} 
                                     modelChange={modelChangeGoal}
+                                    goal={goal}
                                     />
                                 </Tab.Panel>
                             </Tab.Panels>
