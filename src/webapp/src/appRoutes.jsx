@@ -13,6 +13,7 @@ import FormWayOfBeing from "./components/CompanyMenuPanel/wayOfBeing/FormWayOfBe
 import FormMenuWayOfBeing from "./components/CompanyMenuPanel/wayOfBeing/FormMenuWayOfBeing";
 import TeamList from "./pages/TeamsList";
 import ListUsers from "./components/CompanyMenuPanel/Users/ListUsers";
+import User from "./pages/user";
 
 function AppRoutes() {
   return (
@@ -31,7 +32,10 @@ function AppRoutes() {
         <Route path="formteam" element={<FormTeam />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />} />
       </Route>
-      
+      <Route path="/user">
+        <Route index element={<User />} />
+
+      </Route>
 
     </Routes>
   );

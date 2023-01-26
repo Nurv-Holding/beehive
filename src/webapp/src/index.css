@@ -42,7 +42,7 @@ header nav{
 }
 
 .grid-row{
-    @apply bg-white rounded-2xl shadow-xl flex flex-col py-4
+    @apply bg-white rounded-md shadow-md flex flex-col py-4
 }
 
 .container-title{
