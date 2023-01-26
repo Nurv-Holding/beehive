@@ -32,7 +32,7 @@ function AppRoutes() {
         <Route path="formteam" element={<FormTeam />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />} />
       </Route>
-      <Route path="/user">
+      <Route path="/idCompany/idUser">
         <Route index element={<User />} />
 
       </Route>

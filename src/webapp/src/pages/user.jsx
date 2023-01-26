@@ -47,27 +47,27 @@ function User() {
 
                             <div>
                                 <ul className='flex flex-row gap-2 w-full flex-wrap justify-center items-center'>
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
                                 </ul>
@@ -79,27 +79,27 @@ function User() {
 
                             <div>
                                 <ul className='flex flex-row gap-2 w-full flex-wrap justify-center items-center'>
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
 
-                                    <a className='text-center w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
+                                    <a className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
                                         OKR
                                     </a>
                                 </ul>
