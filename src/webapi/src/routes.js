@@ -27,6 +27,7 @@ const authenticateController = require("./controllers/autenticateController")
 const futureVisionsController = require("./controllers/futureVisionsController")
 const principlesController = require("./controllers/principlesController")
 const proposalsController = require("./controllers/proposalsController")
+const goalsUserController = require("./controllers/goalsUserController")
 
 const routes = (app) => {
     //login
@@ -101,6 +102,13 @@ const routes = (app) => {
 
                 //projectionGoalsKrs
                 app.get("/goals/:idGoal/krs/c/:idCompany",projectionGoalKrsController().getByGoal)
+
+    //goalsUser
+    app.post("/goalsUser/c/:idCompany",goalsUserController.create)
+    app.get("/goalsUser/:id/c/:idCompany",goalsUserController.getById)
+    app.get("/goalsUser/c/:idCompany",goalsUserController.getAll)
+    app.put("/goalsUser/:id",goalsUserController.update)
+    app.delete("/goalsUser/:id",goalsUserController.remove)
 
     //goalsTeam
     app.post("/goalsTeam/c/:idCompany",goalsTemaController.create)
