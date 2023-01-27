@@ -36,6 +36,7 @@ model Company {
   GoalUserKr         GoalUserKr[]
   GoalsUser          GoalsUser[]
   GoalsUserKr        GoalsUserKr[]
+  HistoryGoalsUserKr HistoryGoalsUserKr[]
 
   @@map("companies")
 }
@@ -208,23 +209,24 @@ model GoalsUser {
 }
 
 model GoalsUserKr {
-  id            Int       @id @default(autoincrement())
-  idCompany     Int
-  idUser        Int
-  idGoalsUser   Int
-  name          String
-  descriptions  String
-  toQuarterly   Int
-  fromQuarterly Int
-  toYearly      Int
-  fromYearly    Int
-  done          Int       @default(0)
-  status        Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  goalsUser     GoalsUser @relation(fields: [idGoalsUser], references: [id], onDelete: Cascade)
-  company       Company   @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  user          User      @relation(fields: [idUser], references: [id], onDelete: Cascade)
+  id                 Int                  @id @default(autoincrement())
+  idCompany          Int
+  idUser             Int
+  idGoalsUser        Int
+  name               String
+  descriptions       String
+  toQuarterly        Int
+  fromQuarterly      Int
+  toYearly           Int
+  fromYearly         Int
+  done               Int                  @default(0)
+  status             Boolean              @default(false)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  goalsUser          GoalsUser            @relation(fields: [idGoalsUser], references: [id], onDelete: Cascade)
+  company            Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  user               User                 @relation(fields: [idUser], references: [id], onDelete: Cascade)
+  HistoryGoalsUserKr HistoryGoalsUserKr[]
 
   @@map("goalsUsersKrs")
 }
@@ -312,6 +314,24 @@ model HistoryGoalKr {
   goalUserKrId  Int?
 
   @@map("historyGoalKrs")
+}
+
+model HistoryGoalsUserKr {
+  id            Int         @id @default(autoincrement())
+  idGoalsUserKr Int
+  idCompany     Int
+  note          String      @db.Text
+  status        Boolean     @default(false)
+  to            Float
+  from          Float
+  quaPercentage Float
+  yeaPercentage Float
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  goalsUserKr   GoalsUserKr @relation(fields: [idGoalsUserKr], references: [id], onDelete: Cascade)
+  company       Company     @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+
+  @@map("historyGoalsUserKrs")
 }
 
 model HistoryGoalsTeamKr {
