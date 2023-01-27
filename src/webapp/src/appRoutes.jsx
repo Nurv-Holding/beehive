@@ -14,6 +14,7 @@ import FormMenuWayOfBeing from "./components/CompanyMenuPanel/wayOfBeing/FormMen
 import TeamList from "./pages/TeamsList";
 import ListUsers from "./components/CompanyMenuPanel/Users/ListUsers";
 import User from "./pages/user";
+import UserGoal from "./pages/userGoal";
 
 function AppRoutes() {
   return (
@@ -31,12 +32,12 @@ function AppRoutes() {
         <Route path="registerfuturevision" element={<FormWayOfBeing />} />
         <Route path="formteam" element={<FormTeam />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />} />
-      </Route>
-      <Route path="/idCompany/idUser">
-        <Route index element={<User />} />
 
+        <Route path="user/:idUser">
+          <Route index element={<User />} />
+          <Route path="goal/:idUserGoal" element={<UserGoal />} />
+        </Route>
       </Route>
-
     </Routes>
   );
 }
