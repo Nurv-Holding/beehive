@@ -30,6 +30,7 @@ export const ContextUserProvider = ({ children }) => {
     const payload = token? jwtDecode(token): null
     const [goalKrs, setGoalKrs] = useState([])
     const [krs, setKrs] = useState([])
+    const [newTeamsUser, setNewTeamsUser] = useState([])
 
     useEffect(() => {
         handlerUsersByCompany()
@@ -43,8 +44,23 @@ export const ContextUserProvider = ({ children }) => {
         handleCompany()
         handlerGoalKrs()
         handlerKrs()
+        returnNewTeamsUser()
         
     },[idCompany, update])
+
+    const returnNewTeamsUser = () => {
+        setNewTeamsUser(() => {
+            return teamUsers.reduce((acum, current) => {
+        
+                const teamsUser = acum.find(f => f.id === current.idUser) || 
+                {name: current.nameUser, id:current.idUser, idTeamUser:current.idTeamUser, email:current.emailUser, teams: []}
+                teamsUser.teams.push({...current})
+                
+                return [...acum.filter(e => e.id !== current.idUser), teamsUser]
+        
+            }, [])
+        })
+    }
 
     const handlerGoalKrs = async () => {
         const {data} = await goalKrsApi.getAll(idCompany)
@@ -120,6 +136,7 @@ export const ContextUserProvider = ({ children }) => {
                     idCompany,
                     token,
                     payload,
+                    newTeamsUser,
                     goalKrs,
                     krs
                 }

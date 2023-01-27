@@ -25,27 +25,32 @@ function ListUsers({ users }) {
                   {user.email}
                 </div>
 
-                <span className="text-bee-blue-clean text-xs mt-2 font-bold">Cargo</span>
+                {/* <span className="text-bee-blue-clean text-xs mt-2 font-bold">Cargo</span>
                 <div className='w-full text-base font-bold text-black text-center'>
-                  {user.occupation}
-                </div>
+                  {user.occupationUser}
+                </div> */}
 
-                <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Objetivos</span>
-                <div className='flex flex-col items-center gap-3 w-full'>
-                  <Disclosure className='bg-none'>
-                    <div className="w-full">
-                      <Disclosure.Button className='bg-none cursor-pointer'>
-                        <div className="bg-white p-4 rounded-xl w-full">
-                          <h1 className='text-black uppercase text-center font-bold text-[12px]'>
-                            Objetivo
-                          </h1>
-                        </div>
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="bg-bee-strong-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
-                        KR
-                      </Disclosure.Panel>
-                    </div>
-                  </Disclosure>
+                <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Times</span>
+                <div className='flex flex-col items-center gap-1 w-full'>
+                  {user?.teams.map((team) => {
+                    return(
+                      <Disclosure className='bg-none'>
+                      <div className="w-full">
+                        <Disclosure.Button className='bg-none cursor-pointer'>
+                          <div className="bg-white p-4 rounded-xl w-full">
+                            <h1 className='text-black uppercase text-center font-bold text-[12px]'>
+                            {team.nameTeam}
+                            </h1>
+                          </div>
+                        </Disclosure.Button>
+                        {/* <Disclosure.Panel className="bg-bee-strong-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                          {team.nameTeam}
+                        </Disclosure.Panel> */}
+                      </div>
+                    </Disclosure>
+                    )
+                  })}
+
                 </div>
               </div>
             </>

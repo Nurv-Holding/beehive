@@ -7,7 +7,7 @@ import usersApi from '../../../api/usersApi'
 import { useEffect } from 'react'
 
 function Users() {
-    const { item, modelChange, idCompany, idGoal } = useContext(ContextCompany)
+    const { item, idCompany, newTeamsUser } = useContext(ContextCompany)
     const [message, setMessage] = useState("")
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
@@ -21,40 +21,6 @@ function Users() {
     const handlerUsers = async () => {
         const { data } = await usersApi.getAllByCompany(idCompany)
         setUsers(data)
-    }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-
-        searchParams.delete('update')
-        setSearchParams(searchParams)
-
-        if (Object.keys(item).length === 0 &&
-            item.name === "" || item.email === "" ||
-            item.occupation === "" || item.password === "" ||
-            item.repeatPassword === "") {
-            setMessage("Precisa preencher os campos vazios")
-
-        } else if (item.password !== item.repeatPassword) {
-            setMessage("Senhas precisam ser as mesmas")
-
-        } else {
-            usersApi.createEmployee(idCompany, { ...item, repeatPassword: undefined })
-                .then(() => {
-                    setMessage("Usuário criado com sucesso")
-                    navigate({
-                        pathname: `/company/${idCompany}`,
-                        search: `?update=${true}`
-                    })
-
-                })
-                .catch((error) => {
-                    console.error(error)
-                    setMessage("Algo deu errado!")
-                })
-
-        }
-
     }
 
     return (
@@ -73,7 +39,7 @@ function Users() {
                 </Link>
             </div>
 
-            <ListUsersOkrs users={users} />
+            <ListUsersOkrs users={newTeamsUser} />
         </div>
     )
 }
