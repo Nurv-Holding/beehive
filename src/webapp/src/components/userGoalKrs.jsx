@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import CloseKr from "./CloseKr"
 import UserCloseKr from "./UserCloseKr"
+import { calcPercentage } from "../utils/utilis"
 
-function UserGoalKrs() {
+function UserGoalKrs({kr}) {
 
   let [isOpenUpdate, setIsOpenUpdate] = useState(false)
   let [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
@@ -32,7 +33,7 @@ function UserGoalKrs() {
         <Disclosure>
           <Disclosure.Button className='grid grid-cols-2 content-center justify-items-center w-full p-4 cursor-pointer'>
             <div className='flex items-center'>
-              <span className="capitalize font-semibold"> Nome do Objetivo </span>
+              <span className="capitalize font-semibold"> {kr.nameKr} </span>
               <div className="bg-green-500 rounded-full p-1.5 ml-2 border"></div>
             </div>
 
@@ -45,46 +46,46 @@ function UserGoalKrs() {
                 <div className="flex flex-col mt-4">
                   <h5>Meta Trimestral:</h5>
                   <div className="flex flex-row">
-                    <span className="text-gray-600 text-xs mr-4">De: (valorAqui)</span>
-                    <span className="text-gray-600 text-xs ml-4">Para: (valorAqui)</span>
+                    <span className="text-gray-600 text-xs mr-4">De: {kr.fromQuarterly} </span>
+                    <span className="text-gray-600 text-xs ml-4">Para: {kr.toQuarterly} </span>
                   </div>
 
                   <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
                     <div className="percentage-bar-quartely"></div>
                   </div>
-                  {/* <style>{`
+                  <style>{`
                                 .percentage-bar-quartely {
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
                                   background-color: rgb(31 98 222/ var(--tw-bg-opacity));
-                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromQuarterlyGoalKrs)}%;
+                                  width: ${calcPercentage(kr.doneGoalsKr, kr.fromQuarterly)}%;
                                 }
-                            `}</style> */}
-                  <span className="text-xs">(valorAqui)% concluído</span>
-                  <span className="text-gray-600 text-sm mt-2">Atual: (valorAqui)</span>
+                            `}</style>
+                  <span className="text-xs">{calcPercentage(kr.doneGoalsKr, kr.fromQuarterly)}% concluído</span>
+                  <span className="text-gray-600 text-sm mt-2">Atual: {kr.done}</span>
                 </div>
 
                 <div className="flex flex-col">
                   <h5>Meta Anual:</h5>
                   <div className="flex flex-row">
-                    <span className="text-gray-600 text-xs mr-4">De: (valorAqui)</span>
-                    <span className="text-gray-600 text-xs ml-4">Para: (valorAqui)</span>
+                    <span className="text-gray-600 text-xs mr-4">De: {kr.fromYearly}</span>
+                    <span className="text-gray-600 text-xs ml-4">Para: {kr.toYearly}</span>
                   </div>
                   <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
                     <div className='percentage-bar-yearly'></div>
                   </div>
-                  {/* <style>{`
+                  <style>{`
                                 .percentage-bar-yearly {
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
                                   background-color: rgb(31 98 222/ var(--tw-bg-opacity));
-                                  width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromYearlyGoalsKr)}%;
+                                  width: ${calcPercentage(kr.done, kr.fromYearly)}%;
                                 }
-                            `}</style> */}
-                  <span className="tetx-xs">(valorAqui)% concluído</span>
-                  <span className="text-gray-600 text-sm mt-2">Atual: (valorAqui)</span>
+                            `}</style>
+                  <span className="tetx-xs">{calcPercentage(kr.done, kr.fromYearly)}% concluído</span>
+                  <span className="text-gray-600 text-sm mt-2">Atual: {kr.done}</span>
                 </div>
 
                 <div className="w-2/4">

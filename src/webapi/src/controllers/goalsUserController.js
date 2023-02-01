@@ -7,10 +7,12 @@ const crudFunctions = crudControllerFactory(prismaClient.goalsUser)
 const getAllKrsByUser = handlerBuilder(async (req, res) => {
     const {idCompany, idUser} = req.params
 
-    const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal, 
-    u.id as idUser,u.name as nameUser, t.id as idTeam, t.name as nameTeam, 
+    const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal, u.id as idUser,
+    u.name as nameUser, t.id as idTeam, t.name as nameTeam,
     guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
-    guk.fromQuarterly, guk.toYearly, guk.fromYearly,guk.done, guk.status 
+    guk.fromQuarterly, guk.toYearly, guk.fromYearly,
+    guk.done, guk.status as krStatus, gu.id as idGoalUser,
+    gu.name as nameGoalUser, gu.status as statusGoalUser
     from goalsuserskrs as guk
     join goalsusers as gu on guk.idGoalsUser=gu.id
     join users as u on gu.idUser=u.id

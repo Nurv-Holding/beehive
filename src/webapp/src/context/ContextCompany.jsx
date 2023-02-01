@@ -10,6 +10,7 @@ import teamsUsersApi from "../api/teamsUsersApi"
 import usersApi from "../api/usersApi"
 import jwtDecode from "jwt-decode"
 import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
+import goalUserKrsApi from "../api/goalUserKrsApi"
 
 export const ContextCompany = createContext()
 
@@ -29,6 +30,8 @@ export const ContextUserProvider = ({ children }) => {
     const token = localStorage.getItem("token")
     const payload = token? jwtDecode(token): null
     const [goalKrs, setGoalKrs] = useState([])
+    const [goalUserKrs, setGoalUserKrs] = useState([])
+    const [newGoalUsersKrs, setNewGoalUsersKrs] = useState([])
     const [krs, setKrs] = useState([])
     const [newTeamsUser, setNewTeamsUser] = useState([])
 
@@ -45,12 +48,16 @@ export const ContextUserProvider = ({ children }) => {
         handlerGoalKrs()
         handlerKrs()
         returnNewTeamsUser()
+        handlerGoalUserKrs()
+        returnNewGoalUsersKrs()
         
     },[idCompany, update])
 
-    const returnNewTeamsUser = () => {
+    const returnNewTeamsUser = async () => {
+        const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+
         setNewTeamsUser(() => {
-            return teamUsers.reduce((acum, current) => {
+            return data.reduce((acum, current) => {
         
                 const teamsUser = acum.find(f => f.id === current.idUser) || 
                 {name: current.nameUser, id:current.idUser, idTeamUser:current.idTeamUser, email:current.emailUser, teams: []}
@@ -62,9 +69,32 @@ export const ContextUserProvider = ({ children }) => {
         })
     }
 
+    const returnNewGoalUsersKrs = async () => {
+        const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, payload.id)
+
+        setNewGoalUsersKrs(() => {
+            return data.reduce((acum, current) => {
+
+                const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
+                {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
+                goal.krs.push({...current})
+                
+                return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
+        
+            }, [])
+        })
+    }
+
     const handlerGoalKrs = async () => {
         const {data} = await goalKrsApi.getAll(idCompany)
         setGoalKrs(data)
+    }
+
+    const handlerGoalUserKrs = async () => {
+        if(payload){
+            const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, payload.id)
+            setGoalUserKrs(data)
+        }
     }
     
     const handlerKrs = async () => {
@@ -137,8 +167,10 @@ export const ContextUserProvider = ({ children }) => {
                     token,
                     payload,
                     newTeamsUser,
+                    newGoalUsersKrs,
                     goalKrs,
-                    krs
+                    krs,
+                    goalUserKrs
                 }
             }
         >
