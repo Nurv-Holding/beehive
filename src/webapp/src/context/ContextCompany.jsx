@@ -10,7 +10,7 @@ import teamsUsersApi from "../api/teamsUsersApi"
 import usersApi from "../api/usersApi"
 import jwtDecode from "jwt-decode"
 import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
-import goalUserKrsApi from "../api/goalUserKrsApi"
+import goalUserKrsApi from "../api/goalUserApi"
 
 export const ContextCompany = createContext()
 
