@@ -4,8 +4,8 @@ const { prismaClient } = require("../database/prismaClient");
 
 const crudFunctions = crudControllerFactory(prismaClient.goalsUser)
 
-const getAllKrs = handlerBuilder(async (req, res) => {
-    const {idCompany} = req.params
+const getAllKrsByUser = handlerBuilder(async (req, res) => {
+    const {idCompany, idUser} = req.params
 
     const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal, 
     u.id as idUser,u.name as nameUser, t.id as idTeam, t.name as nameTeam, 
@@ -16,14 +16,14 @@ const getAllKrs = handlerBuilder(async (req, res) => {
     join users as u on gu.idUser=u.id
     join goals as g on gu.idGoal=g.id
     join teams as t on gu.idTeam=t.id
-    where guk.idCompany=${idCompany};`
+    where guk.idCompany=${idCompany} and guk.idUser=${idUser};`
 
     res.status(200).send(results)
 })
 
 const goalsUserController = {
     ...crudFunctions,
-    getAllKrs
+    getAllKrsByUser
 }
 
 module.exports = goalsUserController
