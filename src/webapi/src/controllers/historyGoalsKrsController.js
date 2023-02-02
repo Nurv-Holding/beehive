@@ -11,7 +11,8 @@ const progectionHistoryGoalKrByKr = async (req, res) => {
         hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,hgk.note,
         hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, hgk.status, hgk.user
         from historyGoalKrs as hgk join goals as g on hgk.idGoal=g.id
-        join goalKrs as gk on hgk.idGoalKr=gk.id where hgk.idCompany=${idCompany} 
+        join goalKrs as gk on hgk.idGoalKr=gk.id 
+        where hgk.idCompany=${idCompany} 
         and hgk.idGoal=${idGoal} and hgk.idGoalKr=${idGoalsKr};`
 
         res.status(200).send(historyGoalKrs)

@@ -124,6 +124,7 @@ const routes = (app) => {
                 app.post("/history/goalsUserKrs/c/:idCompany",historyGoalsUserKrsController.create)
                 app.get("/history/goalsUserKrs/:id/c/:idCompany",historyGoalsUserKrsController.getById)
                 app.get("/history/goalsUserKrs/c/:idCompany",historyGoalsUserKrsController.getAll)
+                app.get("/history/goalsUserKrs/c/:idCompany/krs/:idGoalsUserKr",historyGoalsUserKrsController.getHistoryKrsUsersByGoal)
                 app.put("/history/goalsUserKrs/:id",historyGoalsUserKrsController.update)
                 app.delete("/history/goalsUserKrs/:id",historyGoalsUserKrsController.remove)
 
