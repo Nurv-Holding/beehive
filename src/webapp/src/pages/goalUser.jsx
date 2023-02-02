@@ -119,7 +119,7 @@ function GoalUser() {
                                 {goalUser.krs.map((kr) => {
                                     return(
                                         <div className='mt-4'>
-                                            <UserGoalKrs kr={kr} />
+                                            <UserGoalKrs kr={kr} historyGoalUsersKrs={historyGoalUsersKrs} />
                                         </div>
                                     )
                                 })}

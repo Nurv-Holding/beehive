@@ -4,8 +4,9 @@ import { Disclosure } from '@headlessui/react'
 import CloseKr from "./CloseKr"
 import UserCloseKr from "./UserCloseKr"
 import { calcPercentage } from "../utils/utilis"
+import ChartGoalQuartely from "./ChartGoalQuartely"
 
-function UserGoalKrs({kr}) {
+function UserGoalKrs({kr, historyGoalUsersKrs}) {
 
   let [isOpenUpdate, setIsOpenUpdate] = useState(false)
   let [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
@@ -129,13 +130,13 @@ function UserGoalKrs({kr}) {
             </div>
 
             <div>
-              {/* <ChartGoalQuartely
+              <ChartGoalQuartely
                 items={
-                  historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                  (historyGoalUsersKrs || []).filter(e => e?.idGoalsUserKr === kr.idGoalsUserKr)
                 }
-                initialValue={goalKr}
+                initialValue={kr}
                 title={"Trimestral"}
-              /> */}
+              />
             </div>
 
             <div>
