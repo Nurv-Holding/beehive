@@ -4,8 +4,8 @@ import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import TitleCompany from '../components/TitleCompany';
-import UserAddKr from '../components/UserAddKr';
-import UserCloseGoal from '../components/UserCloseGoal';
+import AddUserKr from '../components/AddUserKr';
+import FinishingUserGoal from '../components/FinishingUserGoal';
 import UserGoalKrs from '../components/userGoalKrs';
 import { ContextCompany } from '../context/ContextCompany';
 
@@ -23,32 +23,13 @@ function GoalUser() {
         historyGoalUsersKrs
     } = useContext(ContextCompany)
 
-    let [isOpenAddKr, setIsOpenAddKr] = useState(false)
-    let [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
+    const [isOpenAddKr, setIsOpenAddKr] = useState(false)
+    const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
+    const [item, setItem] = useState(null)
 
-    // const [screen, setScreen] = useState(getScreen())
-
-    // useEffect(() => {
-    //     handleScreen()
-
-    //     window.addEventListener('resize', handleScreen);
-
-    //     return () => {
-    //       window.removeEventListener('resize', handleScreen);
-    //     };
-
-    // }, [])
-
-    // function getScreen() {
-    //     return window.innerWidth
-    // }
-
-    // const handleScreen = () => {
-    //     setScreen(getScreen())
-    // }
-
-    function openModalAddKr() {
+    function openModalAddKr(item) {
         setIsOpenAddKr(true)
+        setItem(item)
     }
 
     function openModalCloseGoal() {
@@ -95,37 +76,51 @@ function GoalUser() {
                                 </div>
                             </div>
                         </div>
-
-                        <div className='container-percentage-okr flex flex-row justify-end gap-4'>
-                            <UserAddKr
-                                isOpen={isOpenAddKr}
-                                openModal={openModalAddKr}
-                                closeModal={closeModal}
-                            />
-
-                            <UserCloseGoal
-                                isOpen={isOpenCloseGoal}
-                                openModal={openModalCloseGoal}
-                                closeModal={closeModal}
-                            />
-                        </div>
-                        
                     </div>
-                    {(newGoalUsersKrs || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
-                        return(
-                            <div className='mt-4'>
-                                <span className='font-bold text-lg text-bee-blue-clean'> Objetivo pessoal: {goalUser.nameGoalUser} </span>
 
-                                {goalUser.krs.map((kr) => {
-                                    return(
-                                        <div className='mt-4'>
-                                            <UserGoalKrs kr={kr} historyGoalUsersKrs={historyGoalUsersKrs} />
+                    <div className=''>
+                        {(newGoalUsersKrs || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
+                            return(
+                                <div className='mt-4'>
+                                    <div className='flex justify-between'>
+                                        <span className='font-bold text-lg text-bee-blue-clean'> Objetivo pessoal: {goalUser.nameGoalUser} </span>
+                                        <div className='container-percentage-okr flex flex-row justify-end gap-4'>
+                                            <button className="modal-btn" onClick={() => openModalAddKr(goalUser)}>
+                                                Adicionar KR
+                                            </button>
+                                            <AddUserKr
+                                                isOpen={isOpenAddKr}
+                                                closeModal={closeModal}
+                                                idUser={parseInt(idUser)}
+                                                idCompany={idCompany}
+                                                idGoalsUser={item?.idGoalUser}
+                                                nameGoalUser={item?.nameGoalUser}
+                                                idGoal={idGoal}
+                                            />
+
+                                            <FinishingUserGoal
+                                                isOpen={isOpenCloseGoal}
+                                                openModal={openModalCloseGoal}
+                                                closeModal={closeModal}
+                                            />
                                         </div>
-                                    )
-                                })}
-                            </div>
-                        )
-                    })}
+                                    </div>
+
+                                    {goalUser.krs.map((kr) => {
+                                        return(
+                                            <div className='mt-4'>
+                                                <UserGoalKrs 
+                                                kr={kr} 
+                                                historyGoalUsersKrs={historyGoalUsersKrs}
+                                                />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })}
+                    </div>
+
 
                 </div>
             </main>

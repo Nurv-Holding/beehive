@@ -2,14 +2,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import goalKrsApi from '../api/goalKrsApi';
 import goalUserApi from '../api/goalUserApi';
-import historyGoalKrApi from '../api/historyGoalKrApi';
 import historyGoalsUserKrsApi from '../api/historyGoalsUserKrsApi';
 import Header from '../components/Header';
-import HistoryGoalKrsList from '../components/HistoryGoalKrsList';
 import HistoryGoalUsersKrsList from '../components/HistoryGoalUsersKrsList';
-import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextCompany } from '../context/ContextCompany';
 
 const HistoryGoalUsersKr = () => {
@@ -61,8 +57,12 @@ const HistoryGoalUsersKr = () => {
         <>
             <Header />
 
-            <HistoryGoalUsersKrsList histories={histories} goalKr={goalKr} user={user} routerBack={routerBack}/>
-            {/* <TeamHistoriesList/> */}
+            <HistoryGoalUsersKrsList 
+                histories={histories} 
+                goalKr={goalKr} 
+                user={user} 
+                routerBack={routerBack}
+            />
         </>
     );
 }

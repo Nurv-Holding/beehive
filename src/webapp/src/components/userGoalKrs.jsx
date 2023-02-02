@@ -6,11 +6,15 @@ import UserCloseKr from "./UserCloseKr"
 import { calcPercentage } from "../utils/utilis"
 import ChartGoalQuartely from "./ChartGoalQuartely"
 import ChartGoalYearly from "./ChartGoalYearly"
+import { useNavigate } from "react-router-dom"
+import { useContext } from "react"
+import { ContextCompany } from "../context/ContextCompany"
 
 function UserGoalKrs({kr, historyGoalUsersKrs}) {
-
-  let [isOpenUpdate, setIsOpenUpdate] = useState(false)
-  let [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
+  const [isOpenUpdate, setIsOpenUpdate] = useState(false)
+  const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
+  const {idCompany, idUser} = useContext(ContextCompany)
+  const navigate = useNavigate()
 
   function openModalCloseKr() {
     setIsOpenFinishKr(true)
@@ -28,6 +32,10 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
     setIsOpenFinishKr(false)
     setIsOpenUpdate(false)
   }
+
+  const redirectHistory = () => {
+    navigate(`/company/${idCompany}/user/${idUser}/history/${kr?.idKr}`)
+}
 
   return (
     <>
@@ -118,7 +126,7 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
                   Atualizar valores
                 </button>
 
-                <button className="modal-btn h-[30px]">
+                <button onClick={redirectHistory} className="modal-btn h-[30px]">
                   Histórico
                 </button>
 

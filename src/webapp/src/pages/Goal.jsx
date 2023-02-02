@@ -62,7 +62,6 @@ function Goal() {
     handleGoal()
     handleGoalKrs()
     handleGoalTeamsByTeam()
-    // handleGoalTeam()
     handleGoalTeams()
     handleGoalTeamsKrs()
     handleGoalTeamByGoalTeam()
@@ -160,11 +159,6 @@ function Goal() {
     const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
     setGoalTeamsKrs(data)
   }
-
-  // const handleGoalTeam = async () => {
-  //   const { data } = await goalsTeamApi.getById(idCompany, idGoal)
-  //   setGoalTeam(data)
-  // }
 
   const handleGoalTeams = async () => {
     const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)

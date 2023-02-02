@@ -1,6 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const UserCloseGoal = ({
+const FinishingUserGoal = ({
     isOpen,
     closeModal,
     openModal
@@ -30,4 +30,4 @@ const UserCloseGoal = ({
     )
 }
 
-export default UserCloseGoal
+export default FinishingUserGoal
