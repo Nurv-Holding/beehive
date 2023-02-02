@@ -3,24 +3,28 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import goalKrsApi from '../api/goalKrsApi';
+import goalUserApi from '../api/goalUserApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
+import historyGoalsUserKrsApi from '../api/historyGoalsUserKrsApi';
 import Header from '../components/Header';
 import HistoryGoalKrsList from '../components/HistoryGoalKrsList';
+import HistoryGoalUsersKrsList from '../components/HistoryGoalUsersKrsList';
 import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextCompany } from '../context/ContextCompany';
 
-const HistoryKr = () => {
+const HistoryGoalUsersKr = () => {
 
-    const { idgoalsKr, idGoal } = useParams()
-    const { idCompany } = useContext(ContextCompany)
+    const { idGoalsUserKr, idUser } = useParams()
+    const { idCompany, users } = useContext(ContextCompany)
+    const [user, setUser] = useState(null)
     const [histories, setHistories] = useState([])
     const navigate = useNavigate()
     const [goalKr, setGoalKr] = useState(
         {
             id: null,
             name: "",
-            author: null,
             descriptions: "",
+            idUser:null,
             toQuarterly: null,
             fromQuarterly: null,
             toYearly: null,
@@ -35,16 +39,17 @@ const HistoryKr = () => {
     useEffect(() => {
         handleHistory()
         handlerGoalKr()
+        setUser(() => users.find(e => e.id == idUser ))
 
-    }, [idgoalsKr])
+    }, [idGoalsUserKr])
 
     const handlerGoalKr = async () => {
-        const { data } = await goalKrsApi.getById(idCompany, idgoalsKr)
+        const { data } = await goalUserApi.getByIdKr(idCompany, idGoalsUserKr)
         setGoalKr(data)
     }
 
     const handleHistory = async () => {
-        const { data } = await historyGoalKrApi.HistoryGoalKrByKr(idCompany, idGoal, idgoalsKr)
+        const { data } = await historyGoalsUserKrsApi.getHistoryKrsUsersByGoal(idCompany, idGoalsUserKr)
         setHistories(data)
     }
 
@@ -56,10 +61,10 @@ const HistoryKr = () => {
         <>
             <Header />
 
-            <HistoryGoalKrsList histories={histories} goalKr={goalKr} routerBack={routerBack}/>
+            <HistoryGoalUsersKrsList histories={histories} goalKr={goalKr} user={user} routerBack={routerBack}/>
             {/* <TeamHistoriesList/> */}
         </>
     );
 }
 
-export default HistoryKr;
+export default HistoryGoalUsersKr;

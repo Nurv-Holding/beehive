@@ -2,7 +2,7 @@ import moment from "moment"
 import { useState } from "react"
 import ObservationModal from "./ObservationModal"
 
-const HistoryKrsList = ({ histories, goalKr, routerBack }) => {
+const HistoryGoalUsersKrsList = ({ histories, goalKr, user, routerBack }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     function openModal() {
@@ -57,7 +57,7 @@ const HistoryKrsList = ({ histories, goalKr, routerBack }) => {
                                                 <td> {history?.from} </td>
                                                 <td> {history?.quaPercentage}% </td>
                                                 <td> {history?.yeaPercentage}% </td>
-                                                <td> {history?.user} </td>
+                                                <td> {user?.name} </td>
                                                 <td> {history?.status ? "encerrado" : "ativo"} </td>
                                                 <td>
                                                     <ObservationModal
@@ -81,4 +81,4 @@ const HistoryKrsList = ({ histories, goalKr, routerBack }) => {
     )
 }
 
-export default HistoryKrsList
+export default HistoryGoalUsersKrsList

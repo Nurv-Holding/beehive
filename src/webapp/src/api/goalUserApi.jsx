@@ -10,7 +10,7 @@ const getAllKrsByUser = (idCompany, idUser) => axios.get(`${host}/goalsUser/all/
 
 //krs
 const getAllKrs = (idCompany) => axios.get(`${host}/goalsUserKrs/c/${idCompany}`)
-const getByIdKr = (idGoal, idCompany) => axios.get(`${host}/goalsUserKrs/${idGoal}/c/${idCompany}`)
+const getByIdKr = (idCompany, idGoalsUserKr) => axios.get(`${host}/goalsUserKrs/${idGoalsUserKr}/c/${idCompany}`)
 const createKr = (idCompany,data) => axios.post(`${host}/goalsUserKrs/c/${idCompany}`,data)
 const updateKr = (idGoal, data) => axios.put(`${host}/goalsUserKrs/${idGoal}`,data)
 

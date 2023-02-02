@@ -15,6 +15,7 @@ import TeamList from "./pages/TeamsList";
 import ListUsers from "./components/CompanyMenuPanel/Users/ListUsers";
 import User from "./pages/user";
 import GoalUser from "./pages/goalUser";
+import HistoryGoalUsersKr from "./pages/HistoryGoalUsersKrs";
 
 function AppRoutes() {
   return (
@@ -35,6 +36,7 @@ function AppRoutes() {
 
         <Route path="user/:idUser">
           <Route index element={<User />} />
+          <Route path="history/:idGoalsUserKr" element={<HistoryGoalUsersKr />} />
           <Route path="goal/:idGoal" element={<GoalUser />} />
         </Route>
       </Route>
