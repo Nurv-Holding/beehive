@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = process.env.HOST
+const host = "https://beehive-teste-app.onrender.com"
 
 const create = (idCompany,data) => axios.post(`${host}/tasks/c/${idCompany}`,data)
 const remove = (idTask) => axios.delete(`${host}/tasks/${idTask}`)

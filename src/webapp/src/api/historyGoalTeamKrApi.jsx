@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = process.env.HOST
+const host = "https://beehive-teste-app.onrender.com"
 
 const create = (idCompany,data) => axios.post(`${host}/hGoalsTeamKrs/history/${idCompany}`,data)
 const getByKrs = (idCompany, idGoal, idTeam) => axios.get(`${host}/hGoalsTeamKrs/c/${idCompany}/g/${idGoal}/t/${idTeam}/history/krs`)
