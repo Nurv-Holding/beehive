@@ -5,6 +5,7 @@ import CloseKr from "./CloseKr"
 import UserCloseKr from "./UserCloseKr"
 import { calcPercentage } from "../utils/utilis"
 import ChartGoalQuartely from "./ChartGoalQuartely"
+import ChartGoalYearly from "./ChartGoalYearly"
 
 function UserGoalKrs({kr, historyGoalUsersKrs}) {
 
@@ -140,12 +141,13 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
             </div>
 
             <div>
-              {/* <ChartGoalYearly
+              <ChartGoalYearly
                 items={
-                  historyGoalKrs.filter(e => e?.idGoalKr === goalKr.idgoalsKr)
+                  (historyGoalUsersKrs || []).filter(e => e?.idGoalsUserKr === kr.idGoalsUserKr)
                 }
+                initialValue={kr}
                 title={"Anual"}
-              /> */}
+              />
             </div>
 
           </Disclosure.Panel>
