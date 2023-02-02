@@ -18,7 +18,9 @@ function GoalUser() {
         goalUserKrs,
         newGoalUsersKrs,
         goalAndTeams,
-        teamsAndUsersByGoal
+        teamsAndUsersByGoal,
+        idUser,
+        historyGoalUsersKrs
     } = useContext(ContextCompany)
 
     let [isOpenAddKr, setIsOpenAddKr] = useState(false)
@@ -84,7 +86,7 @@ function GoalUser() {
                             <div className='border-t pt-4 border-white'>
                                 <span className='font-bold text-xl text-bee-strong-1'>Times: </span>
                                 <div className='flex gap-2'>
-                                    {(goalAndTeams || []).filter(e => e.idGoal == idGoal).map((team) => {
+                                    {(teamsAndUsersByGoal || []).filter(e => e.idGoal == idGoal).map((team) => {
                                         return(
                                             <span className='font-bold text-lg mt-2 text-bee-blue-clean bg-white p-2 rounded-md shadow-md'> {team.nameTeam} </span>
                                         )
@@ -109,7 +111,7 @@ function GoalUser() {
                         </div>
                         
                     </div>
-                    {(newGoalUsersKrs || []).filter(e => e.idGoal == idGoal && e.idUser === payload?.id).map((goalUser) => {
+                    {(newGoalUsersKrs || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
                         return(
                             <div className='mt-4'>
                                 <span className='font-bold text-lg text-bee-blue-clean'> Objetivo pessoal: {goalUser.nameGoalUser} </span>

@@ -11,6 +11,7 @@ import usersApi from "../api/usersApi"
 import jwtDecode from "jwt-decode"
 import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
 import goalUserKrsApi from "../api/goalUserApi"
+import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 
 export const ContextCompany = createContext()
 
@@ -35,6 +36,7 @@ export const ContextUserProvider = ({ children }) => {
     const [krs, setKrs] = useState([])
     const [newTeamsUser, setNewTeamsUser] = useState([])
     const [teamsAndUsersByGoal, setTeamsAndUsersByGoal] = useState([])
+    const [historyGoalUsersKrs, setHistoryGoalUsersKrs] = useState([])
 
     useEffect(() => {
         handlerUsersByCompany()
@@ -52,8 +54,9 @@ export const ContextUserProvider = ({ children }) => {
         handlerGoalUserKrs()
         returnNewGoalUsersKrs()
         handlerTeamsAndUsersByGoal()
+        handlerHistoryGoalUsersKrs()
         
-    },[idCompany, update])
+    },[idCompany, idGoal, update])
 
     const returnNewTeamsUser = async () => {
         const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
@@ -96,11 +99,16 @@ export const ContextUserProvider = ({ children }) => {
         if(idUser){
             const {data} = await goalsTeamApi.getTeamsAndUsersByGoal(idCompany, idUser, idGoal)
             setTeamsAndUsersByGoal(data)
-            
+
         }else{
             setTeamsAndUsersByGoal([])
         }
         
+    }
+
+    const handlerHistoryGoalUsersKrs = async () => {
+        const {data} = await historyGoalsUserKrsApi.getAll(idCompany)
+        setHistoryGoalUsersKrs(data)
     }
 
     const handlerGoalKrs = async () => {
@@ -189,7 +197,9 @@ export const ContextUserProvider = ({ children }) => {
                     goalKrs,
                     krs,
                     goalUserKrs,
-                    teamsAndUsersByGoal
+                    teamsAndUsersByGoal,
+                    idUser,
+                    historyGoalUsersKrs
                 }
             }
         >
