@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "prisma": "^4.9.0",
     "sucrase": "^3.28.0"
   },
   "dependencies": {
