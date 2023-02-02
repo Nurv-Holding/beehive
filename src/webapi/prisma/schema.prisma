@@ -164,6 +164,7 @@ model Goal {
   HistoryGoalKr    HistoryGoalKr[]
   GoalUser         GoalUser[]
   GoalUserKr       GoalUserKr[]
+  GoalsUser        GoalsUser[]
 
   @@map("goals")
 }
@@ -187,19 +188,19 @@ model GoalsTeam {
 }
 
 model GoalsUser {
-  id                 Int               @id @default(autoincrement())
-  idCompany          Int
-  idProcessGoalsTeam Int?
-  idUser             Int
-  name               String
-  status             Boolean           @default(false)
-  descriptions       String
-  createdAt          DateTime          @default(now())
-  updatedAt          DateTime          @updatedAt
-  processGoalsTeam   ProcessGoalsTeam? @relation(fields: [idProcessGoalsTeam], references: [id], onDelete: Cascade)
-  company            Company           @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  user               User              @relation(fields: [idUser], references: [id], onDelete: Cascade)
-  GoalsUserKr        GoalsUserKr[]
+  id           Int           @id @default(autoincrement())
+  idCompany    Int
+  idGoal       Int?
+  idUser       Int
+  name         String
+  status       Boolean       @default(false)
+  descriptions String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  goal         Goal?         @relation(fields: [idGoal], references: [id], onDelete: Cascade)
+  company      Company       @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  user         User          @relation(fields: [idUser], references: [id], onDelete: Cascade)
+  GoalsUserKr  GoalsUserKr[]
 
   @@map("goalsUsers")
 }
@@ -240,7 +241,6 @@ model ProcessGoalsTeam {
   goal               Goal?                @relation(fields: [idGoal], references: [id], onDelete: Cascade)
   comapany           Company              @relation(fields: [idCompany], references: [id], onDelete: Cascade)
   HistoryGoalsTeamKr HistoryGoalsTeamKr[]
-  GoalsUser          GoalsUser[]
 
   @@map("processGoalsTeams")
 }
