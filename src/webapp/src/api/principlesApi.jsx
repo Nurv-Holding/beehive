@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = 'http://localhost:3002'
+const host = process.env.HOST
 
 const getAll = (idCompany) => axios.get(`${host}/principles/c/${idCompany}`)
 const create = (idCompany,data) => axios.post(`${host}/principles/c/${idCompany}`,data)

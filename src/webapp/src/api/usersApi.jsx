@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = 'http://localhost:3002'
+const host = process.env.HOST
 
 const getAllByCompany = (idCompany) => axios.get(`${host}/users/c/${idCompany}`)
 const getAll = () => axios.get(`${host}/users`)

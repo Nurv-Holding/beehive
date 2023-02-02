@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = 'http://localhost:3002'
+const host = process.env.HOST
 
 const create = (idCompany,data) => axios.post(`${host}/tasks/c/${idCompany}`,data)
 const remove = (idTask) => axios.delete(`${host}/tasks/${idTask}`)

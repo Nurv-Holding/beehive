@@ -20,5 +20,8 @@
   "license": "ISC",
   "devDependencies": {
     "sucrase": "^3.28.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }
