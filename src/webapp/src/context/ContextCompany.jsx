@@ -22,7 +22,7 @@ export const ContextUserProvider = ({ children }) => {
     const [item, setItem] = useState({})
     const [goalAndTeams, setGoalAndTeams] = useState([])
     const [searchParams] = useSearchParams()
-    const { idGoal, idCompany } = useParams()
+    const { idGoal, idCompany, idUser } = useParams()
     const [companyGoals, setCompanyGoals] = useState([])
     const [teamUsers, setTeamUsers] = useState([])
     const [company, setCompany] = useState({name:"", cnpj:"", createdAt:"", updatedAt:""})
@@ -34,6 +34,7 @@ export const ContextUserProvider = ({ children }) => {
     const [newGoalUsersKrs, setNewGoalUsersKrs] = useState([])
     const [krs, setKrs] = useState([])
     const [newTeamsUser, setNewTeamsUser] = useState([])
+    const [teamsAndUsersByGoal, setTeamsAndUsersByGoal] = useState([])
 
     useEffect(() => {
         handlerUsersByCompany()
@@ -50,6 +51,7 @@ export const ContextUserProvider = ({ children }) => {
         returnNewTeamsUser()
         handlerGoalUserKrs()
         returnNewGoalUsersKrs()
+        handlerTeamsAndUsersByGoal()
         
     },[idCompany, update])
 
@@ -70,19 +72,35 @@ export const ContextUserProvider = ({ children }) => {
     }
 
     const returnNewGoalUsersKrs = async () => {
-        const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, payload.id)
+        if(idUser){
+            const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, idUser)
 
-        setNewGoalUsersKrs(() => {
-            return data.reduce((acum, current) => {
+            setNewGoalUsersKrs(() => {
+                return data.reduce((acum, current) => {
+    
+                    const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
+                    {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
+                    goal.krs.push({...current})
+                    
+                    return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
+            
+                }, [])
+            })
+        }else{
+            setNewGoalUsersKrs([])
+        }
 
-                const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
-                {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
-                goal.krs.push({...current})
-                
-                return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
+    }
+
+    const handlerTeamsAndUsersByGoal = async () => {
+        if(idUser){
+            const {data} = await goalsTeamApi.getTeamsAndUsersByGoal(idCompany, idUser, idGoal)
+            setTeamsAndUsersByGoal(data)
+            
+        }else{
+            setTeamsAndUsersByGoal([])
+        }
         
-            }, [])
-        })
     }
 
     const handlerGoalKrs = async () => {
@@ -170,7 +188,8 @@ export const ContextUserProvider = ({ children }) => {
                     newGoalUsersKrs,
                     goalKrs,
                     krs,
-                    goalUserKrs
+                    goalUserKrs,
+                    teamsAndUsersByGoal
                 }
             }
         >

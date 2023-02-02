@@ -17,7 +17,8 @@ function GoalUser() {
         payload,
         goalUserKrs,
         newGoalUsersKrs,
-        goalAndTeams
+        goalAndTeams,
+        teamsAndUsersByGoal
     } = useContext(ContextCompany)
 
     let [isOpenAddKr, setIsOpenAddKr] = useState(false)
