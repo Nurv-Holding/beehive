@@ -1,10 +1,24 @@
+import { useState } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import goalUserApi from "../api/goalUserApi"
+import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const UserCloseKr = ({
+const FinishingGoalUsersKrs = ({
     isOpen,
     closeModal,
-    openModal
+    openModal,
+    finishGoalUsersKr,
+    kr
 }) => {
+
+    const [note, setNote] = useState("")
+
+    const handlerSubmit = (event) => {
+        event.preventDefault()
+
+        finishGoalUsersKr(note, kr?.idKr)
+    }
 
     return (
         <div>
@@ -19,8 +33,8 @@ const UserCloseKr = ({
             >
                 <div className="flex flex-col gap-4">
                     <h1 className="text-xl">Encerrar o KR: <span className="text-red-500">Nome do Kr</span>?</h1>
-                    <form className="mt-2 w-full flex flex-col gap-3">
-                        <textarea className="p-2 input-style min-h-[50px] text-black" name="description" cols="60" rows="3"></textarea>
+                    <form onSubmit={handlerSubmit} className="mt-2 w-full flex flex-col gap-3">
+                        <textarea onChange={({target}) => setNote(target.value)} className="p-2 input-style min-h-[50px] text-black" name="description" cols="60" rows="3"></textarea>
                         <div>
                             <button className='submit-button' type="submit" >
                                 Encerrar
@@ -41,4 +55,4 @@ const UserCloseKr = ({
     )
 }
 
-export default UserCloseKr
+export default FinishingGoalUsersKrs

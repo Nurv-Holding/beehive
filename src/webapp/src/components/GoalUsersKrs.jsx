@@ -2,27 +2,31 @@ import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import CloseKr from "./CloseKr"
-import UserCloseKr from "./UserCloseKr"
+import FinishingGoalUsersKrs from "./FinishingGoalUsersKrs"
 import { calcPercentage } from "../utils/utilis"
 import ChartGoalQuartely from "./ChartGoalQuartely"
 import ChartGoalYearly from "./ChartGoalYearly"
-import { useNavigate } from "react-router-dom"
+import { json, useNavigate, useSearchParams } from "react-router-dom"
 import { useContext } from "react"
 import { ContextCompany } from "../context/ContextCompany"
+import goalUserApi from "../api/goalUserApi"
+import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 
-function UserGoalKrs({kr, historyGoalUsersKrs}) {
+function GoalUsersKrs({ kr }) {
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
-  const {idCompany, idUser} = useContext(ContextCompany)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [message, setMessage] = useState("")
+  const [itemUpdated, setItemUpdated] = useState({ done: null, note: "" })
+  const {idCompany, idUser, historyGoalUsersKrs, idGoal} = useContext(ContextCompany)
   const navigate = useNavigate()
 
-  function openModalCloseKr() {
+  function openModalFinishingKr() {
     setIsOpenFinishKr(true)
   }
 
-  function openModalUpdate() {
-    setIsOpenUpdate(true)
-  }
+  const pathHistory = `/company/${idCompany}/user/${idUser}/history/${kr?.idKr}`
+  const path= `/company/${idCompany}/user/${idUser}/goal/${idGoal}`
 
   function openModalUpdate() {
     setIsOpenUpdate(true)
@@ -34,17 +38,108 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
   }
 
   const redirectHistory = () => {
-    navigate(`/company/${idCompany}/user/${idUser}/history/${kr?.idKr}`)
+    navigate(`${pathHistory}`)
+  }
+
+  const changeModel = ({target}) => {
+    setItemUpdated((state) => {
+      return {...state, [target.name]: target.value}
+    })
+  }
+
+  
+  const finishGoalUsersKr = async (note, idKr) => {
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
+    if (note === "") {
+        setMessage("Primeiro precisa preencher os campos")
+
+    } else {
+        const { data } = await historyGoalsUserKrsApi.getHistoryKrsUsersByGoal(idCompany, idKr)
+        const history = data.length !== 0 ? data[data.length - 1] : null
+        const result = await goalUserApi.updateKr(kr.idKr, { status: true })
+        const goalKr = result.data
+
+        const newData = {
+            idGoalsUserKr: goalKr?.id,
+            quaPercentage: history?.quaPercentage || 0,
+            yeaPercentage: history?.yeaPercentage || 0,
+            to: history?.to || 0,
+            from: history?.from || 0,
+            status: !!goalKr?.status,
+            note
+        }
+
+        historyGoalsUserKrsApi.create(idCompany, newData)
+        .then(() => {
+            navigate({
+            pathname: `${path}`,
+            search: `?update=${true}`
+            })
+
+            closeModal()
+        })
+        .catch((error) => {
+            console.error(error)
+            setMessage("Algo deu errado!")
+        })
+    }
+
 }
+
+  const goalKrsUpdate = async (event) => {
+    event.preventDefault()
+
+    searchParams.delete('update')
+    setSearchParams(searchParams)
+
+    if (!itemUpdated.done || itemUpdated.note === "") {
+      setMessage("Primeiro precisa preencher os campos")
+
+    } else {
+      const done = parseInt(itemUpdated.done)
+      const data = { done: done + kr?.done }
+
+      const result = await goalUserApi.updateKr(kr.idKr, data)
+      const goalUserKr = result.data
+
+      const newData = {
+        idGoalsUserKr: goalUserKr.id,
+        quaPercentage: calcPercentage((kr?.done + done), kr?.fromQuarterly),
+        yeaPercentage: calcPercentage((kr?.done + done), kr?.fromYearly),
+        to: kr?.done,
+        from: data.done,
+        status: !!kr?.krStatus,
+        note: itemUpdated.note
+      }
+
+      historyGoalsUserKrsApi.create(idCompany, newData)
+        .then(() => {
+          setMessage("Atualizado")
+          navigate({
+            pathname: `${path}`,
+            search: `?update=${true}`
+          })
+
+          closeModal()
+        })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado")
+        })
+    }
+
+  }
 
   return (
     <>
-      <div className="bg-white rounded-md p-0.5 mt-4 flex flex-col">
+      <div className={`${!(!!kr.krStatus) ? "bg-white rounded-md p-0.5 mt-4 flex flex-col" : "bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
         <Disclosure>
           <Disclosure.Button className='grid grid-cols-2 content-center justify-items-center w-full p-4 cursor-pointer'>
             <div className='flex items-center'>
               <span className="capitalize font-semibold"> {kr.nameKr} </span>
-              <div className="bg-green-500 rounded-full p-1.5 ml-2 border"></div>
+              <div className={`${!(!!kr.krStatus) ? "bg-green-500 rounded-full p-1.5 ml-2 border" : "bg-red-500 rounded-full p-1.5 ml-2 border"}`}></div>
             </div>
 
             <span className="text-gray-600 text-sm">Atualizado (data aqui)</span>
@@ -69,10 +164,10 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
                                   background-color: rgb(31 98 222/ var(--tw-bg-opacity));
-                                  width: ${calcPercentage(kr.doneGoalsKr, kr.fromQuarterly)}%;
+                                  width: ${calcPercentage(kr.done, kr.fromQuarterly)}%;
                                 }
                             `}</style>
-                  <span className="text-xs">{calcPercentage(kr.doneGoalsKr, kr.fromQuarterly)}% concluído</span>
+                  <span className="text-xs">{calcPercentage(kr.done, kr.fromQuarterly)}% concluído</span>
                   <span className="text-gray-600 text-sm mt-2">Atual: {kr.done}</span>
                 </div>
 
@@ -105,10 +200,10 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
                     </span>
                     <div className="flex flex-col gap-[2%] mt-4">
                       <div className="flex gap-2 items-center">
-                        <form className="flex flex-col gap-5">
-                          <input type="text" className="input-style" name="done" placeholder="Atualizar os dados" />
+                        <form onSubmit={goalKrsUpdate} className="flex flex-col gap-5">
+                          <input type="text" className="input-style" onChange={changeModel} name="done" placeholder="Atualizar os dados" />
                           <span>Descrição</span>
-                          <textarea className="p-2 input-style min-h-[50px]" name="note" cols="60" rows="3"></textarea>
+                          <textarea className="p-2 input-style min-h-[50px]" onChange={changeModel} name="note" cols="60" rows="3"></textarea>
                           <button type="submit" className="submit-button">OK</button>
                           <span className="text-red-600">
                             {/* <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block'}`}> {message} </span> */}
@@ -122,26 +217,34 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
               </div>
 
               <div className="flex gap-2 mt-2">
+                {!(!!kr.krStatus) &&
                 <button onClick={openModalUpdate} className="modal-btn h-[30px]">
                   Atualizar valores
                 </button>
+                }
+
 
                 <button onClick={redirectHistory} className="modal-btn h-[30px]">
                   Histórico
                 </button>
-
-                <UserCloseKr
+                
+                {!(!!kr.krStatus) &&
+                <FinishingGoalUsersKrs
                   isOpen={isOpenFinishKr}
                   closeModal={closeModal}
-                  openModal={openModalCloseKr}
+                  openModal={openModalFinishingKr}
+                  kr={kr}
+                  finishGoalUsersKr={finishGoalUsersKr}
                 />
+                }
+
               </div>
             </div>
 
             <div>
               <ChartGoalQuartely
                 items={
-                  (historyGoalUsersKrs || []).filter(e => e?.idGoalsUserKr === kr.idGoalsUserKr)
+                  (historyGoalUsersKrs || []).filter(e => e?.idGoalsUserKr === kr.idKr)
                 }
                 initialValue={kr}
                 title={"Trimestral"}
@@ -151,7 +254,7 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
             <div>
               <ChartGoalYearly
                 items={
-                  (historyGoalUsersKrs || []).filter(e => e?.idGoalsUserKr === kr.idGoalsUserKr)
+                  (historyGoalUsersKrs || []).filter(e => e?.idGoalsUserKr === kr.idKr)
                 }
                 initialValue={kr}
                 title={"Anual"}
@@ -165,4 +268,4 @@ function UserGoalKrs({kr, historyGoalUsersKrs}) {
   )
 }
 
-export default UserGoalKrs;
+export default GoalUsersKrs;

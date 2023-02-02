@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import TitleCompany from '../components/TitleCompany';
 import AddUserKr from '../components/AddUserKr';
 import FinishingUserGoal from '../components/FinishingUserGoal';
-import UserGoalKrs from '../components/userGoalKrs';
+import GoalUsersKrs from '../components/GoalUsersKrs';
 import { ContextCompany } from '../context/ContextCompany';
 
 function GoalUser() {
@@ -109,9 +109,8 @@ function GoalUser() {
                                     {goalUser.krs.map((kr) => {
                                         return(
                                             <div className='mt-4'>
-                                                <UserGoalKrs 
+                                                <GoalUsersKrs 
                                                 kr={kr} 
-                                                historyGoalUsersKrs={historyGoalUsersKrs}
                                                 />
                                             </div>
                                         )
