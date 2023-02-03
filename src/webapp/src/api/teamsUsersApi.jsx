@@ -8,7 +8,7 @@ const update = (idTeamUser, data) => axios.put(`${host}/members/${idTeamUser}/te
 const getById = (idTeamUser) => axios.put(`${host}/members/${idTeamUser}/teams`)
 const getAllTeamsAndUsers = (idCompany) => axios.get(`${host}/members/p/teams/c/${idCompany}`)
 
-export default {
+export {
     getAll,
     create,
     update,

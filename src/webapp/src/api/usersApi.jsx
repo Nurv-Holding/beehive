@@ -9,7 +9,7 @@ const createEmployee = (idCompany,data) => axios.post(`${host}/employees/c/${idC
 const authenticate = (data) => axios.post(`${host}/login`, data)
     .then(x => localStorage.setItem("token", x.data))
 
-export default {
+export {
     getAllByCompany,
     create,
     createEmployee,

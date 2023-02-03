@@ -6,7 +6,7 @@ const create = (idCompany,data) => axios.post(`${host}/hGoalsKrs/history/${idCom
 const getAll = (idCompany) => axios.get(`${host}/hGoalsKrs/history/${idCompany}`)
 const HistoryGoalKrByKr = (idCompany, idGoal, idgoalsKr) => axios.get(`${host}/hGoalsKrs/history/${idCompany}/${idGoal}/${idgoalsKr}`)
 
-export default {
+export {
     create,
     getAll,
     HistoryGoalKrByKr

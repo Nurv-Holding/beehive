@@ -9,7 +9,7 @@ const getAllTeams = (idCompany) => axios.get(`${host}/processGoalsTeams/all/team
 const getByTeams = (idCompany) => axios.get(`${host}/processGoalsTeams/by/teams/${idCompany}`)
 const getAllTeamsByKrs = (idCompany) => axios.get(`${host}/processGoalsTeams/all/teams/krs/${idCompany}`)
 
-export default {
+export {
     getAll,
     create,
     getById,

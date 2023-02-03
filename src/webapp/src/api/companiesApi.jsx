@@ -8,7 +8,7 @@ const getCompanyAndGoals = (idCompany) => axios.get(`${host}/companies/c/${idCom
 const getById = (idCompany) => axios.get(`${host}/companies/${idCompany}`)
 
 
-export default {
+export {
     getAll,
     create,
     getCompanyAndGoals,

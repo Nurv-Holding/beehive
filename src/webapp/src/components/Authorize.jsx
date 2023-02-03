@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { ContextUser } from "../context/ContextUser"
 import Loading from "./Loading"
 import jwtDecode from "jwt-decode"
 
