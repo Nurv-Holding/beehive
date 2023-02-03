@@ -1,9 +1,10 @@
 import Header from '../components/Header';
 import Profile from '../components/profile';
 import { ContextCompany } from '../context/ContextCompany';
-import { useContext } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
+import taskUsersApi from '../api/taskUsersApi';
 
 
 function User() {
@@ -11,13 +12,21 @@ function User() {
         company,
         idCompany,
         idGoal,
+        idUser,
         payload,
         newGoalUsersKrs,
         taskUsers
     } = useContext(ContextCompany)
     const navigate = useNavigate()
 
-    const returnTotalTasks = () => {}
+    const returnTotalTasks = () => {
+        console.log((taskUsers || []).map((x) => { if((!!x.done)){ return x.done}}).length)
+        return {
+            total: (taskUsers || []).length,
+            totalDone: (taskUsers || []).map((x) => { if((!!x.done)){ return x.done}}),
+            totalNotDone: (taskUsers || []).map((x) => { if(!(!!x.done)){ return x.done}})
+        }
+    }
 
     const redirectRouter = (route) => {
         navigate(route)
@@ -33,24 +42,25 @@ function User() {
                         <Profile payload={payload} />
 
                         <div className='grid-row w-full bg-white p-4 flex flex-col'>
+
                             <h1 className='container-title'>Entregas</h1>
                             <div className='flex flex-col gap-1'>
                                 <div className='w-full rounded-md p-1 text-white bg-green-500'>
                                     <span>
-                                        Em dia:
-                                        <span className='text-xl font-bold'> 12</span>
+                                        Total de tarefas:
+                                        <span className='text-xl font-bold'> {returnTotalTasks().total} </span>
                                     </span>
                                 </div>
                                 <div className='w-full rounded-md p-1 text-white bg-yellow-500'>
                                     <span>
-                                        Para hoje:
-                                        <span className='text-xl font-bold'> 1</span>
+                                        Tarefas Concluídas:
+                                        <span className='text-xl font-bold'> {returnTotalTasks().totalDone} </span>
                                     </span>
                                 </div>
                                 <div className='w-full rounded-md p-1 text-white bg-red-500'>
                                     <span>
-                                        Atrasadas:
-                                        <span className='text-xl font-bold'> 3</span>
+                                        Tarefas a serem concluídas:
+                                        <span className='text-xl font-bold'> {returnTotalTasks().totalNotDone} </span>
                                     </span>
                                 </div>
                             </div>

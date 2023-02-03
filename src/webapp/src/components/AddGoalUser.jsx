@@ -53,7 +53,6 @@ function AddGoalUser({ idRef, idGoal, idUser, idCompany, path, payload }) {
         <>
             <NewModal idRef={idRef}>
                 <div className="p-8 flex flex-col justify-center items-center gap-4">
-                    {JSON.stringify(item)}
                     <h1 className="text-center uppercase text-bee-strong-1 font-bold text-3xl"> {payload?.name} </h1>
                     <span className="text-bee-blue-clean text-lg font-bold">Adicionar Objetivo</span>
 

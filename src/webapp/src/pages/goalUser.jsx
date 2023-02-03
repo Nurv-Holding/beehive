@@ -191,7 +191,7 @@ function GoalUser() {
                         </div>
                     </div>
 
-                    <div className=''>
+                    <div className='mt-4'>
                         {(goalUsers || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
                             return(
                                 <div className='mt-4'>
@@ -238,20 +238,20 @@ function GoalUser() {
                             )
                         })}
                     </div>
-                </div>
-                <div>
-                    <span> Tarefas </span>
-                    <div>
-                        {(taskUsers || [])?.filter(f => f.idGoal == idGoal)?.map((task) => {
-                            return(
-                                <div className="bg-white rounded-md p-5 mt-4 flex flex-col">
-                                    <span> {task.nameTask} </span>
-                                    <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
-                                        {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
-                                    </span>
-                                </div>
-                            )
-                        })}
+                    <div className='w-full mb-4'>
+                        <h1 className='text-center font-bold text-lg my-4 text-bee-strong-1 uppercase'> Tarefas </h1>
+                        <div className='w-full'>
+                            {(taskUsers || [])?.filter(f => f.idGoal == idGoal)?.map((task) => {
+                                return(
+                                    <div className="bg-white rounded-md p-5 mt-4 flex flex-col w-full">
+                                        <span className='capitalize font-semibold'> {task.nameTask} </span>
+                                        <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
+                                            {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
+                                        </span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
             </main>
