@@ -13,6 +13,7 @@ import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
 import goalUserKrsApi from "../api/goalUserApi"
 import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 import goalUserApi from "../api/goalUserApi"
+import taskUsersApi from "../api/taskUsersApi"
 
 export const ContextCompany = createContext()
 
@@ -20,6 +21,7 @@ export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
     const [goal, setGoal] = useState(null)
     const [usersByCompany, setUsersByCompany] = useState([])
+    const [taskUsers, setTasksUsers] = useState([])
     const [users, setUsers] = useState([])
     const [teams, setTeams] = useState([])
     const [item, setItem] = useState({})
@@ -60,6 +62,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerHistoryGoalUsersKrs()
         handlerGoalUsers()
         handlerGoal()
+        handlerTasksUsers()
         
     },[idCompany, idGoal, update])
 
@@ -111,14 +114,28 @@ export const ContextUserProvider = ({ children }) => {
         
     }
 
+    const handlerTasksUsers = async () => {
+        if(idUser){
+            const {data} = await taskUsersApi.getTasksUserByGoal(idCompany, idUser)
+            setTasksUsers(data)
+
+        }else{
+            setTasksUsers([])
+        }
+    }
+
     const handlerHistoryGoalUsersKrs = async () => {
         const {data} = await historyGoalsUserKrsApi.getAll(idCompany)
         setHistoryGoalUsersKrs(data)
     }
 
     const handlerGoal = async () => {
-        const {data} = await goalsApi.getById(idGoal, idCompany)
-        setGoal(data)
+        if(idGoal){
+            const {data} = await goalsApi.getById(idGoal, idCompany)
+            setGoal(data)
+        }else{
+            setGoal([])
+        }
     }
 
     const handlerGoalUsers = async () => {
@@ -216,7 +233,8 @@ export const ContextUserProvider = ({ children }) => {
                     idUser,
                     historyGoalUsersKrs,
                     goalUsers,
-                    goal
+                    goal,
+                    taskUsers
                 }
             }
         >

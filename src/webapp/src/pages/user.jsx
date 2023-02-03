@@ -1,11 +1,33 @@
 import Header from '../components/Header';
 import jwtDecode from 'jwt-decode';
 import Profile from '../components/profile';
+import { ContextCompany } from '../context/ContextCompany';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Disclosure } from '@headlessui/react';
 
 
 function User() {
-    const token = localStorage.getItem("token")
-    const payload = token ? jwtDecode(token) : null
+    const {
+        company,
+        idCompany,
+        idGoal,
+        payload,
+        goalUserKrs,
+        newGoalUsersKrs,
+        goalAndTeams,
+        teamsAndUsersByGoal,
+        idUser,
+        historyGoalUsersKrs,
+        goalUsers,
+        goal,
+        taskUsers
+    } = useContext(ContextCompany)
+    const navigate = useNavigate()
+
+    const redirectRouter = (route) => {
+        navigate(route)
+    }
 
     return (
         <>
@@ -76,34 +98,32 @@ function User() {
                         </div>
 
                         <div className='grid-row w-full bg-white p-4'>
-                            <h1 className='container-title'>Tarefas</h1>
-
+                            <h1 className='container-title'>OKRs Individuais</h1>
                             <div>
-                                <ul className='flex flex-row gap-2 w-full flex-wrap justify-center items-center'>
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-green-500 hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        Tarefa X
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-green-500 hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        Tarefa X
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-green-500 hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        Tarefa X
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-yellow-500 hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        Tarefa X
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-red-500 hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        Tarefa X
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-red-500 hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        Tarefa X
-                                    </a>
-                                </ul>
+                                {(newGoalUsersKrs || []).map((item) => {
+                                    return(
+                                        <div onClick={() => redirectRouter(`goal/${item.idGoal}`)} className='p-4 cursor-pointer'>
+                                            <span> {item.nameGoal} </span>
+                                            {(newGoalUsersKrs || []).filter(f => f.idGoal === item.idGoal).map((goalUser) => {
+                                                return(
+                                                    <div>
+                                                        <span className='text-green-500'> {goalUser.nameGoalUser} </span>
+                                                        <div>
+                                                            {(goalUser.krs.map((kr) => {
+                                                                return(
+                                                                    <div className='text-bee-blue-clean'>
+                                                                        <span> {kr.nameKr} </span>
+                                                                    </div>
+                                                                )
+                                                            }))}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    )
+                                })}
+  
                             </div>
                         </div>
                     </div>

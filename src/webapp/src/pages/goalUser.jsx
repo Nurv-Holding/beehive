@@ -11,6 +11,8 @@ import goalUserApi from '../api/goalUserApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import goalKrsApi from '../api/goalKrsApi';
 import AddGoalUser from '../components/AddGoalUser';
+import moment from 'moment';
+import { calcDate } from '../utils/utilis';
 
 function GoalUser() {
     const {
@@ -25,7 +27,8 @@ function GoalUser() {
         idUser,
         historyGoalUsersKrs,
         goalUsers,
-        goal
+        goal,
+        taskUsers
     } = useContext(ContextCompany)
 
     const [isOpenAddKr, setIsOpenAddKr] = useState(false)
@@ -37,6 +40,20 @@ function GoalUser() {
 
     // const pathHistory = `/company/${idCompany}/user/${idUser}/history/${kr?.idKr}`
     const path= `/company/${idCompany}/user/${idUser}/goal/${idGoal}`
+
+    const returnNewTeamsAndUsers = () => {
+        let items = [];
+        (teamsAndUsersByGoal || []).forEach((f) => {
+            const verifyIdTeam = teamsAndUsersByGoal.find(e => e.idTeam === f.idTeam)
+            if(items.length === 0) items.push(verifyIdTeam)
+    
+            if(verifyIdTeam && !(items || []).some(s => s.idTeam === verifyIdTeam.idTeam)) 
+                items.push(verifyIdTeam)
+            
+        })
+    
+        return items
+    }
 
     function openModalAddKr(item) {
         setIsOpenAddKr(true)
@@ -163,7 +180,7 @@ function GoalUser() {
                             <div className='border-t pt-4 border-white'>
                                 <span className='font-bold text-xl text-bee-strong-1'>Times: </span>
                                 <div className='flex gap-2'>
-                                    {(teamsAndUsersByGoal || []).filter(e => e.idGoal == idGoal).map((team) => {
+                                    {(returnNewTeamsAndUsers() || []).map((team) => {
                                         return(
                                             <span className='font-bold text-lg mt-2 text-bee-blue-clean bg-white p-2 rounded-md shadow-md'> {team.nameTeam} </span>
                                         )
@@ -221,8 +238,21 @@ function GoalUser() {
                             )
                         })}
                     </div>
-
-
+                </div>
+                <div>
+                    <span> Tarefas </span>
+                    <div>
+                        {(taskUsers || [])?.filter(f => f.idGoal == idGoal)?.map((task) => {
+                            return(
+                                <div className="bg-white rounded-md p-5 mt-4 flex flex-col">
+                                    <span> {task.nameTask} </span>
+                                    <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
+                                        {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
+                                    </span>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </main>
         </>

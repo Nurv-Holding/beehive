@@ -32,7 +32,7 @@ const getTasksUserByGoal = handlerBuilder(async (req, res) => {
     const results = await prismaClient.$queryRaw`select tk.id as idTask, tk.name as nameTask,
     tku.done, tku.description, u.id as idUser, u.name as nameUser,
     t.id as idTeam, t.name as nameTeam, pgt.idGoal,
-    tku.createdAt, tku.updatedAt
+    tku.createdAt, tku.updatedAt, tk.finalDate
     from taskusers as tku join tasks as tk on tku.idTask=tk.id
     join teamusers as tu on tku.idTeamUser=tu.id
     join users as u on tu.idUser=u.id
