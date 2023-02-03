@@ -17,7 +17,7 @@ const FinishingGoalUsersKrs = ({
     const handlerSubmit = (event) => {
         event.preventDefault()
 
-        finishGoalUsersKr(note, kr?.idKr)
+        finishGoalUsersKr(note, kr)
     }
 
     return (

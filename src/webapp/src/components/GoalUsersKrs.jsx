@@ -12,7 +12,7 @@ import { ContextCompany } from "../context/ContextCompany"
 import goalUserApi from "../api/goalUserApi"
 import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 
-function GoalUsersKrs({ kr }) {
+function GoalUsersKrs({ kr, finishGoalUsersKr }) {
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
@@ -46,47 +46,6 @@ function GoalUsersKrs({ kr }) {
       return {...state, [target.name]: target.value}
     })
   }
-
-  
-  const finishGoalUsersKr = async (note, idKr) => {
-    searchParams.delete('update')
-    setSearchParams(searchParams)
-
-    if (note === "") {
-        setMessage("Primeiro precisa preencher os campos")
-
-    } else {
-        const { data } = await historyGoalsUserKrsApi.getHistoryKrsUsersByGoal(idCompany, idKr)
-        const history = data.length !== 0 ? data[data.length - 1] : null
-        const result = await goalUserApi.updateKr(kr.idKr, { status: true })
-        const goalKr = result.data
-
-        const newData = {
-            idGoalsUserKr: goalKr?.id,
-            quaPercentage: history?.quaPercentage || 0,
-            yeaPercentage: history?.yeaPercentage || 0,
-            to: history?.to || 0,
-            from: history?.from || 0,
-            status: !!goalKr?.status,
-            note
-        }
-
-        historyGoalsUserKrsApi.create(idCompany, newData)
-        .then(() => {
-            navigate({
-            pathname: `${path}`,
-            search: `?update=${true}`
-            })
-
-            closeModal()
-        })
-        .catch((error) => {
-            console.error(error)
-            setMessage("Algo deu errado!")
-        })
-    }
-
-}
 
   const goalKrsUpdate = async (event) => {
     event.preventDefault()
@@ -138,7 +97,7 @@ function GoalUsersKrs({ kr }) {
         <Disclosure>
           <Disclosure.Button className='grid grid-cols-2 content-center justify-items-center w-full p-4 cursor-pointer'>
             <div className='flex items-center'>
-              <span className="capitalize font-semibold"> {kr.nameKr} </span>
+              <span className="capitalize font-semibold"> {kr.idKr} {kr.nameKr} </span>
               <div className={`${!(!!kr.krStatus) ? "bg-green-500 rounded-full p-1.5 ml-2 border" : "bg-red-500 rounded-full p-1.5 ml-2 border"}`}></div>
             </div>
 

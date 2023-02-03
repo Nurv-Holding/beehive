@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
-import { useRef } from 'react';
 import { useContext, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import TitleCompany from '../components/TitleCompany';
 import AddUserKr from '../components/AddUserKr';
 import FinishingUserGoal from '../components/FinishingUserGoal';
 import GoalUsersKrs from '../components/GoalUsersKrs';
 import { ContextCompany } from '../context/ContextCompany';
+import historyGoalsUserKrsApi from '../api/historyGoalsUserKrsApi';
+import goalUserApi from '../api/goalUserApi';
+import historyGoalKrApi from '../api/historyGoalKrApi';
+import goalKrsApi from '../api/goalKrsApi';
 
 function GoalUser() {
     const {
@@ -20,20 +22,29 @@ function GoalUser() {
         goalAndTeams,
         teamsAndUsersByGoal,
         idUser,
-        historyGoalUsersKrs
+        historyGoalUsersKrs,
+        goalUsers,
+        goal
     } = useContext(ContextCompany)
 
     const [isOpenAddKr, setIsOpenAddKr] = useState(false)
     const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
     const [item, setItem] = useState(null)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const navigate = useNavigate()
+    const [message, setMessage] = useState("")
+
+    // const pathHistory = `/company/${idCompany}/user/${idUser}/history/${kr?.idKr}`
+    const path= `/company/${idCompany}/user/${idUser}/goal/${idGoal}`
 
     function openModalAddKr(item) {
         setIsOpenAddKr(true)
         setItem(item)
     }
 
-    function openModalCloseGoal() {
+    function openModalCloseGoal(item) {
         setIsOpenCloseGoal(true)
+        setItem(item)
     }
 
     function closeModal() {
@@ -41,10 +52,80 @@ function GoalUser() {
         setIsOpenCloseGoal(false)
     }
 
-    const navigate = useNavigate()
-
     const routerBack = () => {
         navigate(-1)
+    }
+
+    const finishGoalUsersKr = async (note, kr) => {
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+    
+        if (note === "") {
+            setMessage("Primeiro precisa preencher os campos")
+    
+        } else {
+            const { data } = await historyGoalsUserKrsApi.getHistoryKrsUsersByGoal(idCompany, kr.idKr)
+            const history = data.length !== 0 ? data[data.length - 1] : null
+            const result = await goalUserApi.updateKr(kr.idKr, { status: true })
+            const goalKr = result.data
+    
+            const newData = {
+                idGoalsUserKr: goalKr?.id,
+                quaPercentage: history?.quaPercentage || 0,
+                yeaPercentage: history?.yeaPercentage || 0,
+                to: history?.to || 0,
+                from: history?.from || 0,
+                status: !!goalKr?.status,
+                note
+            }
+    
+            historyGoalsUserKrsApi.create(idCompany, newData)
+            .then(() => {
+                navigate({
+                pathname: `${path}`,
+                search: `?update=${true}`
+                })
+    
+                closeModal()
+            })
+            .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+            })
+        }
+    
+    }
+
+    const finishingGoal = async (event) => {
+        event.preventDefault()
+
+        searchParams.delete('update')
+        setSearchParams(searchParams)
+
+        await goalUserKrs.forEach(async (kr) => {
+            if(!kr.krStatus){
+
+                const note = `Objetivo encerrado por: ${payload?.name}`
+
+                await finishGoalUsersKr(note, kr)
+
+            }
+
+        })
+
+        goalUserApi.update(item.id, {status: true})
+        .then(() => {
+            
+            navigate({
+              pathname: `${path}`,
+              search: `?update=${true}`
+            })
+    
+            closeModal()
+          })
+          .catch((error) => {
+            console.error(error)
+          })
     }
 
 
@@ -63,7 +144,7 @@ function GoalUser() {
                 <div className='w-11/12 flex flex-col'>
                     <div className='container-two-percentage mb-4'>
                         <div className='container-percentage-okr flex flex-col'>
-                            <span className='font-bold text-xl text-bee-strong-1 uppercase'> {newGoalUsersKrs.length !== 0 && newGoalUsersKrs[0].nameGoal} </span>
+                            <span className='font-bold text-xl text-bee-strong-1 uppercase'> {goal?.name} </span>
                             <div className='border-t pt-4 border-white'>
                                 <span className='font-bold text-xl text-bee-strong-1'>Times: </span>
                                 <div className='flex gap-2'>
@@ -79,11 +160,11 @@ function GoalUser() {
                     </div>
 
                     <div className=''>
-                        {(newGoalUsersKrs || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
+                        {(goalUsers || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
                             return(
                                 <div className='mt-4'>
                                     <div className='flex justify-between'>
-                                        <span className='font-bold text-lg text-bee-blue-clean'> Objetivo pessoal: {goalUser.nameGoalUser} </span>
+                                        <span className='font-bold text-lg text-bee-blue-clean'> Objetivo pessoal: {goalUser.id} {goalUser.name} </span>
                                         <div className='container-percentage-okr flex flex-row justify-end gap-4'>
                                             <button className="modal-btn" onClick={() => openModalAddKr(goalUser)}>
                                                 Adicionar KR
@@ -93,24 +174,30 @@ function GoalUser() {
                                                 closeModal={closeModal}
                                                 idUser={parseInt(idUser)}
                                                 idCompany={idCompany}
-                                                idGoalsUser={item?.idGoalUser}
-                                                nameGoalUser={item?.nameGoalUser}
+                                                idGoalsUser={item?.id}
+                                                nameGoalUser={item?.name}
                                                 idGoal={idGoal}
                                             />
 
+                                            <button className="modal-btn" onClick={() => openModalCloseGoal(goalUser)}>
+                                                Encerrar objetivo
+                                            </button>
+
                                             <FinishingUserGoal
                                                 isOpen={isOpenCloseGoal}
-                                                openModal={openModalCloseGoal}
                                                 closeModal={closeModal}
+                                                finishingGoal={finishingGoal}
+                                                item={item}
                                             />
                                         </div>
                                     </div>
 
-                                    {goalUser.krs.map((kr) => {
+                                    {(newGoalUsersKrs || []).filter(f => f.idGoalUser === goalUser.id && f.idGoal == idGoal)[0]?.krs?.map((kr) => {
                                         return(
                                             <div className='mt-4'>
                                                 <GoalUsersKrs 
-                                                kr={kr} 
+                                                kr={kr}
+                                                finishGoalUsersKr={finishGoalUsersKr}
                                                 />
                                             </div>
                                         )

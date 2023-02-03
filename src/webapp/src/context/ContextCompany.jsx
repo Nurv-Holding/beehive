@@ -12,11 +12,13 @@ import jwtDecode from "jwt-decode"
 import goalTeamsKrsApi from "../api/goalTeamsKrsApi"
 import goalUserKrsApi from "../api/goalUserApi"
 import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
+import goalUserApi from "../api/goalUserApi"
 
 export const ContextCompany = createContext()
 
 export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
+    const [goal, setGoal] = useState(null)
     const [usersByCompany, setUsersByCompany] = useState([])
     const [users, setUsers] = useState([])
     const [teams, setTeams] = useState([])
@@ -37,6 +39,7 @@ export const ContextUserProvider = ({ children }) => {
     const [newTeamsUser, setNewTeamsUser] = useState([])
     const [teamsAndUsersByGoal, setTeamsAndUsersByGoal] = useState([])
     const [historyGoalUsersKrs, setHistoryGoalUsersKrs] = useState([])
+    const [goalUsers, setGoalUsers] = useState([])
 
     useEffect(() => {
         handlerUsersByCompany()
@@ -55,6 +58,8 @@ export const ContextUserProvider = ({ children }) => {
         returnNewGoalUsersKrs()
         handlerTeamsAndUsersByGoal()
         handlerHistoryGoalUsersKrs()
+        handlerGoalUsers()
+        handlerGoal()
         
     },[idCompany, idGoal, update])
 
@@ -109,6 +114,16 @@ export const ContextUserProvider = ({ children }) => {
     const handlerHistoryGoalUsersKrs = async () => {
         const {data} = await historyGoalsUserKrsApi.getAll(idCompany)
         setHistoryGoalUsersKrs(data)
+    }
+
+    const handlerGoal = async () => {
+        const {data} = await goalsApi.getById(idGoal, idCompany)
+        setGoal(data)
+    }
+
+    const handlerGoalUsers = async () => {
+        const {data} = await goalUserApi.getAll(idCompany)
+        setGoalUsers(data)
     }
 
     const handlerGoalKrs = async () => {
@@ -199,7 +214,9 @@ export const ContextUserProvider = ({ children }) => {
                     goalUserKrs,
                     teamsAndUsersByGoal,
                     idUser,
-                    historyGoalUsersKrs
+                    historyGoalUsersKrs,
+                    goalUsers,
+                    goal
                 }
             }
         >
