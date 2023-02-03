@@ -1,9 +1,8 @@
 import Header from '../components/Header';
-import jwtDecode from 'jwt-decode';
 import Profile from '../components/profile';
 import { ContextCompany } from '../context/ContextCompany';
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
 
 
@@ -13,17 +12,12 @@ function User() {
         idCompany,
         idGoal,
         payload,
-        goalUserKrs,
         newGoalUsersKrs,
-        goalAndTeams,
-        teamsAndUsersByGoal,
-        idUser,
-        historyGoalUsersKrs,
-        goalUsers,
-        goal,
         taskUsers
     } = useContext(ContextCompany)
     const navigate = useNavigate()
+
+    const returnTotalTasks = () => {}
 
     const redirectRouter = (route) => {
         navigate(route)
@@ -32,7 +26,6 @@ function User() {
     return (
         <>
             <Header />
-
             <main>
 
                 <div className='grid-container'>
@@ -65,59 +58,31 @@ function User() {
                     </div>
 
                     <div className='grid-col'>
-                        <div className='grid-row w-full bg-white p-4'>
-                            <h1 className='container-title'>OKRs Corporativos</h1>
 
-                            <div>
-                                <ul className='flex flex-row gap-2 w-full flex-wrap justify-center items-center'>
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        OKR
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        OKR
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        OKR
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        OKR
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        OKR
-                                    </a>
-
-                                    <a href='1/goal/1' className='text-center cursor-pointer w-[20%] bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium'>
-                                        OKR
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className='grid-row w-full bg-white p-4'>
+                        <div className=''>
                             <h1 className='container-title'>OKRs Individuais</h1>
-                            <div>
+                            <div className='mx-auto grid grid-cols-2 items-center justify-center gap-4 mb-2'>
                                 {(newGoalUsersKrs || []).map((item) => {
                                     return(
-                                        <div onClick={() => redirectRouter(`goal/${item.idGoal}`)} className='p-4 cursor-pointer'>
-                                            <span> {item.nameGoal} </span>
+                                        <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
+                                            <span onClick={() => redirectRouter(`goal/${item.idGoal}`)} className="text-bee-strong-1 text-xl font-bold text-center uppercase"> {item.nameGoal} </span>
                                             {(newGoalUsersKrs || []).filter(f => f.idGoal === item.idGoal).map((goalUser) => {
                                                 return(
-                                                    <div>
-                                                        <span className='text-green-500'> {goalUser.nameGoalUser} </span>
-                                                        <div>
-                                                            {(goalUser.krs.map((kr) => {
-                                                                return(
-                                                                    <div className='text-bee-blue-clean'>
-                                                                        <span> {kr.nameKr} </span>
-                                                                    </div>
-                                                                )
-                                                            }))}
-                                                        </div>
-                                                    </div>
+                                                    <Disclosure>
+                                                        <Disclosure.Button className="w-full bg-white w-full p-4 rounded-xl shadow-lg cursor-default my-1">
+                                                        <h1 className='text-black uppercase text-center font-bold text-[12px]'> {goalUser.nameGoalUser} </h1>
+                                                        </Disclosure.Button>
+                                                        <>
+                                                        {(goalUser.krs.map((kr) => {
+                                                            return(
+                                                                <Disclosure.Panel className='bg-bee-blue-clean p-2 my-1 uppercase text-[10px] rounded-xl text-white shadow-lg font-bold cursor-default'>
+                                                                    <span> {kr.nameKr} </span>
+                                                                </Disclosure.Panel>
+                                                            )
+                                                        }))}
+                                                        </>
+
+                                                    </Disclosure>
                                                 )
                                             })}
                                         </div>
