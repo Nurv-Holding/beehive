@@ -1,4 +1,5 @@
 const crudControllerFactory = require("../common/crudControllerFactory");
+const handlerBuilder = require("../common/handlerBuilder");
 const { prismaClient } = require("../database/prismaClient");
 
 const crudFunctions = crudControllerFactory(prismaClient.taskUser)
@@ -23,11 +24,29 @@ const getByUserAndKrs = async (req, res) => {
         res.status(500).send(error)
         
     }
-} 
+}
+
+const getTasksUserByGoal = handlerBuilder(async (req, res) => {
+    const {idCompany, idUser} = req.params
+
+    const results = await prismaClient.$queryRaw`select tk.id as idTask, tk.name as nameTask,
+    tku.done, tku.description, u.id as idUser, u.name as nameUser,
+    t.id as idTeam, t.name as nameTeam, pgt.idGoal,
+    tku.createdAt, tku.updatedAt
+    from taskusers as tku join tasks as tk on tku.idTask=tk.id
+    join teamusers as tu on tku.idTeamUser=tu.id
+    join users as u on tu.idUser=u.id
+    join teams as t on tu.idTeam=t.id
+    join processgoalsteams as pgt on pgt.idTeam=t.id
+    where pgt.idCompany=${idCompany} and u.id=${idUser};`
+
+    res.status(200).send(results)
+})
 
 const taskUsersController = {
     ...crudFunctions,
-    getByUserAndKrs
+    getByUserAndKrs,
+    getTasksUserByGoal
 }
 
 module.exports = taskUsersController

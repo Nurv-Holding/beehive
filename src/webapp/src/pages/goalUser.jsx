@@ -10,6 +10,7 @@ import historyGoalsUserKrsApi from '../api/historyGoalsUserKrsApi';
 import goalUserApi from '../api/goalUserApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import goalKrsApi from '../api/goalKrsApi';
+import AddGoalUser from '../components/AddGoalUser';
 
 function GoalUser() {
     const {
@@ -134,6 +135,14 @@ function GoalUser() {
             <Header />
 
             <main className='flex flex-col items-center pt-8'>
+                <AddGoalUser 
+                    idRef={"addGoalUser"} 
+                    idGoal={idGoal} 
+                    idUser={idUser} 
+                    idCompany={idCompany} 
+                    path={path}
+                    payload={payload} 
+                />
                 <div className='flex flex-row w-full justify-center items-center'>
                     <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -144,7 +153,13 @@ function GoalUser() {
                 <div className='w-11/12 flex flex-col'>
                     <div className='container-two-percentage mb-4'>
                         <div className='container-percentage-okr flex flex-col'>
-                            <span className='font-bold text-xl text-bee-strong-1 uppercase'> {goal?.name} </span>
+                            <div className='flex justify-between'>
+                                <span className='font-bold text-xl text-bee-strong-1 uppercase'> {goal?.name} </span>
+                                <button className="modal-btn" data-bs-toggle="modal" data-bs-target="#addGoalUser">
+                                    Adicionar Objetivo Individual
+                                </button>
+                            </div>
+                            
                             <div className='border-t pt-4 border-white'>
                                 <span className='font-bold text-xl text-bee-strong-1'>Times: </span>
                                 <div className='flex gap-2'>
@@ -164,7 +179,7 @@ function GoalUser() {
                             return(
                                 <div className='mt-4'>
                                     <div className='flex justify-between'>
-                                        <span className='font-bold text-lg text-bee-blue-clean'> Objetivo pessoal: {goalUser.id} {goalUser.name} </span>
+                                        <span className='font-bold text-lg text-bee-blue-clean uppercase'> {goalUser.name} </span>
                                         <div className='container-percentage-okr flex flex-row justify-end gap-4'>
                                             <button className="modal-btn" onClick={() => openModalAddKr(goalUser)}>
                                                 Adicionar KR

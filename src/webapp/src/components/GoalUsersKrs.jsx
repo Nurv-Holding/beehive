@@ -97,7 +97,7 @@ function GoalUsersKrs({ kr, finishGoalUsersKr }) {
         <Disclosure>
           <Disclosure.Button className='grid grid-cols-2 content-center justify-items-center w-full p-4 cursor-pointer'>
             <div className='flex items-center'>
-              <span className="capitalize font-semibold"> {kr.idKr} {kr.nameKr} </span>
+              <span className="capitalize font-semibold"> {kr.nameKr} </span>
               <div className={`${!(!!kr.krStatus) ? "bg-green-500 rounded-full p-1.5 ml-2 border" : "bg-red-500 rounded-full p-1.5 ml-2 border"}`}></div>
             </div>
 
