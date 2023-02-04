@@ -9,9 +9,6 @@ import usersApi from '../../../api/usersApi'
 
 function Teams() {
     const { teams, idCompany, goals } = useContext(ContextUser)
-    // const [message, setMessage] = useState("")
-    // const navigate = useNavigate()
-    // const [searchParams, setSearchParams] = useSearchParams()
     const [goalTeams, setGoalTeams] = useState([])
     const [allTeams, setAllTeams] = useState([])
     const [teamsByKrs, setTeamsByKrs] = useState([])
@@ -52,6 +49,7 @@ function Teams() {
         setTeamsByKrs(data)
     }
 
+<<<<<<< HEAD
     // const handleSubmit = (event) => {
     //     event.preventDefault()
 
@@ -78,6 +76,8 @@ function Teams() {
     //     }
     // }
 
+=======
+>>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
     return (
         <div className='w-full flex flex-col h-full'>
             <ListTeams 

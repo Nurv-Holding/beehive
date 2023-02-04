@@ -8,10 +8,12 @@ const update = (idTeamUser, data) => axios.put(`${host}/members/${idTeamUser}/te
 const getById = (idTeamUser) => axios.put(`${host}/members/${idTeamUser}/teams`)
 const getAllTeamsAndUsers = (idCompany) => axios.get(`${host}/members/p/teams/c/${idCompany}`)
 
-export default {
+const teamsUsersApi = {
     getAll,
     create,
     update,
     getById,
     getAllTeamsAndUsers
 }
+
+export default teamsUsersApi

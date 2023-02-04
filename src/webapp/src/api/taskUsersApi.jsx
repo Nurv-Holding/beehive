@@ -7,9 +7,11 @@ const getAll = (idCompany) => axios.get(`${host}/taskUsers/c/${idCompany}`)
 const getByUserAndKrs = (idCompany, idGoal) => axios.get(`${host}/taskUsers/user/${idGoal}/krs/c/${idCompany}`)
 const update = (idTaskUser, data) => axios.put(`${host}/taskUsers/${idTaskUser}`, data)
 
-export default {
+const taskUsersApi = {
     create,
     getAll,
     getByUserAndKrs,
     update
 }
+
+export default taskUsersApi

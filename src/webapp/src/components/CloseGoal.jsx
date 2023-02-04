@@ -16,9 +16,7 @@ const CloseGoal = ({
     payload,
     idGoal,
     goalKrs,
-    idCompany,
-    handleSubmit,
-    idGoalKr
+    idCompany
 }) => {
     const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()

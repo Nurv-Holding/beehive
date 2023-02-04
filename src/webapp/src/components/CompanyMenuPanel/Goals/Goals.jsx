@@ -1,12 +1,10 @@
-// import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useContext } from 'react'
 import { ContextUser } from '../../../context/ContextUser'
-// import { useState } from 'react'
-// import jwtDecode from "jwt-decode"
 import GoalsList from './GoalsList'
 
 function Goals() {
     const { companyGoals, goalAndTeams, krs, goalKrs } = useContext(ContextUser)
+<<<<<<< HEAD
     // const [message, setMessage] = useState("Aqui vai uma mensagem")
     // const navigate = useNavigate()
     // const [searchParams, setSearchParams] = useSearchParams()
@@ -42,6 +40,8 @@ function Goals() {
 
 
     // }
+=======
+>>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
 
     return (
         <div className='w-full h-full flex flex-col items-center mt-8'>

@@ -6,8 +6,10 @@ const create = (idCompany,data) => axios.post(`${host}/hGoalsKrs/history/${idCom
 const getAll = (idCompany) => axios.get(`${host}/hGoalsKrs/history/${idCompany}`)
 const HistoryGoalKrByKr = (idCompany, idGoal, idgoalsKr) => axios.get(`${host}/hGoalsKrs/history/${idCompany}/${idGoal}/${idgoalsKr}`)
 
-export default {
+const historyGoalKrApi = {
     create,
     getAll,
     HistoryGoalKrByKr
 }
+
+export default historyGoalKrApi

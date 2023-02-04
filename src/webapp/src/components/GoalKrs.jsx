@@ -154,7 +154,7 @@ function GoalKrs({
                 </div>
 
                 <div className='profile-photo-task'>
-                  <img src="https://thispersondoesnotexist.com/image" alt="img" />
+                  <img src="https://thispersondoesnotexist.com/image" alt="User profile"/>
                 </div>
 
                 <span className="text-gray-600 text-sm">Atualizado {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}</span>

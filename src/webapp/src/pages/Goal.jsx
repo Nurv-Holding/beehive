@@ -33,7 +33,7 @@ function Goal() {
     payload,
     token } = useContext(ContextUser)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   const [goal, setGoal] = useState({})
   const [goalKrs, setGoalKrs] = useState([])
   const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
@@ -43,8 +43,8 @@ function Goal() {
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [teamUsers, setTeamUsers] = useState([])
-  const [ooalTeam, setGoalTeam] = useState([])
-  const [ooalTeams, setGoalTeams] = useState([])
+  const [setGoalTeam] = useState([])
+  const [setGoalTeams] = useState([])
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -187,7 +187,7 @@ function Goal() {
 
     const { data } = await goalsTeamApi.getByTeam(idCompany, idTeam)
 
-    const hasTeam = data.filter(e => e.idGoal == idGoal && e.idTeam == idTeam)
+    const hasTeam = data.filter(e => e.idGoal === idGoal && e.idTeam === idTeam)
 
     if (Object.keys(item).length === 0) {
       setMessage("Precisa selecionar um time")
@@ -410,7 +410,7 @@ function Goal() {
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
               <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
-              <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
+              <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id === goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status) &&
               <div className='container-percentage-okr flex flex-row justify-around'>

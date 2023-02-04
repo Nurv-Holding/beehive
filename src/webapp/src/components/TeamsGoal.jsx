@@ -44,13 +44,11 @@ function TeamsGoal({
   navigate,
   payload }) {
 
-  // const [isOpen, setIsOpen] = useState(false)
   const [krs, setKrs] = useState({})
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
   const [done, setDone] = useState(0)
   const [idGoalsTeam, setIdGoalsTeam] = useState(null)
   const [user, setUser] = useState(null)
-  // const [goalKr, setGoalKr] = useState({})
   const [addTaskModal, setAddTaskModal] = useState(false)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
@@ -81,6 +79,7 @@ function TeamsGoal({
     setKrs(item)
   }
 
+<<<<<<< HEAD
   // function closeModal() {
   //   setIsOpen(false)
   // }
@@ -90,6 +89,8 @@ function TeamsGoal({
   //   setIsOpen(true)
   // }
 
+=======
+>>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
   const openModalFinishTeamKr = (item) => {
     setKrs(item)
     setOpenModalFinishKr(true)
