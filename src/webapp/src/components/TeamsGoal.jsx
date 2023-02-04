@@ -79,18 +79,6 @@ function TeamsGoal({
     setKrs(item)
   }
 
-<<<<<<< HEAD
-  // function closeModal() {
-  //   setIsOpen(false)
-  // }
-
-  // function openModal(goalKr) {
-  //   setGoalKr(goalKr)
-  //   setIsOpen(true)
-  // }
-
-=======
->>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
   const openModalFinishTeamKr = (item) => {
     setKrs(item)
     setOpenModalFinishKr(true)

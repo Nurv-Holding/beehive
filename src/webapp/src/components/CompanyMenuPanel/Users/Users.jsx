@@ -1,25 +1,12 @@
-<<<<<<< HEAD
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-=======
 import { Link, useParams } from 'react-router-dom'
->>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
 import ListaUsuarios from './ListUsers'
 import { useState } from 'react'
 import usersApi from '../../../api/usersApi'
 import { useEffect } from 'react'
 
 function Users() {
-<<<<<<< HEAD
-    // const { item } = useContext(ContextUser)
-    // const [message, setMessage] = useState("")
     const { idCompany } = useParams()
     const [users, setUsers] = useState([])
-    // const navigate = useNavigate()
-    // const [searchParams, setSearchParams] = useSearchParams()
-=======
-    const { idCompany } = useParams()
-    const [users, setUsers] = useState([])
->>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
 
     useEffect(() => {
         handlerUsers()

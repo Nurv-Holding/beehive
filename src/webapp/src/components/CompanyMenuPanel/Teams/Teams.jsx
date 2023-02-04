@@ -49,35 +49,6 @@ function Teams() {
         setTeamsByKrs(data)
     }
 
-<<<<<<< HEAD
-    // const handleSubmit = (event) => {
-    //     event.preventDefault()
-
-    //     searchParams.delete('update')
-    //     setSearchParams(searchParams)
-
-    //     if (Object.keys(item).length === 0 || item.name === "" || item.descriptions === "") {
-    //         setMessage("Precisa preencher os campos vazios")
-
-    //     } else {
-    //         teamsApi.create(idCompany, item)
-    //             .then(() => {
-    //                 setMessage("Time criado com sucesso")
-    //                 navigate({
-    //                     pathname: `/company/${idCompany}`,
-    //                     search: `?update=${true}`
-    //                 })
-
-    //             })
-    //             .catch((error) => {
-    //                 console.error(error)
-    //                 setMessage("Algo deu errado!")
-    //             })
-    //     }
-    // }
-
-=======
->>>>>>> 244e2115c2593744479eaade7a73edd5443bf19b
     return (
         <div className='w-full flex flex-col h-full'>
             <ListTeams 
