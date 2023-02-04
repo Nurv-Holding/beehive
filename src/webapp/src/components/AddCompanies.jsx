@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Modal from './CompanyMenuPanel/Goals/components/Modal'
 import { useState } from 'react'
 import companiesApi from '../api/companiesApi'

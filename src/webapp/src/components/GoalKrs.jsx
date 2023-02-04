@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { calcPercentage } from '../utils/utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
-import { json, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextUser } from "../context/ContextUser";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
@@ -22,15 +22,12 @@ function GoalKrs({
 
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextUser)
-  const [done, setDone] = useState(0)
   const [itemUpdated, setItemUpdated] = useState({ done:null, note:"" })
   const [goalKr, setGoalKr] = useState({})
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
-  const [description, setDescription] = useState("")
   const [searchParams, setSearchParams] = useSearchParams()
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
-  const [finishKr, setFinishKr] = useState()
   const [note, setNote] = useState("")
 
   function closeModal() {
@@ -157,7 +154,7 @@ function GoalKrs({
                 </div>
 
                 <div className='profile-photo-task'>
-                  <img src="https://thispersondoesnotexist.com/image" />
+                  <img src="https://thispersondoesnotexist.com/image" alt="img" />
                 </div>
 
                 <span className="text-gray-600 text-sm">Atualizado {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}</span>

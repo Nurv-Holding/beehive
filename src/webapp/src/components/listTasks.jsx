@@ -1,11 +1,9 @@
 import moment from "moment"
-import { useEffect } from "react"
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import taskUsersApi from "../api/taskUsersApi"
 import { calcDate } from "../utils/utilis"
 import TaskDone from "./taskDone"
-import SwitchToggle from "./switchToggle"
 import DescriptionTask from "./descriptionTask"
 
 const ListTasks = ({
@@ -19,8 +17,8 @@ const ListTasks = ({
     idCompany,
     updateTask, 
     user}) => {
-    const [enabled, setEnabled] = useState(false)
-    const [index, setIndex] = useState(null)
+    // const [enabled, setEnabled] = useState(false)
+    // const [index, setIndex] = useState(null)
     const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [openModalTaskDone, setOpenModalTaskDone] = useState(false)

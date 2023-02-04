@@ -6,7 +6,6 @@ import goalKrsApi from '../api/goalKrsApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import Header from '../components/Header';
 import HistoryKrsList from '../components/HistoryKrsList';
-import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextUser } from '../context/ContextUser';
 
 const HistoryKr = () => {

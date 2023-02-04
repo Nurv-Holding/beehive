@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import goalKrsApi from "../api/goalKrsApi"
 import goalsApi from "../api/goalsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import historyGoalKrApi from "../api/historyGoalKrApi";
 import goalTeamsKrsApi from "../api/goalTeamsKrsApi";
 import goalsTeamApi from "../api/goalsTeamApi";

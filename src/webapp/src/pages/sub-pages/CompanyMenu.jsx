@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Users from '../../components/CompanyMenuPanel/Users/Users'
 import Teams from '../../components/CompanyMenuPanel/Teams/Teams'
