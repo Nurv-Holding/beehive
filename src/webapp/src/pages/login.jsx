@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import usersApi from "../api/usersApi"
-import Header from "../components/Header"
-import logo from "../media/photos/BE-HIVE1-01.png"
 
 const Login = () => {
     const [user, setUse] = useState({email: "", password: ""})

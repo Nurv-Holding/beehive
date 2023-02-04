@@ -8,7 +8,7 @@ import teamsUsersApi from '../../../api/teamsUsersApi'
 
 function ListTeams({ allTeams, users, teamsByKrs, teamByTeam }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextUser)
-  const [idTeam, setIdTeam] = useState(null)
+  const [idTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
