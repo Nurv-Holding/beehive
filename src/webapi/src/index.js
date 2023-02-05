@@ -5,7 +5,7 @@ const BusinessError = require('./common/erros/BusineErros')
 
 const app = express()
 
-const port = process.env.PORT || 3002
+const port = process.env.PORT || 3004
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))

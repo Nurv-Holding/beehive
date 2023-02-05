@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = "https://beehive-teste-app.onrender.com"
+const host = process.env.REACT_APP_HOSTPROD
 
 const getAllByCompany = (idCompany) => axios.get(`${host}/users/c/${idCompany}`)
 const getAll = () => axios.get(`${host}/users`)
