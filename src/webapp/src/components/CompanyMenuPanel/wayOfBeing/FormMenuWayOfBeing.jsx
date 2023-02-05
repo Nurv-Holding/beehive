@@ -35,6 +35,8 @@ function FormMenuWayOfBeing() {
         })
     }
 
+    const path = `/company/${idCompany}/formfuturevisionchildren/${idFutureVision}`
+
     const registerGoals = (event) => {
         event.preventDefault()
         searchParams.delete('update')
@@ -49,7 +51,7 @@ function FormMenuWayOfBeing() {
                 setMessage({name:"", descriptions:""})
                 setMessage("Cadastro realizado com sucesso")
                 navigate({
-                  pathname: `/company/${idCompany}/formfuturevisionchildren/${idFutureVision}`,
+                  pathname: `${path}`,
                   search: `?update=${true}`
                 })
               })
@@ -73,7 +75,7 @@ function FormMenuWayOfBeing() {
             .then(() => {
                 setMessage("Cadastro realizado com sucesso")
                 navigate({
-                  pathname: `/formfuturevisionchildren/${idFutureVision}/${idCompany}`,
+                  pathname: `${path}`,
                   search: `?update=${true}`
                 })
               })
@@ -97,7 +99,7 @@ function FormMenuWayOfBeing() {
             .then(() => {
                 setMessage("Cadastro realizado com sucesso")
                 navigate({
-                  pathname: `/formfuturevisionchildren/${idFutureVision}/${idCompany}`,
+                  pathname: `${path}`,
                   search: `?update=${true}`
                 })
               })

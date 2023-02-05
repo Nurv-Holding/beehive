@@ -12,7 +12,8 @@ function User() {
         newGoalUsersKrs,
         taskUsers,
         goalUsers,
-        teamsAndUsers
+        teamsAndUsers,
+        futureVisions
     } = useContext(ContextCompany)
     const navigate = useNavigate()
 
@@ -79,6 +80,42 @@ function User() {
                     </div>
 
                     <div className='grid-col'>
+
+                    <div className=''>
+                            <h1 className='container-title text-center'>Jeito de Ser</h1>
+                            <div className='mx-auto flex flex-row items-center justify-center gap-4 mb-2'>
+                                <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
+                                    {(futureVisions || []).map((x) => {
+                                        return(
+                                            <>
+                                            <h1 className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.title} </h1>
+                                            <p> {x.description} </p>
+                                            </>
+                                        )
+                                    })}
+                                </div>
+                                <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
+                                    {(futureVisions || []).map((x) => {
+                                        return(
+                                            <>
+                                            <h1 className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.title} </h1>
+                                            <p> {x.description} </p>
+                                            </>
+                                        )
+                                    })}
+                                </div>
+                                <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
+                                    {(futureVisions || []).map((x) => {
+                                        return(
+                                            <>
+                                            <h1 className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.title} </h1>
+                                            <p> {x.description} </p>
+                                            </>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
 
                         <div className=''>
                             <h1 className='container-title'>OKRs Individuais</h1>
