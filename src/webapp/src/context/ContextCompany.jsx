@@ -15,6 +15,7 @@ import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 import goalUserApi from "../api/goalUserApi"
 import taskUsersApi from "../api/taskUsersApi"
 import futureVisionApi from "../api/futureVisionApi"
+import principlesApi from "../api/principlesApi"
 
 export const ContextCompany = createContext()
 
@@ -44,6 +45,7 @@ export const ContextUserProvider = ({ children }) => {
     const [teamsAndUsers, setTeamsAndUsers] = useState([])
     const [historyGoalUsersKrs, setHistoryGoalUsersKrs] = useState([])
     const [futureVisions, setFutureVisions] = useState([])
+    const [prinples, setPrinciples] = useState([])
     const [goalUsers, setGoalUsers] = useState([])
 
     useEffect(() => {
@@ -68,6 +70,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerTasksUsers()
         handlerTeamsAndUsers()
         handlerFutureVisions()
+        handlerPrinciples()
         
     },[idCompany, idGoal, update])
 
@@ -143,6 +146,11 @@ export const ContextUserProvider = ({ children }) => {
     const handlerFutureVisions = async () => {
         const {data} = await futureVisionApi.getAll(idCompany)
         setFutureVisions(data)
+    }
+
+    const handlerPrinciples = async () => {
+        const {data} = await principlesApi.getAll(idCompany)
+        setPrinciples(data)
     }
 
     const handlerHistoryGoalUsersKrs = async () => {
@@ -257,7 +265,8 @@ export const ContextUserProvider = ({ children }) => {
                     goal,
                     taskUsers,
                     teamsAndUsers,
-                    futureVisions
+                    futureVisions,
+                    prinples
                 }
             }
         >

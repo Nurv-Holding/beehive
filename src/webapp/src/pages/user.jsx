@@ -13,7 +13,8 @@ function User() {
         taskUsers,
         goalUsers,
         teamsAndUsers,
-        futureVisions
+        futureVisions,
+        prinples
     } = useContext(ContextCompany)
     const navigate = useNavigate()
 
@@ -95,7 +96,7 @@ function User() {
                                     })}
                                 </div>
                                 <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
-                                    {(futureVisions || []).map((x) => {
+                                    {(prinples || []).map((x) => {
                                         return(
                                             <>
                                             <h1 className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.title} </h1>
