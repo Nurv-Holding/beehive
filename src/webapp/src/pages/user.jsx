@@ -17,17 +17,11 @@ function User() {
     const navigate = useNavigate()
 
     const returnTotalTasks = () => {
-        console.log((taskUsers || []).map((x) => {
-            if((!!x.done)){ 
-                return x.done
-            }else{
-                return undefined
-            }
-        }))
+
         return {
             total: (taskUsers || []).length,
-            totalDone: (taskUsers || []).map((x) => { if((!!x.done)){ return x.done} else return undefined}),
-            totalNotDone: (taskUsers || []).map((x) => { if(!(!!x.done)){ return x.done} else return undefined})
+            totalDone: (taskUsers || []).filter(f => f.done).length,
+            totalNotDone: (taskUsers || []).filter(f => !f.done).length
         }
     }
 
@@ -60,7 +54,7 @@ function User() {
 
                         <div className='grid-row w-full bg-white p-4 flex flex-col'>
 
-                            <h1 className='container-title'>Entregas</h1>
+                            <h1 className='container-title'>Tarefas</h1>
                             <div className='flex flex-col gap-1'>
                                 <div className='w-full rounded-md p-1 text-white bg-green-500'>
                                     <span>

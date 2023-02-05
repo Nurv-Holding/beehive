@@ -238,7 +238,7 @@ function GoalUser() {
                     <div className='w-full mb-4'>
                         <h1 className='text-center font-bold text-lg my-4 text-bee-strong-1 uppercase'> Tarefas </h1>
                         <div className='w-full'>
-                            {(taskUsers || [])?.filter(f => f.idGoal == idGoal)?.map((task) => {
+                            {(taskUsers || [])?.filter(f => f.idGoal === parseInt(idGoal))?.map((task) => {
                                 return(
                                     <div className="bg-white rounded-md p-5 mt-4 flex flex-col w-full">
                                         <span className='capitalize font-semibold'> {task.nameTask} </span>
