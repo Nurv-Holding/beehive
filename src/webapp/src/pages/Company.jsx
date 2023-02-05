@@ -10,14 +10,14 @@ function Company() {
   const [company, setCompany] = useState({name:"", cnpj:"", createdAt:"", updatedAt:""})
 
   useEffect(() => {
+    const handleCompany = async () => {
+      const {data}= await companiesApi.getById(idCompany)
+      setCompany(data)
+    }
+    
     handleCompany()
 
   },[idCompany])
-
-  const handleCompany = async () => {
-    const {data}= await companiesApi.getById(idCompany)
-    setCompany(data)
-  }
 
   return (
     <>

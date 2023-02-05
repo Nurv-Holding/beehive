@@ -4,29 +4,30 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import teamsUsersApi from "../api/teamsUsersApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompany, update, idLeader }) => {
+const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompany, idLeader }) => {
     const [idUser, setIdUser] = useState(null)
     const [message, setMessage] = useState("")
     const [newUsers, setNewUsers] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
+    const update = searchParams.get('update')
 
     useEffect(() => {
+
+        const handleNewUsers = async () => {
+            const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+            setNewUsers(() => {
+                return users?.filter((item) => {
+                    const verifyItem = data.find(f => f.idUser === item.id && f.idTeam === idTeam)
+    
+                    return item.id !== verifyItem?.idUser && item.id !== idLeader
+                })
+            })
+        }
+
         handleNewUsers()
 
-    },[idTeam, update])
-
-    const handleNewUsers = async () => {
-        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setNewUsers(() => {
-            return users?.filter((item) => {
-                const verifyItem = data.find(f => f.idUser === item.id && f.idTeam === idTeam)
-
-                return item.id !== verifyItem?.idUser && item.id !== idLeader
-            })
-        })
-    }
-
+    },[update, users, idCompany, idLeader, idTeam])
 
     const addMember = (event) => {
         event.preventDefault()

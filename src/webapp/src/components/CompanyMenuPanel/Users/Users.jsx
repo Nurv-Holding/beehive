@@ -9,14 +9,16 @@ function Users() {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
+        const handlerUsers = async () => {
+            const { data } = await usersApi.getAllByCompany(idCompany)
+            setUsers(data)
+        }
+
         handlerUsers()
 
     }, [idCompany])
 
-    const handlerUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
-    }
+
 
     return (
         <div className='flex flex-row justify-between'>

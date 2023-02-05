@@ -22,27 +22,27 @@ const TeamList = () => {
     const update = searchParams.get('update')
 
     useEffect(() => {
+        const handleTeams = async () => {
+            const { data } = await teamsApi.getAll(idCompany)
+            setTeams(data)
+        }
+    
+        const handleUsersAndTeams = async () => {
+            const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+            setUsersAndTeams(data)
+        }
+    
+        const handleUsers = async () => {
+            const { data } = await usersApi.getAllByCompany(idCompany)
+    
+            setUsers(data)
+        }
+
         handleTeams()
         handleUsers()
         handleUsersAndTeams()
 
     }, [idCompany, update])
-
-    const handleTeams = async () => {
-        const { data } = await teamsApi.getAll(idCompany)
-        setTeams(data)
-    }
-
-    const handleUsersAndTeams = async () => {
-        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setUsersAndTeams(data)
-    }
-
-    const handleUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-
-        setUsers(data)
-    }
 
     const routerBack = () => {
         navigate(`/company/${idCompany}`)
@@ -99,7 +99,6 @@ const TeamList = () => {
                                 usersAndTeams={usersAndTeams} 
                                 users={users} idTeam={idTeam} 
                                 idCompany={idCompany}
-                                update={update}
                                 idLeader={idLeader}
                                 />
                             </div>

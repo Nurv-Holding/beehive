@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import teamsApi from '../api/teamsApi';
@@ -11,8 +11,7 @@ import { ContextUser } from '../context/ContextUser';
 
 const HistoryKrsTeam = () => {
 
-    const {idTeam, idGoal} = useParams()
-    const { idCompany } = useContext(ContextUser)
+    const { idCompany, idGoal, idTeam } = useContext(ContextUser)
     const [histories, setHistories] = useState([])
     const [goalTeams, setGoalTeams] = useState([])
     const navigate = useNavigate()
@@ -29,32 +28,32 @@ const HistoryKrsTeam = () => {
     )
 
     useEffect(() => {
+        const handlerTeam = async () => {
+            const {data} = await teamsApi.getById(idTeam, idCompany)
+            setTeam(data)
+        }
+    
+        const handleGoalTeamByGoalTeam = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
+            setGoalTeams(data)
+          }
+    
+        const handleHistory = async () => {
+            const {data} = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
+            setHistories(data)
+        }
+    
+        const handleGoalTeamByKrs = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
+            setGoalTeamByKrs(data)
+        }
+
         handleHistory()
         handlerTeam()
         handleGoalTeamByGoalTeam()
         handleGoalTeamByKrs()
 
-    },[idTeam])
-
-    const handlerTeam = async () => {
-        const {data} = await teamsApi.getById(idTeam, idCompany)
-        setTeam(data)
-    }
-
-    const handleGoalTeamByGoalTeam = async () => {
-        const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
-        setGoalTeams(data)
-      }
-
-    const handleHistory = async () => {
-        const {data} = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
-        setHistories(data)
-    }
-
-    const handleGoalTeamByKrs = async () => {
-        const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
-        setGoalTeamByKrs(data)
-      }
+    },[idTeam, idGoal, idCompany])
 
       const routerBack = () => {
         navigate(-1)

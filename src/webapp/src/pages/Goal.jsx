@@ -43,8 +43,6 @@ function Goal() {
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [teamUsers, setTeamUsers] = useState([])
-  const [setGoalTeam] = useState([])
-  const [setGoalTeams] = useState([])
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -59,11 +57,61 @@ function Goal() {
   const update = searchParams.get('update')
 
   useEffect(() => {
+
+    const handleTasksUser = async () => {
+      const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
+      setTasksUser(data)
+    }
+  
+    const handleTemaUsers = async () => {
+      const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+      setTeamUsers(data)
+    }
+  
+    const handleHistoryGoalTeamKrs = async () => {
+      const { data } = await historyGoalTeamKrApi.getAllByKrs()
+      setHistoryGoalTeamKrs(data)
+  
+    }
+  
+    const handleHistoryGoalKrs = async () => {
+      const { data } = await historyGoalKrApi.getAll(idCompany)
+      setHistoryGoalKrs(data)
+    }
+  
+    const handleGoalTeamByGoalTeam = async () => {
+      const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
+      setGoalTeamByGoalTeam(data)
+    }
+  
+    const handleGoalTeamByKrs = async () => {
+      const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
+      setGoalTeamByKrs(data)
+    }
+  
+    const handleGoal = async () => {
+      const { data } = await goalsApi.getById(idGoal, idCompany)
+      setGoal(data)
+    }
+  
+    const handleGoalTeamsByTeam = async () => {
+      const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
+      setGoalTeamsByTeam(data)
+    }
+  
+    const handleGoalTeamsKrs = async () => {
+      const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
+      setGoalTeamsKrs(data)
+    }
+  
+    const handleGoalKrs = async () => {
+      const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
+      setGoalKrs(data)
+    }
+
     handleGoal()
     handleGoalKrs()
     handleGoalTeamsByTeam()
-    handleGoalTeam()
-    handleGoalTeams()
     handleGoalTeamsKrs()
     handleGoalTeamByGoalTeam()
     handleGoalTeamByKrs()
@@ -113,67 +161,6 @@ function Goal() {
 
   function closeModalCloseGoal() {
     setIsOpenCloseGoal(false)
-  }
-
-  const handleTasksUser = async () => {
-    const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
-    setTasksUser(data)
-  }
-
-  const handleTemaUsers = async () => {
-    const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-    setTeamUsers(data)
-  }
-
-  const handleHistoryGoalTeamKrs = async () => {
-    const { data } = await historyGoalTeamKrApi.getAllByKrs()
-    setHistoryGoalTeamKrs(data)
-
-  }
-
-  const handleHistoryGoalKrs = async () => {
-    const { data } = await historyGoalKrApi.getAll(idCompany)
-    setHistoryGoalKrs(data)
-  }
-
-  const handleGoalTeamByGoalTeam = async () => {
-    const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
-    setGoalTeamByGoalTeam(data)
-  }
-
-  const handleGoalTeamByKrs = async () => {
-    const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
-    setGoalTeamByKrs(data)
-  }
-
-  const handleGoal = async () => {
-    const { data } = await goalsApi.getById(idGoal, idCompany)
-    setGoal(data)
-  }
-
-  const handleGoalTeamsByTeam = async () => {
-    const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
-    setGoalTeamsByTeam(data)
-  }
-
-  const handleGoalTeamsKrs = async () => {
-    const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
-    setGoalTeamsKrs(data)
-  }
-
-  const handleGoalTeam = async () => {
-    const { data } = await goalsTeamApi.getById(idCompany, idGoal)
-    setGoalTeam(data)
-  }
-
-  const handleGoalTeams = async () => {
-    const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)
-    setGoalTeams(data)
-  }
-
-  const handleGoalKrs = async () => {
-    const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
-    setGoalKrs(data)
   }
 
   const addTeamInGoal = async (event) => {

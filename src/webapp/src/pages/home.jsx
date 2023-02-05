@@ -17,14 +17,14 @@ function Home() {
   const update = searchParams.get('update')
 
   useEffect(() => {
+    const handlerCompanies = async () => {
+      const {data} = await companiesApi.getAll()
+      setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
+    }
+
     handlerCompanies()
 
-  },[update])
-
-  const handlerCompanies = async () => {
-    const {data} = await companiesApi.getAll()
-    setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
-  }
+  },[update, payload])
 
   return (
     <>

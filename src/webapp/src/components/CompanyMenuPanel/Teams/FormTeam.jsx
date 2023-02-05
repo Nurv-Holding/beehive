@@ -20,14 +20,14 @@ function FormTeam() {
     }
 
     useEffect(() => {
+        const handleUsers = async () => {
+            const {data} = await usersApi.getAllByCompany(idCompany)
+            setUsers(data)
+        }
+        
         handleUsers()
 
     },[idCompany])
-
-    const handleUsers = async () => {
-        const {data} = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault()

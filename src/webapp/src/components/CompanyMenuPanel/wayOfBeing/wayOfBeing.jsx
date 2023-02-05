@@ -18,26 +18,27 @@ function WayOfBeing() {
     const [proposals, setProposals] = useState([])
 
     useEffect(() => {
+        const handleFutureVision = async () => {
+            const { data } = await futureVisionApi.getAll(idCompany)
+            setFutureVisions(data)
+        }
+    
+        const handlePrinciples = async () => {
+            const { data } = await principlesApi.getAll(idCompany)
+            setPrinciples(data)
+        }
+    
+        const handleProposals = async () => {
+            const { data } = await proposalsApi.getAll(idCompany)
+            setProposals(data)
+        }
+
         handleFutureVision()
         handlePrinciples()
         handleProposals()
 
     }, [idCompany])
 
-    const handleFutureVision = async () => {
-        const { data } = await futureVisionApi.getAll(idCompany)
-        setFutureVisions(data)
-    }
-
-    const handlePrinciples = async () => {
-        const { data } = await principlesApi.getAll(idCompany)
-        setPrinciples(data)
-    }
-
-    const handleProposals = async () => {
-        const { data } = await proposalsApi.getAll(idCompany)
-        setProposals(data)
-    }
 
     return (
         <div className='flex flex-row'>

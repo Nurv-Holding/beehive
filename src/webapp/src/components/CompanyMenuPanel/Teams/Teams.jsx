@@ -16,6 +16,31 @@ function Teams() {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
+        const handleGoalTeamsByTeam = async () => {
+            const { data } = await goalsTeamApi.getAllGoalGroupByTeam(idCompany)
+            setGoalTeams(data)
+        }
+    
+        const handleTeamsByTeams = async () => {
+            const { data } = await teamsApi.getByTeams(idCompany)
+            setTeamByTeam(data)
+        }
+    
+        const handleUsers = async () => {
+            const { data } = await usersApi.getAllByCompany(idCompany)
+            setUsers(data)
+        }
+    
+        const handleTeamsByGoals = async () => {
+            const { data } = await teamsApi.getAllTeams(idCompany)
+            setAllTeams(data)
+        }
+    
+        const handleTeamsByKrs = async () => {
+            const { data } = await teamsApi.getAllTeamsByKrs(idCompany)
+            setTeamsByKrs(data)
+        }
+
         handleGoalTeamsByTeam()
         handleTeamsByGoals()
         handleTeamsByKrs()
@@ -23,31 +48,6 @@ function Teams() {
         handleTeamsByTeams()
 
     },[idCompany])
-
-    const handleGoalTeamsByTeam = async () => {
-        const { data } = await goalsTeamApi.getAllGoalGroupByTeam(idCompany)
-        setGoalTeams(data)
-    }
-
-    const handleTeamsByTeams = async () => {
-        const { data } = await teamsApi.getByTeams(idCompany)
-        setTeamByTeam(data)
-    }
-
-    const handleUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
-    }
-
-    const handleTeamsByGoals = async () => {
-        const { data } = await teamsApi.getAllTeams(idCompany)
-        setAllTeams(data)
-    }
-
-    const handleTeamsByKrs = async () => {
-        const { data } = await teamsApi.getAllTeamsByKrs(idCompany)
-        setTeamsByKrs(data)
-    }
 
     return (
         <div className='w-full flex flex-col h-full'>
