@@ -115,11 +115,120 @@ join goalsTeams as gt on pgt.idGoalsTeam=gt.id
 join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id
 where pgt.idCompany=2 group by t.id;
 
-/*Projeção de times com o objetivos*/
-select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal
+/*Projeção de todos os times e objetivos*/
+select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
+gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
 left join goalsteams as gt on pgt.idGoalsTeam=gt.id
 left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
 
-select * from goalTeamKrs;
+/*Projeção de times por times*/
+select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
+gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
+from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+join teams as t on pgt.idTeam=t.id
+left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id group by t.id;
+
+/*Projeção de times com KRS*/
+select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
+gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
+from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+join teams as t on pgt.idTeam=t.id
+left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
+
+select pgt.id as idProcess, g.id as idGoal,
+t.id as idTeam, t.name as nameTeam,
+u.id as idUser, u.name as nameUser
+from processgoalsteams as pgt 
+join goals as g on pgt.idGoal=g.id
+join teams as t on pgt.idTeam=t.id
+join teamusers as tu on tu.idTeam=t.id
+join users as u on tu.idUser=u.id
+where pgt.idGoal=14;
+
+/*Projeção dos todos os krs individuais*/
+select g.id as idGoal, g.name as nameGoal, u.id as idUser,
+u.name as nameUser, guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
+guk.fromQuarterly, guk.toYearly, guk.fromYearly,
+guk.done, guk.status as krStatus, gu.id as idGoalUser,
+gu.name as nameGoalUser, gu.status as statusGoalUser
+from goalsuserskrs as guk
+join goalsusers as gu on guk.idGoalsUser=gu.id
+join users as u on gu.idUser=u.id
+join goals as g on gu.idGoal=g.id
+where guk.idCompany=4 and guk.idUser=6 group by guk.id;
+
+/*projeção do objetivo com os times e usuários*/
+select g.id as idGoal, g.name as nameGoal,
+t.id as idTeam, t.name as nameTeam,
+u.id as idUser, u.name as nameUser 
+from processgoalsteams as pgt 
+join goals as g on pgt.idGoal=g.id
+join teams as t on pgt.idTeam=t.id
+join teamusers as tu on tu.idTeam=t.id
+join users as u on tu.idUser=u.id
+where pgt.idCompany=4 and u.id=6 and g.id=14;
+
+/*Projeção dos todos os krs individuais por times*/
+select g.id as idGoal, g.name as nameGoal, u.id as idUser,
+u.name as nameUser, t.id as idTeam, t.name as nameTeam,
+guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
+guk.fromQuarterly, guk.toYearly, guk.fromYearly,
+guk.done, guk.status as krStatus, gu.id as idGoalUser,
+gu.name as nameGoalUser, gu.status as statusGoalUser
+from goalsuserskrs as guk
+left join goalsusers as gu on guk.idGoalsUser=gu.id
+left join users as u on gu.idUser=u.id
+left join goals as g on gu.idGoal=g.id
+left join processgoalsteams as pgt on pgt.idGoal=g.id
+left join teams as t on pgt.idTeam=t.id
+left join teamusers as tu on tu.idTeam=t.id
+where guk.idCompany=4 and guk.idUser=6 group by t.id;
+
+select g.id as idGoal, g.name as nameGoal, u.id as idUser,
+u.name as nameUser, t.id as idTeam, t.name as nameTeam,
+guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
+guk.fromQuarterly, guk.toYearly, guk.fromYearly,
+guk.done, guk.status as krStatus, gu.id as idGoalUser,
+gu.name as nameGoalUser, gu.status as statusGoalUser
+from goalsuserskrs as guk
+left join goalsusers as gu on guk.idGoalsUser=gu.id
+left join users as u on gu.idUser=u.id
+left join goals as g on gu.idGoal=g.id
+left join processgoalsteams as pgt on pgt.idGoal=g.id
+left join teams as t on pgt.idTeam=t.id
+left join teamusers as tu on tu.idTeam=t.id
+where guk.idCompany=4 and guk.idUser=6 group by guk.id;
+
+/*Projeção de histórico de krs de objetivo*/
+select hgk.id as idHistoryGoalKrs, hgk.idGoalsUserKr, 
+hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,hgk.note,
+hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, hgk.status
+from historygoalsuserkrs as hgk
+join goalsuserskrs as gk on hgk.idGoalsUserKr=gk.id 
+where hgk.idCompany=4  and hgk.idGoalsUserKr=12;
+
+select tk.id as idTask, tk.name as nameTask, 
+g.id as idGoal, g.name as nameGoal,u.id as idUser, 
+u.name as nameUser, tk.updatedAt as initialDate, 
+tk.finalDate, t.id as idTeam, t.name as nameTeam
+from tasks as tk join goalsteams as gt on tk.idGoalsTeamKr=gt.id
+join goals as g on gt.idGoal=g.id 
+join teams as t on g.idTeam=t.id 
+join users as u on tk.idUser=u.id where tk.idCompany=4 and g.id=14;
+
+select tk.id as idTask, tk.name as nameTask,
+tku.done, tku.description, u.id as idUser, u.name as nameUser,
+tu.idTeam as idTeam, t.name as nameTeam, pgt.idGoal,
+tku.createdAt, tku.updatedAt, tk.finalDate
+from taskusers as tku join tasks as tk on tku.idTask=tk.id
+join teamusers as tu on tku.idTeamUser=tu.id
+join users as u on tu.idUser=u.id
+join teams as t on tu.idTeam=t.id
+join processgoalsteams as pgt on pgt.idTeam=t.id
+where pgt.idCompany=4 and u.id=7 and pgt.idGoal=14;
+
+select * from tasks;

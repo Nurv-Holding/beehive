@@ -1,31 +1,48 @@
 import Header from '../components/Header';
 import Profile from '../components/profile';
 import { ContextCompany } from '../context/ContextCompany';
-import { useContext, useEffect, useState } from 'react';
-import {  useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import {  useNavigate } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
-import taskUsersApi from '../api/taskUsersApi';
-
 
 function User() {
     const {
-        company,
-        idCompany,
-        idGoal,
         idUser,
         payload,
         newGoalUsersKrs,
-        taskUsers
+        taskUsers,
+        goalUsers,
+        teamsAndUsers
     } = useContext(ContextCompany)
     const navigate = useNavigate()
 
     const returnTotalTasks = () => {
-        console.log((taskUsers || []).map((x) => { if((!!x.done)){ return x.done}}).length)
+        console.log((taskUsers || []).map((x) => {
+            if((!!x.done)){ 
+                return x.done
+            }else{
+                return undefined
+            }
+        }))
         return {
             total: (taskUsers || []).length,
-            totalDone: (taskUsers || []).map((x) => { if((!!x.done)){ return x.done}}),
-            totalNotDone: (taskUsers || []).map((x) => { if(!(!!x.done)){ return x.done}})
+            totalDone: (taskUsers || []).map((x) => { if((!!x.done)){ return x.done} else return undefined}),
+            totalNotDone: (taskUsers || []).map((x) => { if(!(!!x.done)){ return x.done} else return undefined})
         }
+    }
+
+    const returnNewGoalsByUsers = () => {
+        let items = [];
+        (teamsAndUsers || []).forEach((f) => {
+            const verifyIdTeam = teamsAndUsers.find(e => e.idGoal === f.idGoal)
+            if(items.length === 0) items.push(verifyIdTeam)
+    
+            if(verifyIdTeam && !(items || []).some(s => s.idGoal === verifyIdTeam.idGoal)) 
+                items.push(verifyIdTeam)
+            
+        })
+    
+        return items
     }
 
     const redirectRouter = (route) => {
@@ -72,33 +89,36 @@ function User() {
                         <div className=''>
                             <h1 className='container-title'>OKRs Individuais</h1>
                             <div className='mx-auto grid grid-cols-2 items-center justify-center gap-4 mb-2'>
-                                {(newGoalUsersKrs || []).map((item) => {
+                                {(returnNewGoalsByUsers() || []).filter(f => f.idUser === parseInt(idUser)).map(x => {
                                     return(
+                                        <>
                                         <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
-                                            <span onClick={() => redirectRouter(`goal/${item.idGoal}`)} className="text-bee-strong-1 text-xl font-bold text-center uppercase"> {item.nameGoal} </span>
-                                            {(newGoalUsersKrs || []).filter(f => f.idGoal === item.idGoal).map((goalUser) => {
-                                                return(
-                                                    <Disclosure>
-                                                        <Disclosure.Button className="w-full bg-white w-full p-4 rounded-xl shadow-lg cursor-default my-1">
-                                                        <h1 className='text-black uppercase text-center font-bold text-[12px]'> {goalUser.nameGoalUser} </h1>
-                                                        </Disclosure.Button>
-                                                        <>
-                                                        {(goalUser.krs.map((kr) => {
-                                                            return(
-                                                                <Disclosure.Panel className='bg-bee-blue-clean p-2 my-1 uppercase text-[10px] rounded-xl text-white shadow-lg font-bold cursor-default'>
-                                                                    <span> {kr.nameKr} </span>
-                                                                </Disclosure.Panel>
-                                                            )
-                                                        }))}
-                                                        </>
+                                        <span onClick={() => redirectRouter(`goal/${x.idGoal}`)} className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.nameGoal} </span>
+                                        {(goalUsers || []).filter(e => e.idGoal === x.idGoal).map((item) => {
+                                            
+                                            return(
+                                                <Disclosure>
+                                                    <Disclosure.Button className="w-full bg-white p-4 rounded-xl shadow-lg my-1 cursor-pointer">
+                                                    <h1 className='text-black uppercase text-center font-bold text-[12px]'> {item.name} </h1>
+                                                    </Disclosure.Button>
+                                                    <>
+                                                    {(newGoalUsersKrs.filter(e => e.idGoalUser === item.id)[0]?.krs.map((kr) => {
+                                                        return(
+                                                            <Disclosure.Panel className='bg-bee-blue-clean p-2 my-1 uppercase text-[10px] rounded-xl text-white shadow-lg font-bold'>
+                                                                <span> {kr.nameKr} </span>
+                                                            </Disclosure.Panel>
+                                                        )
+                                                    }))}
+                                                    </>
 
-                                                    </Disclosure>
-                                                )
-                                            })}
+                                                </Disclosure>
+                                            )
+                                        })}
                                         </div>
+                                        </>
                                     )
                                 })}
-  
+
                             </div>
                         </div>
                     </div>

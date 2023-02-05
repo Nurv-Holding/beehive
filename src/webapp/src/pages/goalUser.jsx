@@ -8,8 +8,6 @@ import GoalUsersKrs from '../components/GoalUsersKrs';
 import { ContextCompany } from '../context/ContextCompany';
 import historyGoalsUserKrsApi from '../api/historyGoalsUserKrsApi';
 import goalUserApi from '../api/goalUserApi';
-import historyGoalKrApi from '../api/historyGoalKrApi';
-import goalKrsApi from '../api/goalKrsApi';
 import AddGoalUser from '../components/AddGoalUser';
 import moment from 'moment';
 import { calcDate } from '../utils/utilis';
@@ -38,7 +36,6 @@ function GoalUser() {
     const navigate = useNavigate()
     const [message, setMessage] = useState("")
 
-    // const pathHistory = `/company/${idCompany}/user/${idUser}/history/${kr?.idKr}`
     const path= `/company/${idCompany}/user/${idUser}/goal/${idGoal}`
 
     const returnNewTeamsAndUsers = () => {
@@ -192,7 +189,7 @@ function GoalUser() {
                     </div>
 
                     <div className='mt-4'>
-                        {(goalUsers || []).filter(e => e.idGoal == idGoal && e.idUser == idUser).map((goalUser) => {
+                        {(goalUsers || []).filter(e => e.idGoal === parseInt(idGoal)  && e.idUser === parseInt(idUser)).map((goalUser) => {
                             return(
                                 <div className='mt-4'>
                                     <div className='flex justify-between'>
@@ -224,7 +221,7 @@ function GoalUser() {
                                         </div>
                                     </div>
 
-                                    {(newGoalUsersKrs || []).filter(f => f.idGoalUser === goalUser.id && f.idGoal == idGoal)[0]?.krs?.map((kr) => {
+                                    {(newGoalUsersKrs || []).filter(f => f.idGoalUser === goalUser.id && f.idGoal === parseInt(idGoal))[0]?.krs?.map((kr) => {
                                         return(
                                             <div className='mt-4'>
                                                 <GoalUsersKrs 

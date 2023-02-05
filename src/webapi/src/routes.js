@@ -164,6 +164,7 @@ const routes = (app) => {
             app.get("/processGoalsTeams/by/teams/:idCompany",processGoalTeamController.getByTeams)
             app.get("/processGoalsTeams/all/teams/krs/:idCompany",processGoalTeamController.getAllTeamsByKrs)
             app.get("/processGoalsTeams/teams/c/:idCompany/users/:idUser/goal/:idGoal",processGoalTeamController.getTeamsAndUsersByGoal)
+            app.get("/processGoalsTeams/all/teams/c/:idCompany/users/:idUser/",processGoalTeamController.getAllTeamsAndUsers)
 
             //goalsTeam
             app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)

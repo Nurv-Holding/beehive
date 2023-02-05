@@ -40,6 +40,7 @@ export const ContextUserProvider = ({ children }) => {
     const [krs, setKrs] = useState([])
     const [newTeamsUser, setNewTeamsUser] = useState([])
     const [teamsAndUsersByGoal, setTeamsAndUsersByGoal] = useState([])
+    const [teamsAndUsers, setTeamsAndUsers] = useState([])
     const [historyGoalUsersKrs, setHistoryGoalUsersKrs] = useState([])
     const [goalUsers, setGoalUsers] = useState([])
 
@@ -63,6 +64,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerGoalUsers()
         handlerGoal()
         handlerTasksUsers()
+        handlerTeamsAndUsers()
         
     },[idCompany, idGoal, update])
 
@@ -110,6 +112,17 @@ export const ContextUserProvider = ({ children }) => {
 
         }else{
             setTeamsAndUsersByGoal([])
+        }
+        
+    }
+
+    const handlerTeamsAndUsers = async () => {
+        if(idUser){
+            const {data} = await goalsTeamApi.getAllTeamsAndUsers(idCompany, idUser)
+            setTeamsAndUsers(data)
+
+        }else{
+            setTeamsAndUsers([])
         }
         
     }
@@ -234,7 +247,8 @@ export const ContextUserProvider = ({ children }) => {
                     historyGoalUsersKrs,
                     goalUsers,
                     goal,
-                    taskUsers
+                    taskUsers,
+                    teamsAndUsers
                 }
             }
         >
