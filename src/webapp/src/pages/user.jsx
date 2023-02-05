@@ -14,7 +14,8 @@ function User() {
         goalUsers,
         teamsAndUsers,
         futureVisions,
-        prinples
+        prinples,
+        proposals
     } = useContext(ContextCompany)
     const navigate = useNavigate()
 
@@ -106,7 +107,7 @@ function User() {
                                     })}
                                 </div>
                                 <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
-                                    {(futureVisions || []).map((x) => {
+                                    {(proposals || []).map((x) => {
                                         return(
                                             <>
                                             <h1 className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.title} </h1>
@@ -120,32 +121,32 @@ function User() {
 
                         <div className=''>
                             <h1 className='container-title'>OKRs Individuais</h1>
-                            <div className='mx-auto grid grid-cols-2 items-center justify-center gap-4 mb-2'>
+                            <div className='mx-auto flex flex-wrap gap-4 mb-2'>
                                 {(returnNewGoalsByUsers() || []).filter(f => f.idUser === parseInt(idUser)).map(x => {
                                     return(
                                         <>
                                         <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
-                                        <span onClick={() => redirectRouter(`goal/${x.idGoal}`)} className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.nameGoal} </span>
-                                        {(goalUsers || []).filter(e => e.idGoal === x.idGoal).map((item) => {
-                                            
-                                            return(
-                                                <Disclosure>
-                                                    <Disclosure.Button className="w-full bg-white p-4 rounded-xl shadow-lg my-1 cursor-pointer">
-                                                    <h1 className='text-black uppercase text-center font-bold text-[12px]'> {item.name} </h1>
-                                                    </Disclosure.Button>
-                                                    <>
-                                                    {(newGoalUsersKrs.filter(e => e.idGoalUser === item.id)[0]?.krs.map((kr) => {
-                                                        return(
-                                                            <Disclosure.Panel className='bg-bee-blue-clean p-2 my-1 uppercase text-[10px] rounded-xl text-white shadow-lg font-bold'>
-                                                                <span> {kr.nameKr} </span>
-                                                            </Disclosure.Panel>
-                                                        )
-                                                    }))}
-                                                    </>
+                                            <span onClick={() => redirectRouter(`goal/${x.idGoal}`)} className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.nameGoal} </span>
+                                            {(goalUsers || []).filter(e => e.idGoal === x.idGoal).map((item) => {
+                                                
+                                                return(
+                                                    <Disclosure>
+                                                        <Disclosure.Button className="w-full bg-white p-4 rounded-xl shadow-lg my-1 cursor-pointer">
+                                                        <h1 className='text-black uppercase text-center font-bold text-[12px]'> {item.name} </h1>
+                                                        </Disclosure.Button>
+                                                        <>
+                                                        {(newGoalUsersKrs.filter(e => e.idGoalUser === item.id)[0]?.krs.map((kr) => {
+                                                            return(
+                                                                <Disclosure.Panel className='bg-bee-blue-clean p-2 my-1 uppercase text-[10px] rounded-xl text-white shadow-lg font-bold'>
+                                                                    <span> {kr.nameKr} </span>
+                                                                </Disclosure.Panel>
+                                                            )
+                                                        }))}
+                                                        </>
 
-                                                </Disclosure>
-                                            )
-                                        })}
+                                                    </Disclosure>
+                                                )
+                                            })}
                                         </div>
                                         </>
                                     )
