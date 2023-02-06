@@ -1,7 +1,7 @@
 import { Disclosure } from '@headlessui/react'
 import { Link } from "react-router-dom"
 
-const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
+const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs, idCompany }) => {
 
     const teams = (idGoal) => {
         let newItems = []
@@ -24,7 +24,7 @@ const GoalsList = ({ companyGoals, goalKrs, goalAndTeams, krs }) => {
                 return(
                     <div className="bg-white w-[500px] h-[400px] overflow-y-scroll rounded-3xl shadow-lg py-4 px-6 flex flex-col items-center">
                         <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">
-                            <Link to={`goal/${goal.idGoal}`}>
+                            <Link to={`${goal.idGoal}`}>
                                 {goal.nameGoal}
                             </Link>
                         </span>

@@ -1,28 +1,11 @@
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import ListUsersOkrs from './ListUsersOkrs'
+import { Link} from 'react-router-dom'
 import { useContext } from 'react'
-import { ContextCompany } from '../../../context/ContextCompany'
-import { useState } from 'react'
-import usersApi from '../../../api/usersApi'
-import { useEffect } from 'react'
+import { ContextCompany } from '../context/ContextCompany'
+import ListUsersOk from "../components/CompanyMenuPanel/Users/ListUsersOkrs"
 
 function Users() {
-    const { item, idCompany, newTeamsUser } = useContext(ContextCompany)
-    const [message, setMessage] = useState("")
-    const [users, setUsers] = useState([])
-    const navigate = useNavigate()
-    const [searchParams, setSearchParams] = useSearchParams()
-
-    useEffect(() => {
-        handlerUsers()
-
-    }, [idCompany])
-
-    const handlerUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
-    }
-
+    const { idCompany, newTeamsUser } = useContext(ContextCompany)
+ 
     return (
         <div className='flex flex-row justify-between'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 gap-2 flex flex-col items-center py-2'>
@@ -39,7 +22,7 @@ function Users() {
                 </Link>
             </div>
 
-            <ListUsersOkrs users={newTeamsUser} />
+            <ListUsersOk users={newTeamsUser} />
         </div>
     )
 }

@@ -1,12 +1,29 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Tab } from '@headlessui/react'
-import Users from '../../components/CompanyMenuPanel/Users/Users'
-import Teams from '../../components/CompanyMenuPanel/Teams/Teams'
-import Goals from '../../components/CompanyMenuPanel/Goals/Goals'
 import TitleCompany from '../../components/TitleCompany'
-import WayOfBeing from '../../components/CompanyMenuPanel/wayOfBeing/wayOfBeing'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { ContextCompany } from '../../context/ContextCompany'
+import profilesApi from '../../api/profilesApi'
 
 export default function CompanyMenu( { company } ) {
+  const { payload } = useContext(ContextCompany)
+  const [profile, setProfile] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const getOneProfile = async () => {
+      const { data } = await profilesApi.getById(payload?.idProfile)
+      setProfile(data)
+    }
+
+    getOneProfile()
+
+  },[payload])
+
+  const redirectRouter = (path) => {
+    navigate(path)
+  }
+
   return (
     <div className='flex h-full'>
       <Tab.Group>
@@ -14,11 +31,24 @@ export default function CompanyMenu( { company } ) {
 
         <TitleCompany className="text-bee-blue-clean" name={company?.name} />
 
+        {profile?.name !== "adminMaster" && 
           <Tab>
             {({ selected }) => (
-              <button
+              <button onClick={() => redirectRouter(`user/${payload?.id}`)}
                 className={
-                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
+                  selected && 'text-bee-blue-clean bg-gray-200'
+                }
+              >
+                Meu painel
+              </button>
+            )}
+          </Tab>
+        }
+          <Tab>
+            {({ selected }) => (
+              <button onClick={() => redirectRouter(`wayOfBeing`)}
+                className={
+                  selected && 'text-bee-blue-clean bg-gray-200'
                 }
               >
                 Jeito de ser
@@ -28,9 +58,9 @@ export default function CompanyMenu( { company } ) {
 
           <Tab>
             {({ selected }) => (
-              <button
+              <button onClick={() => redirectRouter(`goals`)} 
                 className={
-                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
+                  selected && 'text-bee-blue-clean bg-gray-200'
                 }
               >
                 Objetivos
@@ -40,9 +70,9 @@ export default function CompanyMenu( { company } ) {
 
           <Tab>
             {({ selected }) => (
-              <button
+              <button onClick={() => redirectRouter(`teams`)} 
                 className={
-                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
+                  selected && 'text-bee-blue-clean bg-gray-200'
                 }
               >
                 Times
@@ -52,9 +82,9 @@ export default function CompanyMenu( { company } ) {
 
           <Tab>
             {({ selected }) => (
-              <button
+              <button onClick={() => redirectRouter(`users`)} 
                 className={
-                  selected ? 'text-bee-blue-clean bg-gray-200' : ''
+                  selected && 'text-bee-blue-clean bg-gray-200'
                 }
               >
                 Usuários
@@ -65,11 +95,12 @@ export default function CompanyMenu( { company } ) {
 
         <div className='w-full'>
           <Tab.Panels className='text-white'>
-            <Tab.Panel>
+            <Outlet />
+            {/* <Tab.Panel>
               <WayOfBeing />
-            </Tab.Panel>
+            </Tab.Panel> */}
 
-            <Tab.Panel>
+            {/* <Tab.Panel>
               <Goals />
             </Tab.Panel>
 
@@ -79,7 +110,7 @@ export default function CompanyMenu( { company } ) {
 
             <Tab.Panel>
               <Users />
-            </Tab.Panel>
+            </Tab.Panel> */}
           </Tab.Panels>
         </div>
       </Tab.Group>

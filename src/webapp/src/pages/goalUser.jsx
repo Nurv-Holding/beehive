@@ -20,10 +20,8 @@ function GoalUser() {
         payload,
         goalUserKrs,
         newGoalUsersKrs,
-        goalAndTeams,
         teamsAndUsersByGoal,
         idUser,
-        historyGoalUsersKrs,
         goalUsers,
         goal,
         taskUsers
@@ -146,7 +144,7 @@ function GoalUser() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
 
             <main className='flex flex-col items-center pt-8'>
                 <AddGoalUser 
@@ -157,13 +155,13 @@ function GoalUser() {
                     path={path}
                     payload={payload} 
                 />
-                <div className='flex flex-row w-full justify-center items-center'>
+                {/* <div className='flex flex-row w-full justify-center items-center'>
                     <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </button>
 
                     <TitleCompany className='text-bee' name={company?.name} />
-                </div>
+                </div> */}
                 <div className='w-11/12 flex flex-col'>
                     <div className='container-two-percentage mb-4'>
                         <div className='container-percentage-okr flex flex-col'>

@@ -14,15 +14,14 @@ const AuthorizeAccess = ({ children, userAutorized }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        const getOneProfile = async () => {
+            const { data } = await profilesApi.getById(payload?.idProfile)
+            setProfile(data)
+        }
+
         getOneProfile()
-        console.log("profile", profile)
-
-    }, [idCompany])
-
-    const getOneProfile = async () => {
-        const { data } = await profilesApi.getById(payload?.idProfile)
-        setProfile(data)
-    }
+        
+    }, [idCompany, profile, payload])
 
     const routerBack = () => {
         navigate(-1)

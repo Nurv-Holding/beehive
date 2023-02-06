@@ -16,24 +16,32 @@ import ListUsers from "./components/CompanyMenuPanel/Users/ListUsers";
 import User from "./pages/user";
 import GoalUser from "./pages/goalUser";
 import HistoryGoalUsersKr from "./pages/HistoryGoalUsersKrs";
+import WayOfBeing from "./pages/wayOfBeing";
+import Goals from "./pages/Goals";
+import Teams from "./pages/Teams";
+import Users from "./pages/Users";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/company/:idCompany" element={<CompanyApp />}>
-        <Route index element={<Company />} />
-        <Route path="goal/:idGoal" element={<Goal />} />
-        <Route path="goal/:idGoal/history-kr/:idgoalsKr" element={<HistoryKr />} />
-        <Route path="goal/:idGoal/history-krTeam/:idTeam" element={<HistoryKrsTeam />} />
+      <Route path="company/:idCompany" element={<Company />} >
+        <Route path="goals">
+          <Route index element={<Goals />} />
+          <Route path=":idGoal" element={<Goal />} />
+          <Route path=":idGoal/history-kr/:idgoalsKr" element={<HistoryKr />} />
+          <Route path=":idGoal/history-krTeam/:idTeam" element={<HistoryKrsTeam />} />
+        </Route>
+        <Route path="teams" element={<Teams />} />
         <Route path="teamlist" element={<TeamList />} />
         <Route path="userslist" element={<ListUsers />} />
         <Route path="formuser" element={<FormUser />} />
         <Route path="registerfuturevision" element={<FormWayOfBeing />} />
         <Route path="formteam" element={<FormTeam />} />
+        <Route path="wayOfBeing" element={<WayOfBeing />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />} />
-
+        <Route path="users" element={<Users />} />
         <Route path="user/:idUser">
           <Route index element={<User />} />
           <Route path="history/:idGoalsUserKr" element={<HistoryGoalUsersKr />} />

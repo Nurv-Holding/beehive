@@ -75,7 +75,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerPrinciples()
         handlerProposals()
         
-    },[idCompany, idGoal, update])
+    },[idCompany, idGoal, update, idUser])
 
     const returnNewTeamsUser = async () => {
         const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)

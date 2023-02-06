@@ -48,7 +48,7 @@ function User() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <main>
 
                 <div className='grid-container'>

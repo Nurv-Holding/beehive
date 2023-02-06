@@ -59,6 +59,62 @@ function Goal() {
   const update = searchParams.get('update')
 
   useEffect(() => {
+    const handleTasksUser = async () => {
+      const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
+      setTasksUser(data)
+    }
+  
+    const handleTemaUsers = async () => {
+      const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+      setTeamUsers(data)
+    }
+  
+    const handleHistoryGoalTeamKrs = async () => {
+      const { data } = await historyGoalTeamKrApi.getAllByKrs()
+      setHistoryGoalTeamKrs(data)
+  
+    }
+  
+    const handleHistoryGoalKrs = async () => {
+      const { data } = await historyGoalKrApi.getAll(idCompany)
+      setHistoryGoalKrs(data)
+    }
+  
+    const handleGoalTeamByGoalTeam = async () => {
+      const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
+      setGoalTeamByGoalTeam(data)
+    }
+  
+    const handleGoalTeamByKrs = async () => {
+      const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
+      setGoalTeamByKrs(data)
+    }
+  
+    const handleGoal = async () => {
+      const { data } = await goalsApi.getById(idGoal, idCompany)
+      setGoal(data)
+    }
+  
+    const handleGoalTeamsByTeam = async () => {
+      const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
+      setGoalTeamsByTeam(data)
+    }
+  
+    const handleGoalTeamsKrs = async () => {
+      const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
+      setGoalTeamsKrs(data)
+    }
+  
+    const handleGoalTeams = async () => {
+      const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)
+      setGoalTeams(data)
+    }
+  
+    const handleGoalKrs = async () => {
+      const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
+      setGoalKrs(data)
+    }
+
     handleGoal()
     handleGoalKrs()
     handleGoalTeamsByTeam()
@@ -112,62 +168,6 @@ function Goal() {
 
   function closeModalCloseGoal() {
     setIsOpenCloseGoal(false)
-  }
-
-  const handleTasksUser = async () => {
-    const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
-    setTasksUser(data)
-  }
-
-  const handleTemaUsers = async () => {
-    const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-    setTeamUsers(data)
-  }
-
-  const handleHistoryGoalTeamKrs = async () => {
-    const { data } = await historyGoalTeamKrApi.getAllByKrs()
-    setHistoryGoalTeamKrs(data)
-
-  }
-
-  const handleHistoryGoalKrs = async () => {
-    const { data } = await historyGoalKrApi.getAll(idCompany)
-    setHistoryGoalKrs(data)
-  }
-
-  const handleGoalTeamByGoalTeam = async () => {
-    const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
-    setGoalTeamByGoalTeam(data)
-  }
-
-  const handleGoalTeamByKrs = async () => {
-    const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
-    setGoalTeamByKrs(data)
-  }
-
-  const handleGoal = async () => {
-    const { data } = await goalsApi.getById(idGoal, idCompany)
-    setGoal(data)
-  }
-
-  const handleGoalTeamsByTeam = async () => {
-    const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
-    setGoalTeamsByTeam(data)
-  }
-
-  const handleGoalTeamsKrs = async () => {
-    const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
-    setGoalTeamsKrs(data)
-  }
-
-  const handleGoalTeams = async () => {
-    const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)
-    setGoalTeams(data)
-  }
-
-  const handleGoalKrs = async () => {
-    const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
-    setGoalKrs(data)
   }
 
   const addTeamInGoal = async (event) => {
@@ -386,16 +386,16 @@ function Goal() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
 
       <main className='flex flex-col items-center pt-8'>
-        <div className='flex flex-row w-full justify-center items-center'>
+        {/* <div className='flex flex-row w-full justify-center items-center'>
           <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
             <ion-icon name="arrow-back-outline"></ion-icon>
           </button>
 
           <TitleCompany className='text-bee' name={company?.name} />
-        </div>
+        </div> */}
 
 
         <div className='w-11/12'>
