@@ -12,7 +12,7 @@ function User() {
         newGoalUsersKrs,
         taskUsers,
         goalUsers,
-        teamsAndUsers,
+        teamsAndUsersByUser,
         futureVisions,
         prinples,
         proposals
@@ -30,8 +30,8 @@ function User() {
 
     const returnNewGoalsByUsers = () => {
         let items = [];
-        (teamsAndUsers || []).forEach((f) => {
-            const verifyIdTeam = teamsAndUsers.find(e => e.idGoal === f.idGoal)
+        (teamsAndUsersByUser || []).forEach((f) => {
+            const verifyIdTeam = teamsAndUsersByUser.find(e => e.idGoal === f.idGoal)
             if(items.length === 0) items.push(verifyIdTeam)
     
             if(verifyIdTeam && !(items || []).some(s => s.idGoal === verifyIdTeam.idGoal)) 

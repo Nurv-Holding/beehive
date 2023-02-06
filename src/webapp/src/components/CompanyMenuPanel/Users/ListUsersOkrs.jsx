@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-import { Disclosure, Tab } from '@headlessui/react'
 
 function ListUsers({ users }) {
   return (
@@ -25,32 +23,19 @@ function ListUsers({ users }) {
                   {user.email}
                 </div>
 
-                {/* <span className="text-bee-blue-clean text-xs mt-2 font-bold">Cargo</span>
-                <div className='w-full text-base font-bold text-black text-center'>
-                  {user.occupationUser}
-                </div> */}
-
                 <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Times</span>
                 <div className='flex flex-col items-center gap-1 w-full'>
                   {user?.teams.map((team) => {
                     return(
-                      <Disclosure className='bg-none'>
                       <div className="w-full">
-                        <Disclosure.Button className='bg-none cursor-pointer'>
-                          <div className="bg-white p-4 rounded-xl w-full">
-                            <h1 className='text-black uppercase text-center font-bold text-[12px]'>
-                            {team.nameTeam}
-                            </h1>
-                          </div>
-                        </Disclosure.Button>
-                        {/* <Disclosure.Panel className="bg-bee-strong-1 p-2 uppercase text-[10px] rounded-xl text-black shadow-lg font-bold cursor-default">
+                        <div className="bg-white m-1 rounded-xl w-full">
+                          <h1 className='text-black uppercase text-center font-bold text-[12px]'>
                           {team.nameTeam}
-                        </Disclosure.Panel> */}
+                          </h1>
+                        </div>
                       </div>
-                    </Disclosure>
                     )
                   })}
-
                 </div>
               </div>
             </>

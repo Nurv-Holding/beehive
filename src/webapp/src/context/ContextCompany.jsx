@@ -40,10 +40,11 @@ export const ContextUserProvider = ({ children }) => {
     const [goalKrs, setGoalKrs] = useState([])
     const [goalUserKrs, setGoalUserKrs] = useState([])
     const [newGoalUsersKrs, setNewGoalUsersKrs] = useState([])
+    const [newGoalUsersAllKrs, setNewGoalUsersAllKrs] = useState([])
     const [krs, setKrs] = useState([])
     const [newTeamsUser, setNewTeamsUser] = useState([])
     const [teamsAndUsersByGoal, setTeamsAndUsersByGoal] = useState([])
-    const [teamsAndUsers, setTeamsAndUsers] = useState([])
+    const [teamsAndUsersByUser, setTeamsAndUsersByUser] = useState([])
     const [historyGoalUsersKrs, setHistoryGoalUsersKrs] = useState([])
     const [futureVisions, setFutureVisions] = useState([])
     const [prinples, setPrinciples] = useState([])
@@ -51,6 +52,185 @@ export const ContextUserProvider = ({ children }) => {
     const [goalUsers, setGoalUsers] = useState([])
     
     useEffect(() => {
+        const returnNewTeamsUser = async () => {
+            const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+    
+            setNewTeamsUser(() => {
+                return data.reduce((acum, current) => {
+            
+                    const teamsUser = acum.find(f => f.id === current.idUser) || 
+                    {name: current.nameUser, id:current.idUser, idTeamUser:current.idTeamUser, email:current.emailUser, teams: []}
+                    teamsUser.teams.push({...current})
+                    
+                    return [...acum.filter(e => e.id !== current.idUser), teamsUser]
+            
+                }, [])
+            })
+        }
+    
+        const returnNewGoalUsersKrs = async () => {
+            if(idUser){
+                const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, idUser)
+    
+                setNewGoalUsersKrs(() => {
+                    return data.reduce((acum, current) => {
+        
+                        const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
+                        {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
+                        goal.krs.push({...current})
+                        
+                        return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
+                
+                    }, [])
+                })
+            }else{
+                setNewGoalUsersKrs([])
+            }
+        }
+    
+        const returnNewGoalUsersAllKrs = async () => {
+            if(idUser){
+                const {data} = await goalUserKrsApi.getAllKrsByCompany(idCompany)
+    
+                setNewGoalUsersAllKrs(() => {
+                    return data.reduce((acum, current) => {
+        
+                        const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
+                        {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
+                        goal.krs.push({...current})
+                        
+                        return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
+                
+                    }, [])
+                })
+            }else{
+                setNewGoalUsersAllKrs([])
+            }
+        }
+    
+        const handlerTeamsAndUsersByGoal = async () => {
+            if(idUser){
+                const {data} = await goalsTeamApi.getTeamsAndUsersByGoal(idCompany, idUser, idGoal)
+                setTeamsAndUsersByGoal(data)
+    
+            }else{
+                setTeamsAndUsersByGoal([])
+            }
+            
+        }
+    
+        const handlerTeamsAndUsers = async () => {
+            if(idUser){
+                const {data} = await goalsTeamApi.getTeamsAndUsersByUser(idCompany, idUser)
+                setTeamsAndUsersByUser(data)
+    
+            }else{
+                setTeamsAndUsersByUser([])
+            }
+            
+        }
+    
+        const handlerTasksUsers = async () => {
+            if(idUser){
+                const {data} = await taskUsersApi.getTasksUserByGoal(idCompany, idUser)
+                setTasksUsers(data)
+    
+            }else{
+                setTasksUsers([])
+            }
+        }
+    
+        const handlerFutureVisions = async () => {
+            const {data} = await futureVisionApi.getAll(idCompany)
+            setFutureVisions(data)
+        }
+    
+        const handlerPrinciples = async () => {
+            const {data} = await principlesApi.getAll(idCompany)
+            setPrinciples(data)
+        }
+    
+        const handlerProposals = async () => {
+            const {data} = await proposalsApi.getAll(idCompany)
+            setProposals(data)
+        }
+    
+        const handlerHistoryGoalUsersKrs = async () => {
+            const {data} = await historyGoalsUserKrsApi.getAll(idCompany)
+            setHistoryGoalUsersKrs(data)
+        }
+    
+        const handlerGoal = async () => {
+            if(idGoal){
+                const {data} = await goalsApi.getById(idGoal, idCompany)
+                setGoal(data)
+            }else{
+                setGoal([])
+            }
+        }
+    
+        const handlerGoalUsers = async () => {
+            const {data} = await goalUserApi.getAll(idCompany)
+            setGoalUsers(data)
+        }
+    
+        const handlerGoalKrs = async () => {
+            const {data} = await goalKrsApi.getAll(idCompany)
+            setGoalKrs(data)
+        }
+    
+        const handlerGoalUserKrs = async () => {
+            if(payload){
+                const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, payload.id)
+                setGoalUserKrs(data)
+            }
+        }
+        
+        const handlerKrs = async () => {
+            const {data} = await goalTeamsKrsApi.getAllGroupByKrs(idCompany)
+            setKrs(data)
+        }
+    
+        const handlerTeamUsers = async () => {
+            const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+            setTeamUsers(data)
+        }
+    
+        const handleCompany = async () => {
+            const {data}= await companiesApi.getById(idCompany)
+            setCompany(data)
+        }
+    
+        const handlerGoalAndTeams = async () => {
+            const {data} = await goalsTeamApi.getAllGoalGroupByTeam(idCompany)
+            setGoalAndTeams(data)
+        }
+    
+        const handlerCompanyGoals = async () => {
+            const {data} = await companiesApi.getCompanyAndGoals(idCompany)
+            setCompanyGoals(data)
+        }
+    
+        const handlerUsersByCompany = async () => {
+            const {data} = await usersApi.getAllByCompany(idCompany)
+            setUsersByCompany(data)
+        }
+    
+        const handlerUsers = async () => {
+            const {data} = await usersApi.getAll(idCompany)
+            setUsers(data)
+        }
+    
+        const handlerTeams = async () => {
+            const {data} = await teamsApi.getAll(idCompany)
+            setTeams(data)
+        }
+    
+        const handlerGoals = async () => {
+            const {data} = await goalsApi.getAll(idCompany)
+            setGoals(data)
+        }
+
         handlerUsersByCompany()
         handlerGoals()
         handlerTeams()
@@ -74,168 +254,9 @@ export const ContextUserProvider = ({ children }) => {
         handlerFutureVisions()
         handlerPrinciples()
         handlerProposals()
+        returnNewGoalUsersAllKrs()
         
-    },[idCompany, idGoal, update, idUser])
-
-    const returnNewTeamsUser = async () => {
-        const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-
-        setNewTeamsUser(() => {
-            return data.reduce((acum, current) => {
-        
-                const teamsUser = acum.find(f => f.id === current.idUser) || 
-                {name: current.nameUser, id:current.idUser, idTeamUser:current.idTeamUser, email:current.emailUser, teams: []}
-                teamsUser.teams.push({...current})
-                
-                return [...acum.filter(e => e.id !== current.idUser), teamsUser]
-        
-            }, [])
-        })
-    }
-
-    const returnNewGoalUsersKrs = async () => {
-        if(idUser){
-            const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, idUser)
-
-            setNewGoalUsersKrs(() => {
-                return data.reduce((acum, current) => {
-    
-                    const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
-                    {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
-                    goal.krs.push({...current})
-                    
-                    return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
-            
-                }, [])
-            })
-        }else{
-            setNewGoalUsersKrs([])
-        }
-
-    }
-
-    const handlerTeamsAndUsersByGoal = async () => {
-        if(idUser){
-            const {data} = await goalsTeamApi.getTeamsAndUsersByGoal(idCompany, idUser, idGoal)
-            setTeamsAndUsersByGoal(data)
-
-        }else{
-            setTeamsAndUsersByGoal([])
-        }
-        
-    }
-
-    const handlerTeamsAndUsers = async () => {
-        if(idUser){
-            const {data} = await goalsTeamApi.getAllTeamsAndUsers(idCompany, idUser)
-            setTeamsAndUsers(data)
-
-        }else{
-            setTeamsAndUsers([])
-        }
-        
-    }
-
-    const handlerTasksUsers = async () => {
-        if(idUser){
-            const {data} = await taskUsersApi.getTasksUserByGoal(idCompany, idUser)
-            setTasksUsers(data)
-
-        }else{
-            setTasksUsers([])
-        }
-    }
-
-    const handlerFutureVisions = async () => {
-        const {data} = await futureVisionApi.getAll(idCompany)
-        setFutureVisions(data)
-    }
-
-    const handlerPrinciples = async () => {
-        const {data} = await principlesApi.getAll(idCompany)
-        setPrinciples(data)
-    }
-
-    const handlerProposals = async () => {
-        const {data} = await proposalsApi.getAll(idCompany)
-        setProposals(data)
-    }
-
-    const handlerHistoryGoalUsersKrs = async () => {
-        const {data} = await historyGoalsUserKrsApi.getAll(idCompany)
-        setHistoryGoalUsersKrs(data)
-    }
-
-    const handlerGoal = async () => {
-        if(idGoal){
-            const {data} = await goalsApi.getById(idGoal, idCompany)
-            setGoal(data)
-        }else{
-            setGoal([])
-        }
-    }
-
-    const handlerGoalUsers = async () => {
-        const {data} = await goalUserApi.getAll(idCompany)
-        setGoalUsers(data)
-    }
-
-    const handlerGoalKrs = async () => {
-        const {data} = await goalKrsApi.getAll(idCompany)
-        setGoalKrs(data)
-    }
-
-    const handlerGoalUserKrs = async () => {
-        if(payload){
-            const {data} = await goalUserKrsApi.getAllKrsByUser(idCompany, payload.id)
-            setGoalUserKrs(data)
-        }
-    }
-    
-    const handlerKrs = async () => {
-        const {data} = await goalTeamsKrsApi.getAllGroupByKrs(idCompany)
-        setKrs(data)
-    }
-
-    const handlerTeamUsers = async () => {
-        const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setTeamUsers(data)
-    }
-
-    const handleCompany = async () => {
-        const {data}= await companiesApi.getById(idCompany)
-        setCompany(data)
-    }
-
-    const handlerGoalAndTeams = async () => {
-        const {data} = await goalsTeamApi.getAllGoalGroupByTeam(idCompany)
-        setGoalAndTeams(data)
-    }
-
-    const handlerCompanyGoals = async () => {
-        const {data} = await companiesApi.getCompanyAndGoals(idCompany)
-        setCompanyGoals(data)
-    }
-
-    const handlerUsersByCompany = async () => {
-        const {data} = await usersApi.getAllByCompany(idCompany)
-        setUsersByCompany(data)
-    }
-
-    const handlerUsers = async () => {
-        const {data} = await usersApi.getAll(idCompany)
-        setUsers(data)
-    }
-
-    const handlerTeams = async () => {
-        const {data} = await teamsApi.getAll(idCompany)
-        setTeams(data)
-    }
-
-    const handlerGoals = async () => {
-        const {data} = await goalsApi.getAll(idCompany)
-        setGoals(data)
-    }
+    },[idCompany, idGoal, update, idUser, payload])
 
     const modelChange = ({ target }) => {
         setItem((state) => {
@@ -272,10 +293,11 @@ export const ContextUserProvider = ({ children }) => {
                     goalUsers,
                     goal,
                     taskUsers,
-                    teamsAndUsers,
+                    teamsAndUsersByUser,
                     futureVisions,
                     prinples,
-                    proposals
+                    proposals,
+                    newGoalUsersAllKrs
                 }
             }
         >

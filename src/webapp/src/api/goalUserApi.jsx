@@ -7,6 +7,7 @@ const getById = (idGoal, idCompany) => axios.get(`${host}/goalsUser/${idGoal}/c/
 const create = (idCompany,data) => axios.post(`${host}/goalsUser/c/${idCompany}`,data)
 const update = (idGoal, data) => axios.put(`${host}/goalsUser/${idGoal}`,data)
 const getAllKrsByUser = (idCompany, idUser) => axios.get(`${host}/goalsUser/all/c/${idCompany}/user/${idUser}/krs`)
+const getAllKrsByCompany = (idCompany) => axios.get(`${host}/goalsUser/all/c/${idCompany}/krs`)
 
 //krs
 const getAllKrs = (idCompany) => axios.get(`${host}/goalsUserKrs/c/${idCompany}`)
@@ -20,6 +21,7 @@ export default {
     create,
     update,
     getAllKrsByUser,
+    getAllKrsByCompany,
     getAllKrs,
     getByIdKr,
     createKr,
