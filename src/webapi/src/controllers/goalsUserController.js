@@ -21,9 +21,27 @@ const getAllKrsByUser = handlerBuilder(async (req, res) => {
     res.status(200).send(results)
 })
 
+const getAllKrs = handlerBuilder(async (req, res) => {
+    const {idCompany} = req.params
+
+    const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal, u.id as idUser,
+    u.name as nameUser, guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
+    guk.fromQuarterly, guk.toYearly, guk.fromYearly,
+    guk.done, guk.status as krStatus, gu.id as idGoalUser,
+    gu.name as nameGoalUser, gu.status as statusGoalUser
+    from goalsuserskrs as guk
+    join goalsusers as gu on guk.idGoalsUser=gu.id
+    join users as u on gu.idUser=u.id
+    join goals as g on gu.idGoal=g.id
+    where guk.idCompany=${idCompany} group by guk.id;`
+
+    res.status(200).send(results)
+})
+
 const goalsUserController = {
     ...crudFunctions,
-    getAllKrsByUser
+    getAllKrsByUser,
+    getAllKrs
 }
 
 module.exports = goalsUserController

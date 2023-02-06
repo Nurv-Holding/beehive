@@ -127,7 +127,7 @@ function User() {
                                         <>
                                         <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
                                             <span onClick={() => redirectRouter(`goal/${x.idGoal}`)} className="text-bee-strong-1 text-xl font-bold text-center uppercase hover:text-bee-blue-clean"> {x.nameGoal} </span>
-                                            {(goalUsers || []).filter(e => e.idGoal === x.idGoal).map((item) => {
+                                            {(goalUsers || []).filter(e => e.idGoal === x.idGoal && e.idUser === parseInt(idUser)).map((item) => {
                                                 
                                                 return(
                                                     <Disclosure>

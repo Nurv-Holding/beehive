@@ -188,6 +188,18 @@ left join teams as t on pgt.idTeam=t.id
 left join teamusers as tu on tu.idTeam=t.id
 where guk.idCompany=4 and guk.idUser=6 group by t.id;
 
+/*Projeção de todos os OKRs individuais*/
+select g.id as idGoal, g.name as nameGoal, u.id as idUser,
+u.name as nameUser, guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
+guk.fromQuarterly, guk.toYearly, guk.fromYearly,
+guk.done, guk.status as krStatus, gu.id as idGoalUser,
+gu.name as nameGoalUser, gu.status as statusGoalUser
+from goalsuserskrs as guk
+join goalsusers as gu on guk.idGoalsUser=gu.id
+join users as u on gu.idUser=u.id
+join goals as g on gu.idGoal=g.id
+where guk.idCompany=4 group by guk.id;
+
 select g.id as idGoal, g.name as nameGoal, u.id as idUser,
 u.name as nameUser, t.id as idTeam, t.name as nameTeam,
 guk.id as idKr, guk.name as nameKr, guk.toQuarterly,
@@ -201,7 +213,7 @@ left join goals as g on gu.idGoal=g.id
 left join processgoalsteams as pgt on pgt.idGoal=g.id
 left join teams as t on pgt.idTeam=t.id
 left join teamusers as tu on tu.idTeam=t.id
-where guk.idCompany=4 and guk.idUser=6 group by guk.id;
+where guk.idCompany=4;
 
 /*Projeção de histórico de krs de objetivo*/
 select hgk.id as idHistoryGoalKrs, hgk.idGoalsUserKr, 
@@ -231,4 +243,4 @@ join teams as t on tu.idTeam=t.id
 join processgoalsteams as pgt on pgt.idTeam=t.id
 where pgt.idCompany=4 and u.id=7 and pgt.idGoal=14;
 
-select * from tasks;
+select * from goalsusers;

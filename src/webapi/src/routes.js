@@ -112,6 +112,7 @@ const routes = (app) => {
     app.put("/goalsUser/:id",goalsUserController.update)
     app.delete("/goalsUser/:id",goalsUserController.remove)
     app.get("/goalsUser/all/c/:idCompany/user/:idUser/krs",goalsUserController.getAllKrsByUser)
+    app.get("/goalsUser/all/c/:idCompany/krs",goalsUserController.getAllKrs)
 
         //goalsUserKrs
         app.post("/goalsUserKrs/c/:idCompany",goalsUserKrsController.create)
