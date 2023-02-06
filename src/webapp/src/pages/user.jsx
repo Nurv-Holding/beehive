@@ -132,7 +132,7 @@ function User() {
                                                 return(
                                                     <Disclosure>
                                                         <Disclosure.Button className="w-full bg-white p-4 rounded-xl shadow-lg my-1 cursor-pointer">
-                                                        <h1 className='text-black uppercase text-center font-bold text-[12px]'> {item.name} </h1>
+                                                            <h1 className='text-black uppercase text-center font-bold text-[12px]'> {item.name} </h1>
                                                         </Disclosure.Button>
                                                         <>
                                                         {(newGoalUsersKrs.filter(e => e.idGoalUser === item.id)[0]?.krs.map((kr) => {

@@ -4,7 +4,15 @@ import { ContextCompany } from '../context/ContextCompany'
 import ListUsersOk from "../components/CompanyMenuPanel/Users/ListUsersOkrs"
 
 function Users() {
-    const { idCompany, newTeamsUser, newGoalUsersAllKrs } = useContext(ContextCompany)
+    const { 
+        idCompany, 
+        newTeamsUser, 
+        newGoalUsersAllKrs, 
+        newAllTeamsAndUsers,
+        goalUsers
+    } = useContext(ContextCompany)
+
+
  
     return (
         <div className='flex flex-row justify-between'>
@@ -22,7 +30,12 @@ function Users() {
                 </Link>
             </div>
 
-            <ListUsersOk users={newTeamsUser} newGoalUsersAllKrs={newGoalUsersAllKrs} />
+            <ListUsersOk 
+                users={newTeamsUser} 
+                newGoalUsersAllKrs={newGoalUsersAllKrs}
+                newAllTeamsAndUsers={newAllTeamsAndUsers}
+                goalUsers={goalUsers}
+            />
         </div>
     )
 }

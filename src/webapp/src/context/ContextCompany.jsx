@@ -45,6 +45,7 @@ export const ContextUserProvider = ({ children }) => {
     const [newTeamsUser, setNewTeamsUser] = useState([])
     const [teamsAndUsersByGoal, setTeamsAndUsersByGoal] = useState([])
     const [teamsAndUsersByUser, setTeamsAndUsersByUser] = useState([])
+    const [newAllTeamsAndUsers, setNewAllTeamsAndUsers] = useState([])
     const [historyGoalUsersKrs, setHistoryGoalUsersKrs] = useState([])
     const [futureVisions, setFutureVisions] = useState([])
     const [prinples, setPrinciples] = useState([])
@@ -52,6 +53,25 @@ export const ContextUserProvider = ({ children }) => {
     const [goalUsers, setGoalUsers] = useState([])
     
     useEffect(() => {
+        const returnAllNewGoalsUsers = async () => {
+            const {data} = await goalsTeamApi.getAllTeamsAndUsers(idCompany)
+
+            setNewAllTeamsAndUsers(() => {
+                let items = [];
+                (data || []).forEach((f) => {
+                    const verifyIdTeam = data.find(e => e.idGoal === f.idGoal && e.idUser === f.idUser)
+                    if(items.length === 0) items.push(verifyIdTeam)
+            
+                    if(verifyIdTeam && !(items || []).some(s => s.idGoal === verifyIdTeam.idGoal && s.idUser === verifyIdTeam.idUser)) 
+                        items.push(verifyIdTeam)
+                    
+                })
+            
+                return  items
+            })
+
+        }
+
         const returnNewTeamsUser = async () => {
             const {data} = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
     
@@ -89,23 +109,19 @@ export const ContextUserProvider = ({ children }) => {
         }
     
         const returnNewGoalUsersAllKrs = async () => {
-            if(idUser){
-                const {data} = await goalUserKrsApi.getAllKrsByCompany(idCompany)
+            const {data} = await goalUserKrsApi.getAllKrsByCompany(idCompany)
     
-                setNewGoalUsersAllKrs(() => {
-                    return data.reduce((acum, current) => {
-        
-                        const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
-                        {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
-                        goal.krs.push({...current})
-                        
-                        return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
-                
-                    }, [])
-                })
-            }else{
-                setNewGoalUsersAllKrs([])
-            }
+            setNewGoalUsersAllKrs(() => {
+                return data.reduce((acum, current) => {
+    
+                    const goal = acum.find(f => f.idGoalUser === current.idGoalUser) || 
+                    {nameGoal: current.nameGoal,idGoalUser:current.idGoalUser, nameGoalUser:current.nameGoalUser, idGoal:current.idGoal, idUser:current.idUser, nameUser:current.nameUser, krs: []}
+                    goal.krs.push({...current})
+                    
+                    return [...acum.filter(e => e.idGoalUser !== current.idGoalUser), goal]
+            
+                }, [])
+            })
         }
     
         const handlerTeamsAndUsersByGoal = async () => {
@@ -232,6 +248,7 @@ export const ContextUserProvider = ({ children }) => {
         }
 
         handlerUsersByCompany()
+        returnAllNewGoalsUsers()
         handlerGoals()
         handlerTeams()
         handlerTeamUsers()
@@ -256,7 +273,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerProposals()
         returnNewGoalUsersAllKrs()
         
-    },[idCompany, idGoal, update, idUser, payload])
+    },[idCompany, idGoal, update, idUser])
 
     const modelChange = ({ target }) => {
         setItem((state) => {
@@ -297,7 +314,8 @@ export const ContextUserProvider = ({ children }) => {
                     futureVisions,
                     prinples,
                     proposals,
-                    newGoalUsersAllKrs
+                    newGoalUsersAllKrs,
+                    newAllTeamsAndUsers
                 }
             }
         >

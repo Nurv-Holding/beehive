@@ -1,5 +1,6 @@
+import { Disclosure } from "@headlessui/react"
 
-function ListUsers({ users }) {
+function ListUsers({ users, newAllTeamsAndUsers, newGoalUsersAllKrs, goalUsers }) {
   return (
     <div className='flex flex-col w-full'>
       < div
@@ -13,7 +14,7 @@ function ListUsers({ users }) {
         {(users || []).map((user) => {
           return (
             <>
-              <div className="bg-white w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg flex flex-col items-center justify-center">
+              <div className="bg-white w-full aspect-square overflow-y-scroll h-[500px] rounded-3xl shadow-lg flex flex-col items-center justify-center">
                 <h1 className="text-bee-strong-1 text-xl font-bold text-center uppercase" data-bs-toggle="modal" data-bs-target="#members">
                   {user.name}
                 </h1>
@@ -23,8 +24,9 @@ function ListUsers({ users }) {
                   {user.email}
                 </div>
 
-                <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Times</span>
+                
                 <div className='flex flex-col items-center gap-1 w-full'>
+                  <span className="text-bee-blue-clean text-xs mt-2 font-bold">Lista de Times</span>
                   {user?.teams.map((team) => {
                     return(
                       <div className="w-full">
@@ -36,6 +38,35 @@ function ListUsers({ users }) {
                       </div>
                     )
                   })}
+                </div>
+                <div className="flex flex-col items-center gap-1 w-full">
+                  <span className="text-bee-blue-clean text-xs mt-2 text-center font-bold"> Objetivos </span>
+                  <div> {(newAllTeamsAndUsers || []).filter(e => e.idUser === user.id).map((goal) => {
+                    return(
+                      <div>
+                        <span className="text-black"> {goal.nameGoal} </span>
+                        {(goalUsers || []).filter(f => goal.idGoal === f.idGoal && goal.idUser === f.idUser).map((goalUser) => {
+                          return(
+                            <div>
+                              <Disclosure>
+                                <Disclosure.Button className="w-full bg-white p-4 rounded-xl shadow-lg my-1 cursor-pointer">
+                                  <h1 className='text-black uppercase text-center font-bold text-[12px]'> {goalUser.name} </h1>
+                                </Disclosure.Button>
+                                {(newGoalUsersAllKrs || []).filter(e => e.idGoalUser === goalUser.id)[0]?.krs.map((kr) => {
+                                  return(
+                                    <Disclosure.Panel className='bg-bee-blue-clean p-2 my-1 uppercase text-[10px] rounded-xl text-white shadow-lg font-bold'>
+                                      <span> {kr.nameKr} </span>
+                                    </Disclosure.Panel>
+                                  )
+                                })}
+                              </Disclosure>
+                              
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )
+                  })} </div>
                 </div>
               </div>
             </>

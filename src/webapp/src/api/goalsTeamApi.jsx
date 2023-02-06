@@ -15,6 +15,7 @@ const getGroupByTeam = (idCompany, idGoal) => axios.get(`${host}/goalsTeam/${idG
 const getAllGoalGroupByTeam = (idCompany) => axios.get(`${host}/goals/g/p/process/c/${idCompany}`)
 const getTeamsAndUsersByGoal = (idCompany, idUser, idGoal) => axios.get(`${host}/processGoalsTeams/teams/c/${idCompany}/users/${idUser}/goal/${idGoal}`)
 const getTeamsAndUsersByUser = (idCompany, idUser) => axios.get(`${host}/processGoalsTeams/all/teams/c/${idCompany}/users/${idUser}`)
+const getAllTeamsAndUsers = (idCompany) => axios.get(`${host}/processGoalsTeams/all/teams/c/${idCompany}/users`)
 
 export default {
     getAll,
@@ -29,5 +30,6 @@ export default {
     getGroupByTeam,
     getAllGoalGroupByTeam,
     getTeamsAndUsersByGoal,
-    getTeamsAndUsersByUser
+    getTeamsAndUsersByUser,
+    getAllTeamsAndUsers
 }
