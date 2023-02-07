@@ -42,15 +42,11 @@ header nav{
 }
 
 .grid-row{
-    @apply bg-white rounded-md shadow-md flex flex-col py-4
+    @apply bg-white rounded-md shadow-md flex flex-col
 }
 
 .container-title{
     @apply text-sm text-bee-blue-clean mb-2 cursor-default
-}
-
-.text-desc{
-    @apply text-xs text-gray-700 mt-0.5
 }
 
 .grid-general{
@@ -64,24 +60,6 @@ header nav{
 .general:hover{
     @apply text-bee-blue-clean
 }
-
-/*PROFILE*/
-.profile-photo{
-    @apply w-[140px] aspect-square self-center rounded-full overflow-hidden
-}
-
-.profile-name{
-    @apply text-xl mt-2
-}
-
-.profile-nav{
-    @apply w-[90%] border border-b border-x-0 border-t-0 border-black text-base
-}
-
-.profile-nav span:hover{
-    @apply text-bee-blue-clean
-}
-/*END PROFILE*/
 
 /*COMPROMISSES*/
 .grid-compromisses{
