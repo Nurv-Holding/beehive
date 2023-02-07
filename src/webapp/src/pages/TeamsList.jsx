@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import Header from '../components/Header';
 import teamsApi from '../api/teamsApi'
 import usersApi from '../api/usersApi'
 import teamsUsersApi from '../api/teamsUsersApi'
@@ -62,11 +61,9 @@ const TeamList = () => {
 
     return (
         <>
-            <Header />
-
-            <main className='flex flex-col items-center gap-8'>
+            <main className='flex flex-col items-center gap-8 relative'>
                 <div className='flex items-center mt-8'>
-                    <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                    <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </button>
 

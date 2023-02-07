@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { ContextCompany } from '../../context/ContextCompany'
 
 export default function CompanyMenu( { company } ) {
-  const { payload, profile } = useContext(ContextCompany)
+  const { payload, profile, idCompany } = useContext(ContextCompany)
   const navigate = useNavigate()
 
   const redirectRouter = (path) => {
@@ -34,7 +34,7 @@ export default function CompanyMenu( { company } ) {
         }
           <Tab>
             {({ selected }) => (
-              <button onClick={() => redirectRouter(`wayOfBeing`)}
+              <button onClick={() => redirectRouter(`/company/${idCompany}`)}
                 className={
                   selected && 'text-bee-blue-clean bg-gray-200'
                 }
