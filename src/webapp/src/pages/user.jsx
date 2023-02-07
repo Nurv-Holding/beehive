@@ -47,16 +47,14 @@ function User() {
 
     return (
         <>
-            {/* <Header /> */}
             <main>
 
                 <div className='w-full grid justify-center my-8 gap-x-8 grid-cols-[20%,70%] text-black'>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-8'>
                         <Profile payload={payload} />
 
                         <div className='bg-white rounded-md shadow-md flex flex-col w-full p-4'>
-
-                            <h1 className=''>Tarefas</h1>
+                            <h1>Tarefas</h1>
                             <div className='flex flex-col gap-1'>
                                 <div className='w-full rounded-md p-1 text-white bg-green-500'>
                                     <span>
@@ -82,8 +80,8 @@ function User() {
 
                     <div className='flex flex-col'>
 
-                    <div className=''>
-                            <h1 className='text-sm text-bee-blue-clean mb-2 cursor-default text-center'>Jeito de Ser</h1>
+                    <div>
+                            <h1 className='text-bee-blue-clean mb-2 font-bold cursor-default text-center'>Jeito de Ser</h1>
                             <div className='mx-auto flex flex-row items-center justify-center gap-4 mb-2'>
                                 <div className='bg-white w-[300px] h-[300px] overflow-y-scroll rounded-3xl shadow-lg py-3 px-3 flex flex-col items-center cursor-pointer'>
                                     {(futureVisions || []).map((x) => {
