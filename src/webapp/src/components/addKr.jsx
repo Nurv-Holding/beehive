@@ -1,7 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-function AddKr({ 
-    message, 
+function AddKr({  
     handleSubmit, 
     modelChange, 
     isOpen, 

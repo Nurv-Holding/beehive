@@ -17,7 +17,8 @@ function GoalKrs({
   historyGoalKrs,
   redirectHistory,
   goal,
-  payload
+  payload,
+  path
 }) {
 
   let [isOpen, setIsOpen] = useState(false)
@@ -77,7 +78,7 @@ function GoalKrs({
           historyGoalKrApi.create(idCompany, newData)
 
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -123,7 +124,7 @@ function GoalKrs({
       historyGoalKrApi.create(idCompany, newData)
         .then(() => {
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 

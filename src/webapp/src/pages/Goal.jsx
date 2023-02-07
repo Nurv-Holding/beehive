@@ -119,6 +119,8 @@ function Goal() {
 
   }, [idGoal, idCompany, update])
 
+  const path = `/company/${idCompany}/goals/${idGoal}`
+
   function updateData() {
     setIsOpen(false)
   }
@@ -184,7 +186,7 @@ function Goal() {
         .then(() => {
           setMessage("Time adicionado")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -225,7 +227,7 @@ function Goal() {
         .then(() => {
           setMessage("Ojetivo criado com sucesso")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -242,7 +244,7 @@ function Goal() {
         .then(() => {
           setMessage("Ojetivo criado com sucesso")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -312,7 +314,7 @@ function Goal() {
       .then(() => {
         setMessage("Kr encerrado")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
   
@@ -362,7 +364,7 @@ function Goal() {
       .then(() => {
         setMessage("KR criado com sucesso")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
 
@@ -376,10 +378,10 @@ function Goal() {
 
   return (
     <>
-      <main className='flex flex-col items-center pt-8 relative'>
+      <main className='flex flex-col items-center pt-8 relative text-black'>
         <div className='w-11/12'>
           <div className='flex flex-row w-full justify-center items-center'>
-            <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+            <button onClick={routerBack} className="p-3 shadow-md text-xl text-white rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
               <ion-icon name="arrow-back-outline"></ion-icon>
             </button>
 
@@ -405,7 +407,6 @@ function Goal() {
 
                 <AddTeam
                   message={message}
-                  handleSubmit={handleSubmit}
                   modelChange={modelChange}
                   isOpen={isOpenTeam}
                   closeModal={closeModalTeam}
@@ -442,6 +443,7 @@ function Goal() {
             users={users}
             goal={goal}
             redirectHistory={redirectHistory}
+            path={path}
             
           />
 
@@ -476,6 +478,7 @@ function Goal() {
               setNoteTeamKr={setNoteTeamKr}
               idTeam={idTeam}
               messageFinish={message}
+              path={path}
             />
           </div>
         </div>

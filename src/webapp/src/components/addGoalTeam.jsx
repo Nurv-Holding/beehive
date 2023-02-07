@@ -5,8 +5,6 @@ function AddGoalTeam({ idRef, createGoalsTeam, modelChange, idTeam }) {
     const goalTealSubmit = (event) => {
         event.preventDefault()
 
-        console.log("AddGoalTeam idTeam", idTeam)
-
         createGoalsTeam(idTeam)
     }
 
