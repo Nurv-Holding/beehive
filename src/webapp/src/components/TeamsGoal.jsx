@@ -38,7 +38,9 @@ function TeamsGoal({
   tasksUser,
   goal,
   navigate,
-  payload }) {
+  payload,
+  path
+}) {
 
   const [krs, setKrs] = useState({})
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
@@ -136,7 +138,7 @@ function TeamsGoal({
         .then(() => {
           setMessage("KR criado com sucesso")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -175,7 +177,7 @@ function TeamsGoal({
       .then(() => {
         setMessage("Tarefa criada com sucesso")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
 
@@ -204,7 +206,7 @@ function TeamsGoal({
       .then(() => {
         setMessage("Usuário adicionado com sucesso")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
 
@@ -243,7 +245,7 @@ function TeamsGoal({
 
           setMessage("Atualizado")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -290,9 +292,7 @@ function TeamsGoal({
                         createGoalsTeam={createGoalsTeam}
                         modelChange={modelChange}
                         idTeam={idTeam}
-                      >
-
-                      </AddGoalTeam>
+                      />
 
                       <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn p-1">
                         Histórico
@@ -408,6 +408,7 @@ function TeamsGoal({
                                     idGoal={idGoal}
                                     idCompany={idCompany}
                                     goal={goal}
+                                    path={path}
                                   />
 
                                 </div>

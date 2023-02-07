@@ -13,10 +13,10 @@ const ListTasks = ({
     goal,
     setUser,
     navigate,
-    idGoal,
-    idCompany,
     updateTask, 
-    user}) => {
+    user,
+    path
+}) => {
     const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [openModalTaskDone, setOpenModalTaskDone] = useState(false)
@@ -57,7 +57,7 @@ const ListTasks = ({
             setMessage("Tarefa concluída")
             
             navigate({
-              pathname: `/company/${idCompany}/goal/${idGoal}`,
+              pathname: `${path}`,
               search: `?update=${true}`
             })
 

@@ -4,7 +4,7 @@ import AuthorizeAccess from '../../AuthorizeAccess';
 
 function FormMenuWayOfBeing() {
     const navigate = useNavigate()
-    const {idCompany} = useParams()
+    const {idCompany, idFutureVision} = useParams()
 
     const routerBack = () => {
         navigate(`/company/${idCompany}`)
@@ -21,6 +21,18 @@ function FormMenuWayOfBeing() {
             <main className='flex h-full'>
                 <Tab.Group>
                     <Tab.List className='container-nav-empresas'>
+
+                    <Tab className='nav-btn'>
+                            {({ selected }) => (
+                                <button onClick={() => redirectRouter(`formfuturevisionchildren/${idFutureVision}`)}
+                                    className={
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
+                                    }
+                                >
+                                    Objetivo
+                                </button>
+                            )}
+                        </Tab>
 
                         <Tab className='nav-btn'>
                             {({ selected }) => (
@@ -42,18 +54,6 @@ function FormMenuWayOfBeing() {
                                     }
                                 >
                                     Propósito
-                                </button>
-                            )}
-                        </Tab>
-
-                        <Tab className='nav-btn'>
-                            {({ selected }) => (
-                                <button onClick={() => redirectRouter(`register/goals`)}
-                                    className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
-                                    }
-                                >
-                                    Objetivo
                                 </button>
                             )}
                         </Tab>

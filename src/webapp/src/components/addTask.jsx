@@ -1,6 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const AddTask = ({ isOpen, closeModal, modelChange, message, createTask, item }) => {
+const AddTask = ({ isOpen, closeModal, modelChange, message, createTask }) => {
 
     return (
         <>

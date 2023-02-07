@@ -27,7 +27,8 @@ const authenticateController = handlerBuilder(async (req, res) => {
                 photo: user.photo,
                 idProfile: user.idProfile,
                 nameProfile: profile.name,
-                email: user.email
+                email: user.email,
+                idCompany: null,
             }
 
         else

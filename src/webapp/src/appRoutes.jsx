@@ -43,9 +43,9 @@ function AppRoutes() {
         <Route path="registerfuturevision" element={<FormWayOfBeing />} />
         <Route path="formteam" element={<FormTeam />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />}>
+          <Route index element={<RegisterGoals />} />
           <Route path="register/principles" element={<RegisterPrinciples />} />
           <Route path="register/proposals" element={<RegisterProposals />} />
-          <Route path="register/goals" element={<RegisterGoals />} />
         </Route>
         <Route path="users" element={<Users />} />
         <Route path="user/:idUser">

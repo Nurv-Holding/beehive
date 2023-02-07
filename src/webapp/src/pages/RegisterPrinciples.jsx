@@ -9,7 +9,7 @@ const RegisterPrinciples = () => {
     const {idCompany, idFutureVision} = useParams()
     const [message, setMessage] = useState("")
 
-    const path = `/company/${idCompany}/formfuturevisionchildren/${idFutureVision}`
+    const path = `/company/${idCompany}/formfuturevisionchildren/${idFutureVision}/register/principles`
 
     const modelChange = ({ target }) => {
         setItem((state) => {
