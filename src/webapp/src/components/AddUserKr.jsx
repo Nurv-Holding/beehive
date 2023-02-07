@@ -12,7 +12,7 @@ function AddUserKr({
     idUser,
     idCompany,
     idGoalsUser,
-    idGoal,
+    idGoal
 }) {
     const [message, setMessage] = useState("")
     const navigate = useNavigate()

@@ -1,34 +1,22 @@
-import { useEffect } from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import teamsApi from '../../../api/teamsApi';
-import usersApi from '../../../api/usersApi';
+import { ContextCompany } from '../../../context/ContextCompany';
 import AuthorizeAccess from '../../AuthorizeAccess';
-import AuthorizeLogin from '../../AuthorizeLogin';
 import Header from '../../Header';
 
 function FormTeam() {
+    const {users,idCompany} = useContext(ContextCompany)
     const navigate = useNavigate()
     const [team, setTeam] = useState({ name: "", descriptions: "" })
     const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
-    const [users, setUsers] = useState([])
-    const { idCompany } = useParams()
 
     const modelChange = ({ target }) => {
         setTeam((state) => {
             return { ...state, [target.name]: target.value }
         })
-    }
-
-    useEffect(() => {
-        handleUsers()
-
-    }, [idCompany])
-
-    const handleUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
     }
 
     const handleSubmit = (event) => {

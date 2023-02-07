@@ -13,7 +13,7 @@ const getGroupByKrs = (idCompany, idGoal) => axios.get(`${host}/goalsTeamKrs/krs
 const getAllGroupByKrs = (idCompany) => axios.get(`${host}/goals/g/p/process/c/krs/${idCompany}`)
 const update = (idGoal, data) => axios.put(`${host}/goalsTeamKrs/${idGoal}`,data)
 
-export default {
+const goalTeamsKrsApi = {
     getByGoal,
     create,
     getAll,
@@ -26,3 +26,5 @@ export default {
     update
     
 }
+
+export default goalTeamsKrsApi

@@ -5,7 +5,7 @@ function profile({ payload }) {
     return (
         <div className='grid-row w-full bg-white'>
           <div className='profile-photo'>
-            <img src="https://thispersondoesnotexist.com/image"/>
+            <img alt='' src="https://thispersondoesnotexist.com/image"/>
           </div>
 
           <div className='flex flex-col self-center cursor-default'>

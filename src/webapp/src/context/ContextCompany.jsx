@@ -17,6 +17,7 @@ import taskUsersApi from "../api/taskUsersApi"
 import futureVisionApi from "../api/futureVisionApi"
 import principlesApi from "../api/principlesApi"
 import proposalsApi from "../api/proposalsApi"
+import profilesApi from "../api/profilesApi"
 
 export const ContextCompany = createContext()
 
@@ -35,8 +36,6 @@ export const ContextUserProvider = ({ children }) => {
     const [teamUsers, setTeamUsers] = useState([])
     const [company, setCompany] = useState({name:"", cnpj:"", createdAt:"", updatedAt:""})
     const update = searchParams.get('update')
-    const token = localStorage.getItem("token")
-    const payload = token? jwtDecode(token): null
     const [goalKrs, setGoalKrs] = useState([])
     const [goalUserKrs, setGoalUserKrs] = useState([])
     const [newGoalUsersKrs, setNewGoalUsersKrs] = useState([])
@@ -51,8 +50,19 @@ export const ContextUserProvider = ({ children }) => {
     const [prinples, setPrinciples] = useState([])
     const [proposals, setProposals] = useState([])
     const [goalUsers, setGoalUsers] = useState([])
+    const [newPayload, setNewPayload] = useState(null)
+    const [profile, setProfile] = useState(null)
     
     useEffect(() => {
+        const token = localStorage.getItem("token")
+        const payload = token? jwtDecode(token): null
+        setNewPayload(() => payload)
+
+        const getOneProfile = async () => {
+            const { data } = await profilesApi.getById(payload?.idProfile)
+            setProfile(data)
+        }
+
         const returnAllNewGoalsUsers = async () => {
             const {data} = await goalsTeamApi.getAllTeamsAndUsers(idCompany)
 
@@ -247,6 +257,7 @@ export const ContextUserProvider = ({ children }) => {
             setGoals(data)
         }
 
+        getOneProfile()
         handlerUsersByCompany()
         returnAllNewGoalsUsers()
         handlerGoals()
@@ -297,8 +308,7 @@ export const ContextUserProvider = ({ children }) => {
                     item,
                     goalAndTeams,
                     idCompany,
-                    token,
-                    payload,
+                    payload: newPayload,
                     newTeamsUser,
                     newGoalUsersKrs,
                     goalKrs,
@@ -315,7 +325,8 @@ export const ContextUserProvider = ({ children }) => {
                     prinples,
                     proposals,
                     newGoalUsersAllKrs,
-                    newAllTeamsAndUsers
+                    newAllTeamsAndUsers,
+                    profile
                 }
             }
         >

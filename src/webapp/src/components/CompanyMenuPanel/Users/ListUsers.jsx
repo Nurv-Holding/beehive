@@ -1,27 +1,15 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import usersApi from '../../../api/usersApi'
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { ContextCompany } from "../../../context/ContextCompany";
 import Header from "../../Header";
 
 const ListUsers = () => {
-    const { idCompany } = useParams()
-    const [users, setUsers] = useState([])
-
+    const {users} = useContext(ContextCompany)
 
     const navigate = useNavigate()
 
     const routerBack = () => {
         navigate(-1)
-    }
-
-    useEffect(() => {
-        handlerUsers()
-
-    }, [idCompany])
-
-    const handlerUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-        setUsers(data)
     }
 
     return (
@@ -49,9 +37,6 @@ const ListUsers = () => {
                                             <th className='container-title-grid'>Cargo</th>
                                         </tr>
                                     </thead>
-
-
-
 
                                     <tbody className='text-center'>
                                         {(users || []).map((user) => {

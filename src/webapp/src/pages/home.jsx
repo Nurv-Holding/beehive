@@ -11,20 +11,22 @@ import { useSearchParams } from 'react-router-dom';
 
 function Home() {
   const [companies, setCompanies] = useState([])
-  const token = localStorage.getItem("token")
-  const payload = token? jwtDecode(token): null
   const [searchParams] = useSearchParams()
+  const [newPayload, setPayload] = useState(null)
   const update = searchParams.get('update')
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    const payload = token? jwtDecode(token): null
+    setPayload(() => payload)
+    const handlerCompanies = async () => {
+      const {data} = await companiesApi.getAll()
+      setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
+    }
+
     handlerCompanies()
 
   },[update])
-
-  const handlerCompanies = async () => {
-    const {data} = await companiesApi.getAll()
-    setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
-  }
 
   return (
     <>
@@ -33,8 +35,8 @@ function Home() {
       <main>
         <div className='grid-container'>
           <div className='grid-col'>
-            <Profile payload={payload} />
-            {payload?.nameProfile === "adminMaster" &&
+            <Profile payload={newPayload} />
+            {newPayload?.nameProfile === "adminMaster" &&
             <AddCompanies />
             }
 

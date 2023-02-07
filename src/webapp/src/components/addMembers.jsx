@@ -12,22 +12,21 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
     const navigate = useNavigate()
 
     useEffect(() => {
+        const handleNewUsers = async () => {
+            const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+            setNewUsers(() => {
+                return users?.filter((item) => {
+                    const verifyItem = data.find(f => f.idUser === item.id && f.idTeam === idTeam)
+    
+                    return item.id !== verifyItem?.idUser && item.id !== idLeader
+                })
+            })
+        }
+
         handleNewUsers()
         setIdUser(null)
 
-    }, [idTeam, update])
-
-    const handleNewUsers = async () => {
-        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setNewUsers(() => {
-            return users?.filter((item) => {
-                const verifyItem = data.find(f => f.idUser === item.id && f.idTeam === idTeam)
-
-                return item.id !== verifyItem?.idUser && item.id !== idLeader
-            })
-        })
-    }
-
+    }, [idTeam, update, idLeader, users, idCompany])
 
     const addMember = (event) => {
         event.preventDefault()

@@ -1,5 +1,4 @@
 import { Switch } from '@headlessui/react'
-import { useEffect } from 'react'
 
 const SwitchToggle = ({setEnabled, enabled, taskDone, i, index, idTaskUser, done}) => {
 

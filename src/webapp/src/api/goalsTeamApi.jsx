@@ -17,7 +17,7 @@ const getTeamsAndUsersByGoal = (idCompany, idUser, idGoal) => axios.get(`${host}
 const getTeamsAndUsersByUser = (idCompany, idUser) => axios.get(`${host}/processGoalsTeams/all/teams/c/${idCompany}/users/${idUser}`)
 const getAllTeamsAndUsers = (idCompany) => axios.get(`${host}/processGoalsTeams/all/teams/c/${idCompany}/users`)
 
-export default {
+const goalsTeamApi = {
     getAll,
     create,
     getByGoal,
@@ -33,3 +33,5 @@ export default {
     getTeamsAndUsersByUser,
     getAllTeamsAndUsers
 }
+
+export default goalsTeamApi

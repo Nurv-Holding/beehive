@@ -1,12 +1,11 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 import { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
-import CloseKr from "./CloseKr"
 import FinishingGoalUsersKrs from "./FinishingGoalUsersKrs"
 import { calcPercentage } from "../utils/utilis"
 import ChartGoalQuartely from "./ChartGoalQuartely"
 import ChartGoalYearly from "./ChartGoalYearly"
-import { json, useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { useContext } from "react"
 import { ContextCompany } from "../context/ContextCompany"
 import goalUserApi from "../api/goalUserApi"
@@ -194,6 +193,7 @@ function GoalUsersKrs({ kr, finishGoalUsersKr }) {
                   openModal={openModalFinishingKr}
                   kr={kr}
                   finishGoalUsersKr={finishGoalUsersKr}
+                  message={message}
                 />
                 }
 

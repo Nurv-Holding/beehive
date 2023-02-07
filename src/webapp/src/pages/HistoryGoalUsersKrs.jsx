@@ -33,21 +33,21 @@ const HistoryGoalUsersKr = () => {
     )
 
     useEffect(() => {
+        const handlerGoalKr = async () => {
+            const { data } = await goalUserApi.getByIdKr(idCompany, idGoalsUserKr)
+            setGoalKr(data)
+        }
+    
+        const handleHistory = async () => {
+            const { data } = await historyGoalsUserKrsApi.getHistoryKrsUsersByGoal(idCompany, idGoalsUserKr)
+            setHistories(data)
+        }
+
         handleHistory()
         handlerGoalKr()
-        setUser(() => users.find(e => e.id == idUser ))
+        setUser(() => users.find(e => e.id === parseInt(idUser)))
 
-    }, [idGoalsUserKr])
-
-    const handlerGoalKr = async () => {
-        const { data } = await goalUserApi.getByIdKr(idCompany, idGoalsUserKr)
-        setGoalKr(data)
-    }
-
-    const handleHistory = async () => {
-        const { data } = await historyGoalsUserKrsApi.getHistoryKrsUsersByGoal(idCompany, idGoalsUserKr)
-        setHistories(data)
-    }
+    }, [idGoalsUserKr, idUser, idCompany, users])
 
     const routerBack = () => {
         navigate(-1)

@@ -9,20 +9,22 @@ const ModalMembersTeam = ({idRef, idTeam, users}) => {
     const [team, setTeam] = useState({})
 
     useEffect(() => {
+        const handleAllTeamsAndUsers= async () => {
+            const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+            setAllTeamsAndUsers(() => {
+                return data?.filter(f => f.idTeam === idTeam)
+            })
+    
+            setTeam(() => {
+                return teams.find(f => f.id === idTeam)
+            })
+        }
+
         handleAllTeamsAndUsers()
 
-    },[idTeam])
+    },[idTeam, idCompany, teams])
 
-    const handleAllTeamsAndUsers= async () => {
-        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setAllTeamsAndUsers(() => {
-            return data?.filter(f => f.idTeam === idTeam)
-        })
 
-        setTeam(() => {
-            return teams.find(f => f.id === idTeam)
-        })
-    }
 
     return(
         <NewModal idRef={idRef}>

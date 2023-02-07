@@ -4,28 +4,24 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { ContextCompany } from "../context/ContextCompany"
 import Loading from "./Loading"
-import jwtDecode from "jwt-decode"
-
 
 const AuthorizeLogin = ({children}) => {
-    const token = localStorage.getItem("token")
-    const payload = token? jwtDecode(token): null
+    const { payload } = useContext(ContextCompany)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
-
     useEffect(() => {
-        if(!(!!token)){
+        if(!(!!payload)){
             setLoading(false)
             navigate("/login")
         }
 
-        if(!!token && payload?.nameProfile === "adminMaster"){
+        if(!!payload && payload?.nameProfile === "adminMaster"){
             setLoading(false)
             navigate("/")
         }
 
-    },[token])
+    },[payload, navigate])
 
     return(
         <>

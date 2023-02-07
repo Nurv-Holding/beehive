@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Header from '../components/Header';
 import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
 import TeamsGoal from '../components/TeamsGoal';
@@ -33,7 +32,6 @@ function Goal() {
     payload,
     token } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
-  const [loading, setLoading] = useState(false)
   const [goal, setGoal] = useState({})
   const [goalKrs, setGoalKrs] = useState([])
   const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
@@ -43,8 +41,6 @@ function Goal() {
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [teamUsers, setTeamUsers] = useState([])
-  const [ooalTeam, setGoalTeam] = useState([])
-  const [ooalTeams, setGoalTeams] = useState([])
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -105,11 +101,6 @@ function Goal() {
       setGoalTeamsKrs(data)
     }
   
-    const handleGoalTeams = async () => {
-      const { data } = await goalsTeamApi.getByGoal(idCompany, idGoal)
-      setGoalTeams(data)
-    }
-  
     const handleGoalKrs = async () => {
       const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
       setGoalKrs(data)
@@ -118,7 +109,6 @@ function Goal() {
     handleGoal()
     handleGoalKrs()
     handleGoalTeamsByTeam()
-    handleGoalTeams()
     handleGoalTeamsKrs()
     handleGoalTeamByGoalTeam()
     handleGoalTeamByKrs()
@@ -181,7 +171,7 @@ function Goal() {
 
     const { data } = await goalsTeamApi.getByTeam(idCompany, idTeam)
 
-    const hasTeam = data.filter(e => e.idGoal == idGoal && e.idTeam == idTeam)
+    const hasTeam = data.filter(e => e.idGoal === newIdGoal && e.idTeam === parseInt(idTeam))
 
     if (Object.keys(item).length === 0) {
       setMessage("Precisa selecionar um time")
@@ -267,7 +257,7 @@ function Goal() {
   }
 
   const routerBack = () => {
-    navigate(`/company/${idCompany}`)
+    navigate(-1)
   }
 
   const redirectHistory = (route) => {
@@ -386,23 +376,19 @@ function Goal() {
 
   return (
     <>
-      {/* <Header /> */}
-
-      <main className='flex flex-col items-center pt-8'>
-        {/* <div className='flex flex-row w-full justify-center items-center'>
-          <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </button>
-
-          <TitleCompany className='text-bee' name={company?.name} />
-        </div> */}
-
-
+      <main className='flex flex-col items-center pt-8 text-black'>
         <div className='w-11/12'>
+          <div className='flex flex-row w-full justify-center items-center'>
+            <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+
+            <TitleCompany className='text-bee' name={company?.name} />
+          </div>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
               <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
-              <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id == goal?.author)[0]?.name} </span>
+              <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id === goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status) &&
               <div className='container-percentage-okr flex flex-row justify-end gap-4'>
@@ -449,7 +435,6 @@ function Goal() {
             goalKrs={goalKrs}
             updateData={updateData}
             update={update}
-            loading={loading}
             idCompany={idCompany}
             historyGoalKrs={historyGoalKrs}
             token={token}

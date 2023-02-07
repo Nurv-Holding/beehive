@@ -9,7 +9,7 @@ const update = (idUser, data) => axios.get(`${host}/tasks/${idUser}`,data)
 const getByIdQuantifySubtasks = (idCompany=1, idTask) => axios.get(`${host}/tasks/t/${idTask}/q/subtasks/c/${idCompany}`)
 const getQuantifySubtasksDone = (idCompany=1, idTask) => axios.get(`${host}/tasks/t/${idTask}/q/subtasks/c/${idCompany}/done`)
 
-export default {
+const tasksApi = {
     create,
     remove,
     getAll,
@@ -17,3 +17,5 @@ export default {
     getByIdQuantifySubtasks,
     getQuantifySubtasksDone
 }
+
+export default tasksApi

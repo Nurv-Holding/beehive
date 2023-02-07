@@ -15,7 +15,7 @@ const getByIdKr = (idCompany, idGoalsUserKr) => axios.get(`${host}/goalsUserKrs/
 const createKr = (idCompany,data) => axios.post(`${host}/goalsUserKrs/c/${idCompany}`,data)
 const updateKr = (idGoal, data) => axios.put(`${host}/goalsUserKrs/${idGoal}`,data)
 
-export default {
+const goalUserApi = {
     getAll,
     getById,
     create,
@@ -27,3 +27,5 @@ export default {
     createKr,
     updateKr
 }
+
+export default goalUserApi

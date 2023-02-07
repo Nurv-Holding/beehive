@@ -1,4 +1,3 @@
-import Header from '../components/Header';
 import Profile from '../components/profile';
 import { ContextCompany } from '../context/ContextCompany';
 import { useContext } from 'react';
@@ -51,7 +50,7 @@ function User() {
             {/* <Header /> */}
             <main>
 
-                <div className='grid-container'>
+                <div className='grid-container text-black'>
                     <div className='grid-col'>
                         <Profile payload={payload} />
 

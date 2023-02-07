@@ -29,32 +29,32 @@ const HistoryKrsTeam = () => {
     )
 
     useEffect(() => {
+        const handlerTeam = async () => {
+            const {data} = await teamsApi.getById(idTeam, idCompany)
+            setTeam(data)
+        }
+    
+        const handleGoalTeamByGoalTeam = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
+            setGoalTeams(data)
+          }
+    
+        const handleHistory = async () => {
+            const {data} = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
+            setHistories(data)
+        }
+    
+        const handleGoalTeamByKrs = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
+            setGoalTeamByKrs(data)
+        }
+
         handleHistory()
         handlerTeam()
         handleGoalTeamByGoalTeam()
         handleGoalTeamByKrs()
 
-    },[idTeam])
-
-    const handlerTeam = async () => {
-        const {data} = await teamsApi.getById(idTeam, idCompany)
-        setTeam(data)
-    }
-
-    const handleGoalTeamByGoalTeam = async () => {
-        const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
-        setGoalTeams(data)
-      }
-
-    const handleHistory = async () => {
-        const {data} = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
-        setHistories(data)
-    }
-
-    const handleGoalTeamByKrs = async () => {
-        const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
-        setGoalTeamByKrs(data)
-      }
+    },[idTeam, idCompany, idGoal])
 
       const routerBack = () => {
         navigate(-1)

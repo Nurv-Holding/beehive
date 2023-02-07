@@ -1,7 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import Header from '../components/Header';
-import TitleCompany from '../components/TitleCompany';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import AddUserKr from '../components/AddUserKr';
 import FinishingUserGoal from '../components/FinishingUserGoal';
 import GoalUsersKrs from '../components/GoalUsersKrs';
@@ -14,7 +12,6 @@ import { calcDate } from '../utils/utilis';
 
 function GoalUser() {
     const {
-        company,
         idCompany,
         idGoal,
         payload,
@@ -65,9 +62,9 @@ function GoalUser() {
         setIsOpenCloseGoal(false)
     }
 
-    const routerBack = () => {
-        navigate(-1)
-    }
+    // const routerBack = () => {
+    //     navigate(-1)
+    // }
 
     const finishGoalUsersKr = async (note, kr) => {
         searchParams.delete('update')
@@ -225,6 +222,7 @@ function GoalUser() {
                                                 <GoalUsersKrs 
                                                 kr={kr}
                                                 finishGoalUsersKr={finishGoalUsersKr}
+                                                message={message}
                                                 />
                                             </div>
                                         )

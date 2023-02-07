@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { calcPercentage } from '../utils/utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
-import { json, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContextCompany } from "../context/ContextCompany";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
@@ -17,20 +17,17 @@ function GoalKrs({
   historyGoalKrs,
   redirectHistory,
   goal,
-  payload,
-  token }) {
+  payload
+}) {
 
   let [isOpen, setIsOpen] = useState(false)
   const { idGoal } = useContext(ContextCompany)
-  const [done, setDone] = useState(0)
   const [itemUpdated, setItemUpdated] = useState({ done: null, note: "" })
   const [goalKr, setGoalKr] = useState({})
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
-  const [description, setDescription] = useState("")
   const [searchParams, setSearchParams] = useSearchParams()
   const [isOpenFinishKr, setIsOpenFinishKr] = useState(false)
-  const [finishKr, setFinishKr] = useState()
   const [note, setNote] = useState("")
 
   function closeModal() {

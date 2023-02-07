@@ -8,14 +8,14 @@ function FormUser() {
     const [searchParams, setSearchParams] = useSearchParams()
     const {idCompany} = useParams()
     const [message, setMessage] = useState("")
-    const [employee, setEmployee] = useState({
+    const objectEmployee = {
         name:"",
         email:"",
-        password:"",
         occupation:"",
         password:"",
         passwordRepeat:""
-    })
+    }
+    const [employee, setEmployee] = useState(objectEmployee)
 
     const changeModel = ({target}) => {
         setEmployee((state) => {
@@ -43,14 +43,7 @@ function FormUser() {
             if(idCompany){
                 usersApi.createEmployee(idCompany, {...employee, passwordRepeat:undefined})
                 .then(() => {
-                    setEmployee({
-                        name:"",
-                        email:"",
-                        password:"",
-                        occupation:"",
-                        password:"",
-                        passwordRepeat:""
-                    })
+                    setEmployee(objectEmployee)
                     setMessage("Cadastro realizado com sucesso")
                     navigate({
                         pathname: `/company/${idCompany}/formuser`,

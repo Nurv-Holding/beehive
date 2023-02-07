@@ -1,24 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Tab } from '@headlessui/react'
 import TitleCompany from '../../components/TitleCompany'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { ContextCompany } from '../../context/ContextCompany'
-import profilesApi from '../../api/profilesApi'
 
 export default function CompanyMenu( { company } ) {
-  const { payload } = useContext(ContextCompany)
-  const [profile, setProfile] = useState(null)
+  const { payload, profile } = useContext(ContextCompany)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const getOneProfile = async () => {
-      const { data } = await profilesApi.getById(payload?.idProfile)
-      setProfile(data)
-    }
-
-    getOneProfile()
-
-  },[payload])
 
   const redirectRouter = (path) => {
     navigate(path)

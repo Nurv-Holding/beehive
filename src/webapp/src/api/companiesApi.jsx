@@ -7,10 +7,12 @@ const create = (data) => axios.post(`${host}/companies`,data)
 const getCompanyAndGoals = (idCompany) => axios.get(`${host}/companies/c/${idCompany}/goals`)
 const getById = (idCompany) => axios.get(`${host}/companies/${idCompany}`)
 
-
-export default {
+const companiesApi = {
     getAll,
     create,
     getCompanyAndGoals,
     getById
 }
+
+
+export default companiesApi

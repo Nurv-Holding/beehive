@@ -1,27 +1,13 @@
 import { useContext } from "react"
-import { useState } from "react"
-import { useEffect } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import profilesApi from "../api/profilesApi"
+import { useNavigate } from "react-router-dom"
 import { ContextCompany } from "../context/ContextCompany"
 import Loading from "./Loading"
 
 
 const AuthorizeAccess = ({ children, userAutorized }) => {
-    const { idCompany, payload } = useContext(ContextCompany)
-    const [profile, setProfile] = useState(null)
-    const { pathname } = useLocation()
+    const { profile } = useContext(ContextCompany)
+    // const { pathname } = useLocation()
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const getOneProfile = async () => {
-            const { data } = await profilesApi.getById(payload?.idProfile)
-            setProfile(data)
-        }
-
-        getOneProfile()
-        
-    }, [idCompany, profile, payload])
 
     const routerBack = () => {
         navigate(-1)

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
@@ -22,27 +21,27 @@ const TeamList = () => {
     const update = searchParams.get('update')
 
     useEffect(() => {
+        const handleTeams = async () => {
+            const { data } = await teamsApi.getAll(idCompany)
+            setTeams(data)
+        }
+    
+        const handleUsersAndTeams = async () => {
+            const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
+            setUsersAndTeams(data)
+        }
+    
+        const handleUsers = async () => {
+            const { data } = await usersApi.getAllByCompany(idCompany)
+    
+            setUsers(data)
+        }
+
         handleTeams()
         handleUsers()
         handleUsersAndTeams()
 
     }, [idCompany, update])
-
-    const handleTeams = async () => {
-        const { data } = await teamsApi.getAll(idCompany)
-        setTeams(data)
-    }
-
-    const handleUsersAndTeams = async () => {
-        const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-        setUsersAndTeams(data)
-    }
-
-    const handleUsers = async () => {
-        const { data } = await usersApi.getAllByCompany(idCompany)
-
-        setUsers(data)
-    }
 
     const routerBack = () => {
         navigate(`/company/${idCompany}`)

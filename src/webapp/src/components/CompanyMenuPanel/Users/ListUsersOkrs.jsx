@@ -39,12 +39,12 @@ function ListUsers({ users, newAllTeamsAndUsers, newGoalUsersAllKrs, goalUsers }
                     )
                   })}
                 </div>
-                <div className="flex flex-col items-center gap-1 w-full">
+                <div className="flex flex-col items-center gap-1 w-full mt-4">
                   <span className="text-bee-blue-clean text-xs mt-2 text-center font-bold"> Objetivos </span>
                   <div> {(newAllTeamsAndUsers || []).filter(e => e.idUser === user.id).map((goal) => {
                     return(
                       <div>
-                        <span className="text-black"> {goal.nameGoal} </span>
+                        <span className="text-black"> Objetivo Corporativo: {goal.nameGoal} </span>
                         {(goalUsers || []).filter(f => goal.idGoal === f.idGoal && goal.idUser === f.idUser).map((goalUser) => {
                           return(
                             <div>

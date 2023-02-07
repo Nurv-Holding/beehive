@@ -1,7 +1,4 @@
 import { useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
-import goalUserApi from "../api/goalUserApi"
-import historyGoalsUserKrsApi from "../api/historyGoalsUserKrsApi"
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
 const FinishingGoalUsersKrs = ({
@@ -9,7 +6,8 @@ const FinishingGoalUsersKrs = ({
     closeModal,
     openModal,
     finishGoalUsersKr,
-    kr
+    kr,
+    message
 }) => {
 
     const [note, setNote] = useState("")
@@ -49,6 +47,7 @@ const FinishingGoalUsersKrs = ({
                             {/* <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block'}`}> {message} </span> */}
                         </span>
                     </form>
+                    {message}
                 </div>
             </Modal>
         </div>

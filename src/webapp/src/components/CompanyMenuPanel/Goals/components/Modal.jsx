@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom"
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 function Modal({ isOpen, children, closeModal }) {

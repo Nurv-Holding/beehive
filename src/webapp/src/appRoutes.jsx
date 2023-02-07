@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Company from "./pages/Company";
 import Goal from "./pages/Goal";
-import CompanyApp from "./components/CompanyApp";
 import Login from "./pages/login";
 import HistoryKr from "./pages/HistoryKr";
 import HistoryKrsTeam from "./pages/HistoryKrsTeam";

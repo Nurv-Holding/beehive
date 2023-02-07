@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import futureVisionApi from '../../../api/futureVisionApi';
 import AuthorizeAccess from '../../AuthorizeAccess';

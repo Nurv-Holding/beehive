@@ -11,11 +11,12 @@ const authenticate = (data) => axios.post(`${host}/login`, data)
 //employeers
 const createEmployee = (idCompany,data) => axios.post(`${host}/employees/c/${idCompany}`,data)
 
-
-export default {
+const usersApi = {
     getAllByCompany,
     create,
     createEmployee,
     authenticate,
     getAll
 }
+
+export default usersApi

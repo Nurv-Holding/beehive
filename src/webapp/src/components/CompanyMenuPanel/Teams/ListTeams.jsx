@@ -1,5 +1,5 @@
-import { json, Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Disclosure, Tab } from '@headlessui/react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Disclosure } from '@headlessui/react'
 import { useState } from 'react'
 import Modal from '../Goals/components/Modal'
 import { useContext } from 'react'
@@ -18,11 +18,6 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
   const [isOpen, setIsOpen] = useState(false)
   function closeModal() {
     setIsOpen(false)
-  }
-
-  const openModal = (idTeam) => {
-    setIsOpen(true)
-    setIdTeam(idTeam)
   }
 
   const addUserInTeam = async (event) => {

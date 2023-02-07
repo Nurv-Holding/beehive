@@ -6,7 +6,6 @@ import goalKrsApi from '../api/goalKrsApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import Header from '../components/Header';
 import HistoryGoalKrsList from '../components/HistoryGoalKrsList';
-import TeamHistoriesList from '../components/TeamHistoriesList';
 import { ContextCompany } from '../context/ContextCompany';
 
 const HistoryKr = () => {
@@ -33,20 +32,22 @@ const HistoryKr = () => {
     )
 
     useEffect(() => {
+        const handlerGoalKr = async () => {
+            const { data } = await goalKrsApi.getById(idCompany, idgoalsKr)
+            setGoalKr(data)
+        }
+    
+        const handleHistory = async () => {
+            const { data } = await historyGoalKrApi.HistoryGoalKrByKr(idCompany, idGoal, idgoalsKr)
+            setHistories(data)
+        }
+    
+
         handleHistory()
         handlerGoalKr()
 
-    }, [idgoalsKr])
+    }, [idgoalsKr, idGoal, idCompany])
 
-    const handlerGoalKr = async () => {
-        const { data } = await goalKrsApi.getById(idCompany, idgoalsKr)
-        setGoalKr(data)
-    }
-
-    const handleHistory = async () => {
-        const { data } = await historyGoalKrApi.HistoryGoalKrByKr(idCompany, idGoal, idgoalsKr)
-        setHistories(data)
-    }
 
     const routerBack = () => {
         navigate(-1)
