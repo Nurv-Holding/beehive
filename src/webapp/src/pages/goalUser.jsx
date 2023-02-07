@@ -33,6 +33,20 @@ function GoalUser() {
 
     const path= `/company/${idCompany}/user/${idUser}/goal/${idGoal}`
 
+    const returnNewTask = () => {
+        let items = [];
+        (taskUsers || []).forEach((f) => {
+            const verifyIdTeam = taskUsers.find(e => e.idTask === f.idTask)
+            if(items.length === 0) items.push(verifyIdTeam)
+    
+            if(verifyIdTeam && !(items || []).some(s => s.idTask === verifyIdTeam.idTask)) 
+                items.push(verifyIdTeam)
+            
+        })
+    
+        return items
+    }
+
     const returnNewTeamsAndUsers = () => {
         let items = [];
         (teamsAndUsersByGoal || []).forEach((f) => {
@@ -143,7 +157,7 @@ function GoalUser() {
         <>
             {/* <Header /> */}
 
-            <main className='flex flex-col items-center pt-8'>
+            <main className='flex flex-col items-center pt-8 text-black'>
                 <AddGoalUser 
                     idRef={"addGoalUser"} 
                     idGoal={idGoal} 
@@ -234,7 +248,7 @@ function GoalUser() {
                     <div className='w-full mb-4'>
                         <h1 className='text-center font-bold text-lg my-4 text-bee-strong-1 uppercase'> Tarefas </h1>
                         <div className='w-full'>
-                            {(taskUsers || [])?.filter(f => f.idGoal === parseInt(idGoal))?.map((task) => {
+                            {(returnNewTask() || [])?.filter(f => f.idGoal === parseInt(idGoal))?.map((task) => {
                                 return(
                                     <div className="bg-white rounded-md p-5 mt-4 flex flex-col w-full">
                                         <span className='capitalize font-semibold'> {task.nameTask} </span>

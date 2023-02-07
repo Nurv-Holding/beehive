@@ -259,7 +259,7 @@ function Goal() {
   }
 
   const routerBack = () => {
-    navigate(-1)
+    navigate(`/company/${idCompany}/goals`)
   }
 
   const redirectHistory = (route) => {

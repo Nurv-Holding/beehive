@@ -16,14 +16,28 @@ function User() {
         prinples,
         proposals
     } = useContext(ContextCompany)
+
     const navigate = useNavigate()
 
-    const returnTotalTasks = () => {
+    const returnNewTask = () => {
+        let items = [];
+        (taskUsers || []).forEach((f) => {
+            const verifyIdTeam = taskUsers.find(e => e.idTask === f.idTask)
+            if(items.length === 0) items.push(verifyIdTeam)
+    
+            if(verifyIdTeam && !(items || []).some(s => s.idTask === verifyIdTeam.idTask)) 
+                items.push(verifyIdTeam)
+            
+        })
+    
+        return items
+    }
 
+    const returnTotalTasks = () => {
         return {
-            total: (taskUsers || []).length,
-            totalDone: (taskUsers || []).filter(f => f.done).length,
-            totalNotDone: (taskUsers || []).filter(f => !f.done).length
+            total: (returnNewTask() || []).length,
+            totalDone: (returnNewTask()  || []).filter(f => f.done).length,
+            totalNotDone: (returnNewTask()  || []).filter(f => !f.done).length
         }
     }
 

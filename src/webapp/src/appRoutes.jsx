@@ -29,7 +29,7 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="company/:idCompany" element={<Company />} >
-      <Route index element={<WayOfBeing />} />
+        <Route index element={<WayOfBeing />} />
         <Route path="goals">
           <Route index element={<Goals />} />
           <Route path=":idGoal" element={<Goal />} />
