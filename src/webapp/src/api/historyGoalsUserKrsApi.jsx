@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = 'http://localhost:3002'
+const host = process.env.REACT_APP_HOSTLOCAL
 
 const getAll = (idCompany) => axios.get(`${host}/history/goalsUserKrs/c/${idCompany}`)
 const getHistoryKrsUsersByGoal = (idCompany, idGoalsUserKr) => axios.get(`${host}/history/goalsUserKrs/c/${idCompany}/krs/${idGoalsUserKr}`)

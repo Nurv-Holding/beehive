@@ -19,6 +19,7 @@ const TeamList = () => {
     const { idCompany } = useParams()
     const [searchParams] = useSearchParams()
     const update = searchParams.get('update')
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         const handleTeams = async () => {
@@ -37,6 +38,8 @@ const TeamList = () => {
             setUsers(data)
         }
 
+        setMessage("")
+
         handleTeams()
         handleUsers()
         handleUsersAndTeams()
@@ -44,7 +47,7 @@ const TeamList = () => {
     }, [idCompany, update])
 
     const routerBack = () => {
-        navigate(`/company/${idCompany}`)
+        navigate(`/company/${idCompany}/teams`)
     }
 
     function openModal(id, idLeader) {
@@ -60,8 +63,6 @@ const TeamList = () => {
     return (
         <>
             <Header />
-
-
 
             <main className='flex flex-col items-center gap-8'>
                 <div className='flex items-center mt-8'>

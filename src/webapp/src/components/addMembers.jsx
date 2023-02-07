@@ -38,11 +38,13 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
         } else {
             teamsUsersApi.create(idCompany, { idUser: parseInt(idUser), idTeam })
                 .then(() => {
-                    setMessage("Cadastro realizado com sucesso")
+                    setMessage("Usuário adicionado com sucesso!")
                     navigate({
                         pathname: `/company/${idCompany}/teamlist`,
                         search: `?update=${true}`
                     })
+
+                    setMessage("")
                 })
                 .catch((error) => {
                     console.error(error)
@@ -90,7 +92,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
 
                         <button className='submit-button mt-3' type="submit">Adicionar</button>
                         
-                        <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
+                        <span className={`text-center text-black`}> {message} </span>
                     </form>
                 </div>
             </Modal>

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import teamsApi from '../../../api/teamsApi';
+import teamsUsersApi from '../../../api/teamsUsersApi';
 import { ContextCompany } from '../../../context/ContextCompany';
 import AuthorizeAccess from '../../AuthorizeAccess';
 import Header from '../../Header';
@@ -19,7 +20,7 @@ function FormTeam() {
         })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         searchParams.delete('update')
         setSearchParams(searchParams)
@@ -28,30 +29,34 @@ function FormTeam() {
             setMessage("Os campos precisam ser preeenchidos")
 
         else {
-            teamsApi.create(idCompany, { ...team, leader: parseInt(team.leader) })
-                .then(() => {
-                    setMessage("Cadastro realizado com sucesso")
-                    navigate({
-                        pathname: `/formteam/${idCompany}`,
-                        search: `?update=${true}`
-                    })
+            
+        const {data} = await teamsApi.create(idCompany, { ...team, leader: parseInt(team.leader) })
+        const idTeam = data.id
+
+        teamsUsersApi.create(idCompany, { idUser: parseInt(data.leader), idTeam })
+            .then(() => {
+                setMessage("Cadastro realizado com sucesso")
+                navigate({
+                    pathname: `/company/${idCompany}/formteam`,
+                    search: `?update=${true}`
                 })
-                .catch((error) => {
-                    console.error(error)
-                    setMessage("Algo deu errado!")
-                })
+            })
+            .catch((error) => {
+                console.error(error)
+                setMessage("Algo deu errado!")
+            })
         }
     }
 
     const routerBack = () => {
-        navigate(`/company/${idCompany}`)
+        navigate(`/company/${idCompany}/teams`)
     }
 
     return (
         <>
             <Header />
             <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
-                <main className='flex flex-col items-center gap-8'>
+                <main className='flex flex-col items-center gap-8 text-black'>
                     <div className='flex items-center mt-8'>
                         <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                             <ion-icon name="arrow-back-outline"></ion-icon>
@@ -79,7 +84,7 @@ function FormTeam() {
 
                             <button className='submit-button mt-4' type="submit">Cadastrar</button>
                         </form>
-                        <span className={'block text-center'}> {message} </span>
+                        <span className={'text-center text-black'}> {message} </span>
                     </div>
                 </main>
             </AuthorizeAccess>
