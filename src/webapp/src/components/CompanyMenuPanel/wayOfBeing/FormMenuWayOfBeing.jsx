@@ -18,7 +18,7 @@ function FormMenuWayOfBeing() {
         <>
             <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
 
-            <main className='flex h-full text-black'>
+            <main className='flex h-full'>
                 <Tab.Group>
                     <Tab.List className='container-nav-empresas'>
 
@@ -26,7 +26,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button onClick={() => redirectRouter(`register/principles`)}
                                     className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100 ' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
                                     }
                                 >
                                     Princípio
@@ -38,7 +38,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button onClick={() => redirectRouter(`register/proposals`)}
                                     className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
                                     }
                                 >
                                     Propósito
@@ -50,7 +50,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button onClick={() => redirectRouter(`register/goals`)}
                                     className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
                                     }
                                 >
                                     Objetivo
@@ -62,7 +62,7 @@ function FormMenuWayOfBeing() {
                             {({ selected }) => (
                                 <button onClick={routerBack}
                                     className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : ''
+                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
                                     }
                                 >
                                     Voltar
