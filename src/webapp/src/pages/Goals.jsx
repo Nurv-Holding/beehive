@@ -6,7 +6,7 @@ function Goals() {
     const { companyGoals, idCompany, goalAndTeams, krs, goalKrs } = useContext(ContextCompany)
 
     return (
-        <div className='w-full h-full flex flex-col items-center mt-8'>
+        <div className='w-full h-full flex flex-col items-center mt-8 px-8'>
             <GoalsList
                 companyGoals={companyGoals}
                 goalKrs={goalKrs}

@@ -34,7 +34,7 @@ export default function CompanyMenu( { company } ) {
         }
           <Tab>
             {({ selected }) => (
-              <button onClick={() => redirectRouter(`/company/${idCompany}`)}
+              <button onClick={() => redirectRouter(`wayOfBeing`)}
                 className={
                   selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
                 }

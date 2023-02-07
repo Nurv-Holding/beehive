@@ -29,11 +29,11 @@ const AuthorizeAccess = ({ children, userAutorized }) => {
 
                                 <div
                                     className="
-                                    bg-white p-8 shadow-md rounded-md text-center font-bold
-                                    text-xl cursor-default flex flex-col justify-center items-center gap-8
-                                "
+                                        bg-white p-8 shadow-md rounded-md text-center font-bold
+                                        text-xl cursor-default flex flex-col justify-center items-center gap-8
+                                    "
                                 >
-                                    <span>
+                                    <span className="text-red-500">
                                         Usuário não autorizado <br />
                                         para este tipo de atividade
                                     </span>

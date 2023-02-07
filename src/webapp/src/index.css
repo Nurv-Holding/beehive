@@ -17,9 +17,6 @@ html {
     display: none;
 }
 
-html{
-    @apply hidden lg:block
-}
 
 /*COMPROMISSES*/
 .grid-compromisses{
