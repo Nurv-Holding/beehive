@@ -9,12 +9,12 @@ function profile({ payload }) {
       </div>
 
       <div className='flex flex-col cursor-default gap-2 mt-2'>
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-1'>
           <p className='text-xl text-bee-blue-clean'>{payload?.name}</p>
 
-          <div className='flex flex-col gap-0.5'>
-            <p className='text-xs text-gray-700'>{payload?.occupation}</p>
-            <p className='text-xs text-gray-700'>{payload?.email}</p>
+          <div className='flex flex-col text-xs text-gray-700'>
+            <p>{payload?.occupation}</p>
+            <p>{payload?.email}</p>
           </div>
         </div>
 
