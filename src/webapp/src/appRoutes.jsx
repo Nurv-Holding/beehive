@@ -20,6 +20,8 @@ import Goals from "./pages/Goals";
 import Teams from "./pages/Teams";
 import Users from "./pages/Users";
 import RegisterPrinciples from "./pages/RegisterPrinciples";
+import RegisterProposals from "./pages/RegisterProposals";
+import RegisterGoals from "./pages/RegisterGoals";
 
 function AppRoutes() {
   return (
@@ -42,6 +44,8 @@ function AppRoutes() {
         <Route path="wayOfBeing" element={<WayOfBeing />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />}>
           <Route path="register/principles" element={<RegisterPrinciples />} />
+          <Route path="register/proposals" element={<RegisterProposals />} />
+          <Route path="register/goals" element={<RegisterGoals />} />
         </Route>
         <Route path="users" element={<Users />} />
         <Route path="user/:idUser">
