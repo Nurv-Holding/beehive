@@ -43,7 +43,7 @@ const HistoryGoalKrsList = ({ histories, goalKr, routerBack }) => {
                                         <th className='container-title-grid'>Trimestral: {goalKr.fromQuarterly} </th>
                                         <th className='container-title-grid'>Anual: {goalKr.fromYearly} </th>
                                         <th className='container-title-grid'>Atualizado por</th>
-                                        <th className='container-title-grid'>Status</th>
+                                        <th className='-grid'>Status</th>
                                         <th className='container-title-grid'>Observação</th>
                                     </tr>
                                 </thead>

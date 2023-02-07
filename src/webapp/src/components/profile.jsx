@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 function profile({ payload }) {
 
   return (
-    <div className='w-full bg-white p-4 flex flex-col items-center'>
+    <div className='w-full bg-white p-4 flex flex-col items-center rounded-md shadow-md'>
       <div className='w-[60%] aspect-square rounded-full overflow-hidden'>
         <img alt='User profile' src="https://thispersondoesnotexist.com/image" />
       </div>

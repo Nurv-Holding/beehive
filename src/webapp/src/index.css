@@ -12,53 +12,13 @@ html {
 *{
     -ms-overflow-style: none;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
 
 html{
     @apply hidden lg:block
-}
-
-/*HEADER*/
-header{
-    @apply w-[100%] bg-[#FFFFFF] flex items-center justify-between font-bold 
-    lg:h-14 lg:px-10 text-sm
-}
-
-header nav{
-    @apply flex flex-row gap-2 items-center
-}
-/*END HEADER*/
-
-/*GRID CONTAINER and general attributes*/
-.grid-container{
-    @apply w-full grid justify-center my-8 gap-x-8 grid-cols-[20%,70%]
-}
-
-.grid-col{
-    @apply flex flex-col
-    lg:gap-y-4
-}
-
-.grid-row{
-    @apply bg-white rounded-md shadow-md flex flex-col
-}
-
-.container-title{
-    @apply text-sm text-bee-blue-clean mb-2 cursor-default
-}
-
-.grid-general{
-    @apply p-8
-}
-
-.general{
-    @apply w-[40%] max-w-[200px] text-xs text-gray-700 mt-0.5
-}
-
-.general:hover{
-    @apply text-bee-blue-clean
 }
 
 /*COMPROMISSES*/

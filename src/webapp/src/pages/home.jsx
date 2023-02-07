@@ -17,41 +17,42 @@ function Home() {
 
   useEffect(() => {
     const token = localStorage.getItem("token")
-    const payload = token? jwtDecode(token): null
+    const payload = token ? jwtDecode(token) : null
 
     setPayload(() => payload)
     const handlerCompanies = async () => {
-      const {data} = await companiesApi.getAll()
+      const { data } = await companiesApi.getAll()
 
-      if(payload?.nameProfile === "adminMaster")
+      if (payload?.nameProfile === "adminMaster")
         setCompanies(data)
       else
-        setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
+        setCompanies(payload?.idCompany ? (data || [])?.filter(e => e.id === payload?.idCompany) : data)
     }
 
     handlerCompanies()
 
-  },[update])
+  }, [update])
 
   return (
     <>
       <AuthorizeLogin>
-      <Header />
-      <main>
-        <div className='grid-container'>
-          <div className='grid-col'>
-            <Profile payload={newPayload} />
-            {newPayload?.nameProfile === "adminMaster" &&
-            <AddCompanies />
-            }
+        <Header />
+        <main>
+          <div className='w-full grid justify-center my-8 gap-8 grid-cols-[20%,70%]'>
+            <div className='flex flex-col gap-8'>
+              <Profile payload={newPayload} />
 
-          </div>
+              {newPayload?.nameProfile === "adminMaster" &&
+                <AddCompanies />
+              }
 
-            <div className='grid-col'>
+            </div>
+
+            <div className='flex flex-col'>
               <CompaniesList companies={companies} />
             </div>
           </div>
-      </main>
+        </main>
       </AuthorizeLogin>
     </>
   );
