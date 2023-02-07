@@ -84,21 +84,6 @@ export default function CompanyMenu( { company } ) {
         <div className='w-full'>
           <Tab.Panels className='text-white'>
             <Outlet />
-            {/* <Tab.Panel>
-              <WayOfBeing />
-            </Tab.Panel> */}
-
-            {/* <Tab.Panel>
-              <Goals />
-            </Tab.Panel>
-
-            <Tab.Panel>
-              <Teams />
-            </Tab.Panel>
-
-            <Tab.Panel>
-              <Users />
-            </Tab.Panel> */}
           </Tab.Panels>
         </div>
       </Tab.Group>

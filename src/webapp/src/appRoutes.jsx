@@ -19,6 +19,7 @@ import WayOfBeing from "./pages/wayOfBeing";
 import Goals from "./pages/Goals";
 import Teams from "./pages/Teams";
 import Users from "./pages/Users";
+import RegisterPrinciples from "./pages/RegisterPrinciples";
 
 function AppRoutes() {
   return (
@@ -39,7 +40,9 @@ function AppRoutes() {
         <Route path="registerfuturevision" element={<FormWayOfBeing />} />
         <Route path="formteam" element={<FormTeam />} />
         <Route path="wayOfBeing" element={<WayOfBeing />} />
-        <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />} />
+        <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />}>
+          <Route path="register/principles" element={<RegisterPrinciples />} />
+        </Route>
         <Route path="users" element={<Users />} />
         <Route path="user/:idUser">
           <Route index element={<User />} />

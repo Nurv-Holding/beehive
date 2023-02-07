@@ -1,7 +1,7 @@
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Header from '../../Header';
 import { Tab } from '@headlessui/react'
-import RegisterPrinciples from '../../RegisterPrinciples';
+import RegisterPrinciples from '../../../pages/RegisterPrinciples';
 import { useState } from 'react';
 import principlesApi from '../../../api/principlesApi';
 import RegisterProposals from '../../RegisterProposals';
@@ -84,46 +84,26 @@ function FormMenuWayOfBeing() {
         }
     }
 
-    const registerPrinciples = (event) => {
-        event.preventDefault()
-        searchParams.delete('update')
-        setSearchParams(searchParams)
-
-        if(item.title === "" || item.description === "")
-            setMessage("Os campos precisam ser preeenchidos")
-
-        else{
-            principlesApi.create(idCompany,{...item, idFutureVision:parseInt(idFutureVision)})
-            .then(() => {
-                setMessage("Cadastro realizado com sucesso")
-                navigate({
-                  pathname: `${path}`,
-                  search: `?update=${true}`
-                })
-              })
-              .catch((error) => {
-                console.error(error)
-                setMessage("Algo deu errado!")
-              })
-        }
-    }
 
     const routerBack = () => {
         navigate(`/company/${idCompany}`)
     }
 
+    const redirectRouter = (path) => {
+        navigate(path)
+    }
+
     return (
         <>
-            <Header />
             <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
 
-            <main className='flex h-full'>
+            <main className='flex h-full text-black'>
                 <Tab.Group>
                     <Tab.List className='container-nav-empresas'>
 
                         <Tab className='nav-btn'>
                             {({ selected }) => (
-                                <button
+                                <button onClick={() => redirectRouter(`register/principles`)}
                                     className={
                                         selected ? 'text-bee-blue-clean bg-gray-100 ' : ''
                                     }
@@ -173,15 +153,8 @@ function FormMenuWayOfBeing() {
                     <div className='w-full flex flex-col items-center mt-8'>
                         <div className='w-full'>
                             <Tab.Panels>
-                                <Tab.Panel className='w-full flex flex-col items-center'>
-                                    <RegisterPrinciples 
-                                    handleSubmit={registerPrinciples} 
-                                    message={message} 
-                                    modelChange={modelChange}
-                                    item={item} 
-                                    />
-                                </Tab.Panel>
-
+                                <Outlet />
+{/* 
                                 <Tab.Panel className='w-full flex flex-col items-center'>
                                     <RegisterProposals
                                     handleSubmit={registerProposals} 
@@ -197,7 +170,7 @@ function FormMenuWayOfBeing() {
                                     modelChange={modelChangeGoal}
                                     goal={goal}
                                     />
-                                </Tab.Panel>
+                                </Tab.Panel> */}
                             </Tab.Panels>
                         </div>
                     </div>
