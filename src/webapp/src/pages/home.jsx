@@ -18,10 +18,15 @@ function Home() {
   useEffect(() => {
     const token = localStorage.getItem("token")
     const payload = token? jwtDecode(token): null
+
     setPayload(() => payload)
     const handlerCompanies = async () => {
       const {data} = await companiesApi.getAll()
-      setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
+
+      if(payload?.nameProfile === "adminMaster")
+        setCompanies(data)
+      else
+        setCompanies(payload?.idCompany? (data || [])?.filter(e => e.id === payload?.idCompany): data)
     }
 
     handlerCompanies()

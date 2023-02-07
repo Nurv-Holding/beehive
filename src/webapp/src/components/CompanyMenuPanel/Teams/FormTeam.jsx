@@ -55,6 +55,7 @@ function FormTeam() {
         <>
             <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
                 <main className='flex flex-col items-center gap-8 relative'>
+                    {JSON.stringify(team)}
                     <div className='flex items-center mt-8'>
                         <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                             <ion-icon name="arrow-back-outline"></ion-icon>
@@ -68,7 +69,7 @@ function FormTeam() {
                             <div className='w-[70%] gap-2 flex flex-wrap items-center justify-center'>
                                 <input type="text" required className="input-style" placeholder='Nome' name='name' onChange={modelChange} />
 
-                                <textarea className="p-2 input-style min-h-[50px] w-full text-center" placeholder='Descrição' name="description" onChange={modelChange} cols="60" rows="3"></textarea>
+                                <textarea className="p-2 input-style min-h-[50px] w-full text-center" placeholder='Descrição' name="descriptions" onChange={modelChange} cols="60" rows="3"></textarea>
 
                                 <select onChange={modelChange} name="leader" id="users" className="input-style">
                                     <option disabled selected>Líder do time</option>
