@@ -15,7 +15,7 @@ export default function CompanyMenu( { company } ) {
   return (
     <div className='flex h-full'>
       <Tab.Group>
-        <Tab.List className='container-nav-empresas'>
+        <Tab.List className='container-nav-empresas w-[20%] bg-white'>
 
         <TitleCompany className="text-bee-blue-clean" name={company?.name} />
 
@@ -24,7 +24,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`user/${payload?.id}`)}
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200'
+                  selected && 'text-bee-blue-clean bg-gray-200 py-4'  || 'py-4'
                 }
               >
                 Meu painel
@@ -36,7 +36,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`/company/${idCompany}`)}
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200'
+                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
                 }
               >
                 Jeito de ser
@@ -48,7 +48,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`goals`)} 
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200'
+                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
                 }
               >
                 Objetivos
@@ -60,7 +60,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`teams`)} 
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200'
+                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
                 }
               >
                 Times
@@ -72,7 +72,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`users`)} 
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200'
+                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
                 }
               >
                 Usuários

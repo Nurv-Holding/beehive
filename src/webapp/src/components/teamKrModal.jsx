@@ -42,7 +42,7 @@ const TeamKrModal = ({
                             <span className="text-gray-600 text-xs mr-4">De: {krs.toQuarterlyGoalsTeamKr}</span>
                             <span className="text-gray-600 text-xs ml-4">Para: {krs.fromQuarterlyGoalsTeamKr}</span>
                         </div>
-                        <div className='percentage-container-disclosure w-[90%] mt-2 overflow-hidden'>
+                        <div className='bg-[#D9D9D9] h-4 rounded w-[90%] mt-2 overflow-hidden'>
                             <div className='percentage-bar-quartely'></div>
                         </div>
                         <style>{`
@@ -64,7 +64,7 @@ const TeamKrModal = ({
                             <span className="text-gray-600 text-xs mr-4">De: {krs.toYearlyGoalsTeamKr}</span>
                             <span className="text-gray-600 text-xs ml-4">Para: {krs.fromYearlyGoalsTeamKr}</span>
                         </div>
-                        <div className='percentage-container-disclosure w-[90%] mt-2 overflow-hidden'>
+                        <div className='bg-[#D9D9D9] h-4 rounded w-[90%] mt-2 overflow-hidden'>
                             <div className='percentage-bar-yearly'></div>
                         </div>
                         <style>{`

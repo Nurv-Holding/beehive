@@ -162,41 +162,9 @@ html{
 }
 /*End ScrollBar*/
 
-
-
-.container-table-grid-meetings{
-    @apply w-[95%] grid grid-cols-5 gap-2
-}
-/*END TABLE STYLES*/
-
-
-/*NAV TOGGLE*/
-.nav-btn button{
-    @apply text-base rounded px-2 py-2
-}
-
-.nav-btn button:hover{
-    @apply bg-bee-blue-strong text-white
-}
-/*END NAV TOGGLE*/
-
-/*Disclosure*/
-.disclosure-btn{
-    @apply w-full bg-[#D9D9D9]
-}
-
-.percentage-container-disclosure{
-    @apply bg-[#D9D9D9] h-4 rounded
-}
-
-.percentage-bar-disclosure{
-    @apply bg-bee-blue-clean h-4 rounded
-}
-/*End Disclosure*/
-
 /*EmpresasMenu*/
 .container-nav-empresas{
-    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center gap-y-8
+    @apply flex flex-col items-center gap-y-8
 }
 
 .container-nav-empresas{
@@ -209,7 +177,7 @@ html{
 }
 
 .container-nav-empresas button{
-    @apply focus:outline-none font-medium hover:text-bee-blue-clean hover:bg-gray-100 w-full py-2
+    @apply outline-none hover:text-bee-blue-clean hover:bg-gray-300 w-full
 }
 
 .task-doer{

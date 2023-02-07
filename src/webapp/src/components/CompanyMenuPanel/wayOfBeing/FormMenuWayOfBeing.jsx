@@ -4,11 +4,7 @@ import AuthorizeAccess from '../../AuthorizeAccess';
 
 function FormMenuWayOfBeing() {
     const navigate = useNavigate()
-    const {idCompany, idFutureVision} = useParams()
-
-    const routerBack = () => {
-        navigate(`/company/${idCompany}`)
-    }
+    const { idCompany, idFutureVision } = useParams()
 
     const redirectRouter = (path) => {
         navigate(path)
@@ -16,70 +12,56 @@ function FormMenuWayOfBeing() {
 
     return (
         <>
-            <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
+            <AuthorizeAccess userAutorized={["adminMaster", "adminCorporate"]}>
 
-            <main className='flex h-full'>
-                <Tab.Group>
-                    <Tab.List className='container-nav-empresas'>
+                <main className='flex h-full'>
+                    <Tab.Group>
+                        <Tab.List className='h-full-side-bar-calc flex flex-col gap-4 min-w-[15%] bg-gray-200 p-2'>
 
-                    <Tab className='nav-btn'>
-                            {({ selected }) => (
-                                <button onClick={() => redirectRouter(`formfuturevisionchildren/${idFutureVision}`)}
-                                    className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
-                                    }
-                                >
-                                    Objetivo
-                                </button>
-                            )}
-                        </Tab>
+                            <Tab className='w-full'>
+                                {({ selected }) => (
+                                    <button onClick={() => redirectRouter(`/company/${idCompany}/formfuturevisionchildren/${idFutureVision}`)}
+                                        className={
+                                            selected && 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md' || 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
+                                        }
+                                    >
+                                        Objetivo
+                                    </button>
+                                )}
+                            </Tab>
 
-                        <Tab className='nav-btn'>
-                            {({ selected }) => (
-                                <button onClick={() => redirectRouter(`register/principles`)}
-                                    className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
-                                    }
-                                >
-                                    Princípio
-                                </button>
-                            )}
-                        </Tab>
+                            <Tab>
+                                {({ selected }) => (
+                                    <button onClick={() => redirectRouter(`register/principles`)}
+                                        className={
+                                            selected && 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md' || 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
+                                        }
+                                    >
+                                        Princípio
+                                    </button>
+                                )}
+                            </Tab>
 
-                        <Tab className='nav-btn'>
-                            {({ selected }) => (
-                                <button onClick={() => redirectRouter(`register/proposals`)}
-                                    className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
-                                    }
-                                >
-                                    Propósito
-                                </button>
-                            )}
-                        </Tab>
+                            <Tab>
+                                {({ selected }) => (
+                                    <button onClick={() => redirectRouter(`register/proposals`)}
+                                        className={
+                                            selected && 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md' || 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
+                                        }
+                                    >
+                                        Propósito
+                                    </button>
+                                )}
+                            </Tab>
+                        </Tab.List>
 
-                        <Tab className='nav-btn'>
-                            {({ selected }) => (
-                                <button onClick={routerBack}
-                                    className={
-                                        selected ? 'text-bee-blue-clean bg-gray-100' : 'text-black p-2'
-                                    }
-                                >
-                                    Voltar
-                                </button>
-                            )}
-                        </Tab>
-                    </Tab.List>
-
-                    <div className='w-full flex flex-col items-center mt-8'>
-                        <div className='w-full'>
+                        <div className='w-full flex flex-col items-center mt-8'>
                             <Tab.Panels>
                                 <Outlet />
                             </Tab.Panels>
                         </div>
-                    </div>
-                </Tab.Group>
-            </main>
+                    </Tab.Group>
+                </main>
             </AuthorizeAccess>
         </>
     )

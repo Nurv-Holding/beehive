@@ -167,7 +167,7 @@ function GoalKrs({
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromQuarterlyGoalKrs}</span>
                       </div>
 
-                      <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
+                      <div className='bg-[#D9D9D9] h-4 rounded w-[80%] mt-2 overflow-hidden'>
                         <div className="percentage-bar-quartely"></div>
                       </div>
                       <style>{`
@@ -189,7 +189,7 @@ function GoalKrs({
                         <span className="text-gray-600 text-xs mr-4">De: {goalKr.toYearlyGoalsKr}</span>
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromYearlyGoalsKr}</span>
                       </div>
-                      <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
+                      <div className='bg-[#D9D9D9] h-4 rounded w-[80%] mt-2 overflow-hidden'>
                         <div className='percentage-bar-yearly'></div>
                       </div>
                       <style>{`
