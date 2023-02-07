@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { ContextCompany } from '../../context/ContextCompany'
 
 export default function CompanyMenu( { company } ) {
-  const { payload, profile, idCompany } = useContext(ContextCompany)
+  const { payload, profile } = useContext(ContextCompany)
   const navigate = useNavigate()
 
   const redirectRouter = (path) => {
@@ -24,7 +24,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`user/${payload?.id}`)}
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200 py-4'  || 'py-4'
+                  selected? 'text-bee-blue-clean bg-gray-200 py-4': 'py-4'
                 }
               >
                 Meu painel
@@ -36,7 +36,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`wayOfBeing`)}
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
+                  selected? 'text-bee-blue-clean bg-gray-200 py-4': 'py-4'
                 }
               >
                 Jeito de ser
@@ -48,7 +48,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`goals`)} 
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
+                  selected? 'text-bee-blue-clean bg-gray-200 py-4': 'py-4'
                 }
               >
                 Objetivos
@@ -60,7 +60,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`teams`)} 
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
+                  selected? 'text-bee-blue-clean bg-gray-200 py-4': 'py-4'
                 }
               >
                 Times
@@ -72,7 +72,7 @@ export default function CompanyMenu( { company } ) {
             {({ selected }) => (
               <button onClick={() => redirectRouter(`users`)} 
                 className={
-                  selected && 'text-bee-blue-clean bg-gray-200 py-4' || 'py-4'
+                  selected? 'text-bee-blue-clean bg-gray-200 py-4': 'py-4'
                 }
               >
                 Usuários
