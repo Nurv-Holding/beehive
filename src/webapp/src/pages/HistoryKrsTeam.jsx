@@ -11,7 +11,7 @@ import { ContextCompany } from '../context/ContextCompany';
 
 const HistoryKrsTeam = () => {
 
-    const {idTeam, idGoal} = useParams()
+    const { idTeam, idGoal } = useParams()
     const { idCompany } = useContext(ContextCompany)
     const [histories, setHistories] = useState([])
     const [goalTeams, setGoalTeams] = useState([])
@@ -19,31 +19,31 @@ const HistoryKrsTeam = () => {
     const [goaloalTeamByKrs, setGoalTeamByKrs] = useState([])
     const [team, setTeam] = useState(
         {
-            id:null, 
-            name:"", 
-            idCompany:null, 
-            descriptions:"",
-            createdAt:"",
-            updatedAt:""
+            id: null,
+            name: "",
+            idCompany: null,
+            descriptions: "",
+            createdAt: "",
+            updatedAt: ""
         }
     )
 
     useEffect(() => {
         const handlerTeam = async () => {
-            const {data} = await teamsApi.getById(idTeam, idCompany)
+            const { data } = await teamsApi.getById(idTeam, idCompany)
             setTeam(data)
         }
-    
+
         const handleGoalTeamByGoalTeam = async () => {
             const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
             setGoalTeams(data)
-          }
-    
+        }
+
         const handleHistory = async () => {
-            const {data} = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
+            const { data } = await historyGoalTeamKrApi.getByKrs(idCompany, idGoal, idTeam)
             setHistories(data)
         }
-    
+
         const handleGoalTeamByKrs = async () => {
             const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
             setGoalTeamByKrs(data)
@@ -54,16 +54,14 @@ const HistoryKrsTeam = () => {
         handleGoalTeamByGoalTeam()
         handleGoalTeamByKrs()
 
-    },[idTeam, idCompany, idGoal])
+    }, [idTeam, idCompany, idGoal])
 
-      const routerBack = () => {
+    const routerBack = () => {
         navigate(-1)
     }
-    
+
     return (
         <>
-            <Header />
-            
             <HistoryKrsTeamList histories={histories} team={team} goalTeams={goalTeams} goaloalTeamByKrs={goaloalTeamByKrs} routerBack={routerBack} />
         </>
     );

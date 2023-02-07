@@ -378,7 +378,7 @@ function Goal() {
 
   return (
     <>
-      <main className='flex flex-col items-center pt-8 relative text-black'>
+      <main className='flex flex-col items-center pt-8 relative'>
         <div className='w-11/12'>
           <div className='flex flex-row w-full justify-center items-center'>
             <button onClick={routerBack} className="p-3 shadow-md text-xl text-white rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
