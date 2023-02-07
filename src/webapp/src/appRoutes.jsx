@@ -27,6 +27,7 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="company/:idCompany" element={<Company />} >
+      <Route index element={<WayOfBeing />} />
         <Route path="goals">
           <Route index element={<Goals />} />
           <Route path=":idGoal" element={<Goal />} />
@@ -39,7 +40,6 @@ function AppRoutes() {
         <Route path="formuser" element={<FormUser />} />
         <Route path="registerfuturevision" element={<FormWayOfBeing />} />
         <Route path="formteam" element={<FormTeam />} />
-        <Route path="wayOfBeing" element={<WayOfBeing />} />
         <Route path="formfuturevisionchildren/:idFutureVision" element={<FormMenuWayOfBeing />}>
           <Route path="register/principles" element={<RegisterPrinciples />} />
         </Route>

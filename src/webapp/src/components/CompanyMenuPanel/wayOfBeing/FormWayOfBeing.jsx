@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import futureVisionApi from '../../../api/futureVisionApi';
 import AuthorizeAccess from '../../AuthorizeAccess';
-import Header from '../../Header';
 
 function FormWayOfBeing() {
     const navigate = useNavigate()
@@ -52,10 +51,9 @@ function FormWayOfBeing() {
 
     return (
         <>
-        <Header />
         <AuthorizeAccess userAutorized={["adminMaster" ,"adminCorporate"]}>
-            <main className='flex flex-col items-center gap-8 pt-8'>
-                <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+            <main className='flex flex-col items-center gap-8 pt-8 relative'>
+                <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                     <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
 
@@ -68,7 +66,7 @@ function FormWayOfBeing() {
                         <div className='w-[70%] flex flex-col items-center justify-center gap-4'>
                             <input type="text" className="input-style text-center" placeholder='Título' name='title' onChange={modelChange} />
 
-                            <textarea className="p-2 input-style min-h-[50px] text-center" placeholder='Descrição' name="description" onChange={modelChange} cols="60" rows="3"></textarea>
+                            <textarea className="p-2 input-style min-h-[50px] w-full text-center" placeholder='Descrição' name="description" onChange={modelChange} cols="60" rows="3"></textarea>
                         </div>
 
                         <button className='submit-button mt-4' type="submit">Cadastrar</button>
