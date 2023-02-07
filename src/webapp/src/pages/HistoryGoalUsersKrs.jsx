@@ -55,8 +55,6 @@ const HistoryGoalUsersKr = () => {
 
     return (
         <>
-            <Header />
-
             <HistoryGoalUsersKrsList 
                 histories={histories} 
                 goalKr={goalKr} 

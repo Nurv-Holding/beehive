@@ -55,13 +55,12 @@ function FormTeam() {
         <>
             <AuthorizeAccess userAutorized={["adminMaster","adminCorporate"]}>
                 <main className='flex flex-col items-center gap-8 relative'>
-                    {JSON.stringify(team)}
                     <div className='flex items-center mt-8'>
                         <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                             <ion-icon name="arrow-back-outline"></ion-icon>
                         </button>
 
-                        <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'> Cadastrar Time</span>
+                        <span className='font-bold text-2xl text-bee-blue-clean uppercase'> Cadastrar Time</span>
                     </div>
 
                     <div className='flex flex-col w-2/4 items-center bg-white p-2 rounded-lg shadow-xl'>

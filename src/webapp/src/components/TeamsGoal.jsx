@@ -273,8 +273,8 @@ function TeamsGoal({
                       <span className='capitalize font-semibold'> {goalTeams.nameTeam} </span>
                     </div>
 
-                    <div className='percentage-container-disclosure w-[80%]'>
-                      <div className='percentage-bar-disclosure w-[0%]'></div>
+                    <div className='bg-[#D9D9D9] h-4 rounded w-[80%]'>
+                      <div className='bg-bee-blue-clean h-4 rounded w-[0%]'></div>
                     </div>
 
                     <TaskPercentage

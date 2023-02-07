@@ -155,7 +155,6 @@ function GoalUser() {
 
     return (
         <>
-            {/* <Header /> */}
 
             <main className='flex flex-col items-center pt-8 text-black'>
                 <AddGoalUser 

@@ -19,9 +19,9 @@ const HistoryKrsTeamList = ({ histories, team, goalTeams, goaloalTeamByKrs, rout
             <div className='w-11/12'>
                 {(goalTeams || []).filter(e => e.idTeam === team.id)?.map((goalTeam) => {
                     return (
-                        <div className='w-full'>
+                        <div className='w-full relative'>
                             <div className="w-full flex items-center justify-center my-8">
-                                <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                                <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                                     <ion-icon name="arrow-back-outline"></ion-icon>
                                 </button>
 

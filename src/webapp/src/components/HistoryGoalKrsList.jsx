@@ -16,9 +16,9 @@ const HistoryGoalKrsList = ({ histories, goalKr, routerBack }) => {
 
     return (
         <main className='flex flex-col items-center'>
-            <div className='w-11/12'>
+            <div className='w-11/12 relative'>
                 <div className="w-full my-8">
-                    <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                    <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </button>
 

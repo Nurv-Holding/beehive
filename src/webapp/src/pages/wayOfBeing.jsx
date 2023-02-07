@@ -43,7 +43,7 @@ function WayOfBeing() {
         <div className='flex flex-row'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 flex flex-col items-center py-2'>
                 <Link
-                    to={`/company/${idCompany}/registerfuturevision`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
+                    to={`/company/${idCompany}/registerfuturevision`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-clean hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
                 >
                     +
                 </Link>
@@ -53,11 +53,11 @@ function WayOfBeing() {
                 <Tab.Group>
                     <Tab.List className='w-full flex flex-col items-center mt-8'>
                         <div className='w-11/12 flex flex-row gap-2'>
-                            <Tab className='nav-btn'>
+                            <Tab>
                                 {({ selected }) => (
                                     <button
                                         className={
-                                            selected ? 'bg-bee-blue-clean' : 'bg-white text-black'
+                                            selected ? 'bg-bee-blue-clean text-base rounded px-2 py-2 hover:bg-bee-blue-strong hover:text-white' : 'bg-white text-black text-base rounded px-2 py-2 hover:bg-bee-blue-clean hover:text-white'
                                         }
                                     >
                                         Visão de Futuro
@@ -65,11 +65,11 @@ function WayOfBeing() {
                                 )}
                             </Tab>
 
-                            <Tab className='nav-btn'>
+                            <Tab>
                                 {({ selected }) => (
                                     <button
                                         className={
-                                            selected ? 'bg-bee-blue-clean' : 'bg-white text-black'
+                                            selected ? 'bg-bee-blue-clean text-base rounded px-2 py-2 hover:bg-bee-blue-strong hover:text-white' : 'bg-white text-black text-base rounded px-2 py-2 hover:bg-bee-blue-clean hover:text-white'
                                         }
                                     >
                                         Princípios
@@ -77,11 +77,11 @@ function WayOfBeing() {
                                 )}
                             </Tab>
 
-                            <Tab className='nav-btn'>
+                            <Tab>
                                 {({ selected }) => (
                                     <button
                                         className={
-                                            selected ? 'bg-bee-blue-clean' : 'bg-white text-black'
+                                            selected ? 'bg-bee-blue-clean text-base rounded px-2 py-2 hover:bg-bee-blue-strong hover:text-white' : 'bg-white text-black text-base rounded px-2 py-2 hover:bg-bee-blue-clean hover:text-white'
                                         }
                                     >
                                         Propósitos
