@@ -22,7 +22,7 @@ function FormMenuWayOfBeing() {
                                 {({ selected }) => (
                                     <button onClick={() => redirectRouter(`/company/${idCompany}/formfuturevisionchildren/${idFutureVision}`)}
                                         className={
-                                            selected && 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md' || 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
+                                            selected? 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md': 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
                                         }
                                     >
                                         Objetivo
@@ -34,7 +34,7 @@ function FormMenuWayOfBeing() {
                                 {({ selected }) => (
                                     <button onClick={() => redirectRouter(`register/principles`)}
                                         className={
-                                            selected && 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md' || 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
+                                            selected? 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md': 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
                                         }
                                     >
                                         Princípio
@@ -46,7 +46,7 @@ function FormMenuWayOfBeing() {
                                 {({ selected }) => (
                                     <button onClick={() => redirectRouter(`register/proposals`)}
                                         className={
-                                            selected && 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md' || 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
+                                            selected? 'text-bee-blue-clean bg-gray-300 w-full p-4 rounded-md': 'w-full p-4 rounded-md bg-white text-bee-blue-clean hover:bg-gray-300'
                                         }
                                     >
                                         Propósito
