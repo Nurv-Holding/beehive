@@ -39,7 +39,9 @@ const authenticateController = handlerBuilder(async (req, res) => {
                 idProfile: user.idProfile,
                 nameProfile: profile.name,
                 idCompany: user.idCompany,
-                email: user.email
+                email: user.email,
+                admissionDate: user.admissionDate,
+                status: user.status
             }
 
         console.log("payload", payload)
