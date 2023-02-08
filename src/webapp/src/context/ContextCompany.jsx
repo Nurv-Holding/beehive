@@ -243,7 +243,7 @@ export const ContextUserProvider = ({ children }) => {
         }
     
         const handlerUsers = async () => {
-            const {data} = await usersApi.getAll(idCompany)
+            const {data} = await usersApi.getAllByCompany(idCompany)
             setUsers(data)
         }
     

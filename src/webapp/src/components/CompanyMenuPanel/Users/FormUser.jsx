@@ -11,6 +11,7 @@ function FormUser() {
         name:"",
         email:"",
         occupation:"",
+        admissionDate: "",
         password:"",
         passwordRepeat:""
     }
@@ -82,6 +83,8 @@ function FormUser() {
                             <input onChange={changeModel} type="text" value={employee.occupation} className="input-style" name='occupation' placeholder='Cargo' />
 
                             <input onChange={changeModel} type="text" value={employee.email} className="input-style" name='email' placeholder='Email' />
+
+                            <input onChange={changeModel} type="text" value={employee.admissionDate} className="input-style" name='admissionDate' placeholder='Data de admissão' />
 
                             <input onChange={changeModel} type="password" value={employee.password} className="input-style" name='password' placeholder='Senha' />
 
