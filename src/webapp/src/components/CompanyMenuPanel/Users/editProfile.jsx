@@ -41,7 +41,7 @@ const EditProfile = () => {
         })
     }
 
-    const register = (event) => {
+    const register = async (event) => {
         event.preventDefault()
 
         searchParams.delete('update')
@@ -58,7 +58,9 @@ const EditProfile = () => {
 
         }else{
 
-            usersApi.update(newPayload?.id, {...profile, passwordRepeat:undefined})
+            await usersApi.update(newPayload?.id, {...profile, passwordRepeat:undefined})
+
+            usersApi.authenticate({...profile, passwordRepeat:undefined})
             .then(() => {
                 setProfile(objectProfile)
                 setMessage("Cadastro realizado com sucesso")
@@ -91,6 +93,9 @@ const EditProfile = () => {
         </div>
 
         <div className='flex flex-col w-2/4 items-center mt-4 bg-white p-2 rounded-lg shadow-xl'>
+            <div className='w-[20%] aspect-square rounded-full overflow-hidden'>
+                <img alt='User profile' src="https://thispersondoesnotexist.com/image" />
+            </div>
             <form onSubmit={register} className='w-full flex flex-col items-center p-4'>
                 <div className='w-[70%] gap-2 flex flex-wrap items-center justify-center'>
                     <input onChange={changeModel} type="text" value={profile.name} className="input-style" name='name' placeholder='Nome' />

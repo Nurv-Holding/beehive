@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import goalKrsApi from '../api/goalKrsApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
-import Header from '../components/Header';
 import HistoryGoalKrsList from '../components/HistoryGoalKrsList';
 import { ContextCompany } from '../context/ContextCompany';
 

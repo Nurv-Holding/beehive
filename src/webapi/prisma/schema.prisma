@@ -82,22 +82,24 @@ model Profile {
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  idCompany   Int?
-  idProfile   Int?
-  name        String
-  photo       String?
-  email       String        @unique
-  occupation  String
-  password    String?
-  roles       String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  company     Company?      @relation(fields: [idCompany], references: [id], onDelete: Cascade)
-  TeamUser    TeamUser[]
-  GoalUserKr  GoalUserKr[]
-  GoalsUser   GoalsUser[]
-  GoalsUserKr GoalsUserKr[]
+  id            Int           @id @default(autoincrement())
+  idCompany     Int?
+  idProfile     Int?
+  name          String
+  photo         String?
+  email         String        @unique
+  occupation    String
+  admissionDate DateTime
+  status        Boolean       @default(true)
+  password      String?
+  roles         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  company       Company?      @relation(fields: [idCompany], references: [id], onDelete: Cascade)
+  TeamUser      TeamUser[]
+  GoalUserKr    GoalUserKr[]
+  GoalsUser     GoalsUser[]
+  GoalsUserKr   GoalsUserKr[]
 
   @@map("users")
 }

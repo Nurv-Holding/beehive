@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import teamsApi from '../api/teamsApi';
-import Header from '../components/Header';
 import HistoryKrsTeamList from '../components/HistoryKrsTeamList';
 import { ContextCompany } from '../context/ContextCompany';
 

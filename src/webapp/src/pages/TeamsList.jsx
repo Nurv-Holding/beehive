@@ -18,7 +18,6 @@ const TeamList = () => {
     const { idCompany } = useParams()
     const [searchParams] = useSearchParams()
     const update = searchParams.get('update')
-    const [message, setMessage] = useState("")
 
     useEffect(() => {
         const handleTeams = async () => {
@@ -36,8 +35,6 @@ const TeamList = () => {
     
             setUsers(data)
         }
-
-        setMessage("")
 
         handleTeams()
         handleUsers()

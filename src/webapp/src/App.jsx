@@ -6,20 +6,20 @@ function App() {
   const [screen, setScreen] = useState(null)
 
   useEffect(() => {
+    const getScreen = () => {
+      return window.innerWidth
+    }
+  
+    const handleScreen = () => {
+      setScreen(getScreen())
+    }
+
     handleScreen()
     window.addEventListener('resize', handleScreen);
     return () => {
       window.removeEventListener('resize', handleScreen);
     };
   }, [])
-
-  const getScreen = () => {
-    return window.innerWidth
-  }
-
-  const handleScreen = () => {
-    setScreen(getScreen())
-  }
 
   return (
     <>
