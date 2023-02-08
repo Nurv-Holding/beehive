@@ -89,7 +89,7 @@ model User {
   photo         String?
   email         String        @unique
   occupation    String
-  admissionDate DateTime
+  admissionDate DateTime      @default(now())
   status        Boolean       @default(true)
   password      String?
   roles         String?
