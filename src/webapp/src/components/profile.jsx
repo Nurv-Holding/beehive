@@ -20,7 +20,7 @@ function profile({ payload }) {
 
         <div>
           <Link
-            to=""
+            to="/editProfile"
             className="
                 text-sm hover:text-bee-blue-clean border border-black 
                 hover:border-bee-blue-clean border-x-0 border-t-0

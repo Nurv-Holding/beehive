@@ -12,8 +12,6 @@ function Users() {
         goalUsers
     } = useContext(ContextCompany)
 
-
- 
     return (
         <div className='flex flex-row justify-between'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 gap-2 flex flex-col items-center py-2'>

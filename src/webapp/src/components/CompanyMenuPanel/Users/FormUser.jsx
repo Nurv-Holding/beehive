@@ -60,7 +60,7 @@ function FormUser() {
     }
 
     const routerBack = () => {
-        navigate(`/company/${idCompany}`)
+        navigate(`/company/${idCompany}/users`)
     }
 
     return (

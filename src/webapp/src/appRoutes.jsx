@@ -22,12 +22,14 @@ import Users from "./pages/Users";
 import RegisterPrinciples from "./pages/RegisterPrinciples";
 import RegisterProposals from "./pages/RegisterProposals";
 import RegisterGoals from "./pages/RegisterGoals";
+import EditProfile from "./components/CompanyMenuPanel/Users/editProfile";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/editProfile" element={<EditProfile />} />
       <Route path="company/:idCompany" element={<Company />} >
         <Route path="wayOfBeing" element={<WayOfBeing />} />
         <Route path="goals">
