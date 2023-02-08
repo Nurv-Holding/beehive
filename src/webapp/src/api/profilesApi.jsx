@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const host = process.env.REACT_APP_HOSTPROD
+import { host } from "../utils/utilis"
 
 const getAll = () => axios.get(`${host}/profiles`)
 const create = (data) => axios.post(`${host}/profiles`,data)

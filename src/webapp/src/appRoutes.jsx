@@ -23,6 +23,7 @@ import RegisterPrinciples from "./pages/RegisterPrinciples";
 import RegisterProposals from "./pages/RegisterProposals";
 import RegisterGoals from "./pages/RegisterGoals";
 import EditProfile from "./components/CompanyMenuPanel/Users/editProfile";
+import RedirectPages from "./pages/redirectPages";
 
 function AppRoutes() {
   return (
@@ -31,6 +32,7 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/editProfile" element={<EditProfile />} />
       <Route path="company/:idCompany" element={<Company />} >
+        <Route index element={<RedirectPages />} />
         <Route path="wayOfBeing" element={<WayOfBeing />} />
         <Route path="goals">
           <Route index element={<Goals />} />

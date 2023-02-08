@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const host = process.env.REACT_APP_HOSTPROD
+import { host } from "../utils/utilis"
 
 const getAllByCompany = (idCompany) => axios.get(`${host}/users/c/${idCompany}`)
 const getAll = () => axios.get(`${host}/users`)

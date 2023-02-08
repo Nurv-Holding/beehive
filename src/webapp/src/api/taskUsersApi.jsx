@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const host = process.env.REACT_APP_HOSTPROD
+import { host } from "../utils/utilis"
 
 const create = (idCompany,data) => axios.post(`${host}/taskUsers/c/${idCompany}`,data)
 const getAll = (idCompany) => axios.get(`${host}/taskUsers/c/${idCompany}`)
