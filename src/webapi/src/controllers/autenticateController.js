@@ -4,7 +4,6 @@ const handlerBuilder = require("../common/handlerBuilder");
 const BusinessError = require("../common/erros/BusineErros");
 
 const authenticateController = handlerBuilder(async (req, res) => {
-    const idCompany = req.body.idCompany
     const email = req.body.email
     const password = req.body.password
     const secretKey = process.env.SECRET_KEY
