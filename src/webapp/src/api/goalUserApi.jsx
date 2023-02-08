@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const host = process.env.REACT_APP_HOSTLOCAL
+const host = process.env.REACT_APP_HOSTPROD
 
 const getAll = (idCompany) => axios.get(`${host}/goalsUser/c/${idCompany}`)
 const getById = (idGoal, idCompany) => axios.get(`${host}/goalsUser/${idGoal}/c/${idCompany}`)
