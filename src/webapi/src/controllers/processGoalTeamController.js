@@ -75,13 +75,64 @@ const getAllTeamsByKrs = handlerBuilder(async (req, res) => {
     res.status(200).send(results)
 })
 
+const getTeamsAndUsersByGoal = handlerBuilder(async (req, res) => {
+    const {idCompany, idUser, idGoal} = req.params
+
+    const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal,
+    t.id as idTeam, t.name as nameTeam,
+    u.id as idUser, u.name as nameUser 
+    from processgoalsteams as pgt 
+    join goals as g on pgt.idGoal=g.id
+    join teams as t on pgt.idTeam=t.id
+    join teamusers as tu on tu.idTeam=t.id
+    join users as u on tu.idUser=u.id
+    where pgt.idCompany=${idCompany} and u.id=${idUser} and g.id=${idGoal};`
+
+    res.status(200).send(results)
+})
+
+const getTeamsAndUsersByUser = handlerBuilder(async (req, res) => {
+    const {idCompany, idUser} = req.params
+
+    const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal,
+    t.id as idTeam, t.name as nameTeam,
+    u.id as idUser, u.name as nameUser 
+    from processgoalsteams as pgt 
+    join goals as g on pgt.idGoal=g.id
+    join teams as t on pgt.idTeam=t.id
+    join teamusers as tu on tu.idTeam=t.id
+    join users as u on tu.idUser=u.id
+    where pgt.idCompany=${idCompany} and u.id=${idUser};`
+
+    res.status(200).send(results)
+})
+
+const getAllTeamsAndUsers = handlerBuilder(async (req, res) => {
+    const {idCompany} = req.params
+
+    const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal,
+    t.id as idTeam, t.name as nameTeam,
+    u.id as idUser, u.name as nameUser 
+    from processgoalsteams as pgt 
+    join goals as g on pgt.idGoal=g.id
+    join teams as t on pgt.idTeam=t.id
+    join teamusers as tu on tu.idTeam=t.id
+    join users as u on tu.idUser=u.id
+    where pgt.idCompany=${idCompany};`
+
+    res.status(200).send(results)
+})
+
 const processGoalTeamController = {
     ...crudFunctions,
     getAllGoalGroupByTeam,
     getAllGoalGroupByKrs,
     getAllTeams,
     getAllTeamsByKrs,
-    getByTeams
+    getByTeams,
+    getTeamsAndUsersByGoal,
+    getTeamsAndUsersByUser,
+    getAllTeamsAndUsers
 }
 
 module.exports = processGoalTeamController

@@ -4,19 +4,18 @@ const handlerBuilder = require("../common/handlerBuilder");
 const BusinessError = require("../common/erros/BusineErros");
 
 const authenticateController = handlerBuilder(async (req, res) => {
-    const idCompany = req.body.idCompany
     const email = req.body.email
     const password = req.body.password
     const secretKey = process.env.SECRET_KEY
 
     const user = await prismaClient.user.findUnique({ where: { email } })
 
-    const profile = await prismaClient.profile.findUnique({ where: {id: user.idProfile} })
-
     if(!user || Object.keys(user).length === 0 || user.password !== password){
         throw new BusinessError('Invalid username or passwords')
 
     }else{
+        const profile = await prismaClient.profile.findUnique({ where: {id: user?.idProfile} })
+
         let payload = {}
 
         if(profile.name === 'adminMaster')
@@ -27,7 +26,8 @@ const authenticateController = handlerBuilder(async (req, res) => {
                 photo: user.photo,
                 idProfile: user.idProfile,
                 nameProfile: profile.name,
-                email: user.email
+                email: user.email,
+                idCompany: null,
             }
 
         else
@@ -39,7 +39,9 @@ const authenticateController = handlerBuilder(async (req, res) => {
                 idProfile: user.idProfile,
                 nameProfile: profile.name,
                 idCompany: user.idCompany,
-                email: user.email
+                email: user.email,
+                admissionDate: user.admissionDate,
+                status: user.status
             }
 
         console.log("payload", payload)

@@ -3,7 +3,6 @@ import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 const AddTeam = ({ 
     message,
     addTeamInGoal, 
-    item, 
     modelChange, 
     isOpen, 
     closeModal,
@@ -31,7 +30,7 @@ const AddTeam = ({
                         <button className='submit-button' type="submit" >
                             Adicionar
                         </button>
-                        <span> {message} </span>
+                        <span className={`text-center`}> {message} </span>
                     </div>
                 </form>
             </Modal>

@@ -4,14 +4,13 @@ import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import goalKrsApi from '../api/goalKrsApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
-import Header from '../components/Header';
-import HistoryKrsList from '../components/HistoryKrsList';
-import { ContextUser } from '../context/ContextUser';
+import HistoryGoalKrsList from '../components/HistoryGoalKrsList';
+import { ContextCompany } from '../context/ContextCompany';
 
 const HistoryKr = () => {
 
-    const { idgoalsKr } = useParams()
-    const { idCompany, idGoal } = useContext(ContextUser)
+    const { idgoalsKr, idGoal } = useParams()
+    const { idCompany } = useContext(ContextCompany)
     const [histories, setHistories] = useState([])
     const navigate = useNavigate()
     const [goalKr, setGoalKr] = useState(
@@ -41,6 +40,7 @@ const HistoryKr = () => {
             const { data } = await historyGoalKrApi.HistoryGoalKrByKr(idCompany, idGoal, idgoalsKr)
             setHistories(data)
         }
+    
 
         handleHistory()
         handlerGoalKr()
@@ -53,13 +53,7 @@ const HistoryKr = () => {
 
     return (
         <>
-            <Header />
-
-            <div className='flex flex-row w-full justify-center items-center mt-6'>
-                <button onClick={routerBack} className="px-2 rounded-lg bg-white hover:bg-[#5500C3] hover:text-white hover:cursor-pointer absolute m-2 left-2">voltar</button>
-            </div>
-
-            <HistoryKrsList histories={histories} goalKr={goalKr} />
+            <HistoryGoalKrsList histories={histories} goalKr={goalKr} routerBack={routerBack}/>
             {/* <TeamHistoriesList/> */}
         </>
     );

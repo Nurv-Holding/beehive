@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Header from '../components/Header';
 import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
 import TeamsGoal from '../components/TeamsGoal';
-import { ContextUser } from '../context/ContextUser';
+import { ContextCompany } from '../context/ContextCompany';
 import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
 import goalsTeamApi from '../api/goalsTeamApi';
@@ -31,9 +30,8 @@ function Goal() {
     users,
     company,
     payload,
-    token } = useContext(ContextUser)
+    token } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
-  const [loading] = useState(false)
   const [goal, setGoal] = useState({})
   const [goalKrs, setGoalKrs] = useState([])
   const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
@@ -57,7 +55,6 @@ function Goal() {
   const update = searchParams.get('update')
 
   useEffect(() => {
-
     const handleTasksUser = async () => {
       const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
       setTasksUser(data)
@@ -122,6 +119,8 @@ function Goal() {
 
   }, [idGoal, idCompany, update])
 
+  const path = `/company/${idCompany}/goals/${idGoal}`
+
   function updateData() {
     setIsOpen(false)
   }
@@ -174,7 +173,7 @@ function Goal() {
 
     const { data } = await goalsTeamApi.getByTeam(idCompany, idTeam)
 
-    const hasTeam = data.filter(e => e.idGoal === idGoal && e.idTeam === idTeam)
+    const hasTeam = data.filter(e => e.idGoal === newIdGoal && e.idTeam === parseInt(idTeam))
 
     if (Object.keys(item).length === 0) {
       setMessage("Precisa selecionar um time")
@@ -185,9 +184,9 @@ function Goal() {
     } else {
       goalsTeamApi.createProcess(idCompany, { idTeam, idGoal: newIdGoal })
         .then(() => {
-          setMessage("Time adicionado sucesso")
+          setMessage("Time adicionado")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -199,8 +198,6 @@ function Goal() {
         })
     }
   }
-
-
 
   const createGoalsTeam = async (idTeam) => {
     searchParams.delete('update')
@@ -230,7 +227,7 @@ function Goal() {
         .then(() => {
           setMessage("Ojetivo criado com sucesso")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -247,7 +244,7 @@ function Goal() {
         .then(() => {
           setMessage("Ojetivo criado com sucesso")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -262,8 +259,8 @@ function Goal() {
   }
 
   const routerBack = () => {
-    navigate(`/company/${idCompany}`)
-}
+    navigate(`/company/${idCompany}/goals`)
+  }
 
   const redirectHistory = (route) => {
     navigate(route)
@@ -317,7 +314,7 @@ function Goal() {
       .then(() => {
         setMessage("Kr encerrado")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
   
@@ -367,7 +364,7 @@ function Goal() {
       .then(() => {
         setMessage("KR criado com sucesso")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
 
@@ -381,26 +378,22 @@ function Goal() {
 
   return (
     <>
-      <Header />
-
-      <main className='flex flex-col items-center pt-8'>
-        <div className='flex flex-row w-full justify-center items-center'>
-          <button onClick={routerBack} className="p-3 text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-2">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </button>
-
-          <TitleCompany className='text-bee' name={company?.name} />
-        </div>
-
-
+      <main className='flex flex-col items-center pt-8 relative text-black'>
         <div className='w-11/12'>
+          <div className='flex flex-row w-full justify-center items-center'>
+            <button onClick={routerBack} className="p-3 shadow-md text-xl rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong text-white cursor-pointer absolute m-2 left-12">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+
+            <TitleCompany className='text-bee' name={company?.name} />
+          </div>
           <div className='container-two-percentage'>
             <div className='container-percentage-okr flex flex-col'>
               <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
               <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id === goal?.author)[0]?.name} </span>
             </div>
             {!(!!goal.status) &&
-              <div className='container-percentage-okr flex flex-row justify-around'>
+              <div className='container-percentage-okr flex flex-row justify-end gap-4'>
                 <AddKr
                   message={message}
                   nameGoal={goal.name}
@@ -414,7 +407,6 @@ function Goal() {
 
                 <AddTeam
                   message={message}
-                  handleSubmit={handleSubmit}
                   modelChange={modelChange}
                   isOpen={isOpenTeam}
                   closeModal={closeModalTeam}
@@ -444,7 +436,6 @@ function Goal() {
             goalKrs={goalKrs}
             updateData={updateData}
             update={update}
-            loading={loading}
             idCompany={idCompany}
             historyGoalKrs={historyGoalKrs}
             token={token}
@@ -452,6 +443,7 @@ function Goal() {
             users={users}
             goal={goal}
             redirectHistory={redirectHistory}
+            path={path}
             
           />
 
@@ -475,6 +467,7 @@ function Goal() {
               historyGoalTeamKrs={historyGoalTeamKrs}
               tasksUser={tasksUser}
               teamUsers={teamUsers}
+              setIdTeam={setIdTeam}
               payload={payload}
               goal={goal}
               closeModalFinishTeamKr={closeModalFinishTeamKr}
@@ -485,6 +478,7 @@ function Goal() {
               setNoteTeamKr={setNoteTeamKr}
               idTeam={idTeam}
               messageFinish={message}
+              path={path}
             />
           </div>
         </div>

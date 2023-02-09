@@ -1,6 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const TaskDone = ({ openModalTaskDone, name, closeModal, setDescription, taskDone, idTaskUser, done }) => {
+const TaskDone = ({ openModalTaskDone, name, closeModal, setDescription, taskDone, idTaskUser, message }) => {
     const doneTrue = (event) => {
         event.preventDefault()
         taskDone(idTaskUser)
@@ -22,6 +22,7 @@ const TaskDone = ({ openModalTaskDone, name, closeModal, setDescription, taskDon
                             
                     </div>
                 </form>
+                {message}
             </Modal>
         </div>
     )

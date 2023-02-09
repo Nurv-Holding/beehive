@@ -27,6 +27,9 @@ const authenticateController = require("./controllers/autenticateController")
 const futureVisionsController = require("./controllers/futureVisionsController")
 const principlesController = require("./controllers/principlesController")
 const proposalsController = require("./controllers/proposalsController")
+const goalsUserController = require("./controllers/goalsUserController")
+const goalsUserKrsController = require("./controllers/goalsUserKrsController")
+const historyGoalsUserKrsController = require("./controllers/historyGoalsUserKrsController")
 
 const routes = (app) => {
     //login
@@ -102,6 +105,30 @@ const routes = (app) => {
                 //projectionGoalsKrs
                 app.get("/goals/:idGoal/krs/c/:idCompany",projectionGoalKrsController().getByGoal)
 
+    //goalsUser
+    app.post("/goalsUser/c/:idCompany",goalsUserController.create)
+    app.get("/goalsUser/:id/c/:idCompany",goalsUserController.getById)
+    app.get("/goalsUser/c/:idCompany",goalsUserController.getAll)
+    app.put("/goalsUser/:id",goalsUserController.update)
+    app.delete("/goalsUser/:id",goalsUserController.remove)
+    app.get("/goalsUser/all/c/:idCompany/user/:idUser/krs",goalsUserController.getAllKrsByUser)
+    app.get("/goalsUser/all/c/:idCompany/krs",goalsUserController.getAllKrs)
+
+        //goalsUserKrs
+        app.post("/goalsUserKrs/c/:idCompany",goalsUserKrsController.create)
+        app.get("/goalsUserKrs/:id/c/:idCompany",goalsUserKrsController.getById)
+        app.get("/goalsUserKrs/c/:idCompany",goalsUserKrsController.getAll)
+        app.put("/goalsUserKrs/:id",goalsUserKrsController.update)
+        app.delete("/goalsUserKrs/:id",goalsUserKrsController.remove)
+
+                //historyGoalsUserKrs
+                app.post("/history/goalsUserKrs/c/:idCompany",historyGoalsUserKrsController.create)
+                app.get("/history/goalsUserKrs/:id/c/:idCompany",historyGoalsUserKrsController.getById)
+                app.get("/history/goalsUserKrs/c/:idCompany",historyGoalsUserKrsController.getAll)
+                app.get("/history/goalsUserKrs/c/:idCompany/krs/:idGoalsUserKr",historyGoalsUserKrsController.getHistoryKrsUsersByGoal)
+                app.put("/history/goalsUserKrs/:id",historyGoalsUserKrsController.update)
+                app.delete("/history/goalsUserKrs/:id",historyGoalsUserKrsController.remove)
+
     //goalsTeam
     app.post("/goalsTeam/c/:idCompany",goalsTemaController.create)
     app.get("/goalsTeam/:id/c/:idCompany",goalsTemaController.getById)
@@ -137,6 +164,9 @@ const routes = (app) => {
             app.get("/processGoalsTeams/all/teams/:idCompany",processGoalTeamController.getAllTeams)
             app.get("/processGoalsTeams/by/teams/:idCompany",processGoalTeamController.getByTeams)
             app.get("/processGoalsTeams/all/teams/krs/:idCompany",processGoalTeamController.getAllTeamsByKrs)
+            app.get("/processGoalsTeams/teams/c/:idCompany/users/:idUser/goal/:idGoal",processGoalTeamController.getTeamsAndUsersByGoal)
+            app.get("/processGoalsTeams/all/teams/c/:idCompany/users/:idUser/",processGoalTeamController.getTeamsAndUsersByUser)
+            app.get("/processGoalsTeams/all/teams/c/:idCompany/users",processGoalTeamController.getAllTeamsAndUsers)
 
             //goalsTeam
             app.get("/goalsTeam/:idGoal/krs/c/:idCompany",projectionGoalTeamKrsController().getByGoal)
@@ -172,6 +202,7 @@ const routes = (app) => {
         //taskUsers
         app.get("/taskUsers/c/:idCompany",taskUsersController.getAll)
         app.get("/taskUsers/user/:idGoal/krs/c/:idCompany",taskUsersController.getByUserAndKrs)
+        app.get("/taskUsers/user/:idUser/c/:idCompany/goal",taskUsersController.getTasksUserByGoal)
         app.post("/taskUsers/c/:idCompany",taskUsersController.create)
         app.put("/taskUsers/:id",taskUsersController.update)
 

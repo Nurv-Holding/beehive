@@ -13,11 +13,11 @@ const ListTasks = ({
     goal,
     setUser,
     navigate,
-    idGoal,
-    idCompany,
     updateTask, 
-    user}) => {
-    const [setMessage] = useState("")
+    user,
+    path
+}) => {
+    const [message, setMessage] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
     const [openModalTaskDone, setOpenModalTaskDone] = useState(false)
     const [openDescriptionModal, setOpenDescriptionModal] = useState(false)
@@ -57,7 +57,7 @@ const ListTasks = ({
             setMessage("Tarefa concluída")
             
             navigate({
-              pathname: `/company/${idCompany}/goal/${idGoal}`,
+              pathname: `${path}`,
               search: `?update=${true}`
             })
 
@@ -75,8 +75,8 @@ const ListTasks = ({
 
             { (tasksUser.filter(e => e.idGoalTeam === kr.idGoalTeam && e.idGoalsTeamKr === kr.idgoalTeamsKr)).map((task, i) => {
                 return(
-                <div className={`${task.done? "flex justify-between items-center rounded-lg bg-blue-300 mx-2 p-2 my-2": "flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2flex justify-between items-center rounded-lg bg-yellow-200 mx-2 p-2 my-2"}`}>
-                    <span> {task.nameTask} </span>
+                <div className={`${task.done? "grid grid-cols-5 content-center justify-items-center rounded-lg bg-green-300 mx-2 p-2 my-2": "grid grid-cols-5 content-center justify-items-center rounded-lg bg-white mx-2 p-2 my-2"}`}>
+                    <span className="capitalize"> {task.nameTask} </span>
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
                     <>
@@ -86,14 +86,14 @@ const ListTasks = ({
                     {!(!!goal.status) && !task.done?
                     <div>
                         {!task?.done &&
-                        <button className="bg-[#5500c3] text-white p-1 rounded-lg" onClick={() => openTaskDone(task)}> Concluir </button>
+                        <button className="bg-bee-blue-clean text-white py-1 px-3 rounded-lg text-sm" onClick={() => openTaskDone(task)}> Concluir </button>
                         }
                         <TaskDone
                             setOpenModalTaskDone={setOpenModalTaskDone}
                             openModalTaskDone={openModalTaskDone}
                             closeModal={closeModal}
                             idTaskUser={taskState?.idTaskUser}
-                            done={taskState?.done}
+                            message={message}
                             name={taskState?.nameUser}
                             taskDone={taskDone}
                             setDescription={setDescription}
@@ -101,7 +101,7 @@ const ListTasks = ({
                     </div>
                     :
                     <div>
-                        <button onClick={() => openDescription(task)} > Lições Aprendidas </button>
+                        <button onClick={() => openDescription(task)} className='text-bee-blue-clean font-semibold'> Lições Aprendidas </button>
                         <DescriptionTask
                             openDescriptionModal={openDescriptionModal}
                             closeDescriptionModal={closeDescriptionModal}
@@ -115,7 +115,7 @@ const ListTasks = ({
                     </>
                     }
                     {!(!!task.nameUser) &&
-                    <div className="flex">
+                    <div className="flex items-center">
                         <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
                         <option selected disabled >Adicionar Usuário</option>
                             {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
@@ -124,7 +124,7 @@ const ListTasks = ({
                             )
                             })}
                         </select>
-                        <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 mt-1'> OK </button>
+                        <button type='button' onClick={() => updateTask(task.idTaskUser,user)} className='submit-button ml-2 p-1 text-sm'> OK </button>
                     </div>
                     }
 

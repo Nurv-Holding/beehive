@@ -1,6 +1,6 @@
 import Modal from "./CompanyMenuPanel/Goals/components/Modal"
 
-const AddTask = ({ isOpen, closeModal, modelChange, message, createTask, item }) => {
+const AddTask = ({ isOpen, closeModal, modelChange, message, createTask }) => {
 
     return (
         <>
@@ -18,7 +18,7 @@ const AddTask = ({ isOpen, closeModal, modelChange, message, createTask, item })
                             <button className='submit-button' type="submit" >
                                 Adicionar
                             </button>
-                            <span> {message} </span>
+                            <span className={`block`}> {message} </span>
                         </div>
                     </form>
                 </div>

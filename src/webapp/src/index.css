@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 html {
     font-family: 'Montserrat', sans-serif;
@@ -12,76 +12,11 @@ html {
 *{
     -ms-overflow-style: none;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
 
-html{
-    @apply hidden lg:block
-}
-
-/*HEADER*/
-header{
-    @apply w-[100%] bg-[#FFFFFF] flex items-center justify-between font-bold 
-    lg:h-14 lg:px-10 text-sm
-}
-
-header nav{
-    @apply flex flex-row gap-2 items-center
-}
-/*END HEADER*/
-
-/*GRID CONTAINER and general attributes*/
-.grid-container{
-    @apply w-full grid justify-center my-8 gap-x-8 grid-cols-[20%,70%]
-}
-
-.grid-col{
-    @apply flex flex-col
-    lg:gap-y-4
-}
-
-.grid-row{
-    @apply bg-white rounded-2xl shadow-xl flex flex-col py-4
-}
-
-.container-title{
-    @apply text-sm text-bee-blue-clean mb-2 cursor-default
-}
-
-.text-desc{
-    @apply text-xs text-gray-700 mt-0.5
-}
-
-.grid-general{
-    @apply p-8
-}
-
-.general{
-    @apply w-[40%] max-w-[200px] text-xs text-gray-700 mt-0.5
-}
-
-.general:hover{
-    @apply text-[#5500C3]
-}
-
-/*PROFILE*/
-.profile-photo{
-    @apply w-[140px] aspect-square self-center rounded-full overflow-hidden
-}
-
-.profile-name{
-    @apply text-xl mt-2
-}
-
-.profile-nav{
-    @apply w-[90%] border border-b border-x-0 border-t-0 border-black text-base
-}
-
-.profile-nav span:hover{
-    @apply text-[#5500C3]
-}
-/*END PROFILE*/
 
 /*COMPROMISSES*/
 .grid-compromisses{
@@ -102,7 +37,7 @@ header nav{
 }
 
 .container-table-grid-team thead{
-    @apply border-b border-[#5500C3]
+    @apply border-b border-bee-blue-clean
 }
 /*END GRID CONTAINER*/
 
@@ -149,15 +84,15 @@ header nav{
 }
 
 .percentage-first{
-    @apply bg-[#5500C3] w-[75%] h-full rounded
+    @apply bg-bee-blue-clean w-[75%] h-full rounded
 }
 
 .percentage-second{
-    @apply bg-[#5500C3] w-[100%] h-full rounded
+    @apply bg-bee-blue-clean w-[100%] h-full rounded
 }
 
 .percentage-third{
-    @apply bg-[#5500C3] w-[50%] h-full rounded
+    @apply bg-bee-blue-clean w-[50%] h-full rounded
 }
 
 /*END PERCENTAGE CONTAINER*/
@@ -190,15 +125,15 @@ header nav{
 }
 
 .percentage-my-progress{
-    @apply bg-[#5500C3] h-full rounded
+    @apply bg-bee-blue-clean h-full rounded
 }
 
 .percentage-team-progress{
-    @apply bg-[#5500C3] w-[40%] h-full rounded
+    @apply bg-bee-blue-clean w-[40%] h-full rounded
 }
 
 .percentage-monthly-income{
-    @apply bg-[#5500C3] w-[69%] h-full rounded
+    @apply bg-bee-blue-clean w-[69%] h-full rounded
 }
 
 /*ScrollBar*/
@@ -219,46 +154,14 @@ header nav{
 
 .container-team-management::-webkit-scrollbar-thumb,
 .container-empresas::-webkit-scrollbar-thumb{
-    background-color: #5500C3;
+    background-color: #1F62DE;
     border-radius: 8px;
 }
 /*End ScrollBar*/
 
-
-
-.container-table-grid-meetings{
-    @apply w-[95%] grid grid-cols-5 gap-2
-}
-/*END TABLE STYLES*/
-
-
-/*NAV TOGGLE*/
-.nav-btn button{
-    @apply text-base rounded px-2 py-2
-}
-
-.nav-btn button:hover{
-    @apply bg-bee-blue-strong text-white
-}
-/*END NAV TOGGLE*/
-
-/*Disclosure*/
-.disclosure-btn{
-    @apply w-full bg-[#D9D9D9]
-}
-
-.percentage-container-disclosure{
-    @apply bg-[#D9D9D9] h-4 rounded
-}
-
-.percentage-bar-disclosure{
-    @apply bg-[#5500C3] h-4 rounded
-}
-/*End Disclosure*/
-
 /*EmpresasMenu*/
 .container-nav-empresas{
-    @apply w-[20%] bg-[#FFFFFF] flex flex-col items-center gap-y-4
+    @apply flex flex-col items-center gap-y-8
 }
 
 .container-nav-empresas{
@@ -271,7 +174,7 @@ header nav{
 }
 
 .container-nav-empresas button{
-    @apply focus:outline-none font-medium hover:text-bee-blue-strong py-2 hover:bg-gray-200 w-full
+    @apply outline-none hover:text-bee-blue-clean hover:bg-gray-300 w-full
 }
 
 .task-doer{
@@ -312,7 +215,7 @@ header nav{
 }
 
 .submit-button{
-    @apply w-[30%] h-8 bg-[#5500C3] rounded-md text-white 
+    @apply w-[30%] h-8 bg-bee-blue-clean rounded-md text-white hover:bg-bee-blue-strong 
 }
 
 .form-container label{
@@ -328,7 +231,7 @@ header nav{
 }
 
 .container-table-objectives-list-times{
-    @apply w-full grid grid-cols-4 gap-2 items-center
+    @apply w-full grid grid-cols-4 items-center
 }
 
 .container-table-objectives-list-empresas{
@@ -341,7 +244,7 @@ header nav{
 /*Menu With Cards*/
 
 .container-card-empresas{
-    @apply min-w-[15%] w-auto border border-black rounded-lg p-4 flex flex-col items-center justify-center hover:text-[#5500C3]
+    @apply min-w-[15%] w-auto border border-black rounded-lg p-4 flex flex-col items-center justify-center hover:text-bee-blue-clean
 }
 
 .modal-btn{
@@ -356,7 +259,7 @@ header nav{
 }
 
 .container-bar-checklist{
-    @apply h-4 rounded bg-[#5500C3]
+    @apply h-4 rounded bg-bee-blue-clean
 }
 
 .checkbox-container{

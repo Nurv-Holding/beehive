@@ -4,7 +4,7 @@ import { calcPercentage } from '../utils/utilis';
 import goalKrsApi from "../api/goalKrsApi";
 import moment from "moment";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ContextUser } from "../context/ContextUser";
+import { ContextCompany } from "../context/ContextCompany";
 import { Disclosure } from '@headlessui/react'
 import historyGoalKrApi from "../api/historyGoalKrApi";
 import ChartGoalQuartely from "./ChartGoalQuartely";
@@ -18,11 +18,12 @@ function GoalKrs({
   redirectHistory,
   goal,
   payload,
-  token }) {
+  path
+}) {
 
   let [isOpen, setIsOpen] = useState(false)
-  const { idGoal } = useContext(ContextUser)
-  const [itemUpdated, setItemUpdated] = useState({ done:null, note:"" })
+  const { idGoal } = useContext(ContextCompany)
+  const [itemUpdated, setItemUpdated] = useState({ done: null, note: "" })
   const [goalKr, setGoalKr] = useState({})
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
@@ -41,7 +42,7 @@ function GoalKrs({
 
   const changeModel = ({ target }) => {
     setItemUpdated((state) => {
-      return {...state, [target.name]: target.value}
+      return { ...state, [target.name]: target.value }
     })
   }
 
@@ -51,10 +52,10 @@ function GoalKrs({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    if(!itemUpdated.done || itemUpdated.note === ""){
+    if (!itemUpdated.done || itemUpdated.note === "") {
       setMessage("Primeiro precisa preencher os campos")
 
-    }else{
+    } else {
       const done = parseInt(itemUpdated.done)
       const data = { done: done + goalKr?.doneGoalsKr }
 
@@ -69,18 +70,18 @@ function GoalKrs({
         status: !!goalKr?.status,
         note: itemUpdated.note
       }
-  
+
       goalKrsApi.update(goalKr.idgoalsKr, data)
         .then(() => {
           setMessage("Atualizado")
-  
+
           historyGoalKrApi.create(idCompany, newData)
-  
+
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
-  
+
           closeModal()
         })
         .catch((error) => {
@@ -88,7 +89,7 @@ function GoalKrs({
           setMessage("Algo deu errado")
         })
     }
-      
+
   }
 
   function closeModalFinishKr() {
@@ -99,15 +100,15 @@ function GoalKrs({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    if(note === ""){
+    if (note === "") {
       setMessage("Primeiro precisa preencher os campos")
 
-    }else{
-      const {data} = await historyGoalKrApi.getAll(idCompany)
-      const history = data.length !== 0? data[data.length - 1]: null
-      const result = await goalKrsApi.update(idGoalKr, {status: true})
+    } else {
+      const { data } = await historyGoalKrApi.getAll(idCompany)
+      const history = data.length !== 0 ? data[data.length - 1] : null
+      const result = await goalKrsApi.update(idGoalKr, { status: true })
       const goalKr = result.data
-  
+
       const newData = {
         idGoal: parseInt(idGoal),
         idGoalKr: goalKr?.id,
@@ -119,14 +120,14 @@ function GoalKrs({
         status: !!goalKr?.status,
         note
       }
-  
+
       historyGoalKrApi.create(idCompany, newData)
-      .then(() => {
+        .then(() => {
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
-  
+
           closeModalFinishKr()
         })
         .catch((error) => {
@@ -145,16 +146,12 @@ function GoalKrs({
     <>
       {(goalKrs || []).map((goalKr, i) => {
         return (
-          <div key={i} className={`${!(!!goalKr.status) && !(!!goal.status)? "bg-white rounded-md p-0.5 mt-4 flex flex-col":"bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
+          <div key={i} className={`${!(!!goalKr.status) && !(!!goal.status) ? "bg-white rounded-md p-0.5 mt-4 flex flex-col" : "bg-gray-200 rounded-md p-0.5 mt-4 flex flex-col"}`}>
             <Disclosure>
-              <Disclosure.Button className='flex flex-row items-center justify-around w-full p-4 cursor-pointer'>
+              <Disclosure.Button className='grid grid-cols-2 content-center justify-items-center w-full p-4 cursor-pointer'>
                 <div className='flex items-center'>
-                  <span> {goalKr.nameGoalsKr} </span>
-                  <div className={`${!(!!goalKr.status) && !(!!goal.status)? "bg-green-500 rounded-full p-1.5 ml-2 border border-black":"bg-red-500 rounded-full p-1.5 ml-2 border border-black"}`}></div>
-                </div>
-
-                <div className='profile-photo-task'>
-                  <img src="https://thispersondoesnotexist.com/image" alt="User profile"/>
+                  <span className="capitalize font-semibold"> {goalKr.nameGoalsKr} </span>
+                  <div className={`${!(!!goalKr.status) && !(!!goal.status) ? "bg-green-500 rounded-full p-1.5 ml-2 border" : "bg-red-500 rounded-full p-1.5 ml-2 border"}`}></div>
                 </div>
 
                 <span className="text-gray-600 text-sm">Atualizado {moment(goalKr?.updateGoalsTasks).format('DD/MM/YY')} as {moment(goalKr?.updateGoalsTasks).format('HH:mm')}</span>
@@ -170,7 +167,7 @@ function GoalKrs({
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromQuarterlyGoalKrs}</span>
                       </div>
 
-                      <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
+                      <div className='bg-[#D9D9D9] h-4 rounded w-[80%] mt-2 overflow-hidden'>
                         <div className="percentage-bar-quartely"></div>
                       </div>
                       <style>{`
@@ -178,7 +175,7 @@ function GoalKrs({
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
-                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  background-color: rgb(31 98 222/ var(--tw-bg-opacity));
                                   width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromQuarterlyGoalKrs)}%;
                                 }
                             `}</style>
@@ -192,7 +189,7 @@ function GoalKrs({
                         <span className="text-gray-600 text-xs mr-4">De: {goalKr.toYearlyGoalsKr}</span>
                         <span className="text-gray-600 text-xs ml-4">Para: {goalKr.fromYearlyGoalsKr}</span>
                       </div>
-                      <div className='percentage-container-disclosure w-[80%] mt-2 overflow-hidden'>
+                      <div className='bg-[#D9D9D9] h-4 rounded w-[80%] mt-2 overflow-hidden'>
                         <div className='percentage-bar-yearly'></div>
                       </div>
                       <style>{`
@@ -200,7 +197,7 @@ function GoalKrs({
                                   height: 1rem;
                                   border-radius: 0.25rem;
                                   --tw-bg-opacity: 1;
-                                  background-color: rgb(85 0 195 / var(--tw-bg-opacity));
+                                  background-color: rgb(31 98 222/ var(--tw-bg-opacity));
                                   width: ${calcPercentage(goalKr.doneGoalsKr, goalKr.fromYearlyGoalsKr)}%;
                                 }
                             `}</style>
@@ -221,7 +218,7 @@ function GoalKrs({
                               <textarea className="p-2 input-style min-h-[50px]" name="note" onChange={changeModel} cols="60" rows="3"></textarea>
                               <button type="submit" className="submit-button">OK</button>
                               <span className="text-red-600">
-                                {message}
+                                <span className={`${message === "Aqui vai uma mensagem" ? 'hidden' : 'block'}`}> {message} </span>
                               </span>
                             </form>
                           </div>
@@ -239,20 +236,20 @@ function GoalKrs({
                     }
 
                     <button onClick={() => redirectHistory(`history-kr/${goalKr?.idgoalsKr}`)} className="modal-btn h-[30px]">
-                        Histórico
+                      Histórico
                     </button>
                     {(!(!!goalKr?.status) && !(!!goal?.status)) &&
                       <CloseKr
-                      nameKr={goalKr.nameGoalsKr}
-                      idGoalKr={goalKr.idgoalsKr}
-                      isOpen={isOpenFinishKr}
-                      closeModal={closeModalFinishKr}
-                      openModal={openModalCloseKr}
-                      finishGoalKr={finishGoalKr}
-                      setNote={setNote}
-                      note={note}
-                      message={message}
-                    />
+                        nameKr={goalKr.nameGoalsKr}
+                        idGoalKr={goalKr.idgoalsKr}
+                        isOpen={isOpenFinishKr}
+                        closeModal={closeModalFinishKr}
+                        openModal={openModalCloseKr}
+                        finishGoalKr={finishGoalKr}
+                        setNote={setNote}
+                        note={note}
+                        message={message}
+                      />
                     }
                   </div>
                 </div>

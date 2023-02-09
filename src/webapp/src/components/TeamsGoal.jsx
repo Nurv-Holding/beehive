@@ -16,7 +16,6 @@ import moment from 'moment';
 import FinishTeamKr from './FinishTeamKr';
 
 function TeamsGoal({
-  teams = null,
   goalTeamsByTeam,
   idCompany,
   idGoal,
@@ -26,15 +25,12 @@ function TeamsGoal({
   modelChange,
   item,
   goalTeamByGoalTeam,
-  closeModalGoalTeam,
-  goalTeamsKrs,
+  setIdTeam,
   closeModalFinishTeamKr,
   setOpenModalFinishKr,
   openModalFinishKr,
   finishGoalTeamKr,
   historyGoalTeamKrs,
-  openModalGoalTeam,
-  isOpenGoalTeam,
   idTeam,
   messageFinish,
   goalTeamByKrs,
@@ -42,7 +38,9 @@ function TeamsGoal({
   tasksUser,
   goal,
   navigate,
-  payload }) {
+  payload,
+  path
+}) {
 
   const [krs, setKrs] = useState({})
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
@@ -50,7 +48,7 @@ function TeamsGoal({
   const [idGoalsTeam, setIdGoalsTeam] = useState(null)
   const [user, setUser] = useState(null)
   const [addTaskModal, setAddTaskModal] = useState(false)
-  const [message, setMessage] = useState("Aqui vai uma mensagem")
+  const [message, setMessage] = useState("")
   const [isOpenTeamKrModal, setIsOpenTeamKrModal] = useState(false)
   const [itemTask, setItemTask] = useState({ name: "", finalDate: "" })
   const [idProcess, setIdProcess] = useState(null)
@@ -140,7 +138,7 @@ function TeamsGoal({
         .then(() => {
           setMessage("KR criado com sucesso")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
 
@@ -179,7 +177,7 @@ function TeamsGoal({
       .then(() => {
         setMessage("Tarefa criada com sucesso")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
 
@@ -208,7 +206,7 @@ function TeamsGoal({
       .then(() => {
         setMessage("Usuário adicionado com sucesso")
         navigate({
-          pathname: `/company/${idCompany}/goal/${idGoal}`,
+          pathname: `${path}`,
           search: `?update=${true}`
         })
 
@@ -223,10 +221,10 @@ function TeamsGoal({
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    if(!done || note === ""){
+    if (!done || note === "") {
       setMessage("Primeiro precisa preencher os campos")
 
-    }else{
+    } else {
 
       const data = { done: done + krs?.doneGoalsTeamKr }
 
@@ -242,17 +240,17 @@ function TeamsGoal({
             from: data?.done,
             note
           }
-  
+
           historyGoalTeamKrApi.create(idCompany, newData)
-  
+
           setMessage("Atualizado")
           navigate({
-            pathname: `/company/${idCompany}/goal/${idGoal}`,
+            pathname: `${path}`,
             search: `?update=${true}`
           })
-  
+
           closeTeamKrModal()
-  
+
         })
         .catch((error) => {
           console.error(error)
@@ -270,43 +268,36 @@ function TeamsGoal({
             <Disclosure key={i}>
               <div className='flex flex-col w-full bg-white p-2 my-4 rounded-lg'>
                 <div className='flex flex-row w-full'>
-                  <Disclosure.Button className='flex flex-row items-center h-12 justify-around w-full bg-white rounded-lg cursor-pointer'>
+                  <Disclosure.Button className='grid grid-cols-3 content-center justify-items-center h-12 w-full bg-white rounded-lg cursor-pointer'>
                     <div className='flex items-center'>
-                      <span> {goalTeams.nameTeam} </span>
+                      <span className='capitalize font-semibold'> {goalTeams.nameTeam} </span>
                     </div>
 
-                    <div className='percentage-container-disclosure w-[20%]'>
-                      <div className='percentage-bar-disclosure w-[0%]'></div>
+                    <div className='bg-[#D9D9D9] h-4 rounded w-[80%]'>
+                      <div className='bg-bee-blue-clean h-4 rounded w-[0%]'></div>
                     </div>
 
                     <TaskPercentage
                     />
-                    
+
                   </Disclosure.Button>
                   <>
-                  <div className="w-[25%] flex items-center justify-center gap-2">
-                    {!(!!goal.status) &&
-                    <button className="modal-btn p-1" onClick={() => openModalGoalTeam(goalTeams.idTeam)}>
-                      Adicionar objetivo
-                    </button>
-                    }
-                    <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn p-1">
+                    <div className="w-[25%] flex items-center justify-center gap-2">
+                      <button onClick={() => setIdTeam(goalTeams.idTeam)} className="modal-btn p-1" data-bs-toggle="modal" data-bs-target="#teamDisclosure">
+                        Adicionar Objetivo
+                      </button>
+
+                      <AddGoalTeam
+                        idRef={"teamDisclosure"}
+                        createGoalsTeam={createGoalsTeam}
+                        modelChange={modelChange}
+                        idTeam={idTeam}
+                      />
+
+                      <button onClick={() => redirectHistory(`history-krTeam/${goalTeams.idTeam}`)} className="modal-btn p-1">
                         Histórico
-                    </button>
-                  </div>
-                  {!(!!goal.status) &&
-                  
-                    <AddGoalTeam
-                      closeModal={closeModalGoalTeam}
-                      openModal={openModalGoalTeam}
-                      isOpen={isOpenGoalTeam}
-                      createGoalsTeam={createGoalsTeam}
-                      modelChange={modelChange}
-                      idTeam={idTeam}
-                      item={item}
-                    />
-                    
-                  }
+                      </button>
+                    </div>
                   </>
 
                 </div>
@@ -315,11 +306,15 @@ function TeamsGoal({
                   {(goalTeamByGoalTeam.filter(e => e.idTeam === goalTeams.idTeam) || []).map((x, i) => {
                     return (
                       <>
-                        <div key={i} className='text-gray-600 bg-[#D9D9D9] rounded-t-md px-2 py-1 mt-4 flex flex-row justify-around items-center'>
-                          <span className=''> {x.nameGoalTeam}
-                            <span className="text-gray-400 text-xs mx-2"> descrição </span>
+                        <div key={i} className='bg-slate-300 w-full rounded-t-md px-2 py-1 mt-4 grid grid-cols-2 justify-items-center'>
+                          <span className='capitalize font-semibold text-black text-[20px]'> 
+                            {x.nameGoalTeam}
                           </span>
-                          {(x.idGoalTeam && !(!!goal.status)) && <span className='cursor-pointer' onClick={() => openModalTeamKr(x)}>Adicionar Krs</span>}
+                          {(x.idGoalTeam && !(!!goal.status)) && 
+                            <span className='cursor-pointer font-semibold text-bee-blue-clean hover:text-bee-blue-strong flex items-center gap-[2px]' onClick={() => openModalTeamKr(x)}>
+                              Adicionar Krs
+                              <ion-icon name="add-outline"></ion-icon>
+                            </span>}
                           <AddTeamKr
                             closeModal={closeModalTeamKr}
                             handleSubmit={handleSubmit}
@@ -336,23 +331,23 @@ function TeamsGoal({
                           {(goalTeamByKrs.filter(e => e.idGoalTeam === x.idGoalTeam) || []).map((kr, i) => {
                             return (
                               <>
-                                <div className={`${i === 0 || i % 2 === 0 ? "flex flex-col bg-gray-300" : "flex flex-col bg-gray-200"}`}>
+                                <div className={`${i === 0 || i % 2 === 0 ? "flex flex-col bg-slate-200" : "flex flex-col bg-slate-200"}`}>
                                   <div key={i} className={`${i === 0 || i % 2 === 0 ? "flex items-center justify-around w-full p-2" : "flex items-center justify-around w-full p-2"}`}>
                                     <div>
-                                      <p> {kr.nameGoalsTeamKr} </p>
+                                      <span className='capitalize text-black font-semibold text-[18px]'> {kr.nameGoalsTeamKr} </span>
                                     </div>
 
                                     <div>
-                                      {!kr.statusKr?
-                                      <button onClick={() => openModalFinishTeamKr(kr)} 
-                                        className='bg-[#5500c3] text-white p-1 rounded-lg'
-                                      >
-                                        Encerrar KR
-                                      </button>
-                                      :
-                                      "KR encerrado"
+                                      {!kr.statusKr ?
+                                        <button onClick={() => openModalFinishTeamKr(kr)}
+                                          className='bg-bee-blue-clean text-white py-1 px-3 rounded-lg text-sm'
+                                        >
+                                          Encerrar KR
+                                        </button>
+                                        :
+                                        "KR encerrado"
                                       }
-                  
+
                                     </div>
                                     <FinishTeamKr
                                       message={messageFinish}
@@ -364,14 +359,16 @@ function TeamsGoal({
                                     />
 
                                     <div>
-                                      <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer'>
+                                      <span onClick={() => openTeamKrModal(kr)} className='cursor-pointer font-semibold text-bee-blue-clean hover:text-bee-blue-strong flex items-center gap-[2px]'>
                                         Metas
+                                        <ion-icon name="add-outline"></ion-icon>
                                       </span>
                                     </div>
                                     {!(!!goal.status) &&
                                       <div>
-                                        <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer text-center'>
+                                        <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer font-semibold text-bee-blue-clean hover:text-bee-blue-strong flex items-center gap-[2px]'>
                                           Adicionar tarefas
+                                          <ion-icon name="add-outline"></ion-icon>
                                         </span>
 
                                         <AddTask
@@ -411,6 +408,7 @@ function TeamsGoal({
                                     idGoal={idGoal}
                                     idCompany={idCompany}
                                     goal={goal}
+                                    path={path}
                                   />
 
                                 </div>

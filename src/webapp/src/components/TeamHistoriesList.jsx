@@ -9,7 +9,7 @@ function TeamHistoriesList() {
             <span className='font-bold text-xl text-white uppercase m-2'> Nome do Objetivo </span>{/*objetivo time */}
                 <div className='container-history'>{/*Krs de objetivo time */}
                     <div className='flex flex-col items-center'>
-                        <span className="text-xl font-bold mb-2 ml-4 self-start text-[#5500C3] bold cursor-default">Nome do Kr</span>
+                        <span className="text-xl font-bold mb-2 ml-4 self-start text-bee-blue-clean bold cursor-default">Nome do Kr</span>
                         <div className='container-table-grid-team'>
                             <table class="table-auto w-full">
                                 <thead>

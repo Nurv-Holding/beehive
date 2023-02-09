@@ -13,19 +13,24 @@ const Header = () => {
     }
 
     return (
-        <header>
-            <div className="flex flex-row items-center gap-4">
+        <header
+            className="
+                w-full bg-white flex items-center px-10
+                justify-between font-bold h-14 text-sm
+            "
+        >
+            <div className="flex flex-row items-center justify-center gap-4">
                 <div className="w-[80px]">
                     <img src={logo} className="w-full" alt="logo" />
                 </div>
                 {isLogin &&
-                    <span className="hover:cursor-default"> Olá, <span className="hover:text-bee-blue-strong">{payload?.name}</span> </span>
+                    <span className="hover:cursor-default"> Olá, <span className="hover:text-bee-blue-clean">{payload?.name}</span> </span>
                 }
 
             </div>
-            <nav className="flex gap-2">
+            <nav className="flex flex-row gap-2 items-center">
                 <NavLink to="/">
-                    <span className="hover:text-bee-blue-strong">Home</span>
+                    <span className="hover:text-bee-blue-clean">Home</span>
                 </NavLink>
 
                 {isLogin &&

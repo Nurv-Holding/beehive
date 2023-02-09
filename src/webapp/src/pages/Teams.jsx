@@ -1,19 +1,17 @@
-import ListTeams from './ListTeams'
+import ListTeams from '../components/CompanyMenuPanel/Teams/ListTeams'
 import { useContext } from 'react'
 import { useState } from 'react'
-import teamsApi from '../../../api/teamsApi'
-import { ContextUser } from '../../../context/ContextUser'
+import teamsApi from '../api/teamsApi'
+import { ContextCompany } from '../context/ContextCompany'
 import { useEffect } from 'react'
-import goalsTeamApi from '../../../api/goalsTeamApi'
-import usersApi from '../../../api/usersApi'
+import goalsTeamApi from '../api/goalsTeamApi'
 
 function Teams() {
-    const { teams, idCompany, goals } = useContext(ContextUser)
+    const { teams, idCompany, goals, usersByCompany } = useContext(ContextCompany)
     const [goalTeams, setGoalTeams] = useState([])
     const [allTeams, setAllTeams] = useState([])
     const [teamsByKrs, setTeamsByKrs] = useState([])
     const [teamByTeam, setTeamByTeam] = useState([])
-    const [users, setUsers] = useState([])
 
     useEffect(() => {
         const handleGoalTeamsByTeam = async () => {
@@ -24,11 +22,6 @@ function Teams() {
         const handleTeamsByTeams = async () => {
             const { data } = await teamsApi.getByTeams(idCompany)
             setTeamByTeam(data)
-        }
-    
-        const handleUsers = async () => {
-            const { data } = await usersApi.getAllByCompany(idCompany)
-            setUsers(data)
         }
     
         const handleTeamsByGoals = async () => {
@@ -44,7 +37,6 @@ function Teams() {
         handleGoalTeamsByTeam()
         handleTeamsByGoals()
         handleTeamsByKrs()
-        handleUsers()
         handleTeamsByTeams()
 
     },[idCompany])
@@ -56,7 +48,7 @@ function Teams() {
             goals={goals} 
             goalTeams={goalTeams}
             allTeams={allTeams}
-            users={users}
+            users={usersByCompany}
             teamsByKrs={teamsByKrs}
             teamByTeam={teamByTeam}
             />

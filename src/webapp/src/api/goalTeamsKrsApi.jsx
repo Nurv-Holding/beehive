@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const host = process.env.REACT_APP_HOSTPROD
+import { host } from "../utils/utilis"
 
 const getByGoal = (idCompany,idGoal) => axios.get(`${host}/goalsTeam/${idGoal}/krs/c/${idCompany}`)
 const getAll = (idCompany) => axios.get(`${host}/goalsTeamKrs/c/${idCompany}`)
@@ -24,6 +23,7 @@ const goalTeamsKrsApi = {
     getGroupByKrs,
     getAllGroupByKrs,
     update
+    
 }
 
 export default goalTeamsKrsApi

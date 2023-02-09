@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import companiesApi from '../api/companiesApi';
 import Header from '../components/Header';
+import { ContextUserProvider } from '../context/ContextCompany';
 import CompanyMenu from './sub-pages/CompanyMenu';
 
 function Company() {
@@ -14,7 +15,6 @@ function Company() {
       const {data}= await companiesApi.getById(idCompany)
       setCompany(data)
     }
-    
     handleCompany()
 
   },[idCompany])
@@ -22,8 +22,9 @@ function Company() {
   return (
     <>
       <Header />
-      <CompanyMenu company={company} />
-
+      <ContextUserProvider>
+        <CompanyMenu company={company} />
+      </ContextUserProvider>
     </>
   );
 }

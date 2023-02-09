@@ -1,30 +1,73 @@
+import moment from "moment";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ContextCompany } from "../../../context/ContextCompany";
+import EditUser from "../../EditUser";
 
-function ListUsers({ users }) {
-  return (
-    <div className='grid grid-cols-3 gap-3 w-[90%] p-4'>
-      {(users || []).map((user) => {
-        return (
-          <>
-            <div className="bg-white w-full aspect-square overflow-y-scroll rounded-3xl shadow-lg flex flex-col items-center justify-center">
-              <span className="text-bee-strong-1 text-xl font-bold text-center uppercase">
-                {user.name}
-              </span>
+const ListUsers = () => {
+    const {users} = useContext(ContextCompany)
+    const [item, setItem] = useState(null)
 
-              <span className="text-bee-blue-clean text-xs mt-2 font-bold">Descrição</span>
-              <div className='w-full text-base font-bold text-black text-center'>
-                {user.email}
-              </div>
+    const navigate = useNavigate()
 
-              <span className="text-bee-blue-clean text-xs mt-2 font-bold">líder</span>
-              <div className='w-full text-base font-bold text-black text-center'>
-                {user.occupation}
-              </div>
-            </div>
-          </>
-        )
-      })}
-    </div>
-  )
+    const routerBack = () => {
+        navigate(-1)
+    }
+
+    return (
+        <>
+            <main className='flex flex-col items-center gap-8 relative'>
+                <EditUser idRef={"editUser"} item={item} />
+                <div className='flex items-center mt-8'>
+                    <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
+
+                    <span className='font-bold text-2xl text-bee-blue-clean uppercase mt-2'>Lista de usuários</span>
+                </div>
+
+                <div className='w-11/12'>
+                    <div className='container-empresas'>
+                        <div className='flex flex-col items-center'>
+                            <div className='container-table-grid-team px-4'>
+                                <table className="table-fixed w-full">
+                                    <thead>
+                                        <tr>
+                                            <th className='container-title-grid'>Nome</th>
+                                            <th className='container-title-grid'>Email</th>
+                                            <th className='container-title-grid'>Cargo</th>
+                                            <th className='container-title-grid'>Data de admissão</th>
+                                            <th className='container-title-grid'>Status</th>
+                                            <th className='container-title-grid'>Ações</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody className='text-center'>
+                                        {(users || []).map((user) => {
+                                            return (
+                                                <tr>
+                                                    <td>{user.name}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.occupation}</td>
+                                                    <td>{moment(user?.admissionDate).format('DD/MM/YY')}</td>
+                                                    <td>{`${user.status? "Ativo": "Inativo"}`}</td>
+                                                    <td>
+                                                        <button onClick={() => setItem(user)} type="button" className='bg-bee-blue-clean px-2 py-[3px] rounded-md text-white text-xs cursor-pointer hover:bg-sky-900' data-bs-toggle="modal" data-bs-target="#editUser"> 
+                                                            Editar 
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </>
+    )
 }
 
-export default ListUsers
+export default ListUsers;

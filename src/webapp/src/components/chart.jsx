@@ -4,6 +4,7 @@ import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Catego
 import React from 'react';
 
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
+// const formatter = (number) => (number > 999999 ? (number / 1000000).toFixed(1) + 'M' : number);
 
 const buildData = ({ chartData }) => ({
     labels: chartData?.labels,
@@ -56,12 +57,14 @@ const options = {
     },
 };
 
+// const numberToFix = (number, fix) => (number || 0).toFixed(fix);
+
 const StockChart = ({ info, title }) => {
     const data = buildData(info);
 
     return (
         <>
-                <div className="w-full rounded bg-[#5500c3] text-white">
+                <div className="w-full rounded bg-bee-blue-clean text-white">
                     <Line type="line" data={data} options={options} />
                 </div>
 

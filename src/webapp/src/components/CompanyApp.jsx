@@ -1,9 +1,9 @@
 // import ContextUserProvider from "../context/ContextUser"
-import { ContextUserProvider } from "../context/ContextUser"
+import { ContextUserProvider } from "../context/ContextCompany"
 import ContextApp from "./ContextApp"
 
 
-const Users = () => {
+const CompanyApp = () => {
     return(
         <ContextUserProvider>
             <ContextApp />
@@ -12,4 +12,4 @@ const Users = () => {
 
 }
 
-export default Users
+export default CompanyApp

@@ -1,14 +1,16 @@
 const crudControllerFactory = require("../common/crudControllerFactory");
+const formatDate = require("../common/formateDate");
 const { prismaClient } = require("../database/prismaClient");
 
 const crudFunctions = crudControllerFactory(prismaClient.user)
 
 const createEmployee = async (req, res) => {
     let newData;
-    const idCompany = parseInt(req?.params?.idCompany) 
+    const idCompany = parseInt(req?.params?.idCompany)
+    const admissionDate = formatDate(req?.body?.admissionDate) 
 
     if(idCompany)
-        newData = {...req.body, idCompany}
+        newData = {...req.body, idCompany, admissionDate}
     else
         newData = req.body
 

@@ -1,3 +1,4 @@
+const handlerBuilder = require("../common/handlerBuilder")
 const { prismaClient } = require("../database/prismaClient")
 
 const goalsTasksController = () => {
@@ -69,7 +70,8 @@ const goalsTasksController = () => {
         getByIdGoalUsers,
         getByIdGoalByDone,
         getByIdGoalByQuantifyTask,
-        getByIdGoalByQuantifyTaskDone
+        getByIdGoalByQuantifyTaskDone,
+        
     }
 }
 

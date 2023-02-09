@@ -2,27 +2,36 @@ import { Link } from 'react-router-dom'
 
 function profile({ payload }) {
 
-    return (
-        <div className='grid-row w-full bg-white'>
-          <div className='profile-photo'>
-            <img src="https://thispersondoesnotexist.com/image" alt='User profile'/>
-          </div>
+  return (
+    <div className='w-full bg-white p-4 flex flex-col items-center rounded-md shadow-md'>
+      <div className='w-[60%] aspect-square rounded-full overflow-hidden'>
+        <img alt='User profile' src="https://thispersondoesnotexist.com/image" />
+      </div>
 
-          <div className='flex flex-col self-center cursor-default'>
-            <div>
-              <p className='profile-name'>{payload?.name}</p>
-              <p className='text-desc mb-0.5'>{payload?.occupation}</p>
-              <p className='text-desc'>{payload?.email}</p>
-            </div>
+      <div className='flex flex-col cursor-default gap-2 mt-2'>
+        <div className='flex flex-col gap-1'>
+          <p className='text-xl text-bee-blue-clean'>{payload?.name}</p>
 
-            <div className='profile-nav mt-4'>
-              <Link to="/alterarPerfil">
-                <span className="text-sm">Alterar Perfil</span>
-              </Link>
-            </div>
+          <div className='flex flex-col text-xs text-gray-700'>
+            <p>{payload?.occupation}</p>
+            <p>{payload?.email}</p>
           </div>
         </div>
-    )
+
+        <div>
+          <Link
+            to="/editProfile"
+            className="
+                text-sm hover:text-bee-blue-clean border border-black 
+                hover:border-bee-blue-clean border-x-0 border-t-0
+            "
+          >
+            Alterar Perfil
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default profile
