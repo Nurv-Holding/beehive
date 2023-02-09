@@ -17,16 +17,16 @@ const AuthorizeLogin = ({children}) => {
             navigate("/login")
         }
 
-    //     if(!!token && payload?.nameProfile === "adminMaster"){
-    //         setLoading(false)
-    //         navigate("/")
-    //     }
+        if(!!token && payload?.nameProfile === "adminMaster"){
+            setLoading(false)
+            navigate("/")
+        }
 
     },[navigate])
 
     return(
         <>
-            <div> lllll </div>
+            {loading? <Loading />: children}
         </>
     )
 }
