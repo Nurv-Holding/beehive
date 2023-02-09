@@ -10,7 +10,7 @@ const authenticateController = handlerBuilder(async (req, res) => {
 
     const user = await prismaClient.user.findUnique({ where: { email } })
 
-    if(!user || Object.keys(user).length === 0 || user.password !== password){
+    if((!user?.status || !user) || (Object.keys(user).length === 0 || user.password !== password)){
         throw new BusinessError('Invalid username or passwords')
 
     }else{
