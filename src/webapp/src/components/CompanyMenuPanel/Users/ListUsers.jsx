@@ -16,7 +16,7 @@ const ListUsers = () => {
 
     return (
         <>
-            <main className='flex flex-col items-center gap-8 relative'>
+            <main className='flex flex-col items-center gap-8 relative text-black'>
                 <EditUser idRef={"editUser"} item={item} />
                 <div className='flex items-center mt-8'>
                     <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
@@ -37,7 +37,7 @@ const ListUsers = () => {
                                             <th className='container-title-grid'>Email</th>
                                             <th className='container-title-grid'>Cargo</th>
                                             <th className='container-title-grid'>Data de admissão</th>
-                                            <th className='container-title-grid'>Status</th>
+                                            <th className='container-title-grid'>Data de saída</th>
                                             <th className='container-title-grid'>Ações</th>
                                         </tr>
                                     </thead>
@@ -50,7 +50,7 @@ const ListUsers = () => {
                                                     <td>{user.email}</td>
                                                     <td>{user.occupation}</td>
                                                     <td>{moment(user?.admissionDate).format('DD/MM/YY')}</td>
-                                                    <td>{`${user.status? "Ativo": "Inativo"}`}</td>
+                                                    <td>{`${user.status? "Até o momento": moment(user?.updatedAt).format('DD/MM/YY')}`}</td>
                                                     <td>
                                                         <button onClick={() => setItem(user)} type="button" className='bg-bee-blue-clean px-2 py-[3px] rounded-md text-white text-xs cursor-pointer hover:bg-sky-900' data-bs-toggle="modal" data-bs-target="#editUser"> 
                                                             Editar 
