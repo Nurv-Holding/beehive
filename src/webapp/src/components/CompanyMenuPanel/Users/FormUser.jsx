@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import usersApi from '../../../api/usersApi';
+import AuthorizeAccess from '../../AuthorizeAccess';
 
 function FormUser() {
     const navigate = useNavigate()
@@ -66,6 +67,7 @@ function FormUser() {
 
     return (
         <>
+            <AuthorizeAccess userAutorized={["adminCorporate", "adminMaster"]}>
             <main className='flex flex-col items-center gap-8 relative text-black'>
                 <div className='flex items-center mt-8'>
                     <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
@@ -96,6 +98,7 @@ function FormUser() {
                     <span className={`block text-center`}> {message} </span>
                 </div>
             </main>
+            </AuthorizeAccess>
         </>
     )
 

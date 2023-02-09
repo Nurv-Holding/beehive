@@ -9,22 +9,32 @@ function Users() {
         newTeamsUser, 
         newGoalUsersAllKrs, 
         newAllTeamsAndUsers,
-        goalUsers
+        goalUsers,
+        payload
     } = useContext(ContextCompany)
 
     return (
         <div className='flex flex-row justify-between'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 gap-2 flex flex-col items-center py-2'>
+                {payload.nameProfile !== "userCorporate" &&
                 <Link
                     to={`/company/${idCompany}/formuser`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
                 >
                     +
                 </Link>
+                }
+
 
                 <Link
                     to={`/company/${idCompany}/userslist`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-sm px-2"
                 >
                     Lista
+                </Link>
+
+                <Link
+                    to={`/company/${idCompany}/users`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-sm px-2"
+                >
+                    OKRS
                 </Link>
             </div>
 
