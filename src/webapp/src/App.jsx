@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import * as React from "react";
+import { HashRouter } from "react-router-dom";
 import AppRoutes from "./appRoutes";
 
 function App() {
@@ -42,10 +43,11 @@ function App() {
 
           :
 
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
+        <HashRouter>
+          <AppRoutes />
+      </HashRouter>
       }
+
     </>
   );
 }
