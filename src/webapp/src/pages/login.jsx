@@ -49,7 +49,7 @@ const Login = () => {
 
     return (
         <main className="main-login">
-            < div className="login-container" >
+            < div className="login-container">
                 <form onSubmit={login} className="login-form-container">
                     <h1 className="text-xl font-medium">Faça seu login</h1>
                     <div className="w-[65%] flex flex-col">
