@@ -9,7 +9,6 @@ const RedirectPages = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        console.log("payload", payload)
         if(payload){
             if(payload?.nameProfile === "adminMaster"){
                 setLoading(false)

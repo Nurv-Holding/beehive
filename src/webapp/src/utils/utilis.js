@@ -15,4 +15,7 @@ export const calcDate = (date) => {
     return newFinalDate.diff(newInitialDate, 'days');
 }
 
-export const host = process.env.REACT_APP_HOSTPROD
+// const host1 = process.env.REACT_APP_HOSTLOCAL
+const host2 = process.env.REACT_APP_HOSTLOCAL
+
+export const host = host2

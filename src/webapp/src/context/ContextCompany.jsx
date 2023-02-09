@@ -52,6 +52,7 @@ export const ContextUserProvider = ({ children }) => {
     const [goalUsers, setGoalUsers] = useState([])
     const [newPayload, setNewPayload] = useState(null)
     const [profile, setProfile] = useState(null)
+    const [profiles, setProfiles] = useState([])
     
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -61,6 +62,11 @@ export const ContextUserProvider = ({ children }) => {
         const getOneProfile = async () => {
             const { data } = await profilesApi.getById(payload?.idProfile)
             setProfile(data)
+        }
+
+        const handlerProfiles = async () => {
+            const { data } = await profilesApi.getAll()
+            setProfiles(data)
         }
 
         const returnAllNewGoalsUsers = async () => {
@@ -283,6 +289,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerPrinciples()
         handlerProposals()
         returnNewGoalUsersAllKrs()
+        handlerProfiles()
         
     },[idCompany, idGoal, update, idUser])
 
@@ -326,7 +333,8 @@ export const ContextUserProvider = ({ children }) => {
                     proposals,
                     newGoalUsersAllKrs,
                     newAllTeamsAndUsers,
-                    profile
+                    profile,
+                    profiles
                 }
             }
         >
