@@ -62,7 +62,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                         <h4 className='text-gray-500'>Lider: {(users || []).filter(a => a?.id === idLeader)[0]?.name}</h4>
                         <span className='text-gray-500'>Lista de Integrantes</span>
                         <div className='w-[80%] flex flex-col bg-gray-300 p-1 rounded-md'>
-                            {(usersAndTeams || []).filter(a => a.idTeam === idTeam).map((user) => {
+                            {(usersAndTeams || []).filter(a => a.idTeam === idTeam && a.status).map((user) => {
                                 return (
                                     <>
                                         <span className='my-0.5 overflow-hidden'>
@@ -79,7 +79,7 @@ const AddMembers = ({ isOpen, closeModal, usersAndTeams, users, idTeam, idCompan
                         <div className='input-and-label-container'>
                             <select onChange={({ target }) => { setIdUser(target.value) }} name="user" id="users" className="input-style">
                                 <option disabled selected>Selecionar Integrante</option>
-                                {(newUsers || []).map((user) => {
+                                {(newUsers || []).filter(f => f.status).map((user) => {
                                     return (
                                         <>
                                             <option value={user.id} className='my-0.5 overflow-hidden'>
