@@ -35,7 +35,6 @@ function Home() {
 
   return (
     <>
-      <AuthorizeLogin>
         <Header />
         <main>
           <div className='w-full grid justify-center my-8 gap-8 grid-cols-[20%,70%]'>
@@ -53,7 +52,7 @@ function Home() {
             </div>
           </div>
         </main>
-      </AuthorizeLogin>
+
     </>
   );
 }

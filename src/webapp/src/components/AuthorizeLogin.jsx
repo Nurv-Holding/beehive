@@ -10,19 +10,14 @@ const AuthorizeLogin = ({children}) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        const payload = token? jwtDecode(token): null
+        // const payload = token? jwtDecode(token): null
 
         if(!(!!token)){
             setLoading(false)
             navigate("/login")
         }
 
-        if(!!token && payload?.nameProfile === "adminMaster"){
-            setLoading(false)
-            navigate("/")
-        }
-
-    },[navigate])
+    },[])
 
     return(
         <>
