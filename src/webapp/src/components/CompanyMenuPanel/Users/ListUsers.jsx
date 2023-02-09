@@ -5,7 +5,7 @@ import { ContextCompany } from "../../../context/ContextCompany";
 import EditUser from "../../EditUser";
 
 const ListUsers = () => {
-    const {users} = useContext(ContextCompany)
+    const {users, payload} = useContext(ContextCompany)
     const [item, setItem] = useState(null)
 
     const navigate = useNavigate()
@@ -52,9 +52,13 @@ const ListUsers = () => {
                                                     <td>{moment(user?.admissionDate).format('DD/MM/YY')}</td>
                                                     <td>{`${user.status? "Até o momento": moment(user?.updatedAt).format('DD/MM/YY')}`}</td>
                                                     <td>
+                                                        {payload?.nameProfile !== "userCorporate"?
                                                         <button onClick={() => setItem(user)} type="button" className='bg-bee-blue-clean px-2 py-[3px] rounded-md text-white text-xs cursor-pointer hover:bg-sky-900' data-bs-toggle="modal" data-bs-target="#editUser"> 
                                                             Editar 
-                                                        </button>
+                                                        </button>:
+                                                        "Nenhuma ação permitida"
+                                                        }
+
                                                     </td>
                                                 </tr>
                                             )
