@@ -14,7 +14,7 @@ function FormMenuWayOfBeing() {
         <>
             <AuthorizeAccess userAutorized={["adminMaster", "adminCorporate"]}>
 
-                <main className='flex h-full'>
+                <main className='flex h-full text-black'>
                     <Tab.Group>
                         <Tab.List className='h-full-side-bar-calc flex flex-col gap-4 min-w-[15%] bg-gray-200 p-2'>
 

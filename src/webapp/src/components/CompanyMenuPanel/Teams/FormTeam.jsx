@@ -72,7 +72,7 @@ function FormTeam() {
 
                                 <select onChange={modelChange} name="leader" id="users" className="input-style">
                                     <option disabled selected>Líder do time</option>
-                                    {(users || []).map((user) => {
+                                    {(users || []).filter(f => f.status).map((user) => {
                                         return (
                                             <option value={user.id}> {user.name} </option>
                                         )

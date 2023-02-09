@@ -40,7 +40,7 @@ function FormWayOfBeing() {
                 .then(() => {
                     setMessage("Cadastro realizado com sucesso")
                     navigate({
-                        pathname: `registerfuturevision`,
+                        pathname: `/company/${idCompany}/registerfuturevision`,
                         search: `?update=${true}`
                     })
                 })
