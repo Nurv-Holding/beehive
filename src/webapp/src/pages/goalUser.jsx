@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import AddUserKr from '../components/AddUserKr';
 import FinishingUserGoal from '../components/FinishingUserGoal';
 import GoalUsersKrs from '../components/GoalUsersKrs';
@@ -174,7 +174,10 @@ function GoalUser() {
                     <div className='container-two-percentage mb-4'>
                         <div className='container-percentage-okr flex flex-col'>
                             <div className='flex justify-between'>
-                                <span className='font-bold text-xl text-bee-strong-1 uppercase'> {goal?.name} </span>
+                                <Link to={`/company/${idCompany}/goals/${goal?.id}`}>
+                                    <span className='font-bold text-xl text-bee-strong-1 uppercase'> {goal?.name} </span>
+                                </Link>
+                                
                                 <button className="modal-btn" data-bs-toggle="modal" data-bs-target="#addGoalUser">
                                     Adicionar Objetivo Individual
                                 </button>
@@ -185,7 +188,9 @@ function GoalUser() {
                                 <div className='flex gap-2'>
                                     {(returnNewTeamsAndUsers() || []).map((team) => {
                                         return(
-                                            <span className='font-bold text-lg mt-2 text-bee-blue-clean bg-white p-2 rounded-md shadow-md'> {team.nameTeam} </span>
+                                            <Link to={`/company/${idCompany}/goals/${team?.idGoal}`}>
+                                                <span className='font-bold text-lg mt-2 text-bee-blue-clean bg-white p-2 rounded-md shadow-md'> {team.nameTeam} </span>
+                                            </Link>
                                         )
                                     })}
                                     
