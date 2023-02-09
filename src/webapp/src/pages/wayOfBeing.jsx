@@ -12,7 +12,7 @@ import Proposals from '../components/proposals'
 import { Link } from 'react-router-dom'
 
 function WayOfBeing() {
-    const { idCompany } = useContext(ContextCompany)
+    const { idCompany, payload } = useContext(ContextCompany)
     const [futureVisions, setFutureVisions] = useState([])
     const [principles, setPrinciples] = useState([])
     const [proposals, setProposals] = useState([])
@@ -42,11 +42,14 @@ function WayOfBeing() {
     return (
         <div className='flex flex-row'>
             <div className='h-full-side-bar-calc w-14 bg-gray-200 flex flex-col items-center py-2'>
+                {payload?.nameProfile !== "userCorporate" &&
                 <Link
                     to={`/company/${idCompany}/registerfuturevision`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-clean hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
                 >
                     +
                 </Link>
+                }
+
             </div>
 
             <div className='flex flex-col w-[90%] mx-auto'>

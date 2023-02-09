@@ -11,7 +11,7 @@ function FormWayOfBeing() {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const routerBack = () => {
-        navigate(-1)
+        navigate(`/company/${idCompany}/wayOfBeing`)
     }
 
     const modelChange = ({ target }) => {
@@ -25,12 +25,14 @@ function FormWayOfBeing() {
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        const hasFutureVision = await futureVisionApi.getAll(idCompany)
+        const {data} = await futureVisionApi.getAll(idCompany)
+
+        const hasFutureVision = data.length
 
         if(item.title === "" || item.description === "")
             setMessage("Os campos precisam ser preeenchidos")
 
-        else if(hasFutureVision.length !== 0)
+        else if(hasFutureVision !== 0)
             setMessage("Visão de futuro já cadastrado")
 
         else {
@@ -38,7 +40,7 @@ function FormWayOfBeing() {
                 .then(() => {
                     setMessage("Cadastro realizado com sucesso")
                     navigate({
-                        pathname: `/company/${idCompany}`,
+                        pathname: `registerfuturevision`,
                         search: `?update=${true}`
                     })
                 })
@@ -52,7 +54,7 @@ function FormWayOfBeing() {
     return (
         <>
         <AuthorizeAccess userAutorized={["adminMaster" ,"adminCorporate"]}>
-            <main className='flex flex-col items-center gap-8 pt-8 relative'>
+            <main className='flex flex-col items-center gap-8 pt-8 relative text-black'>
                 <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                     <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
