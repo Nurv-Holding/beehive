@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import goalsTeamApi from '../api/goalsTeamApi'
 
 function Teams() {
-    const { teams, idCompany, goals, usersByCompany } = useContext(ContextCompany)
+    const { teams, idCompany, goals, usersByCompany, payload } = useContext(ContextCompany)
     const [goalTeams, setGoalTeams] = useState([])
     const [allTeams, setAllTeams] = useState([])
     const [teamsByKrs, setTeamsByKrs] = useState([])
@@ -51,6 +51,7 @@ function Teams() {
             users={usersByCompany}
             teamsByKrs={teamsByKrs}
             teamByTeam={teamByTeam}
+            payload={payload}
             />
         </div>
     )

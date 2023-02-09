@@ -7,7 +7,7 @@ import { ContextCompany } from '../../../context/ContextCompany'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 import ModalMembersTeam from '../../ModalMembersTeam'
 
-function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }) {
+function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers, payload }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextCompany)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -53,17 +53,27 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers }
   return (
     <div className='flex flex-row w-full'>
       <div className='h-full-side-bar-calc w-14 bg-gray-200 flex gap-2 flex-col items-center py-2'>
+        {payload?.nameProfile !== "userCorporate" &&
         <Link
           to={`/company/${idCompany}/formteam`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-xl px-2"
         >
           +
         </Link>
+        }
+
 
         <Link
           to={`/company/${idCompany}/teamlist`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-sm px-2"
         >
           Lista
         </Link>
+
+        <Link
+            to={`/company/${idCompany}/teams`} className="w-10 aspect-square rounded-lg bg-white text-bee-blue-clean hover:bg-bee-blue-strong hover:text-white flex justify-center text-center items-center font-bold text-sm px-2"
+        >
+            OKRS
+        </Link>
+
       </div>
 
       <div className='w-full'>
