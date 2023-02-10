@@ -1,5 +1,5 @@
 site de teste
 	- Master
-		- https://beehive-teste.netlify.app
+		- https://beehive-teste-prod.netlify.app
 	- Development
-		- https://behive-dev.netlify.app
+		- https://behive-teste-dev.netlify.app
