@@ -1,6 +1,16 @@
 import axios from "axios"
 import { host } from "../utils/utilis"
 
+// const options = {
+//     method: 'post',
+//     url: `${host}`,
+//     withCredentials: false,
+//     'Content-Type': 'text/plain'
+//     // params: {
+//     //   access_token: SECRET_TOKEN,
+//     // },
+//   }
+
 const getAllByCompany = (idCompany) => axios.get(`${host}/users/c/${idCompany}`)
 const getAll = () => axios.get(`${host}/users`)
 const create = (idCompany,data) => axios.post(`${host}/users/c/${idCompany}`,data)
