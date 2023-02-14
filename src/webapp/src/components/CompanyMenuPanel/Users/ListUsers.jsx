@@ -5,13 +5,13 @@ import { ContextCompany } from "../../../context/ContextCompany";
 import EditUser from "../../EditUser";
 
 const ListUsers = () => {
-    const {users, payload} = useContext(ContextCompany)
+    const {users, payload, idCompany } = useContext(ContextCompany)
     const [item, setItem] = useState(null)
 
     const navigate = useNavigate()
 
     const routerBack = () => {
-        navigate(-1)
+        navigate(`/company/${idCompany}/users`)
     }
 
     return (

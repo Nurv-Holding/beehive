@@ -48,10 +48,10 @@ const EditUser = ({idRef, item}) => {
                 <div>
                     <h1 className="text-center uppercase text-bee-strong-1 text-3xl font-bold"> Alterar o perfil </h1>
                     <select onChange={({ target }) => setIdProfile(parseInt(target?.value))} className="my-2">
-                        <option selected  value={item?.idProfile} > {(returnNewProfiles() || []).find(f => f.id === item?.idProfile)?.name} </option>
+                        <option selected  value={item?.idProfile} > {`${(returnNewProfiles() || []).find(f => f.id === item?.idProfile)?.name === "userCorporate"? "Usuário": "Administrador"}`} </option>
                         {(returnNewProfiles() || []).filter(f => f.id !== item?.idProfile).map((profile) => {
                             return(
-                                <option value={profile?.id} > {profile?.name} </option>
+                                <option value={profile?.id} > {`${profile?.name === "userCorporate"? "Usuário": "Administrador"}`} </option>
                             )
                             
                         })}

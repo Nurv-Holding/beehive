@@ -14,7 +14,6 @@ import AddTeam from '../components/addTeam';
 import historyGoalTeamKrApi from '../api/historyGoalTeamKrApi';
 import historyGoalKrApi from '../api/historyGoalKrApi';
 import taskUsersApi from '../api/taskUsersApi';
-import teamsUsersApi from '../api/teamsUsersApi';
 import CloseGoal from '../components/CloseGoal';
 import { calcPercentage } from '../utils/utilis';
 import TitleCompany from '../components/TitleCompany';
@@ -30,7 +29,9 @@ function Goal() {
     users,
     company,
     payload,
-    token } = useContext(ContextCompany)
+    token,
+    teamUsers,
+    tasksUser } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [goal, setGoal] = useState({})
   const [goalKrs, setGoalKrs] = useState([])
@@ -40,7 +41,6 @@ function Goal() {
   const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
   const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
   const [historyGoalKrs, setHistoryGoalKrs] = useState([])
-  const [teamUsers, setTeamUsers] = useState([])
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -49,22 +49,13 @@ function Goal() {
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [idTeam, setIdTeam] = useState(null)
-  const [tasksUser, setTasksUser] = useState([])
+
   const [noteTeamKr, setNoteTeamKr] = useState("")
   const [openModalFinishKr, setOpenModalFinishKr] = useState(false)
   const update = searchParams.get('update')
 
   useEffect(() => {
-    const handleTasksUser = async () => {
-      const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
-      setTasksUser(data)
-    }
-  
-    const handleTemaUsers = async () => {
-      const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-      setTeamUsers(data)
-    }
-  
+
     const handleHistoryGoalTeamKrs = async () => {
       const { data } = await historyGoalTeamKrApi.getAllByKrs()
       setHistoryGoalTeamKrs(data)
@@ -114,8 +105,6 @@ function Goal() {
     handleGoalTeamByKrs()
     handleHistoryGoalTeamKrs()
     handleHistoryGoalKrs()
-    handleTasksUser()
-    handleTemaUsers()
 
   }, [idGoal, idCompany, update])
 

@@ -118,7 +118,7 @@ const ListTasks = ({
                     <div className="flex items-center">
                         <select onChange={({ target }) => setUser(target.value)} className='input-style' name="user">
                         <option selected disabled >Adicionar Usuário</option>
-                            {(teamUsers || []).filter(e => e.idTeam === kr.idTeam).map((user) => {
+                            {(teamUsers || []).filter(e => e.idTeam === kr.idTeam && e.status).map((user) => {
                             return(
                                 <option value={user.idUser} > {user.emailUser} </option>
                             )

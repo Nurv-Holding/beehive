@@ -17,9 +17,9 @@ const AuthorizeAccess = ({ children, userAutorized }) => {
         <>
             {
 
-                !profile ? <Loading /> :
-                    userAutorized.some((x) => x?.toLowerCase() === profile?.name?.toLowerCase()) ?
-                        children :
+                !profile? <Loading />:
+                    userAutorized.some((x) => x?.toLowerCase() === profile?.name?.toLowerCase())?
+                        children:
                         <>
                         <div className="relative">
                             <button onClick={routerBack} className="p-3 mt-8 shadow-md text-xl rounded-full flex justify-center items-center bg-white hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">

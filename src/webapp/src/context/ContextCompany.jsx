@@ -53,11 +53,17 @@ export const ContextUserProvider = ({ children }) => {
     const [newPayload, setNewPayload] = useState(null)
     const [profile, setProfile] = useState(null)
     const [profiles, setProfiles] = useState([])
+    const [tasksUser, setTasksUser] = useState([])
     
     useEffect(() => {
         const token = localStorage.getItem("token")
         const payload = token? jwtDecode(token): null
         setNewPayload(() => payload)
+
+        const handleTasksUser = async () => {
+            const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
+            setTasksUser(data)
+          }
 
         const getOneProfile = async () => {
             const { data } = await profilesApi.getById(payload?.idProfile)
@@ -290,6 +296,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerProposals()
         returnNewGoalUsersAllKrs()
         handlerProfiles()
+        handleTasksUser()
         
     },[idCompany, idGoal, update, idUser])
 
@@ -334,7 +341,8 @@ export const ContextUserProvider = ({ children }) => {
                     newGoalUsersAllKrs,
                     newAllTeamsAndUsers,
                     profile,
-                    profiles
+                    profiles,
+                    tasksUser
                 }
             }
         >
