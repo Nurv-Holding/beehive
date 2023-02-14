@@ -17,7 +17,7 @@ const getAllByCompany = (idCompany) => axios.get(`${host}/users/c/${idCompany}`)
 const getAll = () => axios.get(`${host}/users`)
 const create = (idCompany,data) => axios.post(`${host}/users/c/${idCompany}`,data)
 const update = (idUser,data) => axios.put(`${host}/users/${idUser}`,data)
-const authenticate = (data) => axios.post(`${host}/login`,{...options, body:data})
+const authenticate = (data) => axios.post(`${host}/login`,data)
     .then(x => localStorage.setItem("token", x.data))
 
 //employeers
