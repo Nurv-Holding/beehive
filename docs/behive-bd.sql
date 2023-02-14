@@ -85,10 +85,10 @@ CREATE TABLE IF NOT EXISTS `goals` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `goalsteams`
+-- Estrutura da tabela `goalsTeams`
 --
 
-CREATE TABLE IF NOT EXISTS `goalsteams` (
+CREATE TABLE IF NOT EXISTS `goalsTeams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompany` int(11) NOT NULL,
   `idGoal` int(11) NOT NULL,
@@ -275,9 +275,9 @@ ALTER TABLE `goals`
   ADD CONSTRAINT `goals_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `goalsteams`
+-- Limitadores para a tabela `goalsTeams`
 --
-ALTER TABLE `goalsteams`
+ALTER TABLE `goalsTeams`
   ADD CONSTRAINT `goalsTeams_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `goalsTeams_idGoal_fkey` FOREIGN KEY (`idGoal`) REFERENCES `goals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -285,14 +285,14 @@ ALTER TABLE `goalsteams`
 -- Limitadores para a tabela `goalteamkrs`
 --
 ALTER TABLE `goalteamkrs`
-  ADD CONSTRAINT `goalTeamKrs_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsteams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `goalTeamKrs_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsTeams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `goalTeamKrs_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `processGoalsTeams`
 --
 ALTER TABLE `processGoalsTeams`
-  ADD CONSTRAINT `processGoalsTeams_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsteams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `processGoalsTeams_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsTeams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `processGoalsTeams_idTeam_fkey` FOREIGN KEY (`idTeam`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

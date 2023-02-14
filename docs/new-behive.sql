@@ -120,7 +120,7 @@ select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as n
 gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
-left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
 left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
 
 /*Projeção de times por times*/
@@ -128,7 +128,7 @@ select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as n
 gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
-left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
 left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id group by t.id;
 
 /*Projeção de times com KRS*/
@@ -136,7 +136,7 @@ select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as n
 gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
-left join goalsteams as gt on pgt.idGoalsTeam=gt.id
+left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
 left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
 
 select pgt.id as idProcess, g.id as idGoal,
@@ -227,7 +227,7 @@ select tk.id as idTask, tk.name as nameTask,
 g.id as idGoal, g.name as nameGoal,u.id as idUser, 
 u.name as nameUser, tk.updatedAt as initialDate, 
 tk.finalDate, t.id as idTeam, t.name as nameTeam
-from tasks as tk join goalsteams as gt on tk.idGoalsTeamKr=gt.id
+from tasks as tk join goalsTeams as gt on tk.idGoalsTeamKr=gt.id
 join goals as g on gt.idGoal=g.id 
 join teams as t on g.idTeam=t.id 
 join users as u on tk.idUser=u.id where tk.idCompany=4 and g.id=14;
