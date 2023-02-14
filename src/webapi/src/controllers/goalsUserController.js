@@ -12,8 +12,8 @@ const getAllKrsByUser = handlerBuilder(async (req, res) => {
     guk.fromQuarterly, guk.toYearly, guk.fromYearly,
     guk.done, guk.status as krStatus, gu.id as idGoalUser,
     gu.name as nameGoalUser, gu.status as statusGoalUser
-    from goalsuserskrs as guk
-    join goalsusers as gu on guk.idGoalsUser=gu.id
+    from goalsUsersKrs as guk
+    join goalsUsers as gu on guk.idGoalsUser=gu.id
     join users as u on gu.idUser=u.id
     join goals as g on gu.idGoal=g.id
     where guk.idCompany=${idCompany} and guk.idUser=${idUser} group by guk.id;`
@@ -29,8 +29,8 @@ const getAllKrs = handlerBuilder(async (req, res) => {
     guk.fromQuarterly, guk.toYearly, guk.fromYearly,
     guk.done, guk.status as krStatus, gu.id as idGoalUser,
     gu.name as nameGoalUser, gu.status as statusGoalUser
-    from goalsuserskrs as guk
-    join goalsusers as gu on guk.idGoalsUser=gu.id
+    from goalsUsersKrs as guk
+    join goalsUsers as gu on guk.idGoalsUser=gu.id
     join users as u on gu.idUser=u.id
     join goals as g on gu.idGoal=g.id
     where guk.idCompany=${idCompany} group by guk.id;`

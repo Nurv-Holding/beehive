@@ -352,10 +352,10 @@ INSERT INTO `principles` (`id`, `idCompany`, `idFutureVision`, `title`, `descrip
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `processgoalsteams`
+-- Estrutura da tabela `processGoalsTeams`
 --
 
-CREATE TABLE IF NOT EXISTS `processgoalsteams` (
+CREATE TABLE IF NOT EXISTS `processGoalsTeams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idGoalsTeam` int(11) DEFAULT NULL,
   `idTeam` int(11) DEFAULT NULL,
@@ -371,10 +371,10 @@ CREATE TABLE IF NOT EXISTS `processgoalsteams` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=6 ;
 
 --
--- Extraindo dados da tabela `processgoalsteams`
+-- Extraindo dados da tabela `processGoalsTeams`
 --
 
-INSERT INTO `processgoalsteams` (`id`, `idGoalsTeam`, `idTeam`, `idGoal`, `idCompany`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `processGoalsTeams` (`id`, `idGoalsTeam`, `idTeam`, `idGoal`, `idCompany`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 1, 8, 3, '2023-01-04 00:06:00.375', '2023-01-04 00:06:08.716'),
 (2, 2, 1, 9, 3, '2023-01-04 00:10:13.144', '2023-01-04 00:40:04.592'),
 (3, NULL, 2, 9, 3, '2023-01-04 00:10:17.460', '2023-01-04 00:10:17.460'),
@@ -517,10 +517,10 @@ INSERT INTO `teams` (`id`, `idCompany`, `name`, `descriptions`, `createdAt`, `up
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teamusers`
+-- Estrutura da tabela `teamUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `teamusers` (
+CREATE TABLE IF NOT EXISTS `teamUsers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompany` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
@@ -534,10 +534,10 @@ CREATE TABLE IF NOT EXISTS `teamusers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=4 ;
 
 --
--- Extraindo dados da tabela `teamusers`
+-- Extraindo dados da tabela `teamUsers`
 --
 
-INSERT INTO `teamusers` (`id`, `idCompany`, `idUser`, `idTeam`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `teamUsers` (`id`, `idCompany`, `idUser`, `idTeam`, `createdAt`, `updatedAt`) VALUES
 (1, 3, 5, 1, '2023-01-04 00:05:06.227', '2023-01-04 00:05:06.227'),
 (2, 3, 4, 1, '2023-01-04 00:05:13.671', '2023-01-04 00:05:13.671'),
 (3, 3, 4, 2, '2023-01-04 00:05:20.767', '2023-01-04 00:05:20.767');
@@ -656,7 +656,7 @@ ALTER TABLE `goaluserkrs`
 ALTER TABLE `goalusers`
   ADD CONSTRAINT `goalUsers_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `goalUsers_idGoal_fkey` FOREIGN KEY (`idGoal`) REFERENCES `goals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `goalUsers_idTeamUser_fkey` FOREIGN KEY (`idTeamUser`) REFERENCES `teamusers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `goalUsers_idTeamUser_fkey` FOREIGN KEY (`idTeamUser`) REFERENCES `teamUsers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `historygoalkrs`
@@ -673,7 +673,7 @@ ALTER TABLE `historygoalkrs`
 ALTER TABLE `historygoalsteamkrs`
   ADD CONSTRAINT `historyGoalsTeamKrs_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `historyGoalsTeamKrs_idGoalsTeamKr_fkey` FOREIGN KEY (`idGoalsTeamKr`) REFERENCES `goalteamkrs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `historyGoalsTeamKrs_idProcessGoalTeam_fkey` FOREIGN KEY (`idProcessGoalTeam`) REFERENCES `processgoalsteams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `historyGoalsTeamKrs_idProcessGoalTeam_fkey` FOREIGN KEY (`idProcessGoalTeam`) REFERENCES `processGoalsTeams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `principles`
@@ -683,9 +683,9 @@ ALTER TABLE `principles`
   ADD CONSTRAINT `principles_idFutureVision_fkey` FOREIGN KEY (`idFutureVision`) REFERENCES `futurevisions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `processgoalsteams`
+-- Limitadores para a tabela `processGoalsTeams`
 --
-ALTER TABLE `processgoalsteams`
+ALTER TABLE `processGoalsTeams`
   ADD CONSTRAINT `processGoalsTeams_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `processGoalsTeams_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsteams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `processGoalsTeams_idGoal_fkey` FOREIGN KEY (`idGoal`) REFERENCES `goals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -711,7 +711,7 @@ ALTER TABLE `tasks`
 ALTER TABLE `taskusers`
   ADD CONSTRAINT `taskUsers_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `taskUsers_idTask_fkey` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `taskUsers_idTeamUser_fkey` FOREIGN KEY (`idTeamUser`) REFERENCES `teamusers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `taskUsers_idTeamUser_fkey` FOREIGN KEY (`idTeamUser`) REFERENCES `teamUsers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `teams`
@@ -720,9 +720,9 @@ ALTER TABLE `teams`
   ADD CONSTRAINT `teams_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `teamusers`
+-- Limitadores para a tabela `teamUsers`
 --
-ALTER TABLE `teamusers`
+ALTER TABLE `teamUsers`
   ADD CONSTRAINT `teamUsers_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teamUsers_idTeam_fkey` FOREIGN KEY (`idTeam`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teamUsers_idUser_fkey` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`) ON UPDATE CASCADE;

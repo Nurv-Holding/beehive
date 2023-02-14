@@ -126,10 +126,10 @@ CREATE TABLE IF NOT EXISTS `goalteamkrs` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `processgoalsteams`
+-- Estrutura da tabela `processGoalsTeams`
 --
 
-CREATE TABLE IF NOT EXISTS `processgoalsteams` (
+CREATE TABLE IF NOT EXISTS `processGoalsTeams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idGoalsTeam` int(11) DEFAULT NULL,
   `idTeam` int(11) DEFAULT NULL,
@@ -183,10 +183,10 @@ CREATE TABLE IF NOT EXISTS `teams` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teamusers`
+-- Estrutura da tabela `teamUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `teamusers` (
+CREATE TABLE IF NOT EXISTS `teamUsers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompany` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
@@ -289,9 +289,9 @@ ALTER TABLE `goalteamkrs`
   ADD CONSTRAINT `goalTeamKrs_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `processgoalsteams`
+-- Limitadores para a tabela `processGoalsTeams`
 --
-ALTER TABLE `processgoalsteams`
+ALTER TABLE `processGoalsTeams`
   ADD CONSTRAINT `processGoalsTeams_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsteams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `processGoalsTeams_idTeam_fkey` FOREIGN KEY (`idTeam`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -302,9 +302,9 @@ ALTER TABLE `teams`
   ADD CONSTRAINT `teams_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `teamusers`
+-- Limitadores para a tabela `teamUsers`
 --
-ALTER TABLE `teamusers`
+ALTER TABLE `teamUsers`
   ADD CONSTRAINT `teamUsers_idTeam_fkey` FOREIGN KEY (`idTeam`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teamUsers_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teamUsers_idUser_fkey` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`) ON UPDATE CASCADE;

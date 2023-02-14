@@ -38,7 +38,7 @@ const getAllTeams = handlerBuilder(async (req, res) => {
 
     const results = await prismaClient.$queryRaw`select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
     gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
-    from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+    from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
     left join goalsteams as gt on pgt.idGoalsTeam=gt.id
     left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id
@@ -52,7 +52,7 @@ const getByTeams = handlerBuilder(async (req, res) => {
 
     const results = await prismaClient.$queryRaw`select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
     gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
-    from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+    from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
     left join goalsteams as gt on pgt.idGoalsTeam=gt.id
     left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id 
@@ -66,7 +66,7 @@ const getAllTeamsByKrs = handlerBuilder(async (req, res) => {
 
     const results = await prismaClient.$queryRaw`select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
     gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
-    from goals as g join processgoalsteams as pgt on pgt.idGoal=g.id
+    from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
     left join goalsteams as gt on pgt.idGoalsTeam=gt.id
     left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id
@@ -81,10 +81,10 @@ const getTeamsAndUsersByGoal = handlerBuilder(async (req, res) => {
     const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal,
     t.id as idTeam, t.name as nameTeam,
     u.id as idUser, u.name as nameUser 
-    from processgoalsteams as pgt 
+    from processGoalsTeams as pgt 
     join goals as g on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
-    join teamusers as tu on tu.idTeam=t.id
+    join teamUsers as tu on tu.idTeam=t.id
     join users as u on tu.idUser=u.id
     where pgt.idCompany=${idCompany} and u.id=${idUser} and g.id=${idGoal};`
 
@@ -97,10 +97,10 @@ const getTeamsAndUsersByUser = handlerBuilder(async (req, res) => {
     const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal,
     t.id as idTeam, t.name as nameTeam,
     u.id as idUser, u.name as nameUser 
-    from processgoalsteams as pgt 
+    from processGoalsTeams as pgt 
     join goals as g on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
-    join teamusers as tu on tu.idTeam=t.id
+    join teamUsers as tu on tu.idTeam=t.id
     join users as u on tu.idUser=u.id
     where pgt.idCompany=${idCompany} and u.id=${idUser};`
 
@@ -113,10 +113,10 @@ const getAllTeamsAndUsers = handlerBuilder(async (req, res) => {
     const results = await prismaClient.$queryRaw`select g.id as idGoal, g.name as nameGoal,
     t.id as idTeam, t.name as nameTeam,
     u.id as idUser, u.name as nameUser 
-    from processgoalsteams as pgt 
+    from processGoalsTeams as pgt 
     join goals as g on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
-    join teamusers as tu on tu.idTeam=t.id
+    join teamUsers as tu on tu.idTeam=t.id
     join users as u on tu.idUser=u.id
     where pgt.idCompany=${idCompany};`
 

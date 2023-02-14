@@ -11,7 +11,7 @@ const getHistoryKrsUsersByGoal = handlerBuilder(async (req, res) => {
     hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,hgk.note,
     hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, hgk.status
     from historygoalsuserkrs as hgk
-    join goalsuserskrs as gk on hgk.idGoalsUserKr=gk.id 
+    join goalsUsersKrs as gk on hgk.idGoalsUserKr=gk.id 
     where hgk.idCompany=${idCompany}  and hgk.idGoalsUserKr=${idGoalsUserKr};`
 
     res.status(200).send(results)

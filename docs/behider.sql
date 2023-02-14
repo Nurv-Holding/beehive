@@ -223,10 +223,10 @@ INSERT INTO `teams` (`id`, `idCompany`, `name`, `descriptions`, `createdAt`, `up
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `teamusers`
+-- Estrutura da tabela `teamUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `teamusers` (
+CREATE TABLE IF NOT EXISTS `teamUsers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompany` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
@@ -240,10 +240,10 @@ CREATE TABLE IF NOT EXISTS `teamusers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Extraindo dados da tabela `teamusers`
+-- Extraindo dados da tabela `teamUsers`
 --
 
-INSERT INTO `teamusers` (`id`, `idCompany`, `idUser`, `idTeam`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `teamUsers` (`id`, `idCompany`, `idUser`, `idTeam`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 3, 1, '2022-10-28 01:49:34.769', '2022-10-28 01:49:34.769'),
 (2, 1, 4, 1, '2022-10-28 01:52:12.285', '2022-10-28 01:52:12.285');
 
@@ -367,9 +367,9 @@ ALTER TABLE `teams`
   ADD CONSTRAINT `teams_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `teamusers`
+-- Limitadores para a tabela `teamUsers`
 --
-ALTER TABLE `teamusers`
+ALTER TABLE `teamUsers`
   ADD CONSTRAINT `teamUsers_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `teamUsers_idTeam_fkey` FOREIGN KEY (`idTeam`) REFERENCES `teams` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `teamUsers_idUser_fkey` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`) ON UPDATE CASCADE;

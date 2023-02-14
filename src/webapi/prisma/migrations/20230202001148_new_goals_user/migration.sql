@@ -1,14 +1,14 @@
 /*
   Warnings:
 
-  - You are about to drop the column `idProcessGoalsTeam` on the `goalsusers` table. All the data in the column will be lost.
+  - You are about to drop the column `idProcessGoalsTeam` on the `goalsUsers` table. All the data in the column will be lost.
 
 */
 -- DropForeignKey
-ALTER TABLE `goalsusers` DROP FOREIGN KEY `goalsUsers_idProcessGoalsTeam_fkey`;
+ALTER TABLE `goalsUsers` DROP FOREIGN KEY `goalsUsers_idProcessGoalsTeam_fkey`;
 
 -- AlterTable
-ALTER TABLE `goalsusers` DROP COLUMN `idProcessGoalsTeam`,
+ALTER TABLE `goalsUsers` DROP COLUMN `idProcessGoalsTeam`,
     ADD COLUMN `idGoal` INTEGER NULL;
 
 -- AddForeignKey

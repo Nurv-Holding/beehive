@@ -1,17 +1,17 @@
 /*Projeção de todos os times e integrantes (teamUsersProjectionController)*/
 select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, t.id as idTeam, t.name as nameTeam
-from teamusers as tu join teams as t on tu.idTeam=t.id
+from teamUsers as tu join teams as t on tu.idTeam=t.id
 join users as u on tu.idUser=u.id where tu.idCompany=1;
 
 /*Projeção de um os time e integrantes (teamUsersProjectionController)*/
 select tu.id as idTeamUser, u.id as idUser, u.name as nameUser, t.id as idTeam, t.name as nameTeam
-from teamusers as tu join teams as t on tu.idTeam=t.id
+from teamUsers as tu join teams as t on tu.idTeam=t.id
 join users as u on tu.idUser=u.id where tu.idCompany=1 and t.id=1;
 
 /*Projeção de um o time e integrantes por objetivo (teamUsersProjectionController)*/
 select tu.id as idTeamUser, g.id as idGoal, g.name as nameGoal, u.id as idUser, 
 u.name as nameUser, t.id as idTeam, t.name as nameTeam
-from teamusers as tu join teams as t on tu.idTeam=t.id
+from teamUsers as tu join teams as t on tu.idTeam=t.id
 join goals as g on g.idTeam=t.id
 join users as u on tu.idUser=u.id where tu.idCompany=1 and t.id=1;
 
