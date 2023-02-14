@@ -16,6 +16,7 @@ export const calcDate = (date) => {
 }
 
 // const host1 = process.env.REACT_APP_HOSTLOCAL
-const host2 = process.env.REACT_APP_HOSTPROD
+// const host2 = process.env.REACT_APP_HOSTPROD
+const host3 = process.env.REACT_APP_HOSTDEV
 
-export const host = host2
+export const host = host3
