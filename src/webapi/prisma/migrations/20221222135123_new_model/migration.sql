@@ -16,7 +16,7 @@ ALTER TABLE `historygoalkrs` ADD COLUMN `goalUserKrId` INTEGER NULL;
 ALTER TABLE `historygoalsteamkrs` DROP COLUMN `idTaskUser`;
 
 -- AlterTable
-ALTER TABLE `taskusers` ADD COLUMN `description` TEXT NOT NULL;
+ALTER TABLE `taskUsers` ADD COLUMN `description` TEXT NOT NULL;
 
 -- AlterTable
 ALTER TABLE `teams` ADD COLUMN `leader` INTEGER NOT NULL;

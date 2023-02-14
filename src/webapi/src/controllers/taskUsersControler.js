@@ -33,7 +33,7 @@ const getTasksUserByGoal = handlerBuilder(async (req, res) => {
     tku.done, tku.description, u.id as idUser, u.name as nameUser,
     t.id as idTeam, t.name as nameTeam, gt.idGoal,
     tku.createdAt, tku.updatedAt, tk.finalDate
-    from taskusers as tku join tasks as tk on tku.idTask=tk.id
+    from taskUsers as tku join tasks as tk on tku.idTask=tk.id
     join goalTeamKrs as gtk on tk.idGoalsTeamKr=gtk.id
     join goalsTeams as gt on gtk.idGoalsTeam=gt.id
     join teamUsers as tu on tku.idTeamUser=tu.id

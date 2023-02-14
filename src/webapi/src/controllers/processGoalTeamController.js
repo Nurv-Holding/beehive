@@ -41,7 +41,7 @@ const getAllTeams = handlerBuilder(async (req, res) => {
     from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
     left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-    left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id
+    left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id
     where pgt.idCompany=${idCompany};`
 
     res.status(200).send(results)
@@ -55,7 +55,7 @@ const getByTeams = handlerBuilder(async (req, res) => {
     from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
     left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-    left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id 
+    left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id 
     where pgt.idCompany=${idCompany} group by t.id;`
 
     res.status(200).send(results)
@@ -69,7 +69,7 @@ const getAllTeamsByKrs = handlerBuilder(async (req, res) => {
     from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
     join teams as t on pgt.idTeam=t.id
     left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-    left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id
+    left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id
     where pgt.idCompany=${idCompany};`
 
     res.status(200).send(results)

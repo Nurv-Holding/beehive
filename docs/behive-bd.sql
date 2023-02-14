@@ -104,10 +104,10 @@ CREATE TABLE IF NOT EXISTS `goalsTeams` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `goalteamkrs`
+-- Estrutura da tabela `goalTeamKrs`
 --
 
-CREATE TABLE IF NOT EXISTS `goalteamkrs` (
+CREATE TABLE IF NOT EXISTS `goalTeamKrs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompany` int(11) NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -282,9 +282,9 @@ ALTER TABLE `goalsTeams`
   ADD CONSTRAINT `goalsTeams_idGoal_fkey` FOREIGN KEY (`idGoal`) REFERENCES `goals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `goalteamkrs`
+-- Limitadores para a tabela `goalTeamKrs`
 --
-ALTER TABLE `goalteamkrs`
+ALTER TABLE `goalTeamKrs`
   ADD CONSTRAINT `goalTeamKrs_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsTeams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `goalTeamKrs_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

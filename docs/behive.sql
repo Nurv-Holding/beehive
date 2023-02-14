@@ -166,10 +166,10 @@ INSERT INTO `goalsTeams` (`id`, `idCompany`, `idGoal`, `name`, `author`, `status
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `goalteamkrs`
+-- Estrutura da tabela `goalTeamKrs`
 --
 
-CREATE TABLE IF NOT EXISTS `goalteamkrs` (
+CREATE TABLE IF NOT EXISTS `goalTeamKrs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompany` int(11) NOT NULL,
   `idGoalsTeam` int(11) NOT NULL,
@@ -190,10 +190,10 @@ CREATE TABLE IF NOT EXISTS `goalteamkrs` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=4 ;
 
 --
--- Extraindo dados da tabela `goalteamkrs`
+-- Extraindo dados da tabela `goalTeamKrs`
 --
 
-INSERT INTO `goalteamkrs` (`id`, `idCompany`, `idGoalsTeam`, `name`, `author`, `descriptions`, `toQuarterly`, `fromQuarterly`, `toYearly`, `fromYearly`, `done`, `status`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `goalTeamKrs` (`id`, `idCompany`, `idGoalsTeam`, `name`, `author`, `descriptions`, `toQuarterly`, `fromQuarterly`, `toYearly`, `fromYearly`, `done`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, 3, 1, 'faturamento', 1, 'dddddd', 1000, 10000, 1000, 200000, 1000, 0, '2023-01-04 00:06:19.444', '2023-01-04 00:06:19.444'),
 (2, 3, 2, 'faturamento', 1, 'dddddd', 1000, 10000, 1000, 200000, 1000, 0, '2023-01-04 00:40:27.060', '2023-01-04 00:40:27.060'),
 (3, 3, 2, 'faturamento 2', 1, 'dddddd', 1000, 10000, 1000, 200000, 1000, 0, '2023-01-04 00:44:14.622', '2023-01-04 00:44:14.622');
@@ -461,10 +461,10 @@ INSERT INTO `tasks` (`id`, `idGoalsTeamKr`, `idCompany`, `name`, `author`, `fina
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `taskusers`
+-- Estrutura da tabela `taskUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `taskusers` (
+CREATE TABLE IF NOT EXISTS `taskUsers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idTeamUser` int(11) DEFAULT NULL,
   `idCompany` int(11) NOT NULL,
@@ -480,10 +480,10 @@ CREATE TABLE IF NOT EXISTS `taskusers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Extraindo dados da tabela `taskusers`
+-- Extraindo dados da tabela `taskUsers`
 --
 
-INSERT INTO `taskusers` (`id`, `idTeamUser`, `idCompany`, `idTask`, `done`, `createdAt`, `updatedAt`, `description`) VALUES
+INSERT INTO `taskUsers` (`id`, `idTeamUser`, `idCompany`, `idTask`, `done`, `createdAt`, `updatedAt`, `description`) VALUES
 (1, 1, 3, 1, 1, '2023-01-04 18:15:11.533', '2023-01-04 18:15:24.516', 'bbbbbbbbbb');
 
 -- --------------------------------------------------------
@@ -635,9 +635,9 @@ ALTER TABLE `goalsTeams`
   ADD CONSTRAINT `goalsTeams_idGoal_fkey` FOREIGN KEY (`idGoal`) REFERENCES `goals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `goalteamkrs`
+-- Limitadores para a tabela `goalTeamKrs`
 --
-ALTER TABLE `goalteamkrs`
+ALTER TABLE `goalTeamKrs`
   ADD CONSTRAINT `goalTeamKrs_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `goalTeamKrs_idGoalsTeam_fkey` FOREIGN KEY (`idGoalsTeam`) REFERENCES `goalsTeams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -672,7 +672,7 @@ ALTER TABLE `historygoalkrs`
 --
 ALTER TABLE `historygoalsteamkrs`
   ADD CONSTRAINT `historyGoalsTeamKrs_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `historyGoalsTeamKrs_idGoalsTeamKr_fkey` FOREIGN KEY (`idGoalsTeamKr`) REFERENCES `goalteamkrs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `historyGoalsTeamKrs_idGoalsTeamKr_fkey` FOREIGN KEY (`idGoalsTeamKr`) REFERENCES `goalTeamKrs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `historyGoalsTeamKrs_idProcessGoalTeam_fkey` FOREIGN KEY (`idProcessGoalTeam`) REFERENCES `processGoalsTeams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -703,12 +703,12 @@ ALTER TABLE `proposals`
 --
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tasks_idGoalsTeamKr_fkey` FOREIGN KEY (`idGoalsTeamKr`) REFERENCES `goalteamkrs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tasks_idGoalsTeamKr_fkey` FOREIGN KEY (`idGoalsTeamKr`) REFERENCES `goalTeamKrs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `taskusers`
+-- Limitadores para a tabela `taskUsers`
 --
-ALTER TABLE `taskusers`
+ALTER TABLE `taskUsers`
   ADD CONSTRAINT `taskUsers_idCompany_fkey` FOREIGN KEY (`idCompany`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `taskUsers_idTask_fkey` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `taskUsers_idTeamUser_fkey` FOREIGN KEY (`idTeamUser`) REFERENCES `teamUsers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

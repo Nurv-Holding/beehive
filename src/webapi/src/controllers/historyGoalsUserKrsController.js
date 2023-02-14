@@ -10,7 +10,7 @@ const getHistoryKrsUsersByGoal = handlerBuilder(async (req, res) => {
     const results = await prismaClient.$queryRaw`select hgk.id as idHistoryGoalKrs, hgk.idGoalsUserKr, 
     hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,hgk.note,
     hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, hgk.status
-    from historygoalsuserkrs as hgk
+    from historyGoalsUserKrs as hgk
     join goalsUsersKrs as gk on hgk.idGoalsUserKr=gk.id 
     where hgk.idCompany=${idCompany}  and hgk.idGoalsUserKr=${idGoalsUserKr};`
 

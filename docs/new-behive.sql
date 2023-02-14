@@ -121,7 +121,7 @@ gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
 left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
+left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id;
 
 /*Projeção de times por times*/
 select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
@@ -129,7 +129,7 @@ gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
 left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id group by t.id;
+left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id group by t.id;
 
 /*Projeção de times com KRS*/
 select t.id as idTeam, t.name as nameTeam, t.leader, g.id as idGoal, g.name as nameGoal,
@@ -137,7 +137,7 @@ gt.id as idGoalTeam, gt.name as nameGoalTeam, gtk.id as idKr, gtk.name as nameKr
 from goals as g join processGoalsTeams as pgt on pgt.idGoal=g.id
 join teams as t on pgt.idTeam=t.id
 left join goalsTeams as gt on pgt.idGoalsTeam=gt.id
-left join goalteamkrs as gtk on gtk.idGoalsTeam=gt.id;
+left join goalTeamKrs as gtk on gtk.idGoalsTeam=gt.id;
 
 select pgt.id as idProcess, g.id as idGoal,
 t.id as idTeam, t.name as nameTeam,
@@ -219,7 +219,7 @@ where guk.idCompany=4;
 select hgk.id as idHistoryGoalKrs, hgk.idGoalsUserKr, 
 hgk.updatedAt as updateHistory,hgk.createdAt as createdHistory,hgk.note,
 hgk.quaPercentage, hgk.yeaPercentage, gk.name as nameGoalKr, hgk.to, hgk.from, hgk.status
-from historygoalsuserkrs as hgk
+from historyGoalsUserKrs as hgk
 join goalsUsersKrs as gk on hgk.idGoalsUserKr=gk.id 
 where hgk.idCompany=4  and hgk.idGoalsUserKr=12;
 
@@ -236,7 +236,7 @@ select tk.id as idTask, tk.name as nameTask,
 tku.done, tku.description, u.id as idUser, u.name as nameUser,
 tu.idTeam as idTeam, t.name as nameTeam, pgt.idGoal,
 tku.createdAt, tku.updatedAt, tk.finalDate
-from taskusers as tku join tasks as tk on tku.idTask=tk.id
+from taskUsers as tku join tasks as tk on tku.idTask=tk.id
 join teamUsers as tu on tku.idTeamUser=tu.id
 join users as u on tu.idUser=u.id
 join teams as t on tu.idTeam=t.id

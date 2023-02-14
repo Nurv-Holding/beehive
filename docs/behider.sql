@@ -107,10 +107,10 @@ INSERT INTO `processgoalstask` (`id`, `idCompany`, `idTask`, `idGoal`, `done`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `processtaskusers`
+-- Estrutura da tabela `processtaskUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `processtaskusers` (
+CREATE TABLE IF NOT EXISTS `processtaskUsers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idTask` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
@@ -128,10 +128,10 @@ CREATE TABLE IF NOT EXISTS `processtaskusers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Extraindo dados da tabela `processtaskusers`
+-- Extraindo dados da tabela `processtaskUsers`
 --
 
-INSERT INTO `processtaskusers` (`id`, `idTask`, `idUser`, `idProcessGoalsTask`, `descriptions`, `done`, `createdAt`, `updatedAt`, `idTeam`) VALUES
+INSERT INTO `processtaskUsers` (`id`, `idTask`, `idUser`, `idProcessGoalsTask`, `descriptions`, `done`, `createdAt`, `updatedAt`, `idTeam`) VALUES
 (1, 2, 3, 1, 'gggggggggg', 0, '2022-10-28 14:17:19.468', '2022-10-28 14:17:19.468', 1);
 
 -- --------------------------------------------------------
@@ -338,9 +338,9 @@ ALTER TABLE `processgoalstask`
   ADD CONSTRAINT `processGoalsTask_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `processtaskusers`
+-- Limitadores para a tabela `processtaskUsers`
 --
-ALTER TABLE `processtaskusers`
+ALTER TABLE `processtaskUsers`
   ADD CONSTRAINT `ProcessTaskUsers_idTeam_fkey` FOREIGN KEY (`idTeam`) REFERENCES `teams` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `ProcessTaskUsers_idProcessGoalsTask_fkey` FOREIGN KEY (`idProcessGoalsTask`) REFERENCES `processgoalstask` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `ProcessTaskUsers_idTask_fkey` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`id`) ON UPDATE CASCADE,
