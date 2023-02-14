@@ -1,8 +1,0 @@
--- AlterTable
-ALTER TABLE `goalkrs` MODIFY `done` INTEGER NOT NULL DEFAULT 0;
-
--- AlterTable
-ALTER TABLE `goals` MODIFY `done` INTEGER NOT NULL DEFAULT 0;
-
--- AlterTable
-ALTER TABLE `goalteamkrs` ADD COLUMN `done` INTEGER NOT NULL DEFAULT 0;
