@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ContextCompany } from "../../../context/ContextCompany";
 import EditUser from "../../EditUser";
@@ -7,8 +7,14 @@ import EditUser from "../../EditUser";
 const ListUsers = () => {
     const {users, payload, idCompany, profiles } = useContext(ContextCompany)
     const [item, setItem] = useState(null)
+    const [message, setMessage] = useState("")
 
     const navigate = useNavigate()
+
+    const openModal = (item) => {
+        setItem(item)
+        setMessage("")
+    }
 
     const routerBack = () => {
         navigate(`/company/${idCompany}/users`)
@@ -17,7 +23,12 @@ const ListUsers = () => {
     return (
         <>
             <main className='flex flex-col items-center gap-8 relative text-black'>
-                <EditUser idRef={"editUser"} item={item} />
+                <EditUser 
+                    idRef={"editUser"} 
+                    item={item} 
+                    message={message} 
+                    setMessage={setMessage} 
+                />
                 <div className='flex items-center mt-8'>
                     <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
                         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -50,12 +61,12 @@ const ListUsers = () => {
                                                     <td>{user.name}</td>
                                                     <td>{user.email}</td>
                                                     <td>{user.occupation}</td>
-                                                    <td>{`${(profiles || []).find(e => e.id === user.idProfile).name === "userCorporate"? "Usuário": "Administrador"}`}</td>
+                                                    <td>{`${(profiles || []).find(e => e.id === user.idProfile)?.name === "userCorporate"? "Usuário": "Administrador"}`}</td>
                                                     <td>{moment(user?.admissionDate).format('DD/MM/YY')}</td>
                                                     <td>{`${user.status? "Até o momento": moment(user?.updatedAt).format('DD/MM/YY')}`}</td>
                                                     <td>
                                                         {payload?.nameProfile !== "userCorporate"?
-                                                        <button onClick={() => setItem(user)} type="button" className='bg-bee-blue-clean px-2 py-[3px] rounded-md text-white text-xs cursor-pointer hover:bg-sky-900' data-bs-toggle="modal" data-bs-target="#editUser"> 
+                                                        <button onClick={() => openModal(user)} type="button" className='bg-bee-blue-clean px-2 py-[3px] rounded-md text-white text-xs cursor-pointer hover:bg-sky-900' data-bs-toggle="modal" data-bs-target="#editUser"> 
                                                             Editar 
                                                         </button>:
                                                         "Nenhuma ação permitida"

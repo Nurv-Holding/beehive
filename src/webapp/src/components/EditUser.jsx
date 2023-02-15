@@ -1,16 +1,22 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import usersApi from "../api/usersApi"
 import { ContextCompany } from "../context/ContextCompany"
 import NewModal from "./CompanyMenuPanel/Goals/components/NewModal"
 
-const EditUser = ({idRef, item}) => {
+const EditUser = ({idRef, item, message, setMessage}) => {
     const {profiles, payload, idCompany} = useContext(ContextCompany)
     const [searchParams, setSearchParams] = useSearchParams()
     const [idProfile, setIdProfile] = useState(item?.idProfile)
     const [status, setStatus] = useState(item?.status)
-    const [message, setMessage] = useState("")
     const navigate = useNavigate()
+    const update = searchParams.get('update')
+
+    useEffect(() => {
+        setIdProfile(item?.idProfile)
+        setStatus(item?.status)
+
+    },[update, item])
 
     const updateUser = (event) => {
         event.preventDefault()
