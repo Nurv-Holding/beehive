@@ -17,8 +17,9 @@ const Login = () => {
 
     const login = async (event) => {
         event.preventDefault()
+        setMessage("")
         setLoading(true)
-
+        
         searchParams.delete('update')
         setSearchParams(searchParams)
 
@@ -26,7 +27,7 @@ const Login = () => {
             setLoading(false)
             setMessage("Precisa preencher os campos")
 
-        }else
+        }else{
             setLoading(true)
             usersApi.authenticate(user)
                 .then(() => {
@@ -39,7 +40,6 @@ const Login = () => {
                     setLoading(false)
                     navigate("/")
                     
-
                 })
                 .catch((error) => {
                     if (error?.response?.data === "Invalid username or passwords")
@@ -49,6 +49,8 @@ const Login = () => {
                         setMessage("Algo deu errado!")
 
                 })
+        }
+
     }
 
     return (
