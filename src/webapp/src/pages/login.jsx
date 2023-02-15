@@ -17,14 +17,18 @@ const Login = () => {
 
     const login = async (event) => {
         event.preventDefault()
-
+        setMessage("")
+        setLoading(true)
+        
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        if (user.email === "" || user.password === "")
+        if (user.email === "" || user.password === ""){
+            setLoading(false)
             setMessage("Precisa preencher os campos")
 
-        else
+        }else{
+            setLoading(true)
             usersApi.authenticate(user)
                 .then(() => {
                     setMessage("Time adicionado sucesso")
@@ -33,9 +37,9 @@ const Login = () => {
                         search: `?update=${true}`
                     })
 
+                    setLoading(false)
                     navigate("/")
-                    setLoading(true)
-
+                    
                 })
                 .catch((error) => {
                     if (error?.response?.data === "Invalid username or passwords")
@@ -45,6 +49,8 @@ const Login = () => {
                         setMessage("Algo deu errado!")
 
                 })
+        }
+
     }
 
     return (
