@@ -1,11 +1,11 @@
 import moment from "moment";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ContextCompany } from "../../../context/ContextCompany";
 import EditUser from "../../EditUser";
 
 const ListUsers = () => {
-    const {users, payload, idCompany } = useContext(ContextCompany)
+    const {users, payload, idCompany, profiles } = useContext(ContextCompany)
     const [item, setItem] = useState(null)
 
     const navigate = useNavigate()
@@ -36,6 +36,7 @@ const ListUsers = () => {
                                             <th className='container-title-grid'>Nome</th>
                                             <th className='container-title-grid'>Email</th>
                                             <th className='container-title-grid'>Cargo</th>
+                                            <th className='container-title-grid'>Perfil</th>
                                             <th className='container-title-grid'>Data de admissão</th>
                                             <th className='container-title-grid'>Data de saída</th>
                                             <th className='container-title-grid'>Ações</th>
@@ -49,6 +50,7 @@ const ListUsers = () => {
                                                     <td>{user.name}</td>
                                                     <td>{user.email}</td>
                                                     <td>{user.occupation}</td>
+                                                    <td>{`${(profiles || []).find(e => e.id === user.idProfile).name === "userCorporate"? "Usuário": "Administrador"}`}</td>
                                                     <td>{moment(user?.admissionDate).format('DD/MM/YY')}</td>
                                                     <td>{`${user.status? "Até o momento": moment(user?.updatedAt).format('DD/MM/YY')}`}</td>
                                                     <td>

@@ -72,7 +72,7 @@ const Login = () => {
                         :
                         <button className="form-submit-button" type="submit">Entrar no portal</button>
                     }
-
+                    
                     <span className={`text-center`}> {message} </span>
                 </form>
             </div >
