@@ -17,14 +17,16 @@ const Login = () => {
 
     const login = async (event) => {
         event.preventDefault()
+        setLoading(true)
 
         searchParams.delete('update')
         setSearchParams(searchParams)
 
-        if (user.email === "" || user.password === "")
+        if (user.email === "" || user.password === ""){
+            setLoading(false)
             setMessage("Precisa preencher os campos")
 
-        else
+        }else
             setLoading(true)
             usersApi.authenticate(user)
                 .then(() => {
