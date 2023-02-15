@@ -25,6 +25,7 @@ const Login = () => {
             setMessage("Precisa preencher os campos")
 
         else
+            setLoading(true)
             usersApi.authenticate(user)
                 .then(() => {
                     setMessage("Time adicionado sucesso")
@@ -33,8 +34,9 @@ const Login = () => {
                         search: `?update=${true}`
                     })
 
+                    setLoading(false)
                     navigate("/")
-                    setLoading(true)
+                    
 
                 })
                 .catch((error) => {
