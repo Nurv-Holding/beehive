@@ -34,6 +34,8 @@ const ModalMembersTeam = ({idRef, idTeam, users}) => {
 
                 <div className="gap-4">
                     <ul className="text-black font-medium flex flex-col gap-1">
+                        {allTeamsAndUsers?
+                        <>
                         {(allTeamsAndUsers || []).length === 0?
                         "Ainda não existe integrantes"
                         :allTeamsAndUsers.map((member) => {
@@ -41,6 +43,10 @@ const ModalMembersTeam = ({idRef, idTeam, users}) => {
                                 <li> {member?.nameUser} </li>
                             )
                         })}
+                        </>
+                        :
+                        <> Aguarde... </>
+                        }
                     </ul>
                 </div>
             </div>

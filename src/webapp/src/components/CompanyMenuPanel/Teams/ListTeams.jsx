@@ -7,7 +7,7 @@ import { ContextCompany } from '../../../context/ContextCompany'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 import ModalMembersTeam from '../../ModalMembersTeam'
 
-function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers, payload }) {
+function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, payload }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextCompany)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
@@ -85,6 +85,8 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers, 
         <h1 className='text-3xl text-bee-blue-clean font-bold text-center p-4'>OKRs</h1>
 
         <div className='grid grid-cols-3 gap-3 w-[90%] mx-auto px-3 mb-4'>
+          {teamByTeam?
+          <>
           {(teamByTeam || []).map((team) => {
             return (
               <>
@@ -129,6 +131,11 @@ function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers, 
               </>
             )
           })}
+          </>
+          :
+          <> <span className='text-black'>Aguarde...</span> </>
+          }
+
         </div>
       </div>
 

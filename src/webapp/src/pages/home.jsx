@@ -13,6 +13,7 @@ function Home() {
   const [companies, setCompanies] = useState([])
   const [searchParams] = useSearchParams()
   const [newPayload, setPayload] = useState(null)
+  const [loading, setLoading] = useState(false)
   const update = searchParams.get('update')
 
   useEffect(() => {
@@ -21,15 +22,19 @@ function Home() {
 
     setPayload(() => payload)
     const handlerCompanies = async () => {
-      const { data } = await companiesApi.getAll()
+      setLoading(true)
 
+      const { data } = await companiesApi.getAll()
+        
       if (payload?.nameProfile === "adminMaster")
         setCompanies(data)
+      
       else
         setCompanies(payload?.idCompany ? (data || [])?.filter(e => e.id === payload?.idCompany) : data)
+        
     }
 
-    handlerCompanies()
+    handlerCompanies().then(() => setLoading(false))
 
   }, [update])
 
@@ -49,7 +54,7 @@ function Home() {
             </div>
 
             <div className='flex flex-col'>
-              <CompaniesList companies={companies} />
+              <CompaniesList companies={companies} loading={loading} />
             </div>
           </div>
         </main>

@@ -54,6 +54,9 @@ export const ContextUserProvider = ({ children }) => {
     const [profile, setProfile] = useState(null)
     const [profiles, setProfiles] = useState([])
     const [tasksUser, setTasksUser] = useState([])
+    const [teamByTeam, setTeamByTeam] = useState([])
+    const [teamsByKrs, setTeamsByKrs] = useState([])
+    const [allTeams, setAllTeams] = useState([])
     
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -63,7 +66,22 @@ export const ContextUserProvider = ({ children }) => {
         const handleTasksUser = async () => {
             const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
             setTasksUser(data)
-          }
+        }
+
+        const handleTeamsByKrs = async () => {
+            const { data } = await teamsApi.getAllTeamsByKrs(idCompany)
+            setTeamsByKrs(data)
+        }
+
+        const handleTeamsByTeams = async () => {
+            const { data } = await teamsApi.getByTeams(idCompany)
+            setTeamByTeam(data)
+        }
+
+        const handleTeamsByGoals = async () => {
+            const { data } = await teamsApi.getAllTeams(idCompany)
+            setAllTeams(data)
+        }
 
         const getOneProfile = async () => {
             const { data } = await profilesApi.getById(payload?.idProfile)
@@ -297,6 +315,9 @@ export const ContextUserProvider = ({ children }) => {
         returnNewGoalUsersAllKrs()
         handlerProfiles()
         handleTasksUser()
+        handleTeamsByTeams()
+        handleTeamsByKrs()
+        handleTeamsByGoals()
         
     },[idCompany, idGoal, update, idUser])
 
@@ -342,7 +363,10 @@ export const ContextUserProvider = ({ children }) => {
                     newAllTeamsAndUsers,
                     profile,
                     profiles,
-                    tasksUser
+                    tasksUser,
+                    teamByTeam,
+                    teamsByKrs,
+                    allTeams
                 }
             }
         >

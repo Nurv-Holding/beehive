@@ -42,11 +42,13 @@ const Login = () => {
                     
                 })
                 .catch((error) => {
-                    if (error?.response?.data === "Invalid username or passwords")
+                    if (error?.response?.data === "Invalid username or passwords"){
+                        setLoading(false)
                         setMessage("Usuário ou senha não conferem!")
-
-                    else
+                    }else{
+                        setLoading(false)
                         setMessage("Algo deu errado!")
+                    }
 
                 })
         }
@@ -72,7 +74,7 @@ const Login = () => {
                         :
                         <button className="form-submit-button" type="submit">Entrar no portal</button>
                     }
-
+                    
                     <span className={`text-center`}> {message} </span>
                 </form>
             </div >

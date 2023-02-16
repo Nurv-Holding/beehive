@@ -1,15 +1,12 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import usersApi from "../api/usersApi"
 import { ContextCompany } from "../context/ContextCompany"
 import NewModal from "./CompanyMenuPanel/Goals/components/NewModal"
 
-const EditUser = ({idRef, item}) => {
+const EditUser = ({idRef, item, message, setMessage, idProfile, setIdProfile, status, setStatus}) => {
     const {profiles, payload, idCompany} = useContext(ContextCompany)
     const [searchParams, setSearchParams] = useSearchParams()
-    const [idProfile, setIdProfile] = useState(item?.idProfile)
-    const [status, setStatus] = useState(item?.status)
-    const [message, setMessage] = useState("")
     const navigate = useNavigate()
 
     const updateUser = (event) => {
@@ -48,8 +45,8 @@ const EditUser = ({idRef, item}) => {
                 <div>
                     <h1 className="text-center uppercase text-bee-strong-1 text-3xl font-bold"> Alterar o perfil </h1>
                     <select onChange={({ target }) => setIdProfile(parseInt(target?.value))} className="my-2">
-                        <option selected  value={item?.idProfile} > {`${(returnNewProfiles() || []).find(f => f.id === item?.idProfile)?.name === "userCorporate"? "Usuário": "Administrador"}`} </option>
-                        {(returnNewProfiles() || []).filter(f => f.id !== item?.idProfile).map((profile) => {
+                        <option selected disabled value={item?.idProfile} > Selecione um perfil </option>
+                        {(returnNewProfiles() || []).map((profile) => {
                             return(
                                 <option value={profile?.id} > {`${profile?.name === "userCorporate"? "Usuário": "Administrador"}`} </option>
                             )
@@ -61,8 +58,9 @@ const EditUser = ({idRef, item}) => {
                 <div>
                     <h1 className="text-center uppercase text-bee-strong-1 text-3xl font-bold"> Editar o status </h1>
                     <select onChange={({ target }) => setStatus(parseInt(target?.value))} className="my-2" name="" id="">
-                        <option selected value={item?.status? 1: 0}> {`${item?.status? "Ativo": "Inativo"}`} </option>
-                        <option value={`${item?.status? 0: 1}`}> {`${item?.status? "Inativo": "Ativo"}`} </option>
+                        <option selected disabled > Selecione um status </option>
+                        <option value={1}> Ativo </option>
+                        <option value={0}> Inativo </option>
                     </select>
                 </div>
 
