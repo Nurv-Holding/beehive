@@ -8,12 +8,16 @@ const ListUsers = () => {
     const {users, payload, idCompany, profiles } = useContext(ContextCompany)
     const [item, setItem] = useState(null)
     const [message, setMessage] = useState("")
+    const [idProfile, setIdProfile] = useState(item?.idProfile)
+    const [status, setStatus] = useState(item?.status)
 
     const navigate = useNavigate()
 
     const openModal = (item) => {
         setItem(item)
         setMessage("")
+        setIdProfile(item?.idProfile)
+        setStatus(item?.status)
     }
 
     const routerBack = () => {
@@ -27,7 +31,11 @@ const ListUsers = () => {
                     idRef={"editUser"} 
                     item={item} 
                     message={message} 
-                    setMessage={setMessage} 
+                    setMessage={setMessage}
+                    idProfile={idProfile}
+                    setIdProfile={setIdProfile}
+                    status={status}
+                    setStatus={setStatus}
                 />
                 <div className='flex items-center mt-8'>
                     <button onClick={routerBack} className="p-3 text-xl shadow-md rounded-full flex justify-center items-center bg-bee-blue-clean hover:bg-bee-blue-strong hover:text-white hover:cursor-pointer absolute m-2 left-12">
