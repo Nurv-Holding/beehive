@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function CompaniesList({ companies }) {
+function CompaniesList({ companies, loading }) {
 
     return (
         <div className='bg-white rounded-md shadow-md flex flex-col p-8 min-h-[475px]'>
@@ -8,6 +8,8 @@ function CompaniesList({ companies }) {
 
             <div>
                 <ul className='flex flex-col gap-2'>
+                    {!loading?
+                    <>
                     {(companies || []).map((company) => {
                         return (
                             <Link className='w-full text-left bg-bee-blue-clean hover:bg-bee-blue-strong p-2 rounded-md text-white text-sm font-medium' to={`/company/${company.id}`}>
@@ -15,6 +17,11 @@ function CompaniesList({ companies }) {
                             </Link>
                         )
                     })}
+                    </>
+                    :
+                    <> Aguarde... </>
+                    }
+
                 </ul>
             </div>
         </div>
