@@ -7,7 +7,7 @@ import { ContextCompany } from '../../../context/ContextCompany'
 import teamsUsersApi from '../../../api/teamsUsersApi'
 import ModalMembersTeam from '../../ModalMembersTeam'
 
-function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, allTeamsAndUsers, payload }) {
+function ListTeams({ allTeams, users, teamsByKrs, teamByTeam, payload }) {
   const { usersByCompany, teamUsers, idCompany } = useContext(ContextCompany)
   const [idTeam, setIdTeam] = useState(null)
   const [idUser, setIdUser] = useState(null)
