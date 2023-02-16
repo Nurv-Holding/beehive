@@ -1,47 +1,16 @@
-import { useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import teamsApi from '../api/teamsApi'
-import usersApi from '../api/usersApi'
-import teamsUsersApi from '../api/teamsUsersApi'
-import { useEffect } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import AddMembers from '../components/addMembers';
-
+import { ContextCompany } from '../context/ContextCompany';
 
 const TeamList = () => {
+    const {teams, teamUsers, usersByCompany} = useContext(ContextCompany)
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
-    const [teams, setTeams] = useState([])
-    const [users, setUsers] = useState([])
-    const [usersAndTeams, setUsersAndTeams] = useState([])
     const [idTeam, setIdTeam] = useState(null)
     const [idLeader, setIdLeader] = useState(null)
     const { idCompany } = useParams()
-    const [searchParams] = useSearchParams()
-    const update = searchParams.get('update')
-
-    useEffect(() => {
-        const handleTeams = async () => {
-            const { data } = await teamsApi.getAll(idCompany)
-            setTeams(data)
-        }
     
-        const handleUsersAndTeams = async () => {
-            const { data } = await teamsUsersApi.getAllTeamsAndUsers(idCompany)
-            setUsersAndTeams(data)
-        }
-    
-        const handleUsers = async () => {
-            const { data } = await usersApi.getAllByCompany(idCompany)
-    
-            setUsers(data)
-        }
-
-        handleTeams()
-        handleUsers()
-        handleUsersAndTeams()
-
-    }, [idCompany, update])
-
     const routerBack = () => {
         navigate(`/company/${idCompany}/teams`)
     }
@@ -78,28 +47,31 @@ const TeamList = () => {
                                             <th className='container-title-grid'>Líder</th>
                                         </tr>
                                     </thead>
-
+                                    {teams || usersByCompany?
                                     <tbody className='text-center'>
                                         {(teams || []).map((team) => {
                                             return (
                                                 <>
                                                     <tr>
                                                         <td onClick={() => openModal(team?.id, team?.leader)} className="cursor-pointer">{team?.name}</td>
-                                                        <td>{(users || []).filter(a => a?.id === team?.leader)[0]?.name}</td>
+                                                        <td>{(usersByCompany || []).filter(a => a?.id === team?.leader)[0]?.name}</td>
                                                     </tr>
                                                 </>
                                             )
                                         })}
                                     </tbody>
+                                    :
+                                    <> Aguarde... </>
+                                    }
+
                                 </table>
                                 <AddMembers
                                     isOpen={isOpen}
                                     closeModal={closeModal}
-                                    usersAndTeams={usersAndTeams}
-                                    users={users}
+                                    usersAndTeams={teamUsers}
+                                    users={usersByCompany}
                                     idTeam={idTeam}
                                     idCompany={idCompany}
-                                    update={update}
                                     idLeader={idLeader}
                                 />
                             </div>
