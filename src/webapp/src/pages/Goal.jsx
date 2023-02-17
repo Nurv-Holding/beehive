@@ -38,7 +38,8 @@ const Goal = () => {
     goalTeamsByTeam,
     goalTeamsKrs,
     goalKrsByGoal,
-    loadingGoal
+    loadingGoal,
+    loadingGoalKrs
   } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
@@ -384,6 +385,7 @@ const Goal = () => {
             goal={goal}
             redirectHistory={redirectHistory}
             path={path}
+            loadingGoalKrs={loadingGoalKrs}
             
           />
 

@@ -67,6 +67,7 @@ export const ContextUserProvider = ({ children }) => {
     const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
     const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
     const [goalKrsByGoal, setGoalKrsByGoal] = useState([])
+    const [loadingGoalKrs, setLoadingGoalKrs] = useState(false)
     
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -89,6 +90,8 @@ export const ContextUserProvider = ({ children }) => {
         }
 
         const handleGoalKrs = async () => {
+            setLoadingGoalKrs(true)
+
             const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
             setGoalKrsByGoal(data)
         }
@@ -374,7 +377,7 @@ export const ContextUserProvider = ({ children }) => {
         handleGoalTeamByKrs()
         handleGoalTeamsByTeam()
         handleGoalTeamsKrs()
-        handleGoalKrs()
+        handleGoalKrs().then(() => setLoadingGoalKrs(false))
         
     },[idCompany, idGoal, update, idUser])
 
@@ -405,6 +408,7 @@ export const ContextUserProvider = ({ children }) => {
                     newGoalUsersKrs,
                     goalKrs,
                     goalKrsByGoal,
+                    loadingGoalKrs,
                     krs,
                     goalUserKrs,
                     teamsAndUsersByGoal,

@@ -18,7 +18,8 @@ function GoalKrs({
   redirectHistory,
   goal,
   payload,
-  path
+  path,
+  loadingGoalKrs
 }) {
 
   let [isOpen, setIsOpen] = useState(false)
@@ -143,6 +144,8 @@ function GoalKrs({
   }
 
   return (
+    <>
+    {!loadingGoalKrs?
     <>
       {(goalKrs || []).map((goalKr, i) => {
         return (
@@ -278,6 +281,10 @@ function GoalKrs({
           </div>
         )
       })}
+    </>
+    :
+    <> <span className="text-black"> Aguarde... </span> </>
+    }
     </>
   )
 }
