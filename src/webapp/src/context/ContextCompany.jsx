@@ -26,6 +26,7 @@ export const ContextCompany = createContext()
 export const ContextUserProvider = ({ children }) => {
     const [goals, setGoals] = useState([])
     const [goal, setGoal] = useState(null)
+    const [loadingGoal, setLoadingGoal] = useState(false)
     const [usersByCompany, setUsersByCompany] = useState([])
     const [taskUsers, setTasksUsers] = useState([])
     const [users, setUsers] = useState([])
@@ -262,11 +263,15 @@ export const ContextUserProvider = ({ children }) => {
         }
     
         const handlerGoal = async () => {
+            setLoadingGoal(true)
+
             if(idGoal){
                 const {data} = await goalsApi.getById(idGoal, idCompany)
                 setGoal(data)
+
             }else{
                 setGoal(null)
+                
             }
         }
     
@@ -351,7 +356,7 @@ export const ContextUserProvider = ({ children }) => {
         handlerTeamsAndUsersByGoal()
         handlerHistoryGoalUsersKrs()
         handlerGoalUsers()
-        handlerGoal()
+        handlerGoal().then(() => setLoadingGoal(false))
         handlerTasksUsers()
         handlerTeamsAndUsers()
         handlerFutureVisions()
@@ -425,7 +430,8 @@ export const ContextUserProvider = ({ children }) => {
                     goalTeamByGoalTeam,
                     goalTeamByKrs,
                     goalTeamsByTeam,
-                    goalTeamsKrs
+                    goalTeamsKrs,
+                    loadingGoal
                 }
             }
         >

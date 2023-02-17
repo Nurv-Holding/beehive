@@ -37,7 +37,8 @@ const Goal = () => {
     goal,
     goalTeamsByTeam,
     goalTeamsKrs,
-    goalKrsByGoal
+    goalKrsByGoal,
+    loadingGoal
   } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
@@ -321,6 +322,8 @@ const Goal = () => {
             <TitleCompany className='text-bee' name={company?.name} />
           </div>
           <div className='container-two-percentage'>
+            {!loadingGoal?
+            <>
             <div className='container-percentage-okr flex flex-col'>
               <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
               <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id === goal?.author)[0]?.name} </span>
@@ -362,6 +365,10 @@ const Goal = () => {
                   finishGoalTeamKr={finishGoalTeamKr}
                 />
               </div>
+            }
+            </>
+            :
+            <> <span className='text-black'> Aguarde... </span> </>
             }
           </div>
 
