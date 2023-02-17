@@ -65,6 +65,7 @@ export const ContextUserProvider = ({ children }) => {
     const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
     const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
     const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
+    const [loadingGoalTeamsByTeam, setLoadingGoalTeamsByTeam] = useState(false)
     const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
     const [goalKrsByGoal, setGoalKrsByGoal] = useState([])
     const [loadingGoalKrs, setLoadingGoalKrs] = useState(false)
@@ -103,6 +104,8 @@ export const ContextUserProvider = ({ children }) => {
         }
 
         const handleGoalTeamsByTeam = async () => {
+            setLoadingGoalTeamsByTeam(true)
+
             const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
             setGoalTeamsByTeam(data)
         }
@@ -375,7 +378,7 @@ export const ContextUserProvider = ({ children }) => {
         handleHistoryGoalKrs()
         handleGoalTeamByGoalTeam()
         handleGoalTeamByKrs()
-        handleGoalTeamsByTeam()
+        handleGoalTeamsByTeam().then(() => setLoadingGoalTeamsByTeam(false))
         handleGoalTeamsKrs()
         handleGoalKrs().then(() => setLoadingGoalKrs(false))
         
@@ -435,7 +438,8 @@ export const ContextUserProvider = ({ children }) => {
                     goalTeamByKrs,
                     goalTeamsByTeam,
                     goalTeamsKrs,
-                    loadingGoal
+                    loadingGoal,
+                    loadingGoalTeamsByTeam
                 }
             }
         >

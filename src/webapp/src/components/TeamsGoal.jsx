@@ -15,9 +15,10 @@ import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 import FinishTeamKr from './FinishTeamKr';
 
-function TeamsGoal({
+const TeamsGoal = ({
   goalTeamsByTeam,
   idCompany,
+  loadingGoalTeamsByTeam,
   idGoal,
   redirectHistory,
   createGoalsTeam,
@@ -40,7 +41,7 @@ function TeamsGoal({
   navigate,
   payload,
   path
-}) {
+}) => {
 
   const [krs, setKrs] = useState({})
   const [isOpenTeamKr, setIsOpenTeamKr] = useState(false)
@@ -262,7 +263,9 @@ function TeamsGoal({
 
   return (
     <>
-      {(goalTeamsByTeam || []).map((goalTeams, i) => {
+      {!loadingGoalTeamsByTeam?
+      <>
+            {(goalTeamsByTeam || []).map((goalTeams, i) => {
         return (
           <>
             <Disclosure key={i}>
@@ -428,6 +431,10 @@ function TeamsGoal({
           </>
         )
       })}
+      </>
+      :
+      <> <span className='text-black'> Aguarde... </span> </>
+      }
     </>
   );
 }
