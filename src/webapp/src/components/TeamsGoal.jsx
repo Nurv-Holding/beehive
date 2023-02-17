@@ -310,7 +310,7 @@ function TeamsGoal({
                           <span className='capitalize font-semibold text-black text-[20px]'> 
                             {x.nameGoalTeam}
                           </span>
-                          {(x.idGoalTeam && !(!!goal.status)) && 
+                          {(x.idGoalTeam && !(!!goal?.status)) && 
                             <span className='cursor-pointer font-semibold text-bee-blue-clean hover:text-bee-blue-strong flex items-center gap-[2px]' onClick={() => openModalTeamKr(x)}>
                               Adicionar Krs
                               <ion-icon name="add-outline"></ion-icon>
@@ -364,7 +364,7 @@ function TeamsGoal({
                                         <ion-icon name="add-outline"></ion-icon>
                                       </span>
                                     </div>
-                                    {!(!!goal.status) &&
+                                    {!(!!goal?.status) &&
                                       <div>
                                         <span onClick={() => openAddTaskModal(kr)} className='cursor-pointer font-semibold text-bee-blue-clean hover:text-bee-blue-strong flex items-center gap-[2px]'>
                                           Adicionar tarefas

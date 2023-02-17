@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -6,7 +5,6 @@ import AddKr from '../components/addKr';
 import GoalKrs from '../components/GoalKrs';
 import TeamsGoal from '../components/TeamsGoal';
 import { ContextCompany } from '../context/ContextCompany';
-import goalsApi from '../api/goalsApi';
 import goalKrsApi from '../api/goalKrsApi';
 import goalsTeamApi from '../api/goalsTeamApi';
 import goalTeamsKrsApi from '../api/goalTeamsKrsApi';
@@ -19,7 +17,7 @@ import { calcPercentage } from '../utils/utilis';
 import TitleCompany from '../components/TitleCompany';
 import tasksApi from '../api/tasksApi';
 
-function Goal() {
+const Goal = () => {
   const {
     idGoal,
     idCompany,
@@ -31,16 +29,17 @@ function Goal() {
     payload,
     token,
     teamUsers,
-    tasksUser } = useContext(ContextCompany)
+    tasksUser,
+    historyGoalTeamKrs,
+    historyGoalKrs,
+    goalTeamByGoalTeam,
+    goalTeamByKrs,
+    goal,
+    goalTeamsByTeam,
+    goalTeamsKrs,
+    goalKrsByGoal
+  } = useContext(ContextCompany)
   const [message, setMessage] = useState("Aqui vai uma mensagem")
-  const [goal, setGoal] = useState({})
-  const [goalKrs, setGoalKrs] = useState([])
-  const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
-  const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
-  const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
-  const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
-  const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
-  const [historyGoalKrs, setHistoryGoalKrs] = useState([])
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -49,68 +48,13 @@ function Goal() {
   const [isOpenGoalTeam, setIsOpenGoalTeam] = useState(false)
   const [isOpenCloseGoal, setIsOpenCloseGoal] = useState(false)
   const [idTeam, setIdTeam] = useState(null)
-
   const [noteTeamKr, setNoteTeamKr] = useState("")
   const [openModalFinishKr, setOpenModalFinishKr] = useState(false)
   const update = searchParams.get('update')
 
-  useEffect(() => {
-
-    const handleHistoryGoalTeamKrs = async () => {
-      const { data } = await historyGoalTeamKrApi.getAllByKrs()
-      setHistoryGoalTeamKrs(data)
-  
-    }
-  
-    const handleHistoryGoalKrs = async () => {
-      const { data } = await historyGoalKrApi.getAll(idCompany)
-      setHistoryGoalKrs(data)
-    }
-  
-    const handleGoalTeamByGoalTeam = async () => {
-      const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
-      setGoalTeamByGoalTeam(data)
-    }
-  
-    const handleGoalTeamByKrs = async () => {
-      const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
-      setGoalTeamByKrs(data)
-    }
-  
-    const handleGoal = async () => {
-      const { data } = await goalsApi.getById(idGoal, idCompany)
-      setGoal(data)
-    }
-  
-    const handleGoalTeamsByTeam = async () => {
-      const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
-      setGoalTeamsByTeam(data)
-    }
-  
-    const handleGoalTeamsKrs = async () => {
-      const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
-      setGoalTeamsKrs(data)
-    }
-  
-    const handleGoalKrs = async () => {
-      const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
-      setGoalKrs(data)
-    }
-
-    handleGoal()
-    handleGoalKrs()
-    handleGoalTeamsByTeam()
-    handleGoalTeamsKrs()
-    handleGoalTeamByGoalTeam()
-    handleGoalTeamByKrs()
-    handleHistoryGoalTeamKrs()
-    handleHistoryGoalKrs()
-
-  }, [idGoal, idCompany, update])
-
   const path = `/company/${idCompany}/goals/${idGoal}`
 
-  function updateData() {
+  const updateData = () => {
     setIsOpen(false)
   }
 
@@ -118,36 +62,36 @@ function Goal() {
     setOpenModalFinishKr(false)
   }
 
-  function closeModalGoalTeam() {
+  const closeModalGoalTeam = () => {
     setIsOpenGoalTeam(false)
   }
 
-  function openModalGoalTeam(id) {
+  const openModalGoalTeam = (id) => {
     setIsOpenGoalTeam(true)
     setIdTeam(id)
   }
 
-  function closeModal() {
+  const closeModal = () => {
     setIsOpen(false)
   }
 
-  function closeModalTeam() {
+  const closeModalTeam = () => {
     setIsOpenTeam(false)
   }
 
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true)
   }
 
-  function openModalTeam() {
+  const openModalTeam = () => {
     setIsOpenTeam(true)
   }
 
-  function openModalCloseGoal() {
+  const openModalCloseGoal = () => {
     setIsOpenCloseGoal(true)
   }
 
-  function closeModalCloseGoal() {
+  const closeModalCloseGoal = () => {
     setIsOpenCloseGoal(false)
   }
 
@@ -381,11 +325,11 @@ function Goal() {
               <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
               <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id === goal?.author)[0]?.name} </span>
             </div>
-            {!(!!goal.status) &&
+            {!(!!goal?.status) &&
               <div className='container-percentage-okr flex flex-row justify-end gap-4'>
                 <AddKr
                   message={message}
-                  nameGoal={goal.name}
+                  nameGoal={goal?.name}
                   handleSubmit={handleSubmit}
                   modelChange={modelChange}
                   isOpen={isOpen}
@@ -407,14 +351,14 @@ function Goal() {
 
                 <CloseGoal
                   handleSubmit={handleSubmit}
-                  nameGoal={goal.name}
+                  nameGoal={goal?.name}
                   isOpen={isOpenCloseGoal}
                   closeModal={closeModalCloseGoal}
                   openModal={openModalCloseGoal}
                   idGoal={idGoal}
                   idCompany={idCompany}
                   payload={payload}
-                  goalKrs={goalKrs}
+                  goalKrs={goalKrsByGoal}
                   finishGoalTeamKr={finishGoalTeamKr}
                 />
               </div>
@@ -422,7 +366,7 @@ function Goal() {
           </div>
 
           <GoalKrs
-            goalKrs={goalKrs}
+            goalKrs={goalKrsByGoal}
             updateData={updateData}
             update={update}
             idCompany={idCompany}

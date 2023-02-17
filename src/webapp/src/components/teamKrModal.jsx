@@ -25,7 +25,7 @@ const TeamKrModal = ({
                     Atualizado em: {moment(krs.updateGoalsTeamKrs).format("DD/MM/YY")}
                 </span>
                 <div className="flex flex-col gap-[2%] mt-4">
-                    {!(!!goal.status)&&
+                    {!(!!goal?.status)&&
                     <div className="flex gap-2 items-center">
                         <div className="flex flex-col gap-2">
                             <input onChange={stateDone} type="text" className="input-style" name="done" placeholder="Atualizar os dados" />

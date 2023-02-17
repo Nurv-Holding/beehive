@@ -80,10 +80,10 @@ const ListTasks = ({
                     <span> {!task?.nameUser? "Ainda não existe usuário para executar a tarefa": task?.nameUser} </span>
                     {task.nameUser &&
                     <>
-                    <span className={`${calcDate(task.finalDate)}` < 0 && !task.done && "text-red-400"}> 
-                        {task.done? `Tarefa concluída em: ${moment(task.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
+                    <span className={`${calcDate(task?.finalDate)}` < 0 && !task.done && "text-red-400"}> 
+                        {task.done? `Tarefa concluída em: ${moment(task?.updatedAt).format("DD/MM")}`:calcDate(task.finalDate) > 0? `Faltam ${calcDate(task.finalDate)}`: `${calcDate(task.finalDate) * -1} dias de atraso`} 
                     </span>
-                    {!(!!goal.status) && !task.done?
+                    {!(!!goal?.status) && !task?.done?
                     <div>
                         {!task?.done &&
                         <button className="bg-bee-blue-clean text-white py-1 px-3 rounded-lg text-sm" onClick={() => openTaskDone(task)}> Concluir </button>

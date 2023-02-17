@@ -18,6 +18,8 @@ import futureVisionApi from "../api/futureVisionApi"
 import principlesApi from "../api/principlesApi"
 import proposalsApi from "../api/proposalsApi"
 import profilesApi from "../api/profilesApi"
+import historyGoalTeamKrApi from "../api/historyGoalTeamKrApi"
+import historyGoalKrApi from "../api/historyGoalKrApi"
 
 export const ContextCompany = createContext()
 
@@ -57,6 +59,13 @@ export const ContextUserProvider = ({ children }) => {
     const [teamByTeam, setTeamByTeam] = useState([])
     const [teamsByKrs, setTeamsByKrs] = useState([])
     const [allTeams, setAllTeams] = useState([])
+    const [historyGoalTeamKrs, setHistoryGoalTeamKrs] = useState([])
+    const [historyGoalKrs, setHistoryGoalKrs] = useState([])
+    const [goalTeamByGoalTeam, setGoalTeamByGoalTeam] = useState([])
+    const [goalTeamByKrs, setGoalTeamByKrs] = useState([])
+    const [goalTeamsByTeam, setGoalTeamsByTeam] = useState([])
+    const [goalTeamsKrs, setGoalTeamsKrs] = useState([])
+    const [goalKrsByGoal, setGoalKrsByGoal] = useState([])
     
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -66,6 +75,42 @@ export const ContextUserProvider = ({ children }) => {
         const handleTasksUser = async () => {
             const { data } = await taskUsersApi.getByUserAndKrs(idCompany, idGoal)
             setTasksUser(data)
+        }
+
+        const handleGoalTeamByGoalTeam = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByGoalTeam(idCompany, idGoal)
+            setGoalTeamByGoalTeam(data)
+        }
+
+        const handleGoalTeamsKrs = async () => {
+            const { data } = await goalTeamsKrsApi.getByGoal(idCompany, idGoal)
+            setGoalTeamsKrs(data)
+        }
+
+        const handleGoalKrs = async () => {
+            const { data } = await goalKrsApi.getByGoal(idCompany, idGoal)
+            setGoalKrsByGoal(data)
+        }
+
+        const handleHistoryGoalTeamKrs = async () => {
+            const { data } = await historyGoalTeamKrApi.getAllByKrs()
+            setHistoryGoalTeamKrs(data)
+        
+        }
+
+        const handleGoalTeamsByTeam = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByTeam(idCompany, idGoal)
+            setGoalTeamsByTeam(data)
+        }
+
+        const handleGoalTeamByKrs = async () => {
+            const { data } = await goalTeamsKrsApi.getGroupByKrs(idCompany, idGoal)
+            setGoalTeamByKrs(data)
+        }
+
+        const handleHistoryGoalKrs = async () => {
+            const { data } = await historyGoalKrApi.getAll(idCompany)
+            setHistoryGoalKrs(data)
         }
 
         const handleTeamsByKrs = async () => {
@@ -221,7 +266,7 @@ export const ContextUserProvider = ({ children }) => {
                 const {data} = await goalsApi.getById(idGoal, idCompany)
                 setGoal(data)
             }else{
-                setGoal([])
+                setGoal(null)
             }
         }
     
@@ -318,6 +363,13 @@ export const ContextUserProvider = ({ children }) => {
         handleTeamsByTeams()
         handleTeamsByKrs()
         handleTeamsByGoals()
+        handleHistoryGoalTeamKrs()
+        handleHistoryGoalKrs()
+        handleGoalTeamByGoalTeam()
+        handleGoalTeamByKrs()
+        handleGoalTeamsByTeam()
+        handleGoalTeamsKrs()
+        handleGoalKrs()
         
     },[idCompany, idGoal, update, idUser])
 
@@ -347,6 +399,7 @@ export const ContextUserProvider = ({ children }) => {
                     newTeamsUser,
                     newGoalUsersKrs,
                     goalKrs,
+                    goalKrsByGoal,
                     krs,
                     goalUserKrs,
                     teamsAndUsersByGoal,
@@ -366,7 +419,13 @@ export const ContextUserProvider = ({ children }) => {
                     tasksUser,
                     teamByTeam,
                     teamsByKrs,
-                    allTeams
+                    allTeams,
+                    historyGoalTeamKrs,
+                    historyGoalKrs,
+                    goalTeamByGoalTeam,
+                    goalTeamByKrs,
+                    goalTeamsByTeam,
+                    goalTeamsKrs
                 }
             }
         >
