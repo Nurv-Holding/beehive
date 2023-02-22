@@ -23,8 +23,8 @@ const Goal = () => {
     idCompany,
     teams,
     modelChange,
-    item,
     users,
+    item,
     company,
     payload,
     token,
@@ -38,11 +38,10 @@ const Goal = () => {
     goalTeamsByTeam,
     goalTeamsKrs,
     goalKrsByGoal,
-    loadingGoal,
     loadingGoalKrs,
     loadingGoalTeamsByTeam
   } = useContext(ContextCompany)
-  const [message, setMessage] = useState("Aqui vai uma mensagem")
+  const [message, setMessage] = useState("")
   const [itemGoal, setItemGoal] = useState({ name: "", descriptions: "" })
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -53,7 +52,15 @@ const Goal = () => {
   const [idTeam, setIdTeam] = useState(null)
   const [noteTeamKr, setNoteTeamKr] = useState("")
   const [openModalFinishKr, setOpenModalFinishKr] = useState(false)
+  const objectKr = {}
+  const [itemKr, setItemKr] = useState(objectKr)
   const update = searchParams.get('update')
+
+  const changeModelKr = ({ target }) => {
+    setItemKr((state) => {
+      return {...state, [target.name]: target.value}
+    })
+  }
 
   const path = `/company/${idCompany}/goals/${idGoal}`
 
@@ -84,6 +91,7 @@ const Goal = () => {
 
   const openModal = () => {
     setIsOpen(true)
+    setMessage("")
   }
 
   const openModalTeam = () => {
@@ -264,52 +272,67 @@ const Goal = () => {
 
   }
 
-  const handleSubmit = async (event) => {
+  const createKr = async (event) => {
     event.preventDefault()
 
     searchParams.delete('update')
     setSearchParams(searchParams)
 
     const data = {
-      ...item,
+      ...itemKr,
       idGoal: parseInt(idGoal),
-      toQuarterly: parseInt(item.toQuarterly),
-      toYearly: parseInt(item.toQuarterly),
-      fromQuarterly: parseInt(item.fromQuarterly),
-      fromYearly: parseInt(item.fromYearly),
-      done: parseInt(item.toQuarterly),
+      toQuarterly: parseInt(itemKr.toQuarterly),
+      toYearly: parseInt(itemKr.toQuarterly),
+      fromQuarterly: parseInt(itemKr.fromQuarterly),
+      fromYearly: parseInt(itemKr.fromYearly),
+      done: parseInt(itemKr.toQuarterly),
       author: payload?.id
     }
 
-    const result = await goalKrsApi.create(idCompany, data)
-    const goalKr = result.data
+    console.log("item", itemKr)
 
-    const newData = {
-      idGoal: parseInt(idGoal),
-      idGoalKr: goalKr.id,
-      user: payload?.name,
-      quaPercentage: calcPercentage((goalKr?.done), goalKr?.fromQuarterly),
-      yeaPercentage: calcPercentage((goalKr?.done), goalKr?.fromYearly),
-      to: goalKr?.done,
-      from: data.done,
-      status: !!goalKr?.status,
-      note: "Iniciando Kr"
-    }
+    const result = await goalKrsApi.findByName(idCompany, itemKr?.name)
+    const verifyNameKr = result.data
 
-    historyGoalKrApi.create(idCompany, newData)
-      .then(() => {
-        setMessage("KR criado com sucesso")
-        navigate({
-          pathname: `${path}`,
-          search: `?update=${true}`
+    console.log("idCompany", idCompany)
+    console.log("name", itemKr?.name)
+    console.log("verifyNameKr", verifyNameKr)
+    
+    if(!verifyNameKr){
+      const result = await goalKrsApi.create(idCompany, data)
+      const goalKr = result.data
+  
+      const newData = {
+        idGoal: parseInt(idGoal),
+        idGoalKr: goalKr.id,
+        user: payload?.name,
+        quaPercentage: calcPercentage((goalKr?.done), goalKr?.fromQuarterly),
+        yeaPercentage: calcPercentage((goalKr?.done), goalKr?.fromYearly),
+        to: goalKr?.done,
+        from: data.done,
+        status: !!goalKr?.status,
+        note: "Iniciando Kr"
+      }
+  
+      historyGoalKrApi.create(idCompany, newData)
+        .then(() => {
+          setMessage("KR criado com sucesso")
+          navigate({
+            pathname: `${path}`,
+            search: `?update=${true}`
+          })
+  
+          closeModal()
+        })
+        .catch((error) => {
+          console.error(error)
+          setMessage("Algo deu errado!")
         })
 
-        closeModal()
-      })
-      .catch((error) => {
-        console.error(error)
-        setMessage("Algo deu errado!")
-      })
+    }else{
+      setMessage("Já existe Kr cadastrado com esse nome")
+    }
+
   }
 
   return (
@@ -324,9 +347,7 @@ const Goal = () => {
             <TitleCompany className='text-bee' name={company?.name} />
           </div>
           <div className='container-two-percentage'>
-            {!loadingGoal?
-            <>
-            <div className='container-percentage-okr flex flex-col'>
+          <div className='container-percentage-okr flex flex-col'>
               <span className='font-bold text-xl text-bee-strong-1 uppercase'>{goal?.name}</span>
               <span className='font-bold text-lg mt-2 text-bee-blue-clean'> Criado por: {(users || [])?.filter(e => e.id === goal?.author)[0]?.name} </span>
             </div>
@@ -335,12 +356,12 @@ const Goal = () => {
                 <AddKr
                   message={message}
                   nameGoal={goal?.name}
-                  handleSubmit={handleSubmit}
-                  modelChange={modelChange}
+                  handleSubmit={createKr}
+                  modelChange={changeModelKr}
                   isOpen={isOpen}
                   closeModal={closeModal}
                   openModal={openModal}
-                  item={item}
+                  item={itemKr}
                 />
 
                 <AddTeam
@@ -355,7 +376,7 @@ const Goal = () => {
                 />
 
                 <CloseGoal
-                  handleSubmit={handleSubmit}
+                  handleSubmit={createKr}
                   nameGoal={goal?.name}
                   isOpen={isOpenCloseGoal}
                   closeModal={closeModalCloseGoal}
@@ -367,10 +388,6 @@ const Goal = () => {
                   finishGoalTeamKr={finishGoalTeamKr}
                 />
               </div>
-            }
-            </>
-            :
-            <> <span className='text-black'> Aguarde... </span> </>
             }
           </div>
 

@@ -65,6 +65,7 @@ const TeamsGoal = ({
   }
 
   const openAddTaskModal = (items) => {
+    setMessage("")
     setAddTaskModal(true)
     setKrs(items)
   }
@@ -74,16 +75,19 @@ const TeamsGoal = ({
   }
 
   function openTeamKrModal(item) {
+    setMessage("")
     setIsOpenTeamKrModal(true)
     setKrs(item)
   }
 
   const openModalFinishTeamKr = (item) => {
+    setMessage("")
     setKrs(item)
     setOpenModalFinishKr(true)
   }
 
   function openModalTeamKr(item) {
+    setMessage("")
     setIsOpenTeamKr(true)
     setIdGoalsTeam(item?.idGoalTeam)
     setIdProcess(item?.idProcessGoalsTeams)
@@ -265,7 +269,7 @@ const TeamsGoal = ({
     <>
       {!loadingGoalTeamsByTeam?
       <>
-            {(goalTeamsByTeam || []).map((goalTeams, i) => {
+        {(goalTeamsByTeam || []).map((goalTeams, i) => {
         return (
           <>
             <Disclosure key={i}>

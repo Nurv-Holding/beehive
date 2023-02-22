@@ -7,7 +7,9 @@ function AddKr({
     closeModal,
     item,
     openModal, 
-    nameGoal }) {
+    nameGoal,
+    message
+ }) {
 
     return (
         <div>
@@ -61,6 +63,7 @@ function AddKr({
                             Adicionar
                         </button>
                     </div>
+                    <span> {message} </span>
                 </form>
             </Modal>
         </div>
