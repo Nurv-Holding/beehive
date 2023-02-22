@@ -93,6 +93,7 @@ const routes = (app) => {
         app.post("/goalsKrs/c/:idCompany",goalsKrsController.create)
         app.get("/goalsKrs/:id/c/:idCompany",goalsKrsController.getById)
         app.get("/goalsKrs/c/:idCompany",goalsKrsController.getAll)
+        app.get("/goalsKrs/by/name/:name/c/:idCompany",goalsKrsController.findByName)
         app.put("/goalsKrs/:id",goalsKrsController.update)
         app.delete("/goalsKrs/:id",goalsKrsController.remove)
 
