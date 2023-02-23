@@ -8,7 +8,8 @@ function AddKr({
     item,
     openModal, 
     nameGoal,
-    message
+    message,
+    loading
  }) {
 
     return (
@@ -59,9 +60,14 @@ function AddKr({
                     </div>
 
                     <div className="mt-4">
+                        {!loading?
                         <button className='submit-button' type="submit" >
                             Adicionar
                         </button>
+                        :
+                        <> <span> Aguarde... </span> </>
+                        }
+
                     </div>
                     <span> {message} </span>
                 </form>

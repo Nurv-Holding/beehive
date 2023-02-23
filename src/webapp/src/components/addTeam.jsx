@@ -7,6 +7,7 @@ const AddTeam = ({
     isOpen, 
     closeModal,
     openModal,
+    loading,
     teams }) => {
 
     return (
@@ -27,9 +28,13 @@ const AddTeam = ({
                         
                     </select>
                     <div className="mt-4">
+                    {!loading?
                         <button className='submit-button' type="submit" >
                             Adicionar
                         </button>
+                        :
+                        <> <span> Aguarde... </span> </>
+                        }
                         <span className={`text-center`}> {message} </span>
                     </div>
                 </form>
