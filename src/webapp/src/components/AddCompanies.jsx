@@ -4,7 +4,8 @@ import { useState } from 'react'
 import companiesApi from '../api/companiesApi'
 
 function AddCompanies() {  
-  let [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [company, setCompany] = useState({
     name:"",
     cnpj:""
@@ -30,6 +31,8 @@ function AddCompanies() {
   const createCompany = async (event) => {
     event.preventDefault()
 
+    setLoading(true)
+
     searchParams.delete('update')
     setSearchParams(searchParams)
 
@@ -41,11 +44,14 @@ function AddCompanies() {
         search: `?update=${true}`
       })
 
+      setLoading(false)
+
       closeModal()
     })
     .catch((error) => {
       console.error(error)
       setMessage("Algo deu errado!")
+      setLoading(false)
     })
   }
 
@@ -62,10 +68,15 @@ function AddCompanies() {
                 <input onChange={changeModel} required name='cnpj' type='text' className='input-style' placeholder="Digite o CNPJ da empresa"/>        
                 
                 <div className="mt-4">
-                    <button className='submit-button' type="submit" >
-                        Adicionar
-                    </button>
-                    <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
+                  {!loading?
+                  <button className='submit-button' type="submit" >
+                    Adicionar
+                  </button>
+                  :
+                  <> <span> Aguarde... </span> </>
+                  }
+
+                    <span> {message} </span>
                 </div>
             </form>
          </Modal>

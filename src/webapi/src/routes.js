@@ -58,6 +58,7 @@ const routes = (app) => {
     app.get("/companies/:id",companiesController.getById)
     app.get("/companies/c/:idCompany/goals",companiesController.getCompanyAndGoals)
     app.get("/companies",companiesController.getAll)
+    app.get("/companies/by/cnpj/:cnpj",companiesController.getByCnpj)
     app.put("/companies/:id",companiesController.update)
     app.delete("/companies/:id",companiesController.remove)
 
