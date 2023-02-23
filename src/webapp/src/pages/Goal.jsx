@@ -55,6 +55,7 @@ const Goal = () => {
   const objectKr = {}
   const [itemKr, setItemKr] = useState(objectKr)
   const update = searchParams.get('update')
+  const [loading, setLoading] = useState(false)
 
   const changeModelKr = ({ target }) => {
     setItemKr((state) => {
@@ -92,10 +93,13 @@ const Goal = () => {
   const openModal = () => {
     setIsOpen(true)
     setMessage("")
+    setLoading(false)
   }
 
   const openModalTeam = () => {
     setIsOpenTeam(true)
+    setLoading(false)
+    setMessage("")
   }
 
   const openModalCloseGoal = () => {
@@ -109,6 +113,8 @@ const Goal = () => {
   const addTeamInGoal = async (event) => {
     event.preventDefault()
 
+    setLoading(true)
+
     searchParams.delete('update')
     setSearchParams(searchParams)
 
@@ -120,9 +126,11 @@ const Goal = () => {
     const hasTeam = data.filter(e => e.idGoal === newIdGoal && e.idTeam === parseInt(idTeam))
 
     if (Object.keys(item).length === 0) {
+      setLoading(false)
       setMessage("Precisa selecionar um time")
 
     } else if (hasTeam.length !== 0) {
+      setLoading(false)
       setMessage("Time já selecionado")
 
     } else {
@@ -134,11 +142,14 @@ const Goal = () => {
             search: `?update=${true}`
           })
 
+          setLoading(false)
+
           closeModalTeam()
         })
         .catch((error) => {
           console.error(error)
           setMessage("Algo deu errado!")
+          setLoading(false)
         })
     }
   }
@@ -275,6 +286,8 @@ const Goal = () => {
   const createKr = async (event) => {
     event.preventDefault()
 
+    setLoading(true)
+
     searchParams.delete('update')
     setSearchParams(searchParams)
 
@@ -289,14 +302,8 @@ const Goal = () => {
       author: payload?.id
     }
 
-    console.log("item", itemKr)
-
     const result = await goalKrsApi.findByName(idCompany, itemKr?.name)
     const verifyNameKr = result.data
-
-    console.log("idCompany", idCompany)
-    console.log("name", itemKr?.name)
-    console.log("verifyNameKr", verifyNameKr)
     
     if(!verifyNameKr){
       const result = await goalKrsApi.create(idCompany, data)
@@ -321,16 +328,20 @@ const Goal = () => {
             pathname: `${path}`,
             search: `?update=${true}`
           })
+
+          setLoading(false)
   
           closeModal()
         })
         .catch((error) => {
           console.error(error)
           setMessage("Algo deu errado!")
+          setLoading(false)
         })
 
     }else{
       setMessage("Já existe Kr cadastrado com esse nome")
+      setLoading(false)
     }
 
   }
@@ -362,6 +373,7 @@ const Goal = () => {
                   closeModal={closeModal}
                   openModal={openModal}
                   item={itemKr}
+                  loading={loading}
                 />
 
                 <AddTeam
@@ -373,6 +385,7 @@ const Goal = () => {
                   teams={teams}
                   item={item}
                   addTeamInGoal={addTeamInGoal}
+                  loading={loading}
                 />
 
                 <CloseGoal

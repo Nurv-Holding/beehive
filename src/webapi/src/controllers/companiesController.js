@@ -22,9 +22,21 @@ const getCompanyAndGoals = handlerBuilder(async (req, res) => {
     return res.status(200).send(results)
 })
 
+const getByCnpj = handlerBuilder(async (req,res) => {
+    const { cnpj } = req.params
+
+    const result = await prismaClient.company.findMany({ where: { cnpj } })
+
+    const company = result.length !== 0? result[0]: null
+
+    return res.status(200).send(company)
+
+})
+
 const companiesController = {
     ...crudFunctions,
-    getCompanyAndGoals
+    getCompanyAndGoals,
+    getByCnpj
 }
 
 module.exports = companiesController

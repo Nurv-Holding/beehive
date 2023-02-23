@@ -4,7 +4,8 @@ import { useState } from 'react'
 import companiesApi from '../api/companiesApi'
 
 function AddCompanies() {  
-  let [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [company, setCompany] = useState({
     name:"",
     cnpj:""
@@ -18,7 +19,9 @@ function AddCompanies() {
   }
 
   function openModal() {
+    setMessage("")
     setIsOpen(true)
+    setLoading(false)
   }
 
   const changeModel = ({target}) => {
@@ -30,23 +33,42 @@ function AddCompanies() {
   const createCompany = async (event) => {
     event.preventDefault()
 
+    setLoading(true)
+
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    companiesApi.create(company)
-    .then(() => {
-      setMessage("Empresa criado com sucesso")
-      navigate({
-        pathname: `/`,
-        search: `?update=${true}`
-      })
+    const result = await companiesApi.getByCnpj(company?.cnpj)
+    const verifyCnpj = result.data
 
-      closeModal()
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado!")
-    })
+    if(company.name === "" || company.cnpj === ""){
+      setLoading(false)
+      setMessage("Primeiro precisa preencher os campos vazios")
+
+    }else if(verifyCnpj){
+      setLoading(false)
+      setMessage("Não pode cadastrar empresas com o mesmo cnpj")
+
+    }else{
+      companiesApi.create(company)
+      .then(() => {
+        setMessage("Empresa criado com sucesso")
+        navigate({
+          pathname: `/`,
+          search: `?update=${true}`
+        })
+  
+        setLoading(false)
+  
+        closeModal()
+      })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+        setLoading(false)
+      })
+    }
+
   }
 
     return (
@@ -62,10 +84,15 @@ function AddCompanies() {
                 <input onChange={changeModel} required name='cnpj' type='text' className='input-style' placeholder="Digite o CNPJ da empresa"/>        
                 
                 <div className="mt-4">
-                    <button className='submit-button' type="submit" >
-                        Adicionar
-                    </button>
-                    <span className={`${message === "Aqui vai uma mensagem" ? 'hidden': 'block'}`}> {message} </span>
+                  {!loading?
+                  <button className='submit-button' type="submit" >
+                    Adicionar
+                  </button>
+                  :
+                  <> <span> Aguarde... </span> </>
+                  }
+
+                    <span> {message} </span>
                 </div>
             </form>
          </Modal>
