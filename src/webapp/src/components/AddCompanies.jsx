@@ -19,7 +19,9 @@ function AddCompanies() {
   }
 
   function openModal() {
+    setMessage("")
     setIsOpen(true)
+    setLoading(false)
   }
 
   const changeModel = ({target}) => {
@@ -36,23 +38,37 @@ function AddCompanies() {
     searchParams.delete('update')
     setSearchParams(searchParams)
 
-    companiesApi.create(company)
-    .then(() => {
-      setMessage("Empresa criado com sucesso")
-      navigate({
-        pathname: `/`,
-        search: `?update=${true}`
+    const result = await companiesApi.getByCnpj(company?.cnpj)
+    const verifyCnpj = result.data
+
+    if(company.name === "" || company.cnpj === ""){
+      setLoading(false)
+      setMessage("Primeiro precisa preencher os campos vazios")
+
+    }else if(verifyCnpj){
+      setLoading(false)
+      setMessage("Não pode cadastrar empresas com o mesmo cnpj")
+
+    }else{
+      companiesApi.create(company)
+      .then(() => {
+        setMessage("Empresa criado com sucesso")
+        navigate({
+          pathname: `/`,
+          search: `?update=${true}`
+        })
+  
+        setLoading(false)
+  
+        closeModal()
       })
+      .catch((error) => {
+        console.error(error)
+        setMessage("Algo deu errado!")
+        setLoading(false)
+      })
+    }
 
-      setLoading(false)
-
-      closeModal()
-    })
-    .catch((error) => {
-      console.error(error)
-      setMessage("Algo deu errado!")
-      setLoading(false)
-    })
   }
 
     return (
